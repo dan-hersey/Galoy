@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galoy Regulatory Radar - OCC Intelligence Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/655ebc171c75248c5fc3a947_favicon.png" type="image/png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
+    body { background-color: #000; color: #fff; min-height: 100vh; }
+    ::selection { background: #3654FF; color: #fff; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: #111; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .card { background: #111; border-radius: 12px; border: 1px solid #222; }
+
+    /* Header */
+    header { background: #000; border-bottom: 1px solid #222; padding: 24px 0; }
+    .header-content { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .logo-section { display: flex; align-items: center; gap: 16px; }
+    .logo-section img { height: 28px; }
+    .divider { width: 1px; height: 32px; background: #333; }
+    .header-title { font-size: 20px; font-weight: 700; }
+    .header-subtitle { font-size: 12px; color: #9CA3AF; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 24px; }
+    .tab { background: none; border: none; color: #666; cursor: pointer; padding: 4px 0; font-size: 14px; border-bottom: 2px solid transparent; }
+    .tab.active { color: #fff; border-bottom-color: #3654FF; }
+    .tab:hover { color: #999; }
+
+    /* Stats Grid */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+    .stat-card { padding: 24px; }
+    .stat-label { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; }
+    .stat-value { font-size: 36px; font-weight: 700; margin-top: 8px; }
+    .stat-subtitle { font-size: 14px; color: #9CA3AF; margin-top: 4px; }
+
+    /* Charts Row */
+    .charts-row { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 32px; }
+    .chart-title { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+
+    /* Bar Chart */
+    .bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 200px; padding: 16px 0; }
+    .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .bar-stack { display: flex; flex-direction: column; justify-content: flex-end; width: 100%; height: 160px; gap: 2px; }
+    .bar { width: 100%; border-radius: 4px 4px 0 0; transition: all 0.3s; min-height: 2px; }
+    .bar:hover { opacity: 0.8; }
+    .bar-label { font-size: 11px; color: #666; }
+
+    /* Pie Chart (CSS) */
+    .pie-container { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .pie-chart { width: 160px; height: 160px; border-radius: 50%; position: relative; }
+    .pie-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: #111; border-radius: 50%; }
+    .pie-legend { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #9CA3AF; }
+    .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+    /* Theme Bars */
+    .theme-bars { display: flex; flex-direction: column; gap: 12px; }
+    .theme-bar-item { display: flex; align-items: center; gap: 12px; }
+    .theme-label { width: 120px; font-size: 12px; color: #999; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .theme-bar-bg { flex: 1; height: 24px; background: #1a1a1a; border-radius: 6px; overflow: hidden; }
+    .theme-bar-fill { height: 100%; background: #3654FF; border-radius: 6px; transition: width 0.3s; }
+    .theme-count { width: 30px; font-size: 12px; color: #666; }
+
+    /* Filters */
+    .filters { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 16px; margin-bottom: 24px; }
+    .search-input { flex: 1; min-width: 200px; padding: 10px 16px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; font-size: 14px; }
+    .search-input::placeholder { color: #666; }
+    .search-input:focus { outline: none; border-color: #3654FF; box-shadow: 0 0 0 3px rgba(54, 84, 255, 0.2); }
+    select { padding: 10px 16px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; font-size: 14px; cursor: pointer; }
+    select:focus { outline: none; border-color: #3654FF; }
+    .filter-count { padding: 8px 16px; background: #1a1a1a; border-radius: 8px; font-size: 14px; }
+    .filter-count strong { color: #fff; }
+
+    /* Table */
+    .table-container { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; padding: 16px 24px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; background: #0a0a0a; }
+    td { padding: 16px 24px; font-size: 14px; border-top: 1px solid #222; }
+    tbody tr { cursor: pointer; transition: background 0.2s; }
+    tbody tr:hover { background: rgba(54, 84, 255, 0.08); }
+    .mono { font-family: ui-monospace, monospace; }
+    .text-muted { color: #9CA3AF; }
+    .line-clamp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+    /* Badges */
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
+    .badge-high { background: rgba(255, 90, 90, 0.15); color: #FF5A5A; border: 1px solid rgba(255, 90, 90, 0.3); }
+    .badge-medium { background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-low { background: rgba(100, 116, 139, 0.15); color: #64748B; border: 1px solid rgba(100, 116, 139, 0.3); }
+    .badge-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .badge-dot-high { background: #FF5A5A; }
+    .badge-dot-medium { background: #F59E0B; }
+    .badge-dot-low { background: #64748B; }
+
+    .source-badge { padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; }
+    .source-letter { background: rgba(54, 84, 255, 0.15); color: #6b8aff; }
+    .source-news { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+    .source-bulletin { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+
+    .tag { padding: 2px 8px; background: #1a1a1a; border-radius: 4px; font-size: 12px; color: #999; display: inline-block; margin: 2px; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px; backdrop-filter: blur(8px); }
+    .modal-overlay.active { display: flex; }
+    .modal-content { background: #111; border-radius: 16px; max-width: 640px; width: 100%; max-height: 85vh; overflow: auto; border: 1px solid #222; }
+    .modal-header { padding: 24px; background: #0a0a0a; border-bottom: 1px solid #222; display: flex; justify-content: space-between; align-items: flex-start; }
+    .modal-id { font-size: 14px; font-family: ui-monospace, monospace; color: #3654FF; }
+    .modal-title { font-size: 20px; font-weight: 700; margin-top: 8px; }
+    .modal-close { background: none; border: none; color: #666; cursor: pointer; padding: 4px; }
+    .modal-close:hover { color: #fff; }
+    .modal-body { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+    .modal-label { font-size: 14px; color: #9CA3AF; margin-bottom: 4px; }
+    .modal-value { font-weight: 500; }
+    .modal-themes { display: flex; flex-wrap: wrap; gap: 8px; }
+    .modal-theme { padding: 6px 12px; background: rgba(54, 84, 255, 0.15); color: #6b8aff; border-radius: 9999px; font-size: 14px; font-weight: 500; }
+    .modal-link { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: #3654FF; color: white; border-radius: 8px; font-weight: 500; text-decoration: none; box-shadow: 0 4px 14px rgba(54, 84, 255, 0.35); }
+    .modal-link:hover { background: #4a6aff; }
+
+    /* Footer */
+    footer { border-top: 1px solid #222; margin-top: 48px; padding: 24px 0; }
+    .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-text { font-size: 14px; color: #9CA3AF; }
+    .footer-brand { display: flex; align-items: center; gap: 12px; }
+    .footer-brand img { height: 20px; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .charts-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .tabs { display: none; }
+      .header-content { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-section">
+          <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/656106c240ef09d6b11f4673_logo.svg" alt="Galoy">
+          <div class="divider"></div>
+          <div>
+            <div class="header-title">Regulatory Radar</div>
+            <div class="header-subtitle">OCC Intelligence Dashboard</div>
+          </div>
+        </div>
+        <div class="tabs">
+          <button class="tab active" data-tab="all">All Updates</button>
+          <button class="tab" data-tab="high">High Priority</button>
+          <button class="tab" data-tab="crypto">Crypto Focus</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 32px; padding-bottom: 32px;">
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="card stat-card">
+        <div class="stat-label">Total Items</div>
+        <div class="stat-value" id="statTotal">36</div>
+        <div class="stat-subtitle">Regulatory updates tracked</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-label">High Priority</div>
+        <div class="stat-value" style="color: #FF5A5A;" id="statHigh">17</div>
+        <div class="stat-subtitle">Requires immediate attention</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-label">Crypto-Related</div>
+        <div class="stat-value" style="color: #3654FF;" id="statCrypto">13</div>
+        <div class="stat-subtitle">Digital asset updates</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-label">Medium Priority</div>
+        <div class="stat-value" style="color: #F59E0B;" id="statMedium">5</div>
+        <div class="stat-subtitle">Monitor closely</div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="charts-row">
+      <div class="card" style="padding: 24px;">
+        <div class="chart-title">Regulatory Activity Timeline</div>
+        <div class="bar-chart" id="timelineChart"></div>
+      </div>
+      <div class="card" style="padding: 24px;">
+        <div class="chart-title">Priority Distribution</div>
+        <div class="pie-container">
+          <div class="pie-chart" id="pieChart"></div>
+          <div class="pie-legend" id="pieLegend"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Themes -->
+    <div class="card" style="padding: 24px; margin-bottom: 32px;">
+      <div class="chart-title">Top Regulatory Themes</div>
+      <div class="theme-bars" id="themeBars"></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="card filters">
+      <input type="text" class="search-input" id="searchInput" placeholder="Search by title, ID, or theme...">
+      <select id="priorityFilter">
+        <option value="all">All Priorities</option>
+        <option value="High">High Priority</option>
+        <option value="Medium">Medium Priority</option>
+        <option value="Low">Low Priority</option>
+      </select>
+      <select id="sourceFilter">
+        <option value="all">All Sources</option>
+        <option value="Interpretive Letter">Interpretive Letter</option>
+        <option value="News Release">News Release</option>
+        <option value="Bulletin">Bulletin</option>
+      </select>
+      <div class="filter-count"><strong id="filteredCount">36</strong> <span class="text-muted">of <span id="totalCount">36</span> items</span></div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="card">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Source</th>
+              <th>Priority</th>
+              <th>Themes</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <div class="modal-id" id="modalId"></div>
+          <div class="modal-title" id="modalTitle"></div>
+        </div>
+        <button class="modal-close" onclick="closeModal()">
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="display: flex; gap: 12px;" id="modalBadges"></div>
+        <div>
+          <div class="modal-label">Date</div>
+          <div class="modal-value" id="modalDate"></div>
+        </div>
+        <div>
+          <div class="modal-label">Themes</div>
+          <div class="modal-themes" id="modalThemes"></div>
+        </div>
+        <a href="#" class="modal-link" id="modalLink" target="_blank" rel="noopener noreferrer">
+          View Full Document
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-text">Data source: OCC Regulatory Radar • Last updated: January 2026</div>
+        <div class="footer-brand">
+          <span class="footer-text">Built by</span>
+          <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/656106c240ef09d6b11f4673_logo.svg" alt="Galoy">
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // OCC Regulatory Data
+    const rawData = [
+      { date: "2025-03-07", source_type: "Interpretive Letter", id: "IL 1183", title: "Reaffirms permissibility of crypto custody, stablecoin reserves deposits, and DLT/stablecoins for permissible payments", url: "https://www.occ.gov/topics/charters-and-licensing/interpretations-and-actions/2025/int1183.pdf", theme_tags: "crypto; custody; stablecoins; payments", lead_signal: "High" },
+      { date: "2025-03-07", source_type: "News Release", id: "NR 2025-16", title: "OCC Clarifies Bank Authority to Engage in Certain Cryptocurrency Activities", url: "https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-16.html", theme_tags: "crypto; permissibility", lead_signal: "High" },
+      { date: "2025-03-17", source_type: "News Release", id: "NR 2025-19", title: "OCC Conditionally Approves Fintech Business Model for a National Bank", url: "https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-19.html", theme_tags: "chartering; fintech; de novo", lead_signal: "High" },
+      { date: "2025-03-20", source_type: "News Release", id: "NR 2025-21", title: "OCC Ceases Examinations for Reputation Risk", url: "https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-21.html", theme_tags: "reputation risk; supervision", lead_signal: "High" },
+      { date: "2025-04-08", source_type: "Bulletin", id: "OCC 2025-6", title: "CRA, Fair Housing Act, and ECOA: OCC Contact Information for Certain Notices and Posters", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-6.html", theme_tags: "CRA; consumer compliance", lead_signal: "Low" },
+      { date: "2025-04-15", source_type: "Bulletin", id: "OCC 2025-7", title: "Real Estate Appraisals: Temporary Exceptions in Areas Affected by Los Angeles County Wildfires", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-7.html", theme_tags: "appraisals; disaster relief", lead_signal: "Low" },
+      { date: "2025-05-05", source_type: "Bulletin", id: "OCC 2025-8", title: "Bank Activities: Request for Information on Community Bank Digitalization", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-8.html", theme_tags: "digitalization; community banks", lead_signal: "Medium" },
+      { date: "2025-05-07", source_type: "News Release", id: "NR 2025-42", title: "OCC Clarifies Bank Authority to Engage in Crypto-Asset Custody and Execution Services", url: "https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-42.html", theme_tags: "crypto; custody; execution", lead_signal: "High" },
+      { date: "2025-05-08", source_type: "Bulletin", id: "OCC 2025-9", title: "Business Combinations Under the Bank Merger Act: Rescission: Interim Final Rule", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-9.html", theme_tags: "M&A; bank merger act", lead_signal: "Low" },
+      { date: "2025-05-12", source_type: "Bulletin", id: "OCC 2025-10", title: "Prohibition Against Interstate Deposits: Annual Host State Loan-to-Deposit Ratios", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-10.html", theme_tags: "interstate deposits; ratios", lead_signal: "Low" },
+      { date: "2025-06-16", source_type: "Bulletin", id: "OCC 2025-12", title: "Payments Fraud: Request for Information on Potential Actions to Address Payments Fraud", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-12.html", theme_tags: "payments; fraud; risk", lead_signal: "Medium" },
+      { date: "2025-06-23", source_type: "Bulletin", id: "OCC 2025-13", title: "Guidance on Referrals for Potential Criminal Enforcement: Notice", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-13.html", theme_tags: "enforcement; referrals", lead_signal: "Low" },
+      { date: "2025-06-27", source_type: "Bulletin", id: "OCC 2025-14", title: "NPR: Modifications to the Enhanced Supplementary Leverage Ratio (eSLR) Standards", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-14.html", theme_tags: "capital; leverage; GSIB", lead_signal: "Low" },
+      { date: "2025-06-27", source_type: "Bulletin", id: "OCC 2025-15", title: "BSA/AML: Customer Identification Program Tax Identification Number Alternative Collection Method", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-15.html", theme_tags: "BSA/AML; CIP", lead_signal: "Low" },
+      { date: "2025-07-14", source_type: "Bulletin", id: "OCC 2025-16", title: "Fair Lending: Removing References to Disparate Impact", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-16.html", theme_tags: "fair lending; policy", lead_signal: "Low" },
+      { date: "2025-07-14", source_type: "Bulletin", id: "OCC 2025-17", title: "Bank Activities: Crypto-Asset Safekeeping Services", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-17.html", theme_tags: "crypto; custody; safekeeping", lead_signal: "High" },
+      { date: "2025-07-14", source_type: "News Release", id: "NR 2025-68", title: "Agencies Issue Joint Statement on Risk-Management Considerations For Crypto-Asset Safekeeping", url: "https://www.occ.gov/news-issuances/news-releases/2025/nr-ia-2025-68.html", theme_tags: "crypto; safekeeping; risk mgmt", lead_signal: "High" },
+      { date: "2025-07-16", source_type: "Bulletin", id: "OCC 2025-18", title: "CRA: Interagency NPR to Rescind and Replace the 2023 CRA Final Rule", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-18.html", theme_tags: "CRA; rulemaking", lead_signal: "Low" },
+      { date: "2025-07-25", source_type: "Bulletin", id: "OCC 2025-19", title: "EGRPRA: Regulatory Review to Identify Outdated, Unnecessary, or Unduly Burdensome Regulations", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-19.html", theme_tags: "reg burden; EGRPRA", lead_signal: "Low" },
+      { date: "2025-08-15", source_type: "Bulletin", id: "OCC 2025-20", title: "Accounting: Bank Accounting Advisory Series Updated", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-20.html", theme_tags: "accounting", lead_signal: "Low" },
+      { date: "2025-08-29", source_type: "Bulletin", id: "OCC 2025-21", title: "Fees and Assessments: Interim Calendar Year 2025 Fees and Assessments Structure", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-21.html", theme_tags: "fees", lead_signal: "Low" },
+      { date: "2025-09-08", source_type: "Bulletin", id: "OCC 2025-22", title: "Licensing and CRA: Consideration of Politicized or Unlawful Debanking", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-22.html", theme_tags: "debanking; licensing; CRA", lead_signal: "High" },
+      { date: "2025-09-08", source_type: "Bulletin", id: "OCC 2025-23", title: "Protecting Customer Financial Records", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-23.html", theme_tags: "privacy; records", lead_signal: "Low" },
+      { date: "2025-10-06", source_type: "Bulletin", id: "OCC 2025-24", title: "Examinations: Frequency and Scope for Community Banks", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-24.html", theme_tags: "supervision; exams", lead_signal: "Low" },
+      { date: "2025-10-06", source_type: "Bulletin", id: "OCC 2025-28", title: "NPR: Community Bank Licensing Amendments", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-28.html", theme_tags: "licensing; community banks", lead_signal: "Medium" },
+      { date: "2025-10-07", source_type: "Bulletin", id: "OCC 2025-29", title: "Interagency NPR: Defining 'Unsafe or Unsound Practice' and Revising the MRA Framework", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-29.html", theme_tags: "supervision; MRAs", lead_signal: "Medium" },
+      { date: "2025-10-07", source_type: "Bulletin", id: "OCC 2025-30", title: "NPR: Prohibition on Use of Reputation Risk by Regulators", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-30.html", theme_tags: "reputation risk; supervision", lead_signal: "High" },
+      { date: "2025-10-15", source_type: "News Release", id: "NR 2025-101", title: "OCC Announces Conditional Approval for Chartering Erebor Bank", url: "https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-101.html", theme_tags: "chartering; de novo", lead_signal: "High" },
+      { date: "2025-11-18", source_type: "Interpretive Letter", id: "IL 1186", title: "Banks may pay blockchain network fees and hold limited crypto as principal", url: "https://www.occ.gov/topics/charters-and-licensing/interpretations-and-actions/2025/int1186.pdf", theme_tags: "crypto; network fees; operations", lead_signal: "High" },
+      { date: "2025-11-18", source_type: "News Release", id: "NR 2025-108", title: "OCC Confirms Bank Authority to Hold Crypto-Assets for Paying Network Fees", url: "https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-108.html", theme_tags: "crypto; network fees", lead_signal: "High" },
+      { date: "2025-11-24", source_type: "Bulletin", id: "OCC 2025-39", title: "Bank Activities: RFI on Community Banks' Engagement with Core Service Providers", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-39.html", theme_tags: "third-party; core processors", lead_signal: "High" },
+      { date: "2025-12-05", source_type: "Bulletin", id: "OCC 2025-45", title: "Commercial Lending: Venture Loans to Companies in Early/Expansion/Late Stage Development", url: "https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-45.html", theme_tags: "venture debt; lending", lead_signal: "Medium" },
+      { date: "2025-12-09", source_type: "Interpretive Letter", id: "IL 1188", title: "Banks may engage in riskless principal transactions in crypto-assets", url: "https://www.occ.gov/topics/charters-and-licensing/interpretations-and-actions/2025/int1188.pdf", theme_tags: "crypto; execution; riskless principal", lead_signal: "High" },
+      { date: "2025-12-09", source_type: "News Release", id: "NR 2025-121", title: "OCC Confirms Bank Authority to Engage in Riskless Principal Crypto-Asset Transactions", url: "https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-121.html", theme_tags: "crypto; execution; riskless principal", lead_signal: "High" },
+      { date: "2025-12-10", source_type: "News Release", id: "NR 2025-123", title: "OCC Releases Preliminary Findings from Its Review of Large Banks' Debanking Activities", url: "https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-123.html", theme_tags: "debanking; supervision", lead_signal: "High" },
+      { date: "2025-12-12", source_type: "News Release", id: "NR 2025-125", title: "OCC Announces Conditional Approvals for Five National Trust Bank Charter Applications", url: "https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-125.html", theme_tags: "trust bank; charters", lead_signal: "High" }
+    ];
+
+    let activeTab = 'all';
+    let currentData = [...rawData];
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      updateStats();
+      renderTimeline();
+      renderPieChart();
+      renderThemeBars();
+      renderTable();
+      setupEventListeners();
+    });
+
+    function updateStats() {
+      const high = rawData.filter(d => d.lead_signal === 'High').length;
+      const medium = rawData.filter(d => d.lead_signal === 'Medium').length;
+      const crypto = rawData.filter(d => d.theme_tags.toLowerCase().includes('crypto')).length;
+
+      document.getElementById('statTotal').textContent = rawData.length;
+      document.getElementById('statHigh').textContent = high;
+      document.getElementById('statMedium').textContent = medium;
+      document.getElementById('statCrypto').textContent = crypto;
+      document.getElementById('totalCount').textContent = rawData.length;
+    }
+
+    function renderTimeline() {
+      const months = {};
+      const monthNames = ['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+      rawData.forEach(item => {
+        const month = item.date.substring(0, 7);
+        if (!months[month]) months[month] = { High: 0, Medium: 0, Low: 0 };
+        months[month][item.lead_signal]++;
+      });
+
+      const sortedMonths = Object.keys(months).sort();
+      const maxTotal = Math.max(...sortedMonths.map(m => months[m].High + months[m].Medium + months[m].Low));
+
+      const container = document.getElementById('timelineChart');
+      container.innerHTML = '';
+
+      sortedMonths.forEach(month => {
+        const data = months[month];
+        const total = data.High + data.Medium + data.Low;
+        const heightPct = (total / maxTotal) * 100;
+
+        const group = document.createElement('div');
+        group.className = 'bar-group';
+
+        const stack = document.createElement('div');
+        stack.className = 'bar-stack';
+
+        if (data.Low > 0) {
+          const bar = document.createElement('div');
+          bar.className = 'bar';
+          bar.style.height = (data.Low / total * heightPct) + '%';
+          bar.style.background = '#64748B';
+          bar.title = 'Low: ' + data.Low;
+          stack.appendChild(bar);
+        }
+        if (data.Medium > 0) {
+          const bar = document.createElement('div');
+          bar.className = 'bar';
+          bar.style.height = (data.Medium / total * heightPct) + '%';
+          bar.style.background = '#F59E0B';
+          bar.title = 'Medium: ' + data.Medium;
+          stack.appendChild(bar);
+        }
+        if (data.High > 0) {
+          const bar = document.createElement('div');
+          bar.className = 'bar';
+          bar.style.height = (data.High / total * heightPct) + '%';
+          bar.style.background = '#FF5A5A';
+          bar.title = 'High: ' + data.High;
+          stack.appendChild(bar);
+        }
+
+        const label = document.createElement('div');
+        label.className = 'bar-label';
+        label.textContent = monthNames[parseInt(month.split('-')[1]) - 3] || month.split('-')[1];
+
+        group.appendChild(stack);
+        group.appendChild(label);
+        container.appendChild(group);
+      });
+    }
+
+    function renderPieChart() {
+      const high = rawData.filter(d => d.lead_signal === 'High').length;
+      const medium = rawData.filter(d => d.lead_signal === 'Medium').length;
+      const low = rawData.filter(d => d.lead_signal === 'Low').length;
+      const total = high + medium + low;
+
+      const highPct = (high / total) * 100;
+      const mediumPct = (medium / total) * 100;
+      const lowPct = (low / total) * 100;
+
+      const pie = document.getElementById('pieChart');
+      pie.style.background = `conic-gradient(
+        #FF5A5A 0% ${highPct}%,
+        #F59E0B ${highPct}% ${highPct + mediumPct}%,
+        #64748B ${highPct + mediumPct}% 100%
+      )`;
+
+      const legend = document.getElementById('pieLegend');
+      legend.innerHTML = `
+        <div class="legend-item"><span class="legend-dot" style="background: #FF5A5A;"></span>High (${high})</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #F59E0B;"></span>Medium (${medium})</div>
+        <div class="legend-item"><span class="legend-dot" style="background: #64748B;"></span>Low (${low})</div>
+      `;
+    }
+
+    function renderThemeBars() {
+      const themes = {};
+      rawData.forEach(item => {
+        item.theme_tags.split(';').forEach(tag => {
+          const t = tag.trim();
+          if (t) themes[t] = (themes[t] || 0) + 1;
+        });
+      });
+
+      const sorted = Object.entries(themes)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 8);
+
+      const maxCount = sorted[0][1];
+      const container = document.getElementById('themeBars');
+      container.innerHTML = '';
+
+      sorted.forEach(([name, count]) => {
+        const item = document.createElement('div');
+        item.className = 'theme-bar-item';
+        item.innerHTML = `
+          <div class="theme-label">${name}</div>
+          <div class="theme-bar-bg">
+            <div class="theme-bar-fill" style="width: ${(count / maxCount) * 100}%"></div>
+          </div>
+          <div class="theme-count">${count}</div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+
+      currentData.forEach((item, idx) => {
+        const tr = document.createElement('tr');
+        tr.onclick = () => openModal(item);
+
+        const date = new Date(item.date);
+        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+        const sourceClass = item.source_type === 'Interpretive Letter' ? 'source-letter' :
+                          item.source_type === 'News Release' ? 'source-news' : 'source-bulletin';
+
+        const badgeClass = item.lead_signal === 'High' ? 'badge-high' :
+                         item.lead_signal === 'Medium' ? 'badge-medium' : 'badge-low';
+        const dotClass = item.lead_signal === 'High' ? 'badge-dot-high' :
+                        item.lead_signal === 'Medium' ? 'badge-dot-medium' : 'badge-dot-low';
+
+        const tags = item.theme_tags.split(';').slice(0, 3).map(t =>
+          `<span class="tag">${t.trim()}</span>`
+        ).join('');
+
+        tr.innerHTML = `
+          <td class="text-muted" style="white-space: nowrap;">${dateStr}</td>
+          <td class="mono" style="white-space: nowrap; font-weight: 500;">${item.id}</td>
+          <td style="max-width: 400px;"><div class="line-clamp">${item.title}</div></td>
+          <td style="white-space: nowrap;"><span class="source-badge ${sourceClass}">${item.source_type}</span></td>
+          <td style="white-space: nowrap;"><span class="badge ${badgeClass}"><span class="badge-dot ${dotClass}"></span>${item.lead_signal}</span></td>
+          <td style="max-width: 200px;">${tags}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('filteredCount').textContent = currentData.length;
+    }
+
+    function filterData() {
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      const priority = document.getElementById('priorityFilter').value;
+      const source = document.getElementById('sourceFilter').value;
+
+      currentData = rawData.filter(item => {
+        const matchesSearch = search === '' ||
+          item.title.toLowerCase().includes(search) ||
+          item.theme_tags.toLowerCase().includes(search) ||
+          item.id.toLowerCase().includes(search);
+
+        const matchesPriority = priority === 'all' || item.lead_signal === priority;
+        const matchesSource = source === 'all' || item.source_type === source;
+
+        const matchesTab = activeTab === 'all' ||
+          (activeTab === 'crypto' && item.theme_tags.toLowerCase().includes('crypto')) ||
+          (activeTab === 'high' && item.lead_signal === 'High');
+
+        return matchesSearch && matchesPriority && matchesSource && matchesTab;
+      });
+
+      renderTable();
+    }
+
+    function setupEventListeners() {
+      document.getElementById('searchInput').addEventListener('input', filterData);
+      document.getElementById('priorityFilter').addEventListener('change', filterData);
+      document.getElementById('sourceFilter').addEventListener('change', filterData);
+
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          activeTab = this.dataset.tab;
+          filterData();
+        });
+      });
+
+      document.getElementById('modal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+      });
+    }
+
+    function openModal(item) {
+      document.getElementById('modalId').textContent = item.id;
+      document.getElementById('modalTitle').textContent = item.title;
+
+      const date = new Date(item.date);
+      document.getElementById('modalDate').textContent = date.toLocaleDateString('en-US', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+      });
+
+      const badgeClass = item.lead_signal === 'High' ? 'badge-high' :
+                        item.lead_signal === 'Medium' ? 'badge-medium' : 'badge-low';
+      const dotClass = item.lead_signal === 'High' ? 'badge-dot-high' :
+                      item.lead_signal === 'Medium' ? 'badge-dot-medium' : 'badge-dot-low';
+      const sourceClass = item.source_type === 'Interpretive Letter' ? 'source-letter' :
+                        item.source_type === 'News Release' ? 'source-news' : 'source-bulletin';
+
+      document.getElementById('modalBadges').innerHTML = `
+        <span class="badge ${badgeClass}"><span class="badge-dot ${dotClass}"></span>${item.lead_signal}</span>
+        <span class="source-badge ${sourceClass}">${item.source_type}</span>
+      `;
+
+      document.getElementById('modalThemes').innerHTML = item.theme_tags.split(';')
+        .map(t => `<span class="modal-theme">${t.trim()}</span>`)
+        .join('');
+
+      document.getElementById('modalLink').href = item.url;
+      document.getElementById('modal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
