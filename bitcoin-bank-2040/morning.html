@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morning — A Day in 2040</title>
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="app-header__logo">
+        <span class="app-header__logo-icon">M</span>
+        Meridian
+      </div>
+      <span class="app-header__time" id="header-time">6:47 AM</span>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <!-- Scene Header -->
+      <section class="scene-header">
+        <div class="scene-header__time">6:47 AM — Kitchen</div>
+        <h1 class="scene-header__title">Morning</h1>
+        <p class="scene-header__narrative">
+          "I'm up before the kids. Coffee machine is already done. I pull my phone from the charger and open Meridian while the cup fills."
+        </p>
+      </section>
+
+      <!-- Total Balance Card -->
+      <div class="card" id="balance-card">
+        <div class="balance-display">
+          <div class="balance-display__primary" id="total-usd">$187,420</div>
+          <div class="balance-display__secondary" id="total-btc">0.0682 BTC</div>
+          <div class="balance-display__label">Total Balance</div>
+        </div>
+        <div class="allocation-grid">
+          <div class="allocation-item">
+            <div class="allocation-item__label">Checking</div>
+            <div class="allocation-item__value" id="checking-usd">$7,150</div>
+            <div class="allocation-item__subvalue" id="checking-btc">0.0026 BTC</div>
+          </div>
+          <div class="allocation-item">
+            <div class="allocation-item__label">Savings Vault</div>
+            <div class="allocation-item__value" id="vault-usd">$164,800</div>
+            <div class="allocation-item__subvalue" id="vault-btc">0.06 BTC</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Yield Indicator -->
+      <div style="display: flex; justify-content: center; margin-bottom: var(--space-6);">
+        <button class="yield-indicator" id="yield-btn" aria-label="View yield details">
+          <span class="yield-indicator__dot"></span>
+          <span class="yield-indicator__text" id="yield-text">+0.00000127 BTC overnight</span>
+        </button>
+      </div>
+
+      <!-- Recent Transactions -->
+      <div class="card">
+        <div class="card__header">
+          <h2 class="card__title">Recent Activity</h2>
+        </div>
+        <ul class="transaction-list" id="transaction-list">
+          <!-- Populated by JavaScript -->
+        </ul>
+      </div>
+
+      <!-- Narrative Break -->
+      <div style="padding: var(--space-6) 0; text-align: center;">
+        <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); font-style: italic; max-width: 320px; margin: 0 auto;">
+          "I don't do anything with this information. I just like seeing it. The yield isn't exciting. It never is."
+        </p>
+      </div>
+
+      <!-- Later Morning Section -->
+      <section class="scene-header" style="margin-top: var(--space-4);">
+        <div class="scene-header__time">8:45 AM — Coffee Shop</div>
+        <p class="scene-header__narrative">
+          "I hold my phone near the terminal. The payment routes through Lightning — I see 'Confirmed' on my screen before the barista hands me the cup."
+        </p>
+      </section>
+
+      <!-- Simulated Payment -->
+      <div class="card" id="coffee-payment-card" style="opacity: 0.5; transition: opacity 0.3s;">
+        <div class="card__content" style="display: flex; align-items: center; gap: var(--space-3);">
+          <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--color-success-light); display: flex; align-items: center; justify-content: center; color: var(--color-success);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <div style="flex: 1;">
+            <div style="font-weight: var(--font-weight-semibold);">Third Wave Coffee</div>
+            <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">Flat white • Lightning</div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-weight: var(--font-weight-semibold);">$5.80</div>
+            <div style="font-size: var(--font-size-xs); color: var(--color-text-tertiary);">Confirmed</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--space-4);">
+        <button class="btn btn--primary" id="simulate-payment-btn">
+          Simulate Payment
+        </button>
+      </div>
+
+      <!-- Continue Navigation -->
+      <div style="text-align: center; margin-top: var(--space-8); padding-bottom: var(--space-4);">
+        <p style="font-size: var(--font-size-sm); color: var(--color-text-tertiary); margin-bottom: var(--space-3);">
+          Continue to midday →
+        </p>
+        <a href="./midday.html" class="btn btn--secondary">
+          Invoice Settlements
+        </a>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="scene-nav">
+      <a href="./morning.html" class="scene-nav__link is-active">
+        <svg class="scene-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <span class="scene-nav__label">Morning</span>
+      </a>
+      <a href="./midday.html" class="scene-nav__link">
+        <svg class="scene-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="scene-nav__label">Midday</span>
+      </a>
+      <a href="./afternoon.html" class="scene-nav__link">
+        <svg class="scene-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+        </svg>
+        <span class="scene-nav__label">Afternoon</span>
+      </a>
+      <a href="./evening.html" class="scene-nav__link">
+        <svg class="scene-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+        <span class="scene-nav__label">Evening</span>
+      </a>
+    </nav>
+
+    <!-- Yield Modal -->
+    <div class="modal-overlay" id="yield-modal">
+      <div class="modal">
+        <div class="modal__header">
+          <h3 class="modal__title">Savings Vault Yield</h3>
+          <button class="modal__close" onclick="closeModal('yield-modal')" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="modal__content">
+          <div style="margin-bottom: var(--space-4);">
+            <div style="font-size: var(--font-size-xs); color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.05em;">Current APY</div>
+            <div style="font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold); color: var(--color-success);" id="modal-yield-rate">2.4%</div>
+            <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">Range: 2.1% – 2.8%</div>
+          </div>
+
+          <div style="padding: var(--space-3); background: var(--color-bg-tertiary); border-radius: var(--radius-md); margin-bottom: var(--space-4);">
+            <div style="font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); margin-bottom: var(--space-2);">Overnight Earnings</div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: var(--color-text-secondary);">BTC</span>
+              <span style="font-weight: var(--font-weight-medium);">+0.00004 BTC</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-top: var(--space-1);">
+              <span style="color: var(--color-text-secondary);">USD equivalent</span>
+              <span style="font-weight: var(--font-weight-medium);">≈ $3.49</span>
+            </div>
+          </div>
+
+          <div style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+            <p style="margin-bottom: var(--space-2);"><strong>Source:</strong> Commercial lending pool</p>
+            <p style="margin-bottom: var(--space-2);"><strong>Collateralization:</strong> 150% minimum required</p>
+            <p><strong>Insurance:</strong> North American Digital Asset Consortium</p>
+          </div>
+        </div>
+        <div class="modal__footer">
+          <a href="#" class="btn btn--ghost" style="font-size: var(--font-size-sm);">View Risk Disclosure</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./scripts/app.js"></script>
+  <script src="./scripts/morning.js"></script>
+</body>
+</html>
