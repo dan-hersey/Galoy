@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60">
+  <defs>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00BFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1E90FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFA500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="swooshGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00BFFF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1E90FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Circular swoosh around B -->
+  <ellipse cx="30" cy="30" rx="26" ry="26" fill="none" stroke="url(#swooshGrad)" stroke-width="3" stroke-dasharray="120 50" transform="rotate(-20 30 30)"/>
+
+  <!-- Inner swoosh accent -->
+  <path d="M 8 35 Q 15 50, 35 52 Q 50 50, 52 35" fill="none" stroke="url(#orangeGrad)" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- B letter -->
+  <text x="30" y="42" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="url(#blueGrad)" text-anchor="middle">B</text>
+
+  <!-- "Biti" text in blue -->
+  <text x="70" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#1E90FF">Biti</text>
+
+  <!-- "bank" text in orange -->
+  <text x="126" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#FF8C00">bank</text>
+</svg>

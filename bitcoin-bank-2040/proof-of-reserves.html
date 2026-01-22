@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proof of Reserves — Bitibank</title>
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="app-header__logo">
+        <img src="./assets/bitibank-logo.svg" alt="Bitibank">
+      </div>
+      <span class="app-header__time">Proof of Reserves</span>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <!-- Page Header -->
+      <section class="scene-header">
+        <h1 class="scene-header__title">Proof of Reserves</h1>
+        <p class="scene-header__narrative">
+          "Don't trust. Verify."
+        </p>
+      </section>
+
+      <!-- What This Is -->
+      <div class="card">
+        <div class="card__header">
+          <h2 class="card__title">What This Proves</h2>
+        </div>
+        <div class="card__content" style="font-size: var(--font-size-sm); color: var(--color-text-secondary); line-height: var(--line-height-relaxed);">
+          <p style="margin-bottom: var(--space-3);">
+            Every quarter, Bitibank publishes cryptographic proof that we hold at least 100% of customer deposits in reserve. This isn't a promise — it's verifiable on the Bitcoin blockchain.
+          </p>
+          <p>
+            Any user can verify their balance is included in the proof without revealing their identity or balance to others.
+          </p>
+        </div>
+      </div>
+
+      <!-- Latest Attestation -->
+      <div class="card" style="border: 2px solid var(--color-success);">
+        <div class="card__header">
+          <h2 class="card__title">Latest Attestation</h2>
+        </div>
+        <div class="card__content">
+          <div style="display: grid; gap: var(--space-3);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">Attestation date</span>
+              <span style="font-weight: var(--font-weight-semibold);">January 15, 2040</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">Total liabilities</span>
+              <span style="font-weight: var(--font-weight-semibold);">847,291,400,000 sats</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">Total reserves</span>
+              <span style="font-weight: var(--font-weight-semibold);">853,122,800,000 sats</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">Reserve ratio</span>
+              <span style="font-weight: var(--font-weight-semibold); color: var(--color-success);">100.68%</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">Auditor</span>
+              <span style="font-weight: var(--font-weight-semibold);">Deloitte Digital Assets</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custody Institutions -->
+      <div class="card">
+        <div class="card__header">
+          <h2 class="card__title">Custody Institutions</h2>
+        </div>
+        <div class="card__content" style="font-size: var(--font-size-sm);">
+          <p style="color: var(--color-text-secondary); margin-bottom: var(--space-4);">
+            Reserves are distributed across three independent custodians using 2-of-3 multi-signature security.
+          </p>
+          <div style="display: grid; gap: var(--space-3);">
+            <div style="display: flex; justify-content: space-between; padding: var(--space-2); background: var(--color-bg-tertiary); border-radius: var(--radius-md);">
+              <div>
+                <div style="font-weight: var(--font-weight-medium);">Anchor Trust</div>
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-tertiary);">United States</div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-weight: var(--font-weight-semibold);">38%</div>
+                <div style="color: var(--color-success);">● Verified</div>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-2); background: var(--color-bg-tertiary); border-radius: var(--radius-md);">
+              <div>
+                <div style="font-weight: var(--font-weight-medium);">Geneva Digital Custody</div>
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-tertiary);">Switzerland</div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-weight: var(--font-weight-semibold);">34%</div>
+                <div style="color: var(--color-success);">● Verified</div>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-2); background: var(--color-bg-tertiary); border-radius: var(--radius-md);">
+              <div>
+                <div style="font-weight: var(--font-weight-medium);">Singapore Sovereign Custody</div>
+                <div style="font-size: var(--font-size-xs); color: var(--color-text-tertiary);">Singapore</div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-weight: var(--font-weight-semibold);">28%</div>
+                <div style="color: var(--color-success);">● Verified</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Verify Your Balance -->
+      <div class="card">
+        <div class="card__header">
+          <h2 class="card__title">Verify Your Balance</h2>
+        </div>
+        <div class="card__content">
+          <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-bottom: var(--space-4);">
+            Use your account's Merkle proof to verify your balance is included in the reserves attestation.
+          </p>
+          <div style="padding: var(--space-3); background: var(--color-bg-tertiary); border-radius: var(--radius-md); font-family: monospace; font-size: var(--font-size-xs); overflow-x: auto;">
+            <div style="color: var(--color-text-tertiary);">Your Merkle Leaf Hash:</div>
+            <div style="margin-top: var(--space-1); word-break: break-all;">
+              0x8f2e4c7b3a1d...
+              <span style="color: var(--color-text-tertiary);">(truncated in demo)</span>
+            </div>
+          </div>
+          <button class="btn btn--secondary" style="width: 100%; margin-top: var(--space-3);" disabled title="Demo only">
+            Verify My Inclusion
+          </button>
+          <p style="font-size: var(--font-size-xs); color: var(--color-text-tertiary); text-align: center; margin-top: var(--space-2);">
+            Demo mode: Verification disabled
+          </p>
+        </div>
+      </div>
+
+      <!-- Historical Attestations -->
+      <div class="card">
+        <div class="card__header">
+          <h2 class="card__title">Historical Attestations</h2>
+        </div>
+        <div class="card__content" style="font-size: var(--font-size-sm);">
+          <div style="display: grid; gap: var(--space-2);">
+            <div style="display: flex; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-border-light);">
+              <span>Q4 2039</span>
+              <span style="color: var(--color-success);">100.52% ✓</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-border-light);">
+              <span>Q3 2039</span>
+              <span style="color: var(--color-success);">100.41% ✓</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-2) 0; border-bottom: 1px solid var(--color-border-light);">
+              <span>Q2 2039</span>
+              <span style="color: var(--color-success);">100.38% ✓</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-2) 0;">
+              <span>Q1 2039</span>
+              <span style="color: var(--color-success);">100.55% ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Back Link -->
+      <div style="text-align: center; margin-top: var(--space-6); padding-bottom: var(--space-4);">
+        <a href="./evening.html" class="btn btn--secondary">
+          ← Back to Evening
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <script src="./scripts/app.js"></script>
+</body>
+</html>

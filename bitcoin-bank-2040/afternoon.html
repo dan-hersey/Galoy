@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Afternoon — A Day in 2040</title>
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="app-header__logo">
+        <img src="./assets/bitibank-logo.svg" alt="Bitibank">
+      </div>
+      <span class="app-header__time" id="header-time">2:30 PM</span>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <!-- Scene Header -->
+      <section class="scene-header">
+        <div class="scene-header__time">2:30 PM — Home Office</div>
+        <h1 class="scene-header__title">Credit Line Review</h1>
+        <p class="scene-header__narrative">
+          "I have a Bitcoin-backed credit line with Bitibank. It's not a loan I applied for — it's a standing facility tied to my vault balance."
+        </p>
+      </section>
+
+      <!-- Credit Overview Card -->
+      <div class="card">
+        <div class="credit-overview">
+          <div class="credit-stat">
+            <div class="credit-stat__label">Available Credit</div>
+            <div class="credit-stat__value credit-stat__value--accent" id="available-credit">$82,400</div>
+          </div>
+          <div class="credit-stat">
+            <div class="credit-stat__label">Currently Borrowed</div>
+            <div class="credit-stat__value" id="borrowed-amount">$0</div>
+          </div>
+          <div class="credit-stat">
+            <div class="credit-stat__label">Interest Rate</div>
+            <div class="credit-stat__value" id="interest-rate">4.2% APY</div>
+          </div>
+        </div>
+
+        <!-- Collateral Info -->
+        <div style="padding: var(--space-4); background: var(--color-bg-tertiary); border-top: 1px solid var(--color-border-light);">
+          <div style="font-size: var(--font-size-xs); color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-2);">
+            Collateral (Savings Vault)
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold);" id="collateral-sats">6,000,000 sats</span>
+            <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);" id="collateral-usd">$164,800</span>
+          </div>
+          <div style="font-size: var(--font-size-xs); color: var(--color-text-tertiary); margin-top: var(--space-2);">
+            Max LTV: 50% • You can borrow up to half your vault value
+          </div>
+        </div>
+      </div>
+
+      <!-- How It Works -->
+      <div class="card">
+        <div class="card__header">
+          <h2 class="card__title">How It Works</h2>
+        </div>
+        <div class="card__content" style="font-size: var(--font-size-sm); color: var(--color-text-secondary); line-height: var(--line-height-relaxed);">
+          <p style="margin-bottom: var(--space-3);">
+            Your vault acts as collateral. Borrow instantly — no applications, no credit checks, no waiting.
+          </p>
+          <div style="display: grid; gap: var(--space-3);">
+            <div style="display: flex; gap: var(--space-3);">
+              <div style="width: 24px; height: 24px; background: var(--color-warning-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <span style="font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); color: var(--color-warning);">!</span>
+              </div>
+              <div>
+                <strong>120% ratio:</strong> You'll receive a warning to add collateral or reduce debt.
+              </div>
+            </div>
+            <div style="display: flex; gap: var(--space-3);">
+              <div style="width: 24px; height: 24px; background: var(--color-danger-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                <span style="font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); color: var(--color-danger);">×</span>
+              </div>
+              <div>
+                <strong>110% ratio:</strong> Auto-liquidation sells enough BTC to restore 130% ratio.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Simulation Section -->
+      <section class="scene-header" style="margin-top: var(--space-6);">
+        <div class="scene-header__time">Considering a Kitchen Renovation</div>
+        <p class="scene-header__narrative">
+          "We're thinking about a kitchen renovation. I tap 'Simulate Draw' and enter $15,000."
+        </p>
+      </section>
+
+      <!-- Simulation Input -->
+      <div class="simulation-input">
+        <label class="simulation-input__label" for="draw-amount">
+          Simulate Credit Draw
+        </label>
+        <div style="position: relative;">
+          <span style="position: absolute; left: var(--space-3); top: 50%; transform: translateY(-50%); color: var(--color-text-tertiary);">$</span>
+          <input
+            type="number"
+            id="draw-amount"
+            class="simulation-input__field"
+            style="padding-left: var(--space-6);"
+            placeholder="0"
+            min="0"
+            max="82400"
+            value="15000"
+          >
+        </div>
+        <div style="display: flex; gap: var(--space-2); margin-top: var(--space-3);">
+          <button class="btn btn--secondary" style="flex: 1;" onclick="setDrawAmount(5000)">$5k</button>
+          <button class="btn btn--secondary" style="flex: 1;" onclick="setDrawAmount(15000)">$15k</button>
+          <button class="btn btn--secondary" style="flex: 1;" onclick="setDrawAmount(30000)">$30k</button>
+          <button class="btn btn--secondary" style="flex: 1;" onclick="setDrawAmount(50000)">$50k</button>
+        </div>
+      </div>
+
+      <!-- Simulation Results -->
+      <div class="card" id="simulation-results">
+        <div class="card__header">
+          <h2 class="card__title">Projected Impact</h2>
+        </div>
+        <div class="simulation-results">
+          <div class="simulation-result-item">
+            <span class="simulation-result-item__label">New borrowed amount</span>
+            <span class="simulation-result-item__value" id="result-borrowed">$15,000</span>
+          </div>
+          <div class="simulation-result-item">
+            <span class="simulation-result-item__label">Collateral ratio</span>
+            <span class="simulation-result-item__value" id="result-ratio">1,098%</span>
+          </div>
+          <div class="simulation-result-item">
+            <span class="simulation-result-item__label">Monthly interest</span>
+            <span class="simulation-result-item__value" id="result-monthly">~$52.50</span>
+          </div>
+          <div class="simulation-result-item">
+            <span class="simulation-result-item__label">12-month repayment</span>
+            <span class="simulation-result-item__value" id="result-repayment">$15,630</span>
+          </div>
+        </div>
+
+        <!-- Collateral Gauge -->
+        <div class="collateral-gauge" style="padding: 0 var(--space-4) var(--space-4);">
+          <div class="collateral-gauge__bar">
+            <div class="collateral-gauge__fill" id="gauge-fill" style="width: 100%;"></div>
+          </div>
+          <div class="collateral-gauge__markers">
+            <span>110%</span>
+            <span>120%</span>
+            <span>Your ratio: <span id="gauge-ratio">1,098%</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stress Test -->
+      <div class="stress-test">
+        <div class="stress-test__header">
+          Stress Test: "What if Bitcoin drops?"
+        </div>
+        <select class="stress-test__select" id="stress-scenario">
+          <option value="0">No price change</option>
+          <option value="10">10% price decline</option>
+          <option value="20">20% price decline</option>
+          <option value="30" selected>30% price decline</option>
+          <option value="50">50% price decline</option>
+          <option value="70">70% price decline</option>
+        </select>
+        <div id="stress-results" style="font-size: var(--font-size-sm);">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Narrative Break -->
+      <div style="padding: var(--space-6) 0; text-align: center;">
+        <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); font-style: italic; max-width: 320px; margin: 0 auto;">
+          "There's no approval process. No credit check. No waiting. If I tap 'Confirm,' the $15,000 moves to my checking in seconds."
+        </p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; gap: var(--space-3);">
+        <button class="btn btn--secondary" style="flex: 1;" onclick="resetSimulation()">
+          Reset
+        </button>
+        <button class="btn btn--primary" style="flex: 1;" id="confirm-draw-btn" disabled title="Demo only — draws disabled">
+          Confirm Draw
+        </button>
+      </div>
+      <p style="font-size: var(--font-size-xs); color: var(--color-text-tertiary); text-align: center; margin-top: var(--space-2);">
+        Demo mode: Confirm is disabled. In the real app, this would instantly move funds.
+      </p>
+
+      <!-- What I Don't Miss -->
+      <div class="card" style="margin-top: var(--space-6);">
+        <div class="card__header">
+          <h2 class="card__title">What Elena doesn't miss</h2>
+        </div>
+        <div class="card__content" style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+          <ul style="margin: 0; padding-left: var(--space-4); line-height: var(--line-height-relaxed);">
+            <li>Calling a bank</li>
+            <li>Submitting paperwork</li>
+            <li>Waiting two weeks</li>
+            <li>Getting denied because income is "variable"</li>
+            <li>Reapplying with more documentation</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Continue Navigation -->
+      <div style="text-align: center; margin-top: var(--space-8); padding-bottom: var(--space-4);">
+        <p style="font-size: var(--font-size-sm); color: var(--color-text-tertiary); margin-bottom: var(--space-3);">
+          Continue to evening →
+        </p>
+        <a href="./evening.html" class="btn btn--secondary">
+          Family Finances
+        </a>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="scene-nav">
+      <a href="./morning.html" class="scene-nav__link">
+        <svg class="scene-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <span class="scene-nav__label">Morning</span>
+      </a>
+      <a href="./midday.html" class="scene-nav__link">
+        <svg class="scene-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="scene-nav__label">Midday</span>
+      </a>
+      <a href="./afternoon.html" class="scene-nav__link is-active">
+        <svg class="scene-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+        </svg>
+        <span class="scene-nav__label">Afternoon</span>
+      </a>
+      <a href="./evening.html" class="scene-nav__link">
+        <svg class="scene-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+        <span class="scene-nav__label">Evening</span>
+      </a>
+    </nav>
+  </div>
+
+  <script src="./scripts/app.js"></script>
+  <script src="./scripts/afternoon.js"></script>
+</body>
+</html>
