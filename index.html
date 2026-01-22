@@ -3,212 +3,396 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bitcoin-Backed Lending Portfolio Analysis</title>
+  <title>Bitcoin-Backed Lending Portfolio Analyzer | Galoy</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-    input[type="range"] { -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px; background: #e5e7eb; }
-    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #1e3a5f; cursor: pointer; }
-    input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #1e3a5f; cursor: pointer; border: none; }
-    .bar { transition: width 0.3s ease; }
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    :root {
+      --galoy-blue: #3654FF;
+      --galoy-dark: #0a0a0a;
+      --galoy-gray: #1a1a1a;
+    }
+    body { background: var(--galoy-dark); color: #fff; }
+    .card { background: var(--galoy-gray); border: 1px solid #333; }
+    .highlight { background: linear-gradient(135deg, rgba(54, 84, 255, 0.15), rgba(54, 84, 255, 0.05)); border-color: var(--galoy-blue); }
+
+    /* Custom range slider */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: #333;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--galoy-blue);
+      cursor: pointer;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--galoy-blue);
+      cursor: pointer;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    /* Bar animations */
+    .bar { transition: all 0.4s ease; }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 0%, #3654FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Metric card hover */
+    .metric-card { transition: all 0.3s ease; }
+    .metric-card:hover { transform: translateY(-2px); border-color: var(--galoy-blue); }
+
+    /* Table row hover */
+    .table-row { transition: background 0.2s ease; }
+    .table-row:hover { background: rgba(54, 84, 255, 0.1); }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--galoy-dark); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #444; }
+
+    /* Pulse animation for active allocation */
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(54, 84, 255, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(54, 84, 255, 0); }
+    }
+    .pulse { animation: pulse 2s infinite; }
   </style>
 </head>
-<body class="bg-gray-50 min-h-screen p-6">
-  <div class="max-w-7xl mx-auto mb-8">
-    <h1 class="text-3xl font-bold mb-2" style="color: #1e3a5f">Bitcoin-Backed Lending Portfolio Analysis</h1>
-    <p class="text-gray-600">Interactive model showing the impact of bitcoin-backed loans on portfolio net interest income</p>
-    <div class="mt-3 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
-      ⚙️ Conservative assumptions • No price speculation • Collateral-secured lending only
-    </div>
-  </div>
-
-  <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
-    <div class="lg:col-span-1 bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-      <h2 class="text-lg font-semibold mb-6" style="color: #1e3a5f">Model Inputs</h2>
-
-      <div class="mb-6">
-        <div class="flex justify-between items-baseline mb-2">
-          <label class="text-sm font-medium text-gray-700">Total Loan Book Size</label>
-          <span id="loanBookDisplay" class="text-lg font-semibold" style="color: #1e3a5f">$1.00B</span>
+<body class="min-h-screen">
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-opacity-90 backdrop-blur-sm" style="background: rgba(10,10,10,0.9);">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--galoy-blue);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
         </div>
-        <input type="range" id="loanBook" min="100000000" max="10000000000" step="100000000" value="1000000000" class="w-full cursor-pointer" oninput="updateCalculations()">
-        <div class="flex justify-between text-xs text-gray-400 mt-1"><span>$100M</span><span>$10B</span></div>
+        <span class="font-semibold text-white">Portfolio Analyzer</span>
       </div>
-
-      <div class="mb-6">
-        <div class="flex justify-between items-baseline mb-2">
-          <label class="text-sm font-medium text-gray-700">Bitcoin Loan Allocation</label>
-          <span id="btcAllocDisplay" class="text-lg font-semibold" style="color: #1e3a5f">5%</span>
-        </div>
-        <p class="text-xs text-gray-500 mb-2">Percentage of loan book allocated to bitcoin-backed loans</p>
-        <input type="range" id="btcAlloc" min="0" max="25" step="0.5" value="5" class="w-full cursor-pointer" oninput="updateCalculations()">
-        <div class="flex justify-between text-xs text-gray-400 mt-1"><span>0%</span><span>25%</span></div>
-      </div>
-
-      <div class="border-t border-gray-200 my-6 pt-6">
-        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Interest Rates</p>
-
-        <div class="mb-6">
-          <div class="flex justify-between items-baseline mb-2">
-            <label class="text-sm font-medium text-gray-700">Traditional Loan Rate</label>
-            <span id="tradRateDisplay" class="text-lg font-semibold" style="color: #1e3a5f">6.00%</span>
-          </div>
-          <input type="range" id="tradRate" min="3" max="12" step="0.25" value="6" class="w-full cursor-pointer" oninput="updateCalculations()">
-          <div class="flex justify-between text-xs text-gray-400 mt-1"><span>3%</span><span>12%</span></div>
-        </div>
-
-        <div class="mb-6">
-          <div class="flex justify-between items-baseline mb-2">
-            <label class="text-sm font-medium text-gray-700">Bitcoin-Backed Loan Rate</label>
-            <span id="btcRateDisplay" class="text-lg font-semibold" style="color: #1e3a5f">10.00%</span>
-          </div>
-          <input type="range" id="btcRate" min="6" max="18" step="0.25" value="10" class="w-full cursor-pointer" oninput="updateCalculations()">
-          <div class="flex justify-between text-xs text-gray-400 mt-1"><span>6%</span><span>18%</span></div>
-        </div>
-      </div>
-
-      <div class="border-t border-gray-200 my-6 pt-6">
-        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Risk Parameters</p>
-
-        <div class="mb-6">
-          <div class="flex justify-between items-baseline mb-2">
-            <label class="text-sm font-medium text-gray-700">Bitcoin Loan LTV</label>
-            <span id="ltvDisplay" class="text-lg font-semibold" style="color: #1e3a5f">50%</span>
-          </div>
-          <p class="text-xs text-gray-500 mb-2">Lower LTV = higher collateral buffer</p>
-          <input type="range" id="ltv" min="30" max="70" step="5" value="50" class="w-full cursor-pointer" oninput="updateCalculations()">
-          <div class="flex justify-between text-xs text-gray-400 mt-1"><span>30%</span><span>70%</span></div>
-        </div>
-
-        <div class="mb-6">
-          <div class="flex justify-between items-baseline mb-2">
-            <label class="text-sm font-medium text-gray-700">Cost of Funds</label>
-            <span id="cofDisplay" class="text-lg font-semibold" style="color: #1e3a5f">3.5%</span>
-          </div>
-          <input type="range" id="cof" min="1" max="6" step="0.1" value="3.5" class="w-full cursor-pointer" oninput="updateCalculations()">
-          <div class="flex justify-between text-xs text-gray-400 mt-1"><span>1%</span><span>6%</span></div>
-        </div>
-
-        <div class="mb-6">
-          <div class="flex justify-between items-baseline mb-2">
-            <label class="text-sm font-medium text-gray-700">Traditional Loan Loss Rate</label>
-            <span id="lossDisplay" class="text-lg font-semibold" style="color: #1e3a5f">0.5%</span>
-          </div>
-          <p class="text-xs text-gray-500 mb-2">Bitcoin loans assumed 0% loss (over-collateralized)</p>
-          <input type="range" id="lossRate" min="0" max="3" step="0.1" value="0.5" class="w-full cursor-pointer" oninput="updateCalculations()">
-          <div class="flex justify-between text-xs text-gray-400 mt-1"><span>0%</span><span>3%</span></div>
-        </div>
-      </div>
-
-      <div class="bg-gray-50 rounded-lg p-4 mt-4">
-        <p class="text-xs text-gray-600"><strong>Key Assumption:</strong> Bitcoin-backed loans are over-collateralized at <span id="ltvNote">50</span>% LTV with automated margin calls, resulting in near-zero credit losses.</p>
+      <div class="flex items-center gap-4">
+        <a href="bitcoin-backed-lending-101.html" class="text-sm text-gray-400 hover:text-white transition-colors">Learn the Basics →</a>
+        <a href="https://galoy.io" target="_blank" class="text-sm text-gray-400 hover:text-white transition-colors">galoy.io</a>
       </div>
     </div>
+  </header>
 
-    <div class="lg:col-span-2 space-y-6">
-      <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h2 class="text-lg font-semibold mb-4" style="color: #1e3a5f">Portfolio Impact Summary</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div class="p-4 rounded-lg border border-gray-200 bg-white">
-            <p class="text-sm text-gray-600 mb-1">Current Portfolio NII</p>
-            <p id="currentNII" class="text-2xl font-bold" style="color: #1e3a5f">$20.00M</p>
-            <p class="text-xs text-gray-500 mt-1">100% traditional loans</p>
-          </div>
-          <div class="p-4 rounded-lg border" style="border-color: #3b82f6; background-color: #eff6ff">
-            <p class="text-sm text-gray-600 mb-1">New Portfolio NII</p>
-            <p id="newNII" class="text-2xl font-bold" style="color: #1e3a5f">$21.03M</p>
-            <p id="newNIILabel" class="text-xs text-gray-500 mt-1">5% bitcoin allocation</p>
-          </div>
-          <div class="p-4 rounded-lg border" style="border-color: #3b82f6; background-color: #eff6ff">
-            <p class="text-sm text-gray-600 mb-1">Incremental NII</p>
-            <p id="incNII" class="text-2xl font-bold" style="color: #1e3a5f">$1.03M</p>
-            <p id="incNIIPct" class="text-sm mt-1 text-green-600">+5.13%</p>
-          </div>
-          <div class="p-4 rounded-lg border border-gray-200 bg-white">
-            <p class="text-sm text-gray-600 mb-1">Yield Uplift</p>
-            <p id="yieldUplift" class="text-2xl font-bold" style="color: #1e3a5f">+20.0bps</p>
-            <p id="blendedYield" class="text-xs text-gray-500 mt-1">Blended yield: 6.20%</p>
-          </div>
+  <main class="pt-24 pb-12 px-6">
+    <div class="max-w-7xl mx-auto">
+      <!-- Hero Section -->
+      <div class="mb-10">
+        <p class="text-sm font-medium mb-3" style="color: var(--galoy-blue);">INTERACTIVE MODEL</p>
+        <h1 class="text-3xl lg:text-4xl font-bold mb-4">
+          Bitcoin-Backed Lending <span class="gradient-text">Portfolio Analyzer</span>
+        </h1>
+        <p class="text-gray-400 max-w-2xl mb-6">
+          Model the impact of bitcoin-backed loans on your portfolio's net interest income. Adjust parameters to see how different allocation strategies affect returns.
+        </p>
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm" style="background: rgba(54, 84, 255, 0.15); border: 1px solid rgba(54, 84, 255, 0.3);">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="text-gray-300">Conservative assumptions • No price speculation • Collateral-secured only</span>
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h3 class="text-sm font-semibold mb-4" style="color: #1e3a5f">Net Interest Income Comparison</h3>
-          <div class="space-y-4">
-            <div>
-              <div class="flex justify-between text-sm mb-1">
-                <span class="text-gray-600">Current Portfolio</span>
-                <span id="chartCurrent" class="font-medium">$20.00M</span>
+      <!-- Main Grid -->
+      <div class="grid lg:grid-cols-3 gap-6">
+        <!-- Input Panel -->
+        <div class="lg:col-span-1">
+          <div class="card rounded-2xl p-6 sticky top-24">
+            <h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+              Model Inputs
+            </h2>
+
+            <!-- Loan Book Size -->
+            <div class="mb-6">
+              <div class="flex justify-between items-baseline mb-2">
+                <label class="text-sm text-gray-400">Total Loan Book Size</label>
+                <span id="loanBookDisplay" class="text-lg font-bold" style="color: var(--galoy-blue);">$1.00B</span>
               </div>
-              <div class="h-8 bg-gray-100 rounded-lg overflow-hidden">
-                <div id="barCurrent" class="bar h-full rounded-lg" style="width: 95%; background-color: #94a3b8"></div>
-              </div>
+              <input type="range" id="loanBook" min="100000000" max="10000000000" step="100000000" value="1000000000" class="w-full cursor-pointer" oninput="updateCalculations()">
+              <div class="flex justify-between text-xs text-gray-500 mt-1"><span>$100M</span><span>$10B</span></div>
             </div>
-            <div>
-              <div class="flex justify-between text-sm mb-1">
-                <span class="text-gray-600">With Bitcoin Allocation</span>
-                <span id="chartNew" class="font-medium">$21.03M</span>
+
+            <!-- Bitcoin Allocation -->
+            <div class="mb-6">
+              <div class="flex justify-between items-baseline mb-2">
+                <label class="text-sm text-gray-400">Bitcoin Loan Allocation</label>
+                <span id="btcAllocDisplay" class="text-lg font-bold" style="color: var(--galoy-blue);">5%</span>
               </div>
-              <div class="h-8 bg-gray-100 rounded-lg overflow-hidden">
-                <div id="barNew" class="bar h-full rounded-lg" style="width: 100%; background-color: #1e3a5f"></div>
+              <p class="text-xs text-gray-500 mb-3">Percentage of loan book allocated to bitcoin-backed loans</p>
+              <input type="range" id="btcAlloc" min="0" max="25" step="0.5" value="5" class="w-full cursor-pointer" oninput="updateCalculations()">
+              <div class="flex justify-between text-xs text-gray-500 mt-1"><span>0%</span><span>25%</span></div>
+            </div>
+
+            <div class="border-t border-gray-700 my-6"></div>
+
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Interest Rates</p>
+
+            <!-- Traditional Rate -->
+            <div class="mb-6">
+              <div class="flex justify-between items-baseline mb-2">
+                <label class="text-sm text-gray-400">Traditional Loan Rate</label>
+                <span id="tradRateDisplay" class="font-semibold">6.00%</span>
               </div>
+              <input type="range" id="tradRate" min="3" max="12" step="0.25" value="6" class="w-full cursor-pointer" oninput="updateCalculations()">
+              <div class="flex justify-between text-xs text-gray-500 mt-1"><span>3%</span><span>12%</span></div>
+            </div>
+
+            <!-- Bitcoin Rate -->
+            <div class="mb-6">
+              <div class="flex justify-between items-baseline mb-2">
+                <label class="text-sm text-gray-400">Bitcoin-Backed Loan Rate</label>
+                <span id="btcRateDisplay" class="font-semibold" style="color: #f7931a;">10.00%</span>
+              </div>
+              <input type="range" id="btcRate" min="6" max="18" step="0.25" value="10" class="w-full cursor-pointer" oninput="updateCalculations()">
+              <div class="flex justify-between text-xs text-gray-500 mt-1"><span>6%</span><span>18%</span></div>
+            </div>
+
+            <div class="border-t border-gray-700 my-6"></div>
+
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Risk Parameters</p>
+
+            <!-- LTV -->
+            <div class="mb-6">
+              <div class="flex justify-between items-baseline mb-2">
+                <label class="text-sm text-gray-400">Bitcoin Loan LTV</label>
+                <span id="ltvDisplay" class="font-semibold">50%</span>
+              </div>
+              <p class="text-xs text-gray-500 mb-3">Lower LTV = higher collateral buffer</p>
+              <input type="range" id="ltv" min="30" max="70" step="5" value="50" class="w-full cursor-pointer" oninput="updateCalculations()">
+              <div class="flex justify-between text-xs text-gray-500 mt-1"><span>30%</span><span>70%</span></div>
+            </div>
+
+            <!-- Cost of Funds -->
+            <div class="mb-6">
+              <div class="flex justify-between items-baseline mb-2">
+                <label class="text-sm text-gray-400">Cost of Funds</label>
+                <span id="cofDisplay" class="font-semibold">3.5%</span>
+              </div>
+              <input type="range" id="cof" min="1" max="6" step="0.1" value="3.5" class="w-full cursor-pointer" oninput="updateCalculations()">
+              <div class="flex justify-between text-xs text-gray-500 mt-1"><span>1%</span><span>6%</span></div>
+            </div>
+
+            <!-- Loss Rate -->
+            <div class="mb-6">
+              <div class="flex justify-between items-baseline mb-2">
+                <label class="text-sm text-gray-400">Traditional Loan Loss Rate</label>
+                <span id="lossDisplay" class="font-semibold">0.5%</span>
+              </div>
+              <p class="text-xs text-gray-500 mb-3">Bitcoin loans assumed 0% loss (over-collateralized)</p>
+              <input type="range" id="lossRate" min="0" max="3" step="0.1" value="0.5" class="w-full cursor-pointer" oninput="updateCalculations()">
+              <div class="flex justify-between text-xs text-gray-500 mt-1"><span>0%</span><span>3%</span></div>
+            </div>
+
+            <!-- Assumption Note -->
+            <div class="rounded-xl p-4" style="background: rgba(54, 84, 255, 0.1); border: 1px solid rgba(54, 84, 255, 0.2);">
+              <p class="text-xs text-gray-300">
+                <strong class="text-white">Key Assumption:</strong> Bitcoin-backed loans are over-collateralized at <span id="ltvNote">50</span>% LTV with automated margin calls, resulting in near-zero credit losses.
+              </p>
             </div>
           </div>
         </div>
 
-        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h3 class="text-sm font-semibold mb-4" style="color: #1e3a5f">Portfolio Yield by Allocation</h3>
-          <div class="h-48 flex items-end justify-between gap-2" id="yieldChart"></div>
-          <div class="flex justify-between text-xs text-gray-500 mt-2">
-            <span>0%</span><span>5%</span><span>10%</span><span>15%</span><span>20%</span>
+        <!-- Results Panel -->
+        <div class="lg:col-span-2 space-y-6">
+          <!-- Key Metrics -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="card metric-card rounded-xl p-4">
+              <p class="text-xs text-gray-400 mb-1">Current Portfolio NII</p>
+              <p id="currentNII" class="text-2xl font-bold">$20.00M</p>
+              <p class="text-xs text-gray-500 mt-1">100% traditional</p>
+            </div>
+            <div class="card metric-card highlight rounded-xl p-4">
+              <p class="text-xs text-gray-400 mb-1">New Portfolio NII</p>
+              <p id="newNII" class="text-2xl font-bold" style="color: var(--galoy-blue);">$21.03M</p>
+              <p id="newNIILabel" class="text-xs text-gray-500 mt-1">5% bitcoin allocation</p>
+            </div>
+            <div class="card metric-card rounded-xl p-4">
+              <p class="text-xs text-gray-400 mb-1">Incremental NII</p>
+              <p id="incNII" class="text-2xl font-bold text-green-400">+$1.03M</p>
+              <p id="incNIIPct" class="text-xs text-green-400 mt-1">↑ +5.13%</p>
+            </div>
+            <div class="card metric-card rounded-xl p-4">
+              <p class="text-xs text-gray-400 mb-1">Yield Uplift</p>
+              <p id="yieldUplift" class="text-2xl font-bold">+20.0 bps</p>
+              <p id="blendedYield" class="text-xs text-gray-500 mt-1">Blended: 6.20%</p>
+            </div>
+          </div>
+
+          <!-- Charts Row -->
+          <div class="grid lg:grid-cols-2 gap-6">
+            <!-- NII Comparison -->
+            <div class="card rounded-2xl p-6">
+              <h3 class="text-sm font-semibold mb-6 flex items-center gap-2">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                Net Interest Income Comparison
+              </h3>
+              <div class="space-y-5">
+                <div>
+                  <div class="flex justify-between text-sm mb-2">
+                    <span class="text-gray-400">Current Portfolio</span>
+                    <span id="chartCurrent" class="font-medium">$20.00M</span>
+                  </div>
+                  <div class="h-10 bg-gray-800 rounded-lg overflow-hidden">
+                    <div id="barCurrent" class="bar h-full rounded-lg flex items-center justify-end pr-3" style="width: 95%; background: linear-gradient(90deg, #4b5563, #6b7280);">
+                      <span class="text-xs font-medium text-white opacity-80">Baseline</span>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-sm mb-2">
+                    <span class="text-gray-400">With Bitcoin Allocation</span>
+                    <span id="chartNew" class="font-medium" style="color: var(--galoy-blue);">$21.03M</span>
+                  </div>
+                  <div class="h-10 bg-gray-800 rounded-lg overflow-hidden">
+                    <div id="barNew" class="bar h-full rounded-lg flex items-center justify-end pr-3" style="width: 100%; background: linear-gradient(90deg, #3654FF, #5b7aff);">
+                      <span class="text-xs font-medium text-white">+5.13%</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Yield by Allocation -->
+            <div class="card rounded-2xl p-6">
+              <h3 class="text-sm font-semibold mb-6 flex items-center gap-2">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                Portfolio Yield by Allocation
+              </h3>
+              <div class="h-40 flex items-end justify-between gap-2" id="yieldChart">
+                <!-- Generated by JS -->
+              </div>
+              <div class="flex justify-between text-xs text-gray-500 mt-3 px-1">
+                <span>0%</span><span>5%</span><span>10%</span><span>15%</span><span>20%</span>
+              </div>
+              <p class="text-xs text-gray-500 text-center mt-2">Bitcoin Allocation %</p>
+            </div>
+          </div>
+
+          <!-- Portfolio Composition -->
+          <div class="card rounded-2xl p-6">
+            <h3 class="text-sm font-semibold mb-4 flex items-center gap-2">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+              Portfolio Composition
+            </h3>
+            <div class="h-6 rounded-full overflow-hidden flex bg-gray-800">
+              <div id="tradBar" class="bar h-full transition-all duration-300" style="width: 95%; background: linear-gradient(90deg, #4b5563, #6b7280);"></div>
+              <div id="btcBar" class="bar h-full transition-all duration-300" style="width: 5%; background: linear-gradient(90deg, #f7931a, #ffab40);"></div>
+            </div>
+            <div class="flex justify-between mt-3 text-sm">
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full bg-gray-500"></div>
+                <span id="tradLabel" class="text-gray-400">Traditional: $950.00M (95.0%)</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-3 h-3 rounded-full" style="background: #f7931a;"></div>
+                <span id="btcLabel" class="text-gray-400">Bitcoin-Backed: $50.00M (5.0%)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sensitivity Analysis -->
+          <div class="card rounded-2xl overflow-hidden">
+            <div class="p-6 border-b border-gray-800">
+              <h3 class="text-sm font-semibold flex items-center gap-2">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                Sensitivity Analysis: Impact at Different Allocation Levels
+              </h3>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead>
+                  <tr class="border-b border-gray-800">
+                    <th class="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wide">Allocation</th>
+                    <th class="text-right py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wide">Bitcoin Loans</th>
+                    <th class="text-right py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wide">Portfolio NII</th>
+                    <th class="text-right py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wide">Incremental</th>
+                    <th class="text-right py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wide">Net Yield</th>
+                    <th class="text-right py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wide">Uplift</th>
+                  </tr>
+                </thead>
+                <tbody id="sensitivityTable">
+                  <!-- Generated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Footer Notes -->
+          <div class="card rounded-2xl p-6">
+            <h4 class="text-sm font-semibold mb-4 flex items-center gap-2">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="text-gray-500"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Model Assumptions & Notes
+            </h4>
+            <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-400">
+              <div class="flex items-start gap-2">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                <span>Bitcoin loans fully collateralized at <span id="ltvFooter" class="text-white">50</span>% LTV with automated liquidation</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                <span>Credit losses on bitcoin-backed loans assumed 0% due to over-collateralization</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                <span>No bitcoin price speculation or volatility modeling included</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                <span>Interest rates and cost of funds assumed constant for analysis period</span>
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-4 pt-4 border-t border-gray-800">
+              This model is for illustrative purposes only and does not constitute financial advice.
+            </p>
+          </div>
+
+          <!-- CTA -->
+          <div class="card highlight rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div>
+              <h3 class="font-semibold mb-1">New to Bitcoin-Backed Lending?</h3>
+              <p class="text-sm text-gray-400">Learn the fundamentals with our interactive educational guide.</p>
+            </div>
+            <a href="bitcoin-backed-lending-101.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium transition-all hover:scale-105 flex-shrink-0" style="background: var(--galoy-blue);">
+              Bitcoin-Backed Lending 101
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
           </div>
         </div>
       </div>
 
-      <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h3 class="text-sm font-semibold mb-4" style="color: #1e3a5f">Sensitivity Analysis: Impact at Different Allocation Levels</h3>
-        <div class="overflow-x-auto">
-          <table class="w-full">
-            <thead>
-              <tr class="border-b border-gray-200">
-                <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Bitcoin Allocation</th>
-                <th class="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Bitcoin Loans</th>
-                <th class="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Portfolio NII</th>
-                <th class="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Incremental NII</th>
-                <th class="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Net Yield</th>
-                <th class="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Yield Uplift</th>
-              </tr>
-            </thead>
-            <tbody id="sensitivityTable"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-        <h3 class="text-sm font-semibold mb-4" style="color: #1e3a5f">Portfolio Composition</h3>
-        <div class="h-8 rounded-lg overflow-hidden flex">
-          <div id="tradBar" class="h-full transition-all duration-300" style="width: 95%; background-color: #94a3b8"></div>
-          <div id="btcBar" class="h-full transition-all duration-300" style="width: 5%; background-color: #1e3a5f"></div>
-        </div>
-        <div class="flex justify-between mt-2 text-xs text-gray-600">
-          <span id="tradLabel">Traditional: $950.00M (95.0%)</span>
-          <span id="btcLabel">Bitcoin-Backed: $50.00M (5.0%)</span>
-        </div>
-      </div>
-
-      <div class="bg-gray-100 rounded-xl p-4 text-xs text-gray-600">
-        <p class="font-semibold mb-2">Model Assumptions & Notes:</p>
-        <ul class="space-y-1 list-disc list-inside">
-          <li>Bitcoin-backed loans are fully collateralized at <span id="ltvFooter">50</span>% LTV with automated liquidation protocols</li>
-          <li>Credit losses on bitcoin-backed loans assumed to be 0% due to over-collateralization</li>
-          <li>No bitcoin price speculation or volatility modeling included</li>
-          <li>Interest rates and cost of funds assumed constant for the analysis period</li>
-          <li>This model is for illustrative purposes only and does not constitute financial advice</li>
-        </ul>
-      </div>
+      <!-- Footer -->
+      <footer class="mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+        <p>Built by <a href="https://galoy.io" target="_blank" class="hover:text-white transition-colors">Galoy</a> — Bitcoin-native banking infrastructure</p>
+      </footer>
     </div>
-  </div>
+  </main>
 
   <script>
     function formatCurrency(value) {
@@ -227,6 +411,7 @@
       const cof = parseFloat(document.getElementById('cof').value);
       const lossRate = parseFloat(document.getElementById('lossRate').value);
 
+      // Update displays
       document.getElementById('loanBookDisplay').textContent = formatCurrency(loanBook);
       document.getElementById('btcAllocDisplay').textContent = btcAlloc + '%';
       document.getElementById('tradRateDisplay').textContent = tradRate.toFixed(2) + '%';
@@ -237,15 +422,18 @@
       document.getElementById('ltvNote').textContent = ltv;
       document.getElementById('ltvFooter').textContent = ltv;
 
+      // Calculations
       const btcAllocDec = btcAlloc / 100;
       const tradAllocDec = 1 - btcAllocDec;
 
+      // Current portfolio (100% traditional)
       const currentGross = loanBook * (tradRate / 100);
       const currentFunding = loanBook * (cof / 100);
       const currentLosses = loanBook * (lossRate / 100);
       const currentNII = currentGross - currentFunding - currentLosses;
       const currentYield = (currentNII / loanBook) * 100;
 
+      // New portfolio
       const btcLoanAmt = loanBook * btcAllocDec;
       const tradLoanAmt = loanBook * tradAllocDec;
       const btcGross = btcLoanAmt * (btcRate / 100);
@@ -261,29 +449,36 @@
       const yieldUplift = (newYield - currentYield) * 100;
       const blendedYield = (btcAllocDec * btcRate) + (tradAllocDec * tradRate);
 
+      // Update metrics
       document.getElementById('currentNII').textContent = formatCurrency(currentNII);
       document.getElementById('newNII').textContent = formatCurrency(newNII);
       document.getElementById('newNIILabel').textContent = btcAlloc + '% bitcoin allocation';
-      document.getElementById('incNII').textContent = formatCurrency(incNII);
-      document.getElementById('incNIIPct').textContent = '+' + incPct.toFixed(2) + '%';
-      document.getElementById('yieldUplift').textContent = '+' + yieldUplift.toFixed(1) + 'bps';
-      document.getElementById('blendedYield').textContent = 'Blended yield: ' + blendedYield.toFixed(2) + '%';
+      document.getElementById('incNII').textContent = '+' + formatCurrency(incNII);
+      document.getElementById('incNIIPct').textContent = '↑ +' + incPct.toFixed(2) + '%';
+      document.getElementById('yieldUplift').textContent = '+' + yieldUplift.toFixed(1) + ' bps';
+      document.getElementById('blendedYield').textContent = 'Blended: ' + blendedYield.toFixed(2) + '%';
 
+      // Update charts
       const maxNII = Math.max(currentNII, newNII);
       document.getElementById('chartCurrent').textContent = formatCurrency(currentNII);
       document.getElementById('chartNew').textContent = formatCurrency(newNII);
       document.getElementById('barCurrent').style.width = ((currentNII / maxNII) * 100) + '%';
       document.getElementById('barNew').style.width = ((newNII / maxNII) * 100) + '%';
 
+      // Update bar labels
+      document.getElementById('barNew').innerHTML = '<span class="text-xs font-medium text-white">+' + incPct.toFixed(2) + '%</span>';
+
+      // Update composition
       document.getElementById('tradBar').style.width = (100 - btcAlloc) + '%';
       document.getElementById('btcBar').style.width = btcAlloc + '%';
       document.getElementById('tradLabel').textContent = 'Traditional: ' + formatCurrency(tradLoanAmt) + ' (' + (100 - btcAlloc).toFixed(1) + '%)';
       document.getElementById('btcLabel').textContent = 'Bitcoin-Backed: ' + formatCurrency(btcLoanAmt) + ' (' + btcAlloc + '%)';
 
+      // Update yield chart
       const yieldChart = document.getElementById('yieldChart');
       yieldChart.innerHTML = '';
       const allocations = [0, 5, 10, 15, 20];
-      const yields = allocations.map(function(a) {
+      const yields = allocations.map(a => {
         const bDec = a / 100;
         const tDec = 1 - bDec;
         const bAmt = loanBook * bDec;
@@ -296,29 +491,55 @@
         const nii = tInc - fC - lC;
         return (nii / loanBook) * 100;
       });
-      const maxYield = Math.max.apply(null, yields);
-      const minYield = Math.min.apply(null, yields);
+      const maxYield = Math.max(...yields);
+      const minYield = Math.min(...yields);
       const range = maxYield - minYield || 1;
 
-      allocations.forEach(function(a, i) {
+      allocations.forEach((a, i) => {
+        const barContainer = document.createElement('div');
+        barContainer.className = 'flex-1 flex flex-col items-center';
+
         const bar = document.createElement('div');
-        bar.className = 'flex-1 rounded-t transition-all duration-300';
-        const height = 20 + ((yields[i] - minYield) / range) * 80;
+        bar.className = 'w-full rounded-t transition-all duration-300 cursor-pointer relative group';
+        const height = 30 + ((yields[i] - minYield) / range) * 70;
         bar.style.height = height + '%';
-        bar.style.backgroundColor = a === btcAlloc ? '#1e3a5f' : '#94a3b8';
-        bar.title = a + '% allocation: ' + yields[i].toFixed(2) + '% yield';
-        yieldChart.appendChild(bar);
+
+        const isActive = Math.abs(a - btcAlloc) < 0.5;
+        if (isActive) {
+          bar.style.background = 'linear-gradient(180deg, #3654FF, #5b7aff)';
+          bar.classList.add('pulse');
+        } else {
+          bar.style.background = 'linear-gradient(180deg, #4b5563, #374151)';
+        }
+
+        // Tooltip
+        const tooltip = document.createElement('div');
+        tooltip.className = 'absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-900 px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none';
+        tooltip.textContent = yields[i].toFixed(2) + '% yield';
+        bar.appendChild(tooltip);
+
+        barContainer.appendChild(bar);
+        yieldChart.appendChild(barContainer);
       });
 
+      // Update sensitivity table
       const tbody = document.getElementById('sensitivityTable');
       tbody.innerHTML = '';
 
+      // Baseline row
       const baseRow = document.createElement('tr');
-      baseRow.className = 'border-b border-gray-100 bg-gray-50';
-      baseRow.innerHTML = '<td class="py-3 px-4 text-sm text-gray-600">0% (Baseline)</td><td class="py-3 px-4 text-sm text-right text-gray-600">$0</td><td class="py-3 px-4 text-sm text-right font-medium">' + formatCurrency(currentNII) + '</td><td class="py-3 px-4 text-sm text-right text-gray-500">—</td><td class="py-3 px-4 text-sm text-right font-medium">' + currentYield.toFixed(2) + '%</td><td class="py-3 px-4 text-sm text-right text-gray-500">—</td>';
+      baseRow.className = 'table-row border-b border-gray-800';
+      baseRow.innerHTML = `
+        <td class="py-4 px-6 text-sm text-gray-400">0% (Baseline)</td>
+        <td class="py-4 px-6 text-sm text-right text-gray-400">$0</td>
+        <td class="py-4 px-6 text-sm text-right font-medium">${formatCurrency(currentNII)}</td>
+        <td class="py-4 px-6 text-sm text-right text-gray-500">—</td>
+        <td class="py-4 px-6 text-sm text-right font-medium">${currentYield.toFixed(2)}%</td>
+        <td class="py-4 px-6 text-sm text-right text-gray-500">—</td>
+      `;
       tbody.appendChild(baseRow);
 
-      [1, 5, 10, 20].forEach(function(alloc) {
+      [1, 5, 10, 15, 20, 25].forEach(alloc => {
         const bDec = alloc / 100;
         const tDec = 1 - bDec;
         const bAmt = loanBook * bDec;
@@ -333,17 +554,25 @@
         const yld = (nii / loanBook) * 100;
         const uplift = (yld - currentYield) * 100;
 
+        const isActive = Math.abs(alloc - btcAlloc) < 0.5;
         const row = document.createElement('tr');
-        row.className = 'border-b border-gray-100';
-        if (alloc === btcAlloc) {
-          row.style.backgroundColor = '#eff6ff';
-        }
-        const currentTag = alloc === btcAlloc ? '<span class="ml-2 text-xs px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full">Current</span>' : '';
-        row.innerHTML = '<td class="py-3 px-4 text-sm font-medium" style="color: #1e3a5f">' + alloc + '%' + currentTag + '</td><td class="py-3 px-4 text-sm text-right text-gray-600">' + formatCurrency(bAmt) + '</td><td class="py-3 px-4 text-sm text-right font-medium">' + formatCurrency(nii) + '</td><td class="py-3 px-4 text-sm text-right text-green-600 font-medium">+' + formatCurrency(inc) + '</td><td class="py-3 px-4 text-sm text-right font-medium">' + yld.toFixed(2) + '%</td><td class="py-3 px-4 text-sm text-right text-green-600 font-medium">+' + uplift.toFixed(1) + 'bps</td>';
+        row.className = 'table-row border-b border-gray-800' + (isActive ? ' highlight' : '');
+        row.innerHTML = `
+          <td class="py-4 px-6 text-sm font-medium ${isActive ? 'text-white' : 'text-gray-300'}">
+            ${alloc}%
+            ${isActive ? '<span class="ml-2 text-xs px-2 py-0.5 rounded-full" style="background: var(--galoy-blue);">Current</span>' : ''}
+          </td>
+          <td class="py-4 px-6 text-sm text-right text-gray-400">${formatCurrency(bAmt)}</td>
+          <td class="py-4 px-6 text-sm text-right font-medium">${formatCurrency(nii)}</td>
+          <td class="py-4 px-6 text-sm text-right text-green-400 font-medium">+${formatCurrency(inc)}</td>
+          <td class="py-4 px-6 text-sm text-right font-medium">${yld.toFixed(2)}%</td>
+          <td class="py-4 px-6 text-sm text-right text-green-400 font-medium">+${uplift.toFixed(1)} bps</td>
+        `;
         tbody.appendChild(row);
       });
     }
 
+    // Initialize
     updateCalculations();
   </script>
 </body>
