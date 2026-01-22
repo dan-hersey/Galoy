@@ -3,296 +3,255 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galoy Regulatory Radar - OCC Intelligence Dashboard</title>
+  <title>OCC Regulatory Radar | Galoy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/655ebc171c75248c5fc3a947_favicon.png" type="image/png">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
-    body { background-color: #000; color: #fff; min-height: 100vh; }
-    ::selection { background: #3654FF; color: #fff; }
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    :root {
+      --galoy-blue: #3654FF;
+      --galoy-dark: #0a0a0a;
+      --galoy-gray: #1a1a1a;
+    }
+    body { background: var(--galoy-dark); color: #fff; }
+    .card { background: var(--galoy-gray); border: 1px solid #333; }
+    .highlight { background: linear-gradient(135deg, rgba(54, 84, 255, 0.15), rgba(54, 84, 255, 0.05)); border-color: var(--galoy-blue); }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 0%, #3654FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Scrollbar */
     ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: #111; }
+    ::-webkit-scrollbar-track { background: var(--galoy-dark); }
     ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #555; }
+    ::-webkit-scrollbar-thumb:hover { background: #444; }
 
-    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-    .card { background: #111; border-radius: 12px; border: 1px solid #222; }
+    /* Tab styles */
+    .tab { transition: all 0.2s ease; }
+    .tab.active { background: var(--galoy-blue); color: white; }
+    .tab:not(.active):hover { background: rgba(54, 84, 255, 0.1); }
 
-    /* Header */
-    header { background: #000; border-bottom: 1px solid #222; padding: 24px 0; }
-    .header-content { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-    .logo-section { display: flex; align-items: center; gap: 16px; }
-    .logo-section img { height: 28px; }
-    .divider { width: 1px; height: 32px; background: #333; }
-    .header-title { font-size: 20px; font-weight: 700; }
-    .header-subtitle { font-size: 12px; color: #9CA3AF; }
+    /* Table row hover */
+    .table-row { transition: background 0.2s ease; }
+    .table-row:hover { background: rgba(54, 84, 255, 0.1); }
 
-    /* Tabs */
-    .tabs { display: flex; gap: 24px; }
-    .tab { background: none; border: none; color: #666; cursor: pointer; padding: 4px 0; font-size: 14px; border-bottom: 2px solid transparent; }
-    .tab.active { color: #fff; border-bottom-color: #3654FF; }
-    .tab:hover { color: #999; }
+    /* Bar animations */
+    .bar { transition: all 0.4s ease; }
 
-    /* Stats Grid */
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
-    .stat-card { padding: 24px; }
-    .stat-label { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; }
-    .stat-value { font-size: 36px; font-weight: 700; margin-top: 8px; }
-    .stat-subtitle { font-size: 14px; color: #9CA3AF; margin-top: 4px; }
-
-    /* Charts Row */
-    .charts-row { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 32px; }
-    .chart-title { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
-
-    /* Bar Chart */
-    .bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 200px; padding: 16px 0; }
-    .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    .bar-stack { display: flex; flex-direction: column; justify-content: flex-end; width: 100%; height: 160px; gap: 2px; }
-    .bar { width: 100%; border-radius: 4px 4px 0 0; transition: all 0.3s; min-height: 2px; }
-    .bar:hover { opacity: 0.8; }
-    .bar-label { font-size: 11px; color: #666; }
-
-    /* Pie Chart (CSS) */
-    .pie-container { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-    .pie-chart { width: 160px; height: 160px; border-radius: 50%; position: relative; }
-    .pie-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: #111; border-radius: 50%; }
-    .pie-legend { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #9CA3AF; }
-    .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
-
-    /* Theme Bars */
-    .theme-bars { display: flex; flex-direction: column; gap: 12px; }
-    .theme-bar-item { display: flex; align-items: center; gap: 12px; }
-    .theme-label { width: 120px; font-size: 12px; color: #999; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .theme-bar-bg { flex: 1; height: 24px; background: #1a1a1a; border-radius: 6px; overflow: hidden; }
-    .theme-bar-fill { height: 100%; background: #3654FF; border-radius: 6px; transition: width 0.3s; }
-    .theme-count { width: 30px; font-size: 12px; color: #666; }
-
-    /* Filters */
-    .filters { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding: 16px; margin-bottom: 24px; }
-    .search-input { flex: 1; min-width: 200px; padding: 10px 16px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; font-size: 14px; }
-    .search-input::placeholder { color: #666; }
-    .search-input:focus { outline: none; border-color: #3654FF; box-shadow: 0 0 0 3px rgba(54, 84, 255, 0.2); }
-    select { padding: 10px 16px; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; color: #fff; font-size: 14px; cursor: pointer; }
-    select:focus { outline: none; border-color: #3654FF; }
-    .filter-count { padding: 8px 16px; background: #1a1a1a; border-radius: 8px; font-size: 14px; }
-    .filter-count strong { color: #fff; }
-
-    /* Table */
-    .table-container { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; }
-    th { text-align: left; padding: 16px 24px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; background: #0a0a0a; }
-    td { padding: 16px 24px; font-size: 14px; border-top: 1px solid #222; }
-    tbody tr { cursor: pointer; transition: background 0.2s; }
-    tbody tr:hover { background: rgba(54, 84, 255, 0.08); }
-    .mono { font-family: ui-monospace, monospace; }
-    .text-muted { color: #9CA3AF; }
-    .line-clamp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-
-    /* Badges */
-    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; font-size: 12px; font-weight: 600; }
-    .badge-high { background: rgba(255, 90, 90, 0.15); color: #FF5A5A; border: 1px solid rgba(255, 90, 90, 0.3); }
-    .badge-medium { background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3); }
-    .badge-low { background: rgba(100, 116, 139, 0.15); color: #64748B; border: 1px solid rgba(100, 116, 139, 0.3); }
-    .badge-dot { width: 8px; height: 8px; border-radius: 50%; }
-    .badge-dot-high { background: #FF5A5A; }
-    .badge-dot-medium { background: #F59E0B; }
-    .badge-dot-low { background: #64748B; }
-
-    .source-badge { padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; }
-    .source-letter { background: rgba(54, 84, 255, 0.15); color: #6b8aff; }
-    .source-news { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
-    .source-bulletin { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
-
-    .tag { padding: 2px 8px; background: #1a1a1a; border-radius: 4px; font-size: 12px; color: #999; display: inline-block; margin: 2px; }
+    /* Search input */
+    .search-input:focus { outline: none; border-color: var(--galoy-blue); box-shadow: 0 0 0 3px rgba(54, 84, 255, 0.2); }
 
     /* Modal */
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px; backdrop-filter: blur(8px); }
-    .modal-overlay.active { display: flex; }
-    .modal-content { background: #111; border-radius: 16px; max-width: 640px; width: 100%; max-height: 85vh; overflow: auto; border: 1px solid #222; }
-    .modal-header { padding: 24px; background: #0a0a0a; border-bottom: 1px solid #222; display: flex; justify-content: space-between; align-items: flex-start; }
-    .modal-id { font-size: 14px; font-family: ui-monospace, monospace; color: #3654FF; }
-    .modal-title { font-size: 20px; font-weight: 700; margin-top: 8px; }
-    .modal-close { background: none; border: none; color: #666; cursor: pointer; padding: 4px; }
-    .modal-close:hover { color: #fff; }
-    .modal-body { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
-    .modal-label { font-size: 14px; color: #9CA3AF; margin-bottom: 4px; }
-    .modal-value { font-weight: 500; }
-    .modal-themes { display: flex; flex-wrap: wrap; gap: 8px; }
-    .modal-theme { padding: 6px 12px; background: rgba(54, 84, 255, 0.15); color: #6b8aff; border-radius: 9999px; font-size: 14px; font-weight: 500; }
-    .modal-link { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: #3654FF; color: white; border-radius: 8px; font-weight: 500; text-decoration: none; box-shadow: 0 4px 14px rgba(54, 84, 255, 0.35); }
-    .modal-link:hover { background: #4a6aff; }
+    .modal-overlay { backdrop-filter: blur(8px); }
 
-    /* Footer */
-    footer { border-top: 1px solid #222; margin-top: 48px; padding: 24px 0; }
-    .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-    .footer-text { font-size: 14px; color: #9CA3AF; }
-    .footer-brand { display: flex; align-items: center; gap: 12px; }
-    .footer-brand img { height: 20px; }
+    /* Stat card hover */
+    .stat-card { transition: all 0.3s ease; }
+    .stat-card:hover { transform: translateY(-2px); border-color: var(--galoy-blue); }
 
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .charts-row { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 640px) {
-      .stats-grid { grid-template-columns: 1fr; }
-      .tabs { display: none; }
-      .header-content { justify-content: center; }
-    }
+    /* Theme bar animation */
+    .theme-bar { transition: width 0.5s ease; }
   </style>
 </head>
-<body>
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <div class="logo-section">
-          <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/656106c240ef09d6b11f4673_logo.svg" alt="Galoy">
-          <div class="divider"></div>
-          <div>
-            <div class="header-title">Regulatory Radar</div>
-            <div class="header-subtitle">OCC Intelligence Dashboard</div>
-          </div>
+<body class="min-h-screen">
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-opacity-90 backdrop-blur-sm" style="background: rgba(10,10,10,0.9);">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--galoy-blue);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
         </div>
-        <div class="tabs">
-          <button class="tab active" data-tab="all">All Updates</button>
-          <button class="tab" data-tab="high">High Priority</button>
-          <button class="tab" data-tab="crypto">Crypto Focus</button>
-        </div>
+        <span class="font-semibold text-white">Regulatory Radar</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="bitcoin-backed-lending-101.html" class="text-sm text-gray-400 hover:text-white transition-colors">Lending 101 →</a>
+        <a href="https://galoy.io" target="_blank" class="text-sm text-gray-400 hover:text-white transition-colors">galoy.io</a>
       </div>
     </div>
   </header>
 
-  <main class="container" style="padding-top: 32px; padding-bottom: 32px;">
-    <!-- Stats Grid -->
-    <div class="stats-grid">
-      <div class="card stat-card">
-        <div class="stat-label">Total Items</div>
-        <div class="stat-value" id="statTotal">36</div>
-        <div class="stat-subtitle">Regulatory updates tracked</div>
-      </div>
-      <div class="card stat-card">
-        <div class="stat-label">High Priority</div>
-        <div class="stat-value" style="color: #FF5A5A;" id="statHigh">17</div>
-        <div class="stat-subtitle">Requires immediate attention</div>
-      </div>
-      <div class="card stat-card">
-        <div class="stat-label">Crypto-Related</div>
-        <div class="stat-value" style="color: #3654FF;" id="statCrypto">13</div>
-        <div class="stat-subtitle">Digital asset updates</div>
-      </div>
-      <div class="card stat-card">
-        <div class="stat-label">Medium Priority</div>
-        <div class="stat-value" style="color: #F59E0B;" id="statMedium">5</div>
-        <div class="stat-subtitle">Monitor closely</div>
-      </div>
-    </div>
+  <main class="pt-24 pb-12 px-6">
+    <div class="max-w-7xl mx-auto">
+      <!-- Hero Section -->
+      <div class="mb-10">
+        <p class="text-sm font-medium mb-3" style="color: var(--galoy-blue);">OCC INTELLIGENCE DASHBOARD</p>
+        <h1 class="text-3xl lg:text-4xl font-bold mb-4">
+          OCC <span class="gradient-text">Regulatory Radar</span>
+        </h1>
+        <p class="text-gray-400 max-w-2xl mb-6">
+          Track OCC guidance, interpretive letters, and regulatory developments enabling bitcoin in traditional banking. Stay ahead of the evolving regulatory landscape.
+        </p>
 
-    <!-- Charts Row -->
-    <div class="charts-row">
-      <div class="card" style="padding: 24px;">
-        <div class="chart-title">Regulatory Activity Timeline</div>
-        <div class="bar-chart" id="timelineChart"></div>
-      </div>
-      <div class="card" style="padding: 24px;">
-        <div class="chart-title">Priority Distribution</div>
-        <div class="pie-container">
-          <div class="pie-chart" id="pieChart"></div>
-          <div class="pie-legend" id="pieLegend"></div>
+        <!-- Tabs -->
+        <div class="flex flex-wrap gap-2">
+          <button class="tab active px-4 py-2 rounded-lg text-sm font-medium" data-tab="all">All Updates</button>
+          <button class="tab px-4 py-2 rounded-lg text-sm font-medium text-gray-400" data-tab="high">High Priority</button>
+          <button class="tab px-4 py-2 rounded-lg text-sm font-medium text-gray-400" data-tab="crypto">Crypto Focus</button>
         </div>
       </div>
-    </div>
 
-    <!-- Top Themes -->
-    <div class="card" style="padding: 24px; margin-bottom: 32px;">
-      <div class="chart-title">Top Regulatory Themes</div>
-      <div class="theme-bars" id="themeBars"></div>
-    </div>
-
-    <!-- Filters -->
-    <div class="card filters">
-      <input type="text" class="search-input" id="searchInput" placeholder="Search by title, ID, or theme...">
-      <select id="priorityFilter">
-        <option value="all">All Priorities</option>
-        <option value="High">High Priority</option>
-        <option value="Medium">Medium Priority</option>
-        <option value="Low">Low Priority</option>
-      </select>
-      <select id="sourceFilter">
-        <option value="all">All Sources</option>
-        <option value="Interpretive Letter">Interpretive Letter</option>
-        <option value="News Release">News Release</option>
-        <option value="Bulletin">Bulletin</option>
-      </select>
-      <div class="filter-count"><strong id="filteredCount">36</strong> <span class="text-muted">of <span id="totalCount">36</span> items</span></div>
-    </div>
-
-    <!-- Data Table -->
-    <div class="card">
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>ID</th>
-              <th>Title</th>
-              <th>Source</th>
-              <th>Priority</th>
-              <th>Themes</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody"></tbody>
-        </table>
+      <!-- Stats Grid -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="card stat-card rounded-xl p-5">
+          <p class="text-xs text-gray-400 mb-1">Total Items</p>
+          <p id="statTotal" class="text-3xl font-bold">36</p>
+          <p class="text-xs text-gray-500 mt-1">Regulatory updates tracked</p>
+        </div>
+        <div class="card stat-card rounded-xl p-5">
+          <p class="text-xs text-gray-400 mb-1">High Priority</p>
+          <p id="statHigh" class="text-3xl font-bold text-red-400">17</p>
+          <p class="text-xs text-gray-500 mt-1">Requires attention</p>
+        </div>
+        <div class="card stat-card rounded-xl p-5">
+          <p class="text-xs text-gray-400 mb-1">Crypto-Related</p>
+          <p id="statCrypto" class="text-3xl font-bold" style="color: var(--galoy-blue);">13</p>
+          <p class="text-xs text-gray-500 mt-1">Digital asset updates</p>
+        </div>
+        <div class="card stat-card rounded-xl p-5">
+          <p class="text-xs text-gray-400 mb-1">Medium Priority</p>
+          <p id="statMedium" class="text-3xl font-bold text-yellow-400">5</p>
+          <p class="text-xs text-gray-500 mt-1">Monitor closely</p>
+        </div>
       </div>
+
+      <!-- Charts Row -->
+      <div class="grid lg:grid-cols-3 gap-6 mb-8">
+        <!-- Timeline Chart -->
+        <div class="lg:col-span-2 card rounded-2xl p-6">
+          <h3 class="text-sm font-semibold mb-6 flex items-center gap-2">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            Regulatory Activity Timeline
+          </h3>
+          <div class="h-48 flex items-end gap-2" id="timelineChart"></div>
+          <div class="flex justify-between text-xs text-gray-500 mt-3 px-1" id="timelineLabels"></div>
+          <div class="flex items-center justify-center gap-6 mt-4 text-xs">
+            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-red-400"></div><span class="text-gray-400">High</span></div>
+            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-yellow-400"></div><span class="text-gray-400">Medium</span></div>
+            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-gray-500"></div><span class="text-gray-400">Low</span></div>
+          </div>
+        </div>
+
+        <!-- Priority Distribution -->
+        <div class="card rounded-2xl p-6">
+          <h3 class="text-sm font-semibold mb-6 flex items-center gap-2">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+            Priority Distribution
+          </h3>
+          <div class="flex flex-col items-center">
+            <div class="relative w-40 h-40 mb-6">
+              <div id="pieChart" class="w-full h-full rounded-full"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-20 h-20 rounded-full" style="background: var(--galoy-gray);"></div>
+              </div>
+            </div>
+            <div class="flex flex-wrap justify-center gap-4 text-xs" id="pieLegend"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Themes -->
+      <div class="card rounded-2xl p-6 mb-8">
+        <h3 class="text-sm font-semibold mb-6 flex items-center gap-2">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+          Top Regulatory Themes
+        </h3>
+        <div class="space-y-3" id="themeBars"></div>
+      </div>
+
+      <!-- Filters -->
+      <div class="card rounded-2xl p-4 mb-6">
+        <div class="flex flex-wrap gap-4 items-center">
+          <div class="flex-1 min-w-[200px]">
+            <input type="text" id="searchInput" placeholder="Search by title, ID, or theme..."
+                   class="search-input w-full px-4 py-2.5 bg-black bg-opacity-40 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500">
+          </div>
+          <select id="priorityFilter" class="px-4 py-2.5 bg-black bg-opacity-40 border border-gray-700 rounded-lg text-sm text-white cursor-pointer">
+            <option value="all">All Priorities</option>
+            <option value="High">High Priority</option>
+            <option value="Medium">Medium Priority</option>
+            <option value="Low">Low Priority</option>
+          </select>
+          <select id="sourceFilter" class="px-4 py-2.5 bg-black bg-opacity-40 border border-gray-700 rounded-lg text-sm text-white cursor-pointer">
+            <option value="all">All Sources</option>
+            <option value="Interpretive Letter">Interpretive Letter</option>
+            <option value="News Release">News Release</option>
+            <option value="Bulletin">Bulletin</option>
+          </select>
+          <div class="px-4 py-2.5 bg-black bg-opacity-40 rounded-lg text-sm">
+            <span id="filteredCount" class="font-bold" style="color: var(--galoy-blue);">36</span>
+            <span class="text-gray-500"> of <span id="totalCount">36</span> items</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Table -->
+      <div class="card rounded-2xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="border-b border-gray-800">
+                <th class="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wide">Date</th>
+                <th class="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wide">ID</th>
+                <th class="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wide">Title</th>
+                <th class="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wide">Source</th>
+                <th class="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wide">Priority</th>
+                <th class="text-left py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wide">Themes</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="mt-12 pt-8 border-t border-gray-800">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p class="text-sm text-gray-500">Data source: OCC Regulatory Radar • Last updated: January 2026</p>
+          <p class="text-sm text-gray-500">Built by <a href="https://galoy.io" target="_blank" class="hover:text-white transition-colors">Galoy</a> — Bitcoin-native banking infrastructure</p>
+        </div>
+      </footer>
     </div>
   </main>
 
   <!-- Modal -->
-  <div class="modal-overlay" id="modal">
-    <div class="modal-content">
-      <div class="modal-header">
+  <div class="modal-overlay fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50 p-4" id="modal">
+    <div class="card rounded-2xl max-w-xl w-full max-h-[85vh] overflow-auto">
+      <div class="p-6 border-b border-gray-800 flex justify-between items-start">
         <div>
-          <div class="modal-id" id="modalId"></div>
-          <div class="modal-title" id="modalTitle"></div>
+          <p id="modalId" class="text-sm font-mono mb-1" style="color: var(--galoy-blue);"></p>
+          <h2 id="modalTitle" class="text-xl font-bold"></h2>
         </div>
-        <button class="modal-close" onclick="closeModal()">
-          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-          </svg>
+        <button onclick="closeModal()" class="text-gray-500 hover:text-white transition-colors p-1">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
-      <div class="modal-body">
-        <div style="display: flex; gap: 12px;" id="modalBadges"></div>
+      <div class="p-6 space-y-5">
+        <div id="modalBadges" class="flex flex-wrap gap-2"></div>
         <div>
-          <div class="modal-label">Date</div>
-          <div class="modal-value" id="modalDate"></div>
+          <p class="text-sm text-gray-400 mb-1">Date</p>
+          <p id="modalDate" class="font-medium"></p>
         </div>
         <div>
-          <div class="modal-label">Themes</div>
-          <div class="modal-themes" id="modalThemes"></div>
+          <p class="text-sm text-gray-400 mb-2">Themes</p>
+          <div id="modalThemes" class="flex flex-wrap gap-2"></div>
         </div>
-        <a href="#" class="modal-link" id="modalLink" target="_blank" rel="noopener noreferrer">
+        <a href="#" id="modalLink" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium transition-all hover:scale-105" style="background: var(--galoy-blue);">
           View Full Document
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-          </svg>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
         </a>
       </div>
     </div>
   </div>
-
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-text">Data source: OCC Regulatory Radar • Last updated: January 2026</div>
-        <div class="footer-brand">
-          <span class="footer-text">Built by</span>
-          <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/656106c240ef09d6b11f4673_logo.svg" alt="Galoy">
-        </div>
-      </div>
-    </div>
-  </footer>
 
   <script>
     // OCC Regulatory Data
@@ -374,51 +333,50 @@
       const maxTotal = Math.max(...sortedMonths.map(m => months[m].High + months[m].Medium + months[m].Low));
 
       const container = document.getElementById('timelineChart');
+      const labelsContainer = document.getElementById('timelineLabels');
       container.innerHTML = '';
+      labelsContainer.innerHTML = '';
 
       sortedMonths.forEach(month => {
         const data = months[month];
         const total = data.High + data.Medium + data.Low;
-        const heightPct = (total / maxTotal) * 100;
 
-        const group = document.createElement('div');
-        group.className = 'bar-group';
+        const barGroup = document.createElement('div');
+        barGroup.className = 'flex-1 flex flex-col items-center gap-1';
 
+        // Stacked bars
         const stack = document.createElement('div');
-        stack.className = 'bar-stack';
+        stack.className = 'w-full flex flex-col justify-end h-40 gap-0.5';
 
-        if (data.Low > 0) {
+        if (data.High > 0) {
           const bar = document.createElement('div');
-          bar.className = 'bar';
-          bar.style.height = (data.Low / total * heightPct) + '%';
-          bar.style.background = '#64748B';
-          bar.title = 'Low: ' + data.Low;
+          bar.className = 'bar w-full rounded-t bg-red-400 cursor-pointer';
+          bar.style.height = (data.High / maxTotal * 100) + '%';
+          bar.title = 'High: ' + data.High;
           stack.appendChild(bar);
         }
         if (data.Medium > 0) {
           const bar = document.createElement('div');
-          bar.className = 'bar';
-          bar.style.height = (data.Medium / total * heightPct) + '%';
-          bar.style.background = '#F59E0B';
+          bar.className = 'bar w-full bg-yellow-400 cursor-pointer';
+          bar.style.height = (data.Medium / maxTotal * 100) + '%';
           bar.title = 'Medium: ' + data.Medium;
           stack.appendChild(bar);
         }
-        if (data.High > 0) {
+        if (data.Low > 0) {
           const bar = document.createElement('div');
-          bar.className = 'bar';
-          bar.style.height = (data.High / total * heightPct) + '%';
-          bar.style.background = '#FF5A5A';
-          bar.title = 'High: ' + data.High;
+          bar.className = 'bar w-full rounded-b bg-gray-500 cursor-pointer';
+          bar.style.height = (data.Low / maxTotal * 100) + '%';
+          bar.title = 'Low: ' + data.Low;
           stack.appendChild(bar);
         }
 
-        const label = document.createElement('div');
-        label.className = 'bar-label';
-        label.textContent = monthNames[parseInt(month.split('-')[1]) - 3] || month.split('-')[1];
+        barGroup.appendChild(stack);
+        container.appendChild(barGroup);
 
-        group.appendChild(stack);
-        group.appendChild(label);
-        container.appendChild(group);
+        // Label
+        const label = document.createElement('span');
+        label.textContent = monthNames[parseInt(month.split('-')[1]) - 3] || month.split('-')[1];
+        labelsContainer.appendChild(label);
       });
     }
 
@@ -430,20 +388,18 @@
 
       const highPct = (high / total) * 100;
       const mediumPct = (medium / total) * 100;
-      const lowPct = (low / total) * 100;
 
       const pie = document.getElementById('pieChart');
       pie.style.background = `conic-gradient(
-        #FF5A5A 0% ${highPct}%,
-        #F59E0B ${highPct}% ${highPct + mediumPct}%,
-        #64748B ${highPct + mediumPct}% 100%
+        #f87171 0% ${highPct}%,
+        #facc15 ${highPct}% ${highPct + mediumPct}%,
+        #6b7280 ${highPct + mediumPct}% 100%
       )`;
 
-      const legend = document.getElementById('pieLegend');
-      legend.innerHTML = `
-        <div class="legend-item"><span class="legend-dot" style="background: #FF5A5A;"></span>High (${high})</div>
-        <div class="legend-item"><span class="legend-dot" style="background: #F59E0B;"></span>Medium (${medium})</div>
-        <div class="legend-item"><span class="legend-dot" style="background: #64748B;"></span>Low (${low})</div>
+      document.getElementById('pieLegend').innerHTML = `
+        <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-red-400"></div><span class="text-gray-400">High (${high})</span></div>
+        <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-yellow-400"></div><span class="text-gray-400">Medium (${medium})</span></div>
+        <div class="flex items-center gap-2"><div class="w-3 h-3 rounded-full bg-gray-500"></div><span class="text-gray-400">Low (${low})</span></div>
       `;
     }
 
@@ -456,23 +412,21 @@
         });
       });
 
-      const sorted = Object.entries(themes)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 8);
-
+      const sorted = Object.entries(themes).sort((a, b) => b[1] - a[1]).slice(0, 8);
       const maxCount = sorted[0][1];
+
       const container = document.getElementById('themeBars');
       container.innerHTML = '';
 
       sorted.forEach(([name, count]) => {
         const item = document.createElement('div');
-        item.className = 'theme-bar-item';
+        item.className = 'flex items-center gap-4';
         item.innerHTML = `
-          <div class="theme-label">${name}</div>
-          <div class="theme-bar-bg">
-            <div class="theme-bar-fill" style="width: ${(count / maxCount) * 100}%"></div>
+          <div class="w-28 text-right text-sm text-gray-400 truncate">${name}</div>
+          <div class="flex-1 h-6 bg-gray-800 rounded-lg overflow-hidden">
+            <div class="theme-bar h-full rounded-lg" style="width: ${(count / maxCount) * 100}%; background: linear-gradient(90deg, #3654FF, #5b7aff);"></div>
           </div>
-          <div class="theme-count">${count}</div>
+          <div class="w-8 text-sm text-gray-500">${count}</div>
         `;
         container.appendChild(item);
       });
@@ -482,32 +436,49 @@
       const tbody = document.getElementById('tableBody');
       tbody.innerHTML = '';
 
-      currentData.forEach((item, idx) => {
+      currentData.forEach(item => {
         const tr = document.createElement('tr');
+        tr.className = 'table-row border-b border-gray-800 cursor-pointer';
         tr.onclick = () => openModal(item);
 
         const date = new Date(item.date);
         const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
-        const sourceClass = item.source_type === 'Interpretive Letter' ? 'source-letter' :
-                          item.source_type === 'News Release' ? 'source-news' : 'source-bulletin';
+        // Source badge colors
+        let sourceClasses = 'px-2 py-0.5 rounded text-xs font-medium ';
+        if (item.source_type === 'Interpretive Letter') {
+          sourceClasses += 'bg-blue-500 bg-opacity-20 text-blue-400';
+        } else if (item.source_type === 'News Release') {
+          sourceClasses += 'bg-green-500 bg-opacity-20 text-green-400';
+        } else {
+          sourceClasses += 'bg-yellow-500 bg-opacity-20 text-yellow-400';
+        }
 
-        const badgeClass = item.lead_signal === 'High' ? 'badge-high' :
-                         item.lead_signal === 'Medium' ? 'badge-medium' : 'badge-low';
-        const dotClass = item.lead_signal === 'High' ? 'badge-dot-high' :
-                        item.lead_signal === 'Medium' ? 'badge-dot-medium' : 'badge-dot-low';
+        // Priority badge colors
+        let priorityClasses = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ';
+        let dotColor = '';
+        if (item.lead_signal === 'High') {
+          priorityClasses += 'bg-red-500 bg-opacity-15 text-red-400';
+          dotColor = 'bg-red-400';
+        } else if (item.lead_signal === 'Medium') {
+          priorityClasses += 'bg-yellow-500 bg-opacity-15 text-yellow-400';
+          dotColor = 'bg-yellow-400';
+        } else {
+          priorityClasses += 'bg-gray-500 bg-opacity-15 text-gray-400';
+          dotColor = 'bg-gray-400';
+        }
 
-        const tags = item.theme_tags.split(';').slice(0, 3).map(t =>
-          `<span class="tag">${t.trim()}</span>`
+        const tags = item.theme_tags.split(';').slice(0, 2).map(t =>
+          `<span class="px-2 py-0.5 bg-gray-800 rounded text-xs text-gray-400">${t.trim()}</span>`
         ).join('');
 
         tr.innerHTML = `
-          <td class="text-muted" style="white-space: nowrap;">${dateStr}</td>
-          <td class="mono" style="white-space: nowrap; font-weight: 500;">${item.id}</td>
-          <td style="max-width: 400px;"><div class="line-clamp">${item.title}</div></td>
-          <td style="white-space: nowrap;"><span class="source-badge ${sourceClass}">${item.source_type}</span></td>
-          <td style="white-space: nowrap;"><span class="badge ${badgeClass}"><span class="badge-dot ${dotClass}"></span>${item.lead_signal}</span></td>
-          <td style="max-width: 200px;">${tags}</td>
+          <td class="py-4 px-6 text-sm text-gray-400 whitespace-nowrap">${dateStr}</td>
+          <td class="py-4 px-6 text-sm font-mono font-medium whitespace-nowrap">${item.id}</td>
+          <td class="py-4 px-6 text-sm max-w-md"><div class="line-clamp-2">${item.title}</div></td>
+          <td class="py-4 px-6 whitespace-nowrap"><span class="${sourceClasses}">${item.source_type}</span></td>
+          <td class="py-4 px-6 whitespace-nowrap"><span class="${priorityClasses}"><span class="w-1.5 h-1.5 rounded-full ${dotColor}"></span>${item.lead_signal}</span></td>
+          <td class="py-4 px-6"><div class="flex flex-wrap gap-1">${tags}</div></td>
         `;
         tbody.appendChild(tr);
       });
@@ -546,8 +517,12 @@
 
       document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', function() {
-          document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.tab').forEach(t => {
+            t.classList.remove('active');
+            t.classList.add('text-gray-400');
+          });
           this.classList.add('active');
+          this.classList.remove('text-gray-400');
           activeTab = this.dataset.tab;
           filterData();
         });
@@ -567,28 +542,46 @@
         weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
       });
 
-      const badgeClass = item.lead_signal === 'High' ? 'badge-high' :
-                        item.lead_signal === 'Medium' ? 'badge-medium' : 'badge-low';
-      const dotClass = item.lead_signal === 'High' ? 'badge-dot-high' :
-                      item.lead_signal === 'Medium' ? 'badge-dot-medium' : 'badge-dot-low';
-      const sourceClass = item.source_type === 'Interpretive Letter' ? 'source-letter' :
-                        item.source_type === 'News Release' ? 'source-news' : 'source-bulletin';
+      // Badges
+      let priorityClasses = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ';
+      let dotColor = '';
+      if (item.lead_signal === 'High') {
+        priorityClasses += 'bg-red-500 bg-opacity-15 text-red-400';
+        dotColor = 'bg-red-400';
+      } else if (item.lead_signal === 'Medium') {
+        priorityClasses += 'bg-yellow-500 bg-opacity-15 text-yellow-400';
+        dotColor = 'bg-yellow-400';
+      } else {
+        priorityClasses += 'bg-gray-500 bg-opacity-15 text-gray-400';
+        dotColor = 'bg-gray-400';
+      }
+
+      let sourceClasses = 'px-2 py-0.5 rounded text-xs font-medium ';
+      if (item.source_type === 'Interpretive Letter') {
+        sourceClasses += 'bg-blue-500 bg-opacity-20 text-blue-400';
+      } else if (item.source_type === 'News Release') {
+        sourceClasses += 'bg-green-500 bg-opacity-20 text-green-400';
+      } else {
+        sourceClasses += 'bg-yellow-500 bg-opacity-20 text-yellow-400';
+      }
 
       document.getElementById('modalBadges').innerHTML = `
-        <span class="badge ${badgeClass}"><span class="badge-dot ${dotClass}"></span>${item.lead_signal}</span>
-        <span class="source-badge ${sourceClass}">${item.source_type}</span>
+        <span class="${priorityClasses}"><span class="w-1.5 h-1.5 rounded-full ${dotColor}"></span>${item.lead_signal}</span>
+        <span class="${sourceClasses}">${item.source_type}</span>
       `;
 
       document.getElementById('modalThemes').innerHTML = item.theme_tags.split(';')
-        .map(t => `<span class="modal-theme">${t.trim()}</span>`)
+        .map(t => `<span class="px-3 py-1.5 rounded-full text-sm font-medium" style="background: rgba(54, 84, 255, 0.2); color: #6b8aff;">${t.trim()}</span>`)
         .join('');
 
       document.getElementById('modalLink').href = item.url;
-      document.getElementById('modal').classList.add('active');
+      document.getElementById('modal').classList.remove('hidden');
+      document.getElementById('modal').classList.add('flex');
     }
 
     function closeModal() {
-      document.getElementById('modal').classList.remove('active');
+      document.getElementById('modal').classList.add('hidden');
+      document.getElementById('modal').classList.remove('flex');
     }
   </script>
 </body>
