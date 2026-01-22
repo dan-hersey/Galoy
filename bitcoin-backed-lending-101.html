@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bitcoin-Backed Lending 101 | Galoy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    :root {
+      --galoy-blue: #3654FF;
+      --galoy-dark: #0a0a0a;
+      --galoy-gray: #1a1a1a;
+    }
+    body { background: var(--galoy-dark); color: #fff; }
+    .card { background: var(--galoy-gray); border: 1px solid #333; }
+    .highlight { background: linear-gradient(135deg, rgba(54, 84, 255, 0.15), rgba(54, 84, 255, 0.05)); border-color: var(--galoy-blue); }
+
+    /* Navigation dots */
+    .nav-dot { transition: all 0.3s ease; }
+    .nav-dot.active { background: var(--galoy-blue); transform: scale(1.2); }
+
+    /* Section transitions */
+    .section { opacity: 0; transform: translateY(20px); transition: all 0.5s ease; }
+    .section.visible { opacity: 1; transform: translateY(0); }
+
+    /* Interactive elements */
+    .ltv-bar { transition: all 0.4s ease; }
+    .collateral-indicator { transition: all 0.3s ease; }
+
+    /* Comparison table hover */
+    .compare-row:hover { background: rgba(54, 84, 255, 0.1); }
+
+    /* Timeline animation */
+    .timeline-step { opacity: 0.4; transition: all 0.3s ease; }
+    .timeline-step.active { opacity: 1; }
+    .timeline-connector { transition: background 0.5s ease; }
+
+    /* Flow animation */
+    @keyframes flowPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+    .flow-arrow { animation: flowPulse 2s infinite; }
+    .flow-arrow:nth-child(2) { animation-delay: 0.3s; }
+    .flow-arrow:nth-child(3) { animation-delay: 0.6s; }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 0%, #3654FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Risk meter */
+    .risk-segment { transition: all 0.3s ease; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--galoy-dark); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #444; }
+  </style>
+</head>
+<body class="min-h-screen">
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-opacity-90 backdrop-blur-sm" style="background: rgba(10,10,10,0.9);">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--galoy-blue);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <span class="font-semibold text-white">Bitcoin-Backed Lending 101</span>
+      </div>
+      <a href="https://galoy.io" target="_blank" class="text-sm text-gray-400 hover:text-white transition-colors">
+        galoy.io →
+      </a>
+    </div>
+  </header>
+
+  <!-- Navigation Dots -->
+  <nav class="fixed right-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-3">
+    <button onclick="scrollToSection(0)" class="nav-dot w-3 h-3 rounded-full bg-gray-600 active" title="Introduction"></button>
+    <button onclick="scrollToSection(1)" class="nav-dot w-3 h-3 rounded-full bg-gray-600" title="How It Works"></button>
+    <button onclick="scrollToSection(2)" class="nav-dot w-3 h-3 rounded-full bg-gray-600" title="Bitcoin vs Traditional"></button>
+    <button onclick="scrollToSection(3)" class="nav-dot w-3 h-3 rounded-full bg-gray-600" title="Risk Management"></button>
+    <button onclick="scrollToSection(4)" class="nav-dot w-3 h-3 rounded-full bg-gray-600" title="Why Banks"></button>
+    <button onclick="scrollToSection(5)" class="nav-dot w-3 h-3 rounded-full bg-gray-600" title="Learn More"></button>
+  </nav>
+
+  <main class="pt-20">
+    <!-- Section 1: Hero / Introduction -->
+    <section id="section-0" class="section visible min-h-screen flex items-center px-6 py-20">
+      <div class="max-w-6xl mx-auto w-full">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <p class="text-sm font-medium mb-4" style="color: var(--galoy-blue);">EDUCATIONAL OVERVIEW</p>
+            <h1 class="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+              What is<br><span class="gradient-text">Bitcoin-Backed Lending?</span>
+            </h1>
+            <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+              Bitcoin-backed lending is a form of <strong class="text-white">asset-based lending</strong> where borrowers pledge bitcoin as collateral in exchange for fiat or digital credit. The borrower retains exposure to bitcoin's potential appreciation while gaining immediate liquidity.
+            </p>
+            <div class="flex flex-wrap gap-4 mb-8">
+              <div class="card rounded-lg px-4 py-3">
+                <p class="text-2xl font-bold" style="color: var(--galoy-blue);">24/7</p>
+                <p class="text-xs text-gray-400">Market Liquidity</p>
+              </div>
+              <div class="card rounded-lg px-4 py-3">
+                <p class="text-2xl font-bold" style="color: var(--galoy-blue);">Real-time</p>
+                <p class="text-xs text-gray-400">Risk Monitoring</p>
+              </div>
+              <div class="card rounded-lg px-4 py-3">
+                <p class="text-2xl font-bold" style="color: var(--galoy-blue);">100%</p>
+                <p class="text-xs text-gray-400">Verifiable</p>
+              </div>
+            </div>
+            <button onclick="scrollToSection(1)" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all hover:scale-105" style="background: var(--galoy-blue);">
+              See How It Works
+              <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l7-7-7-7"/></svg>
+            </button>
+          </div>
+          <div class="relative">
+            <!-- Visual: Bitcoin to Dollars Flow -->
+            <div class="card rounded-2xl p-8">
+              <div class="flex items-center justify-between mb-8">
+                <div class="text-center">
+                  <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-3" style="background: linear-gradient(135deg, #f7931a 0%, #ffab40 100%);">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                    </svg>
+                  </div>
+                  <p class="text-sm font-medium">Bitcoin</p>
+                  <p class="text-xs text-gray-400">Collateral</p>
+                </div>
+
+                <div class="flex-1 flex items-center justify-center gap-1 px-4">
+                  <div class="flow-arrow w-3 h-3 rounded-full" style="background: var(--galoy-blue);"></div>
+                  <div class="flow-arrow w-3 h-3 rounded-full" style="background: var(--galoy-blue);"></div>
+                  <div class="flow-arrow w-3 h-3 rounded-full" style="background: var(--galoy-blue);"></div>
+                  <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--galoy-blue);"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+
+                <div class="text-center">
+                  <div class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-3" style="background: linear-gradient(135deg, #22c55e 0%, #4ade80 100%);">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                    </svg>
+                  </div>
+                  <p class="text-sm font-medium">Dollars</p>
+                  <p class="text-xs text-gray-400">Loan</p>
+                </div>
+              </div>
+
+              <div class="bg-black bg-opacity-40 rounded-lg p-4">
+                <p class="text-sm text-gray-300 text-center">
+                  <span class="font-medium text-white">Key Insight:</span> The borrower keeps upside exposure to bitcoin while gaining immediate access to capital.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: How It Works -->
+    <section id="section-1" class="section min-h-screen flex items-center px-6 py-20">
+      <div class="max-w-6xl mx-auto w-full">
+        <p class="text-sm font-medium mb-4" style="color: var(--galoy-blue);">HOW IT WORKS</p>
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">The Loan Lifecycle</h2>
+        <p class="text-gray-400 mb-12 max-w-2xl">Understanding the end-to-end process of a bitcoin-backed loan, from origination to repayment.</p>
+
+        <div class="relative">
+          <!-- Timeline connector -->
+          <div class="absolute top-16 left-0 right-0 h-1 bg-gray-800 rounded hidden lg:block">
+            <div id="timeline-progress" class="timeline-connector h-full rounded transition-all" style="width: 0%; background: var(--galoy-blue);"></div>
+          </div>
+
+          <div class="grid lg:grid-cols-5 gap-6">
+            <div class="timeline-step active cursor-pointer" onclick="setTimelineStep(0)">
+              <div class="card rounded-xl p-6 h-full">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4 relative z-10" style="background: var(--galoy-blue);">
+                  <span class="text-lg font-bold">1</span>
+                </div>
+                <h3 class="font-semibold mb-2">Deposit Collateral</h3>
+                <p class="text-sm text-gray-400">Borrower deposits bitcoin into a secure, segregated custody account controlled by the lender.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step cursor-pointer" onclick="setTimelineStep(1)">
+              <div class="card rounded-xl p-6 h-full">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4 bg-gray-700 relative z-10">
+                  <span class="text-lg font-bold">2</span>
+                </div>
+                <h3 class="font-semibold mb-2">Set LTV Ratio</h3>
+                <p class="text-sm text-gray-400">Loan amount determined by the loan-to-value ratio (typically 50-70% of bitcoin value).</p>
+              </div>
+            </div>
+
+            <div class="timeline-step cursor-pointer" onclick="setTimelineStep(2)">
+              <div class="card rounded-xl p-6 h-full">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4 bg-gray-700 relative z-10">
+                  <span class="text-lg font-bold">3</span>
+                </div>
+                <h3 class="font-semibold mb-2">Receive Funds</h3>
+                <p class="text-sm text-gray-400">Loan is disbursed in fiat currency. Borrower pays interest but keeps bitcoin exposure.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step cursor-pointer" onclick="setTimelineStep(3)">
+              <div class="card rounded-xl p-6 h-full">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4 bg-gray-700 relative z-10">
+                  <span class="text-lg font-bold">4</span>
+                </div>
+                <h3 class="font-semibold mb-2">Monitor & Manage</h3>
+                <p class="text-sm text-gray-400">Real-time LTV monitoring with automated margin calls if bitcoin price drops significantly.</p>
+              </div>
+            </div>
+
+            <div class="timeline-step cursor-pointer" onclick="setTimelineStep(4)">
+              <div class="card rounded-xl p-6 h-full">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center mb-4 bg-gray-700 relative z-10">
+                  <span class="text-lg font-bold">5</span>
+                </div>
+                <h3 class="font-semibold mb-2">Repay & Retrieve</h3>
+                <p class="text-sm text-gray-400">Borrower repays loan + interest and receives their bitcoin collateral back.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive LTV Visualizer -->
+        <div class="card rounded-2xl p-8 mt-12">
+          <div class="flex flex-col lg:flex-row gap-8 items-center">
+            <div class="lg:w-1/2">
+              <h3 class="font-semibold mb-4">Interactive: Understanding LTV</h3>
+              <p class="text-sm text-gray-400 mb-6">Loan-to-Value (LTV) ratio determines how much you can borrow against your bitcoin. A lower LTV means more collateral protection for the lender.</p>
+
+              <label class="block text-sm mb-2">Adjust LTV Ratio: <span id="ltv-value" class="font-bold" style="color: var(--galoy-blue);">50%</span></label>
+              <input type="range" id="ltv-slider" min="30" max="80" value="50" class="w-full h-2 rounded-lg bg-gray-700 cursor-pointer" oninput="updateLTV()">
+              <div class="flex justify-between text-xs text-gray-500 mt-1">
+                <span>30% (Conservative)</span>
+                <span>80% (Aggressive)</span>
+              </div>
+            </div>
+
+            <div class="lg:w-1/2">
+              <div class="bg-black bg-opacity-40 rounded-xl p-6">
+                <p class="text-sm text-gray-400 mb-4">If you deposit <span class="text-white font-medium">1 BTC</span> worth <span class="text-white font-medium">$100,000</span>:</p>
+                <div class="space-y-3">
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-400">Loan Amount:</span>
+                    <span id="loan-amount" class="text-2xl font-bold" style="color: var(--galoy-blue);">$50,000</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-400">Collateral Buffer:</span>
+                    <span id="collateral-buffer" class="text-lg font-medium text-green-400">$50,000 (100%)</span>
+                  </div>
+                  <div class="h-4 bg-gray-700 rounded-full overflow-hidden mt-4">
+                    <div id="ltv-bar" class="ltv-bar h-full rounded-full" style="width: 50%; background: var(--galoy-blue);"></div>
+                  </div>
+                  <div class="flex justify-between text-xs">
+                    <span class="text-gray-500">Loan</span>
+                    <span class="text-gray-500">Buffer</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Bitcoin vs Traditional Collateral -->
+    <section id="section-2" class="section min-h-screen flex items-center px-6 py-20">
+      <div class="max-w-6xl mx-auto w-full">
+        <p class="text-sm font-medium mb-4" style="color: var(--galoy-blue);">BITCOIN IS NOT CRYPTO</p>
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">Why Bitcoin Stands Apart</h2>
+        <p class="text-gray-400 mb-12 max-w-2xl">Bitcoin is a monetary network. It has unique properties that make it exceptional collateral compared to other digital assets—and even some traditional assets.</p>
+
+        <div class="grid lg:grid-cols-2 gap-8 mb-12">
+          <!-- Bitcoin Properties -->
+          <div class="card highlight rounded-2xl p-8">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: #f7931a;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M11.5 11.5v-2h1.25c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25H11.5v-0.5zM11.5 14.5v-2h1.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5H11.5v-1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2 14.5c0 .83-.67 1.5-1.5 1.5H10v-3h-.5v-1H10v-1h-.5v-1H10V9h2.5c1.38 0 2.5 1.12 2.5 2.5 0 .69-.28 1.31-.73 1.76.73.45 1.23 1.24 1.23 2.24z"/></svg>
+              </div>
+              <h3 class="text-xl font-semibold">Bitcoin</h3>
+            </div>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 mt-0.5 flex-shrink-0" style="color: #22c55e;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                <div>
+                  <p class="font-medium">24/7 Liquidity</p>
+                  <p class="text-sm text-gray-400">Trades continuously on global markets, enabling real-time valuation and liquidation</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 mt-0.5 flex-shrink-0" style="color: #22c55e;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                <div>
+                  <p class="font-medium">Verifiable Scarcity</p>
+                  <p class="text-sm text-gray-400">Fixed supply of 21 million coins, cryptographically enforced</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 mt-0.5 flex-shrink-0" style="color: #22c55e;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                <div>
+                  <p class="font-medium">Bearer Asset</p>
+                  <p class="text-sm text-gray-400">Direct ownership without counterparty risk, fully auditable on-chain</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 mt-0.5 flex-shrink-0" style="color: #22c55e;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                <div>
+                  <p class="font-medium">Regulatory Clarity</p>
+                  <p class="text-sm text-gray-400">Recognized as a commodity, not a security, with clear regulatory treatment</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Crypto Tokens -->
+          <div class="card rounded-2xl p-8 opacity-70">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-10 h-10 rounded-lg flex items-center justify-center bg-gray-600">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              </div>
+              <h3 class="text-xl font-semibold text-gray-400">Other Crypto Tokens</h3>
+            </div>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+                <div>
+                  <p class="font-medium text-gray-400">Variable Supply</p>
+                  <p class="text-sm text-gray-500">Many tokens have inflationary or unclear supply mechanics</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+                <div>
+                  <p class="font-medium text-gray-400">Centralized Risk</p>
+                  <p class="text-sm text-gray-500">Often controlled by foundations, companies, or small groups</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+                <div>
+                  <p class="font-medium text-gray-400">Regulatory Uncertainty</p>
+                  <p class="text-sm text-gray-500">Many face securities classification risk</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+                <div>
+                  <p class="font-medium text-gray-400">Liquidity Fragmentation</p>
+                  <p class="text-sm text-gray-500">Limited market depth, especially during stress events</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="card rounded-2xl overflow-hidden">
+          <div class="p-6 border-b border-gray-800">
+            <h3 class="font-semibold">Collateral Comparison</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b border-gray-800">
+                  <th class="text-left p-4 text-sm font-medium text-gray-400">Property</th>
+                  <th class="p-4 text-sm font-medium text-center" style="color: #f7931a;">Bitcoin</th>
+                  <th class="p-4 text-sm font-medium text-gray-400 text-center">Real Estate</th>
+                  <th class="p-4 text-sm font-medium text-gray-400 text-center">Securities</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="compare-row border-b border-gray-800">
+                  <td class="p-4 text-sm">24/7 Market Access</td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500 bg-opacity-20"><svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span></td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-500 bg-opacity-20"><svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></span></td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-500 bg-opacity-20"><svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></span></td>
+                </tr>
+                <tr class="compare-row border-b border-gray-800">
+                  <td class="p-4 text-sm">Instant Valuation</td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500 bg-opacity-20"><svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span></td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-500 bg-opacity-20"><svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></span></td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500 bg-opacity-20"><svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span></td>
+                </tr>
+                <tr class="compare-row border-b border-gray-800">
+                  <td class="p-4 text-sm">Same-Day Liquidation</td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500 bg-opacity-20"><svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span></td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-500 bg-opacity-20"><svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></span></td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 bg-opacity-20"><span class="text-yellow-400 text-xs font-medium">T+1</span></span></td>
+                </tr>
+                <tr class="compare-row border-b border-gray-800">
+                  <td class="p-4 text-sm">No Appraisal Needed</td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500 bg-opacity-20"><svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span></td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-red-500 bg-opacity-20"><svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></span></td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500 bg-opacity-20"><svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span></td>
+                </tr>
+                <tr class="compare-row">
+                  <td class="p-4 text-sm">Verifiable Ownership</td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500 bg-opacity-20"><svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span></td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-yellow-500 bg-opacity-20"><span class="text-yellow-400 text-xs font-medium">~</span></span></td>
+                  <td class="p-4 text-center"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-green-500 bg-opacity-20"><svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Risk Management -->
+    <section id="section-3" class="section min-h-screen flex items-center px-6 py-20">
+      <div class="max-w-6xl mx-auto w-full">
+        <p class="text-sm font-medium mb-4" style="color: var(--galoy-blue);">RISK MANAGEMENT</p>
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">Real-Time Risk Controls</h2>
+        <p class="text-gray-400 mb-12 max-w-2xl">Bitcoin's unique properties enable continuous, automated risk management that traditional collateral cannot match.</p>
+
+        <div class="grid lg:grid-cols-3 gap-6 mb-12">
+          <div class="card rounded-2xl p-6">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: rgba(34, 197, 94, 0.2);">
+              <svg width="24" height="24" fill="none" stroke="#22c55e" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg>
+            </div>
+            <h3 class="font-semibold mb-2">Continuous Monitoring</h3>
+            <p class="text-sm text-gray-400">LTV is calculated and monitored 24/7 using real-time market data. No waiting for monthly statements or quarterly appraisals.</p>
+          </div>
+
+          <div class="card rounded-2xl p-6">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: rgba(251, 191, 36, 0.2);">
+              <svg width="24" height="24" fill="none" stroke="#fbbf24" stroke-width="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            </div>
+            <h3 class="font-semibold mb-2">Automated Margin Calls</h3>
+            <p class="text-sm text-gray-400">When LTV rises above threshold, automated systems notify borrowers and can require additional collateral or partial repayment.</p>
+          </div>
+
+          <div class="card rounded-2xl p-6">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: rgba(239, 68, 68, 0.2);">
+              <svg width="24" height="24" fill="none" stroke="#ef4444" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 class="font-semibold mb-2">Orderly Liquidation</h3>
+            <p class="text-sm text-gray-400">If margin call isn't met, bitcoin can be liquidated on global markets within minutes to protect the lender's principal.</p>
+          </div>
+        </div>
+
+        <!-- Interactive Risk Meter -->
+        <div class="card rounded-2xl p-8">
+          <h3 class="font-semibold mb-6">Interactive: LTV Thresholds & Actions</h3>
+
+          <div class="mb-8">
+            <div class="flex justify-between mb-2">
+              <span class="text-sm text-gray-400">Simulate Bitcoin Price Drop</span>
+              <span id="price-drop-value" class="text-sm font-medium">0%</span>
+            </div>
+            <input type="range" id="price-drop-slider" min="0" max="60" value="0" class="w-full h-2 rounded-lg bg-gray-700 cursor-pointer" oninput="updateRiskMeter()">
+          </div>
+
+          <div class="relative h-16 bg-gray-800 rounded-xl overflow-hidden mb-4">
+            <!-- Risk zones -->
+            <div class="absolute inset-y-0 left-0 w-1/2 bg-green-500 bg-opacity-30 flex items-center justify-center border-r border-gray-700">
+              <span class="text-xs font-medium text-green-400">SAFE ZONE</span>
+            </div>
+            <div class="absolute inset-y-0 left-1/2 w-1/4 bg-yellow-500 bg-opacity-30 flex items-center justify-center border-r border-gray-700">
+              <span class="text-xs font-medium text-yellow-400">MARGIN CALL</span>
+            </div>
+            <div class="absolute inset-y-0 right-0 w-1/4 bg-red-500 bg-opacity-30 flex items-center justify-center">
+              <span class="text-xs font-medium text-red-400">LIQUIDATION</span>
+            </div>
+            <!-- LTV indicator -->
+            <div id="ltv-indicator" class="collateral-indicator absolute top-1/2 -translate-y-1/2 w-1 h-12 rounded-full bg-white" style="left: 25%;"></div>
+          </div>
+
+          <div class="flex justify-between text-xs text-gray-500 mb-6">
+            <span>0%</span>
+            <span>50% LTV</span>
+            <span>75% LTV</span>
+            <span>90% LTV</span>
+            <span>100%</span>
+          </div>
+
+          <div id="risk-status" class="bg-green-500 bg-opacity-10 border border-green-500 border-opacity-30 rounded-lg p-4">
+            <div class="flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full flex items-center justify-center bg-green-500 bg-opacity-20">
+                <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+              </div>
+              <div>
+                <p class="font-medium text-green-400">Safe Zone</p>
+                <p id="risk-description" class="text-sm text-gray-400">Current LTV: 50% — Collateral value provides ample buffer.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Why Banks -->
+    <section id="section-4" class="section min-h-screen flex items-center px-6 py-20">
+      <div class="max-w-6xl mx-auto w-full">
+        <p class="text-sm font-medium mb-4" style="color: var(--galoy-blue);">WHY BANKS</p>
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">Banks Are Uniquely Positioned</h2>
+        <p class="text-gray-400 mb-12 max-w-2xl">While crypto lenders have struggled with risk management, regulated banks bring the discipline and infrastructure needed to offer bitcoin-backed lending safely.</p>
+
+        <div class="grid lg:grid-cols-2 gap-8 mb-12">
+          <div class="space-y-6">
+            <div class="card rounded-xl p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background: var(--galoy-blue);">
+                  <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-2">Trusted Custody</h3>
+                  <p class="text-sm text-gray-400">Banks already hold billions in customer assets. Bitcoin custody is a natural extension of existing fiduciary relationships.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card rounded-xl p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background: var(--galoy-blue);">
+                  <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-2">Credit Underwriting Expertise</h3>
+                  <p class="text-sm text-gray-400">Decades of experience in secured lending, LTV management, and borrower assessment translate directly to bitcoin-backed products.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card rounded-xl p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background: var(--galoy-blue);">
+                  <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-2">Regulatory Discipline</h3>
+                  <p class="text-sm text-gray-400">Unlike unregulated crypto lenders, banks operate within supervisory frameworks that ensure responsible risk management.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card rounded-xl p-6">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0" style="background: var(--galoy-blue);">
+                  <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                </div>
+                <div>
+                  <h3 class="font-semibold mb-2">Customer Demand</h3>
+                  <p class="text-sm text-gray-400">Bitcoin holders want to access liquidity without selling. Banks can serve this growing segment while retaining valuable customer relationships.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card highlight rounded-2xl p-8 flex flex-col justify-center">
+            <blockquote class="text-xl lg:text-2xl font-medium mb-6 leading-relaxed">
+              "Bitcoin isn't replacing lending. It's upgrading collateral."
+            </blockquote>
+            <p class="text-gray-400 mb-8">The fundamentals of secured lending remain the same. What changes is the quality and efficiency of the collateral—making bitcoin-backed loans potentially safer than many traditional secured products.</p>
+
+            <div class="space-y-4">
+              <div class="flex items-center justify-between p-3 bg-black bg-opacity-30 rounded-lg">
+                <span class="text-sm text-gray-400">Traditional mortgage foreclosure</span>
+                <span class="font-medium">6-12 months</span>
+              </div>
+              <div class="flex items-center justify-between p-3 bg-black bg-opacity-30 rounded-lg">
+                <span class="text-sm text-gray-400">Securities liquidation</span>
+                <span class="font-medium">1-3 days</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-lg" style="background: rgba(54, 84, 255, 0.2);">
+                <span class="text-sm text-gray-400">Bitcoin liquidation</span>
+                <span class="font-medium" style="color: var(--galoy-blue);">Minutes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Learn More / CTA -->
+    <section id="section-5" class="section min-h-screen flex items-center px-6 py-20">
+      <div class="max-w-6xl mx-auto w-full">
+        <div class="text-center mb-16">
+          <p class="text-sm font-medium mb-4" style="color: var(--galoy-blue);">LEARN MORE</p>
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">Ready to Explore Further?</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">Bitcoin-backed lending represents a significant opportunity for forward-thinking financial institutions. Here are resources to continue your learning.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6 mb-16">
+          <a href="index.html" class="card rounded-2xl p-6 hover:border-blue-500 transition-colors group">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: rgba(54, 84, 255, 0.2);">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </div>
+            <h3 class="font-semibold mb-2 group-hover:text-blue-400 transition-colors">Portfolio Analyzer</h3>
+            <p class="text-sm text-gray-400">Model the impact of bitcoin-backed loans on your portfolio's net interest income.</p>
+            <span class="inline-flex items-center gap-1 text-sm mt-4" style="color: var(--galoy-blue);">
+              Try the tool
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="regulatory-radar.html" class="card rounded-2xl p-6 hover:border-blue-500 transition-colors group">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: rgba(54, 84, 255, 0.2);">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <h3 class="font-semibold mb-2 group-hover:text-blue-400 transition-colors">Regulatory Radar</h3>
+            <p class="text-sm text-gray-400">Track OCC guidance and regulatory developments enabling bitcoin in traditional banking.</p>
+            <span class="inline-flex items-center gap-1 text-sm mt-4" style="color: var(--galoy-blue);">
+              View updates
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+
+          <a href="https://galoy.io" target="_blank" class="card rounded-2xl p-6 hover:border-blue-500 transition-colors group">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style="background: rgba(54, 84, 255, 0.2);">
+              <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            </div>
+            <h3 class="font-semibold mb-2 group-hover:text-blue-400 transition-colors">Galoy Infrastructure</h3>
+            <p class="text-sm text-gray-400">Learn about bitcoin-native banking infrastructure for regulated financial institutions.</p>
+            <span class="inline-flex items-center gap-1 text-sm mt-4" style="color: var(--galoy-blue);">
+              Visit galoy.io
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </a>
+        </div>
+
+        <!-- Key Takeaways -->
+        <div class="card rounded-2xl p-8 mb-16">
+          <h3 class="font-semibold mb-6">Key Takeaways</h3>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background: var(--galoy-blue);">
+                <span class="text-xs font-bold">1</span>
+              </div>
+              <p class="text-sm text-gray-300">Bitcoin-backed lending is <strong class="text-white">asset-based lending modernized</strong>—not a radical departure from traditional banking.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background: var(--galoy-blue);">
+                <span class="text-xs font-bold">2</span>
+              </div>
+              <p class="text-sm text-gray-300">Bitcoin's <strong class="text-white">24/7 liquidity and transparent pricing</strong> enable real-time risk management impossible with traditional collateral.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background: var(--galoy-blue);">
+                <span class="text-xs font-bold">3</span>
+              </div>
+              <p class="text-sm text-gray-300"><strong class="text-white">Bitcoin is not crypto.</strong> Its regulatory clarity, liquidity, and institutional acceptance set it apart from other digital assets.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style="background: var(--galoy-blue);">
+                <span class="text-xs font-bold">4</span>
+              </div>
+              <p class="text-sm text-gray-300">Banks are <strong class="text-white">uniquely positioned</strong> to offer bitcoin-backed lending safely, bringing custody expertise and regulatory discipline.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center text-sm text-gray-500">
+          <p class="mb-2">Built by <a href="https://galoy.io" target="_blank" class="hover:text-white transition-colors">Galoy</a> — Bitcoin-native banking infrastructure</p>
+          <p>This content is for educational purposes only and does not constitute financial advice.</p>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Section visibility observer
+    const sections = document.querySelectorAll('.section');
+    const navDots = document.querySelectorAll('.nav-dot');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          const index = Array.from(sections).indexOf(entry.target);
+          navDots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    sections.forEach(section => observer.observe(section));
+
+    function scrollToSection(index) {
+      sections[index].scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Timeline interaction
+    let currentStep = 0;
+    function setTimelineStep(step) {
+      currentStep = step;
+      const steps = document.querySelectorAll('.timeline-step');
+      const progress = document.getElementById('timeline-progress');
+
+      steps.forEach((s, i) => {
+        s.classList.toggle('active', i <= step);
+        const circle = s.querySelector('.w-12');
+        if (i <= step) {
+          circle.style.background = 'var(--galoy-blue)';
+        } else {
+          circle.style.background = '#374151';
+        }
+      });
+
+      progress.style.width = (step / 4 * 100) + '%';
+    }
+
+    // Auto-advance timeline
+    setInterval(() => {
+      currentStep = (currentStep + 1) % 5;
+      setTimelineStep(currentStep);
+    }, 3000);
+
+    // LTV Calculator
+    function updateLTV() {
+      const ltv = document.getElementById('ltv-slider').value;
+      const ltvValue = document.getElementById('ltv-value');
+      const loanAmount = document.getElementById('loan-amount');
+      const collateralBuffer = document.getElementById('collateral-buffer');
+      const ltvBar = document.getElementById('ltv-bar');
+
+      const btcValue = 100000;
+      const loan = btcValue * (ltv / 100);
+      const buffer = btcValue - loan;
+      const bufferPct = (buffer / loan * 100).toFixed(0);
+
+      ltvValue.textContent = ltv + '%';
+      loanAmount.textContent = '$' + loan.toLocaleString();
+      collateralBuffer.textContent = '$' + buffer.toLocaleString() + ' (' + bufferPct + '%)';
+      ltvBar.style.width = ltv + '%';
+
+      // Change color based on risk
+      if (ltv <= 50) {
+        ltvBar.style.background = '#22c55e';
+        collateralBuffer.className = 'text-lg font-medium text-green-400';
+      } else if (ltv <= 70) {
+        ltvBar.style.background = 'var(--galoy-blue)';
+        collateralBuffer.className = 'text-lg font-medium text-blue-400';
+      } else {
+        ltvBar.style.background = '#fbbf24';
+        collateralBuffer.className = 'text-lg font-medium text-yellow-400';
+      }
+    }
+
+    // Risk Meter
+    function updateRiskMeter() {
+      const priceDrop = document.getElementById('price-drop-slider').value;
+      const priceDropValue = document.getElementById('price-drop-value');
+      const ltvIndicator = document.getElementById('ltv-indicator');
+      const riskStatus = document.getElementById('risk-status');
+      const riskDescription = document.getElementById('risk-description');
+
+      priceDropValue.textContent = '-' + priceDrop + '%';
+
+      // Starting LTV of 50%, calculate new LTV after price drop
+      const startingLTV = 50;
+      const newLTV = startingLTV / (1 - priceDrop / 100);
+      const indicatorPosition = Math.min(newLTV, 100);
+
+      ltvIndicator.style.left = indicatorPosition + '%';
+
+      if (newLTV < 50) {
+        riskStatus.className = 'bg-green-500 bg-opacity-10 border border-green-500 border-opacity-30 rounded-lg p-4';
+        riskStatus.querySelector('.w-8').className = 'w-8 h-8 rounded-full flex items-center justify-center bg-green-500 bg-opacity-20';
+        riskStatus.querySelector('p.font-medium').className = 'font-medium text-green-400';
+        riskStatus.querySelector('p.font-medium').textContent = 'Safe Zone';
+        riskDescription.textContent = 'Current LTV: ' + newLTV.toFixed(0) + '% — Collateral value provides ample buffer.';
+      } else if (newLTV < 75) {
+        riskStatus.className = 'bg-green-500 bg-opacity-10 border border-green-500 border-opacity-30 rounded-lg p-4';
+        riskStatus.querySelector('.w-8').className = 'w-8 h-8 rounded-full flex items-center justify-center bg-green-500 bg-opacity-20';
+        riskStatus.querySelector('p.font-medium').className = 'font-medium text-green-400';
+        riskStatus.querySelector('p.font-medium').textContent = 'Safe Zone';
+        riskDescription.textContent = 'Current LTV: ' + newLTV.toFixed(0) + '% — Still within safe parameters.';
+      } else if (newLTV < 90) {
+        riskStatus.className = 'bg-yellow-500 bg-opacity-10 border border-yellow-500 border-opacity-30 rounded-lg p-4';
+        riskStatus.querySelector('.w-8').className = 'w-8 h-8 rounded-full flex items-center justify-center bg-yellow-500 bg-opacity-20';
+        riskStatus.querySelector('p.font-medium').className = 'font-medium text-yellow-400';
+        riskStatus.querySelector('p.font-medium').textContent = 'Margin Call Zone';
+        riskDescription.textContent = 'Current LTV: ' + newLTV.toFixed(0) + '% — Borrower notified to add collateral or make partial repayment.';
+      } else {
+        riskStatus.className = 'bg-red-500 bg-opacity-10 border border-red-500 border-opacity-30 rounded-lg p-4';
+        riskStatus.querySelector('.w-8').className = 'w-8 h-8 rounded-full flex items-center justify-center bg-red-500 bg-opacity-20';
+        riskStatus.querySelector('p.font-medium').className = 'font-medium text-red-400';
+        riskStatus.querySelector('p.font-medium').textContent = 'Liquidation Zone';
+        riskDescription.textContent = 'Current LTV: ' + (newLTV > 100 ? '100+' : newLTV.toFixed(0)) + '% — Collateral may be liquidated to protect lender principal.';
+      }
+    }
+
+    // Initialize
+    updateLTV();
+    updateRiskMeter();
+  </script>
+</body>
+</html>
