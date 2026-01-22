@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Bitcoin-Backed Lending Portfolio Analysis</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.10.3/Recharts.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+          body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+          input[type="range"] { -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px; background: #e5e7eb; }
+          input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #1e3a5f; cursor: pointer; }
+          input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: #1e3a5f; cursor: pointer; border: none; }
+        </style>
+  </head>
+  <body class="bg-gray-50">
+      <div id="root"></div>div>
+
+      <script type="text/babel">
+            const { useState, useMemo } = React;
+            const { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } = Recharts;
+
+            const formatCurrency = (value) => {
+                    if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
+                    if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
+                    if (value >= 1e3) return `$${(value / 1e3).toFixed(0)}K`;
+                    return `$${value.toFixed(0)}`;
+            };
+
+            const Slider = ({ label, value, onChange, min, max, step, format, sublabel }) => (
+                    <div className="mb-6">
+                              <div className="flex justify-between items-baseline mb-2">
+                                          <label className="text-sm font-medium text-gray-700">{label}</label>
+                                          <span className="text-lg font-semibold" style={{ color: '#1e3a5f' }}>
+                                            {format(value)}
+                                          </span>
+                              </div>
+                      {sublabel && <p className="text-xs text-gray-500 mb-2">{sublabel}</p>}
+                              <input
+                                          type="range"
+                                          min={min}
+                                          max={max}
+                                          step={step}
+                                          value={value}
+                                          onChange={(e) => onChange(parseFloat(e.target.value))}
+                                          className="w-full cursor-pointer"
+                                        />
+                              <div className="flex justify-between text-xs text-gray-400 mt-1">
+                                          <span>{format(min)}</span>
+                                          <span>{format(max)}</span>
+                              </div>
+                    </div>
+                  );
+
+            const MetricCard = ({ label, value, sublabel, highlight, delta }) => (
+                    <div
+                              className={`p-4 rounded-lg border ${highlight ? 'border-blue-300' : 'border-gray-200 bg-white'}`}
+                              style={highlight ? { borderColor: '#3b82f6', backgroundColor: '#eff6ff' } : {}}
+                            >
+                              <p className="text-sm text-gray-600 mb-1">{label}</p>
+                              <p className="text-2xl font-bold" style={{ color: '#1e3a5f' }}>{value}</p>
+                      {delta && (
+                                        <p className={`text-sm mt-1 ${parseFloat(delta) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                          {parseFloat(delta) >= 0 ? '↑' : '↓'} {delta}
+                                        </p>
+                                      )}
+                      {sublabel && <p className="text-xs text-gray-500 mt-1">{sublabel}</p>}
+                    </div>
+                  );
+
+            function BitcoinLoanAnalyzer() {
+                    const [loanBookSize, setLoanBookSize] = useState(1000000000);
+                    const [bitcoinAllocation, setBitcoinAllocation] = useState(5);
+                    const [traditionalRate, setTraditionalRate] = useState(6.0);
+                    const [bitcoinRate, setBitcoinRate] = useState(10.0);
+                    const [ltv, setLtv] = useState(50);
+                    const [costOfFunds, setCostOfFunds] = useState(3.5);
+                    const [lossRate, setLossRate] = useState(0.5);
+
+                    const calculations = useMemo(() => {
+                              const btcAllocationDecimal = bitcoinAllocation / 100;
+                              const tradAllocationDecimal = 1 - btcAllocationDecimal;
+
+                              const currentGrossIncome = loanBookSize * (traditionalRate / 100);
+                              const currentFundingCost = loanBookSize * (costOfFunds / 100);
+                              const currentLosses = loanBookSize * (lossRate / 100);
+                              const currentNII = currentGrossIncome - currentFundingCost - currentLosses;
+                              const currentYield = ((currentNII / loanBookSize) * 100);
+
+                              const btcLoanAmount = loanBookSize * btcAllocationDecimal;
+                              const tradLoanAmount = loanBookSize * tradAllocationDecimal;
+
+                              const btcGrossIncome = btcLoanAmount * (bitcoinRate / 100);
+                              const tradGrossIncome = tradLoanAmount * (traditionalRate / 100);
+                              const newGrossIncome = btcGrossIncome + tradGrossIncome;
+
+                              const newFundingCost = loanBookSize * (costOfFunds / 100);
+                              const newLosses = tradLoanAmount * (lossRate / 100);
+                              const newNII = newGrossIncome - newFundingCost - newLosses;
+                              const newYield = ((newNII / loanBookSize) * 100);
+
+                              const incrementalNII = newNII - currentNII;
+                              const yieldUplift = newYield - currentYield;
+                              const blendedYield = (btcAllocationDecimal * bitcoinRate) + (tradAllocationDecimal * traditionalRate);
+
+                              const sensitivityAllocations = [1, 5, 10, 20];
+                              const sensitivityData = sensitivityAllocations.map(alloc => {
+                                          const btcAmt = loanBookSize * (alloc / 100);
+                                          const tradAmt = loanBookSize * (1 - alloc / 100);
+                                          const btcInc = btcAmt * (bitcoinRate / 100);
+                                          const tradInc = tradAmt * (traditionalRate / 100);
+                                          const totalInc = btcInc + tradInc;
+                                          const fundCost = loanBookSize * (costOfFunds / 100);
+                                          const losses = tradAmt * (lossRate / 100);
+                                          const nii = totalInc - fundCost - losses;
+                                          const incNII = nii - currentNII;
+                                          const yld = (nii / loanBookSize) * 100;
+                                          return {
+                                                        allocation: `${alloc}%`,
+                                                        allocValue: alloc,
+                                                        nii: nii,
+                                                        incrementalNII: incNII,
+                                                        yield: yld,
+                                                        yieldUplift: yld - currentYield
+                                          };
+                              });
+
+                              return {
+                                          currentNII, currentYield, newNII, newYield, incrementalNII,
+                                          yieldUplift, blendedYield, sensitivityData, btcLoanAmount, tradLoanAmount
+                              };
+                    }, [loanBookSize, bitcoinAllocation, traditionalRate, bitcoinRate, ltv, costOfFunds, lossRate]);
+
+                    const comparisonData = [
+                      { name: 'Current Portfolio', nii: calculations.currentNII, type: 'current' },
+                      { name: `With ${bitcoinAllocation}% Bitcoin`, nii: calculations.newNII, type: 'bitcoin' }
+                            ];
+
+                    const yieldLineData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 18, 20].map(alloc => {
+                              const btcAmt = loanBookSize * (alloc / 100);
+                              const tradAmt = loanBookSize * (1 - alloc / 100);
+                              const btcInc = btcAmt * (bitcoinRate / 100);
+                              const tradInc = tradAmt * (traditionalRate / 100);
+                              const totalInc = btcInc + tradInc;
+                              const fundCost = loanBookSize * (costOfFunds / 100);
+                              const losses = tradAmt * (lossRate / 100);
+                              const nii = totalInc - fundCost - losses;
+                              return { allocation: alloc, yield: (nii / loanBookSize) * 100 };
+                    });
+
+                    return (
+                              <div className="min-h-screen bg-gray-50 p-6">
+                                          <div className="max-w-7xl mx-auto mb-8">
+                                                        <h1 className="text-3xl font-bold mb-2" style={{ color: '#1e3a5f' }}>Bitcoin-Backed Lending Portfolio Analysis</h1>
+                                                        <p className="text-gray-600">Interactive model showing the impact of bitcoin-backed loans on portfolio net interest income</p>
+                                                        <div className="mt-3 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700">Conservative assumptions - No price speculation - Collateral-secured lending only</div>
+                                          </div>
+                                          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                                        <div className="lg:col-span-1 bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                                                                        <h2 className="text-lg font-semibold mb-6" style={{ color: '#1e3a5f' }}>Model Inputs</h2>
+                                                                        <Slider label="Total Loan Book Size" value={loanBookSize} onChange={setLoanBookSize} min={100000000} max={10000000000} step={100000000} format={formatCurrency} />
+                                                                        <Slider label="Bitcoin Loan Allocation" value={bitcoinAllocation} onChange={setBitcoinAllocation} min={0} max={25} step={0.5} format={(v) => `${v}%`} sublabel="Percentage of loan book allocated to bitcoin-backed loans" />
+                                                                        <div className="border-t border-gray-200 my-6 pt-6">
+                                                                                          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Interest Rates</p>
+                                                                                          <Slider label="Traditional Loan Rate" value={traditionalRate} onChange={setTraditionalRate} min={3} max={12} step={0.25} format={(v) => `${v.toFixed(2)}%`} />
+                                                                                          <Slider label="Bitcoin-Backed Loan Rate" value={bitcoinRate} onChange={setBitcoinRate} min={6} max={18} step={0.25} format={(v) => `${v.toFixed(2)}%`} />
+                                                                        </div>
+                                                                        <div className="border-t border-gray-200 my-6 pt-6">
+                                                                                          <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-4">Risk Parameters</p>
+                                                                                          <Slider label="Bitcoin Loan LTV" value={ltv} onChange={setLtv} min={30} max={70} step={5} format={(v) => `${v}%`} sublabel="Lower LTV = higher collateral buffer" />
+                                                                                          <Slider label="Cost of Funds" value={costOfFunds} onChange={setCostOfFunds} min={1} max={6} step={0.1} format={(v) => `${v.toFixed(1)}%`} />
+                                                                                          <Slider label="Traditional Loan Loss Rate" value={lossRate} onChange={setLossRate} min={0} max={3} step={0.1} format={(v) => `${v.toFixed(1)}%`} sublabel="Bitcoin loans assumed 0% loss (over-collateralized)" />
+                                                                        </div>
+                                                                        <div className="bg-gray-50 rounded-lg p-4 mt-4">
+                                                                                          <p className="text-xs text-gray-600"><strong>Key Assumption:</strong> Bitcoin-backed loans are over-collateralized at {ltv}% LTV with automated margin calls, resulting in near-zero credit losses.</p>
+                                                                        </div>
+                                                        </div>
+                                                        <div className="lg:col-span-2 space-y-6">
+                                                                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                                                                                          <h2 className="text-lg font-semibold mb-4" style={{ color: '#1e3a5f' }}>Portfolio Impact Summary</h2>
+                                                                                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                                                                                              <MetricCard label="Current Portfolio NII" value={formatCurrency(calculations.currentNII)} sublabel="100% traditional loans" />
+                                                                                                              <MetricCard label="New Portfolio NII" value={formatCurrency(calculations.newNII)} sublabel={`${bitcoinAllocation}% bitcoin allocation`} highlight={true} />
+                                                                                                              <MetricCard label="Incremental NII" value={formatCurrency(calculations.incrementalNII)} delta={`+${((calculations.incrementalNII / calculations.currentNII) * 100).toFixed(2)}%`} highlight={calculations.incrementalNII > 0} />
+                                                                                                              <MetricCard label="Yield Uplift" value={`+${(calculations.yieldUplift * 100).toFixed(1)}bps`} sublabel={`Blended yield: ${calculations.blendedYield.toFixed(2)}%`} />
+                                                                                            </div>
+                                                                        </div>
+                                                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                                                                          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                                                                                                              <h3 className="text-sm font-semibold mb-4" style={{ color: '#1e3a5f' }}>Net Interest Income Comparison</h3>
+                                                                                                              <ResponsiveContainer width="100%" height={220}>
+                                                                                                                                    <BarChart data={comparisonData} layout="vertical">
+                                                                                                                                                            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                                                                                                                                                            <XAxis type="number" tickFormatter={(v) => `$${(v / 1e6).toFixed(0)}M`} tick={{ fill: '#6b7280', fontSize: 11 }} />
+                                                                                                                                                            <YAxis type="category" dataKey="name" width={130} tick={{ fill: '#374151', fontSize: 12 }} />
+                                                                                                                                                            <Tooltip formatter={(value) => formatCurrency(value)} contentStyle={{ borderRadius: '8px', border: '1px solid #e5e7eb' }} />
+                                                                                                                                                            <Bar dataKey="nii" radius={[0, 4, 4, 0]}>{comparisonData.map((entry, index) => (<Cell key={`cell-${index}`} fill={entry.type === 'bitcoin' ? '#1e3a5f' : '#94a3b8'} />))}</Bar>
+                                                                                                                                      </BarChart>
+                                                                                                                </ResponsiveContainer>
+                                                                                            </div>
+                                                                                          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                                                                                                              <h3 className="text-sm font-semibold mb-4" style={{ color: '#1e3a5f' }}>Portfolio Yield by Bitcoin Allocation</h3>
+                                                                                                              <ResponsiveContainer width="100%" height={220}>
+                                                                                                                                    <LineChart data={yieldLineData}>
+                                                                                                                                                            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                                                                                                                                                            <XAxis dataKey="allocation" tickFormatter={(v) => `${v}%`} tick={{ fill: '#6b7280', fontSize: 11 }} />
+                                                                                                                                                            <YAxis tickFormatter={(v) => `${v.toFixed(1)}%`} tick={{ fill: '#6b7280', fontSize: 11 }} domain={['auto', 'auto']} />
+                                                                                                                                                            <Tooltip formatter={(value) => [`${value.toFixed(3)}%`, 'Net Yield']} labelFormatter={(v) => `${v}% Bitcoin`} contentStyle={{ borderRadius: '8px', border: '1px solid #e5e7eb' }} />
+                                                                                                                                                            <Line type="monotone" dataKey="yield" stroke="#1e3a5f" strokeWidth={2} dot={{ fill: '#1e3a5f', strokeWidth: 0, r: 3 }} activeDot={{ r: 5, fill: '#1e3a5f' }} />
+                                                                                                                                      </LineChart>
+                                                                                                                </ResponsiveContainer>
+                                                                                            </div>
+                                                                        </div>
+                                                                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                                                                                          <h3 className="text-sm font-semibold mb-4" style={{ color: '#1e3a5f' }}>Sensitivity Analysis: Impact at Different Allocation Levels</h3>
+                                                                                          <div className="overflow-x-auto">
+                                                                                                              <table className="w-full">
+                                                                                                                                    <thead>
+                                                                                                                                                            <tr className="border-b border-gray-200">
+                                                                                                                                                                                      <th className="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Bitcoin Allocation</th>
+                                                                                                                                                                                      <th className="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Bitcoin Loans</th>
+                                                                                                                                                                                      <th className="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Portfolio NII</th>
+                                                                                                                                                                                      <th className="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Incremental NII</th>
+                                                                                                                                                                                      <th className="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Net Yield</th>
+                                                                                                                                                                                      <th className="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wide">Yield Uplift</th>
+                                                                                                                                                              </tr>
+                                                                                                                                      </thead>
+                                                                                                                                    <tbody>
+                                                                                                                                                            <tr className="border-b border-gray-100 bg-gray-50">
+                                                                                                                                                                                      <td className="py-3 px-4 text-sm text-gray-600">0% (Baseline)</td>
+                                                                                                                                                                                      <td className="py-3 px-4 text-sm text-right text-gray-600">$0</td>
+                                                                                                                                                                                      <td className="py-3 px-4 text-sm text-right font-medium">{formatCurrency(calculations.currentNII)}</td>
+                                                                                                                                                                                      <td className="py-3 px-4 text-sm text-right text-gray-500">-</td>
+                                                                                                                                                                                      <td className="py-3 px-4 text-sm text-right font-medium">{calculations.currentYield.toFixed(2)}%</td>
+                                                                                                                                                                                      <td className="py-3 px-4 text-sm text-right text-gray-500">-</td>
+                                                                                                                                                              </tr>
+                                                                                                                                      {calculations.sensitivityData.map((row) => (
+                                                        <tr key={row.allocation} className="border-b border-gray-100" style={row.allocValue === bitcoinAllocation ? { backgroundColor: '#eff6ff' } : {}}>
+                                                                                    <td className="py-3 px-4 text-sm font-medium" style={{ color: '#1e3a5f' }}>{row.allocation}{row.allocValue === bitcoinAllocation && (<span className="ml-2 text-xs px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full">Current</span>)}</td>
+                                                                                    <td className="py-3 px-4 text-sm text-right text-gray-600">{formatCurrency(loanBookSize * (row.allocValue / 100))}</td>
+                                                                                    <td className="py-3 px-4 text-sm text-right font-medium">{formatCurrency(row.nii)}</td>
+                                                                                    <td className="py-3 px-4 text-sm text-right text-green-600 font-medium">+{formatCurrency(row.incrementalNII)}</td>
+                                                                                    <td className="py-3 px-4 text-sm text-right font-medium">{row.yield.toFixed(2)}%</td>
+                                                                                    <td className="py-3 px-4 text-sm text-right text-green-600 font-medium">+{(row.yieldUplift * 100).toFixed(1)}bps</td>
+                                                        </tr>
+                                                      ))}
+                                                                                                                                      </tbody>
+                                                                                                                </table>
+                                                                                            </div>
+                                                                        </div>
+                                                                        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                                                                                          <h3 className="text-sm font-semibold mb-4" style={{ color: '#1e3a5f' }}>Portfolio Composition</h3>
+                                                                                          <div className="flex items-center gap-4">
+                                                                                                              <div className="flex-1">
+                                                                                                                                    <div className="h-8 rounded-lg overflow-hidden flex">
+                                                                                                                                                            <div className="h-full transition-all duration-300" style={{ width: `${100 - bitcoinAllocation}%`, backgroundColor: '#94a3b8' }} />
+                                                                                                                                                            <div className="h-full transition-all duration-300" style={{ width: `${bitcoinAllocation}%`, backgroundColor: '#1e3a5f' }} />
+                                                                                                                                      </div>
+                                                                                                                                    <div className="flex justify-between mt-2 text-xs text-gray-600">
+                                                                                                                                                            <span>Traditional: {formatCurrency(calculations.tradLoanAmount)} ({(100 - bitcoinAllocation).toFixed(1)}%)</span>
+                                                                                                                                                            <span>Bitcoin-Backed: {formatCurrency(calculations.btcLoanAmount)} ({bitcoinAllocation}%)</span>
+                                                                                                                                      </div>
+                                                                                                                </div>
+                                                                                            </div>
+                                                                        </div>
+                                                                        <div className="bg-gray-100 rounded-xl p-4 text-xs text-gray-600">
+                                                                                          <p className="font-semibold mb-2">Model Assumptions and Notes:</p>
+                                                                                          <ul className="space-y-1 list-disc list-inside">
+                                                                                                              <li>Bitcoin-backed loans are fully collateralized at {ltv}% LTV with automated liquidation protocols</li>
+                                                                                                              <li>Credit losses on bitcoin-backed loans assumed to be 0% due to over-collateralization</li>
+                                                                                                              <li>No bitcoin price speculation or volatility modeling included</li>
+                                                                                                              <li>Interest rates and cost of funds assumed constant for the analysis period</li>
+                                                                                                              <li>This model is for illustrative purposes only and does not constitute financial advice</li>
+                                                                                            </ul>
+                                                                        </div>
+                                                        </div>
+                                          </div>
+                              </div>
+                            );
+            }
+
+            ReactDOM.render(<BitcoinLoanAnalyzer />, document.getElementById('root'));
+      </script>
+  </body>body>
+</html>html>
+    </style></title>
+  </head>
