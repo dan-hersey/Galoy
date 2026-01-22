@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Midday — A Day in 2040</title>
+  <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="app-header__logo">
+        <img src="./assets/bitibank-logo.png" alt="Bitibank">
+      </div>
+      <span class="app-header__time" id="header-time">12:15 PM</span>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <!-- Scene Header -->
+      <section class="scene-header">
+        <div class="scene-header__time">12:15 PM — Home Office</div>
+        <h1 class="scene-header__title">Midday</h1>
+        <p class="scene-header__narrative">
+          "David texts me: 'Did the Kimura payment come through?' I check the app."
+        </p>
+      </section>
+
+      <!-- Indianapolis Invoice Card -->
+      <div class="invoice-card" id="invoice-indianapolis">
+        <div class="invoice-card__header">
+          <div>
+            <div class="invoice-card__client">Kimura Logistics</div>
+            <div class="invoice-card__location">Indianapolis, IN</div>
+          </div>
+          <div class="invoice-card__amount">
+            <div class="invoice-card__amount-value" id="indy-amount-sats">123,800 sats</div>
+            <div class="invoice-card__amount-btc" id="indy-amount-usd">$3,400</div>
+          </div>
+        </div>
+        <div class="invoice-card__status" id="indy-status">
+          <svg class="invoice-card__status-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          <span class="invoice-card__status-text">Settled at 11:52 AM</span>
+        </div>
+        <div class="invoice-card__details" id="indy-details">
+          <div class="invoice-card__detail-row">
+            <span class="invoice-card__detail-label">Settlement time</span>
+            <span class="invoice-card__detail-value">23 seconds</span>
+          </div>
+          <div class="invoice-card__detail-row">
+            <span class="invoice-card__detail-label">Network fee</span>
+            <span class="invoice-card__detail-value">10 sats ($0.27)</span>
+          </div>
+          <div class="invoice-card__detail-row">
+            <span class="invoice-card__detail-label">Payer bank</span>
+            <span class="invoice-card__detail-value">Midwest Commerce Bank</span>
+          </div>
+          <div class="invoice-card__detail-row">
+            <span class="invoice-card__detail-label">Network</span>
+            <span class="invoice-card__detail-value">Lightning</span>
+          </div>
+        </div>
+        <div class="card__footer" style="text-align: center;">
+          <button class="btn btn--ghost" onclick="toggleExpand('indy-details')" id="indy-toggle-btn">
+            View Details
+          </button>
+        </div>
+      </div>
+
+      <!-- Narrative Break -->
+      <div style="padding: var(--space-4) 0; text-align: center;">
+        <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); font-style: italic; max-width: 320px; margin: 0 auto;">
+          "Ten sats to move $3,400 across state lines, fully settled, no reversals possible."
+        </p>
+      </div>
+
+      <!-- Rotterdam Invoice Card -->
+      <section class="scene-header" style="margin-top: var(--space-4);">
+        <div class="scene-header__time">12:48 PM — International Settlement</div>
+        <p class="scene-header__narrative">
+          "The notification comes in while I'm reviewing a client's shipping manifest."
+        </p>
+      </section>
+
+      <div class="invoice-card" id="invoice-rotterdam">
+        <div class="invoice-card__header">
+          <div>
+            <div class="invoice-card__client">Van der Berg Freight</div>
+            <div class="invoice-card__location">Rotterdam, Netherlands</div>
+          </div>
+          <div class="invoice-card__amount">
+            <div class="invoice-card__amount-value" id="rotterdam-amount-sats">295,000 sats</div>
+            <div class="invoice-card__amount-btc" id="rotterdam-amount-usd">$8,100</div>
+          </div>
+        </div>
+        <div class="invoice-card__status" id="rotterdam-status">
+          <svg class="invoice-card__status-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          <span class="invoice-card__status-text">Settled at 12:48 PM</span>
+        </div>
+        <div class="invoice-card__details" id="rotterdam-details">
+          <div class="invoice-card__detail-row">
+            <span class="invoice-card__detail-label">Original amount</span>
+            <span class="invoice-card__detail-value">€7,450</span>
+          </div>
+          <div class="invoice-card__detail-row">
+            <span class="invoice-card__detail-label">Settlement time</span>
+            <span class="invoice-card__detail-value">5h 10m (incl. batching)</span>
+          </div>
+          <div class="invoice-card__detail-row">
+            <span class="invoice-card__detail-label">Network fee</span>
+            <span class="invoice-card__detail-value">27 sats ($0.74)</span>
+          </div>
+          <div class="invoice-card__detail-row">
+            <span class="invoice-card__detail-label">Payer bank</span>
+            <span class="invoice-card__detail-value">ING Digital Assets</span>
+          </div>
+          <div class="invoice-card__detail-row">
+            <span class="invoice-card__detail-label">Network</span>
+            <span class="invoice-card__detail-value">Bitcoin (Layer 1)</span>
+          </div>
+        </div>
+        <div class="card__footer" style="text-align: center;">
+          <button class="btn btn--ghost" onclick="toggleExpand('rotterdam-details')" id="rotterdam-toggle-btn">
+            View Details
+          </button>
+        </div>
+      </div>
+
+      <!-- Comparison Card -->
+      <div class="card" style="margin-top: var(--space-6);">
+        <div class="card__content" style="text-align: center;">
+          <div style="font-size: var(--font-size-xs); color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-2);">
+            What this used to cost
+          </div>
+          <div style="display: flex; justify-content: center; gap: var(--space-8);">
+            <div>
+              <div style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-danger);">$45</div>
+              <div style="font-size: var(--font-size-xs); color: var(--color-text-tertiary);">Wire fee (2020s)</div>
+            </div>
+            <div>
+              <div style="font-size: var(--font-size-xl); font-weight: var(--font-weight-bold); color: var(--color-success);">27 sats</div>
+              <div style="font-size: var(--font-size-xs); color: var(--color-text-tertiary);">Bitcoin fee (today)</div>
+            </div>
+          </div>
+          <div style="font-size: var(--font-size-xs); color: var(--color-text-tertiary); margin-top: var(--space-3);">
+            Plus: no 4-6 day wait, no manual bank calls
+          </div>
+        </div>
+      </div>
+
+      <!-- Final Narrative -->
+      <div style="padding: var(--space-6) 0; text-align: center;">
+        <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary); font-style: italic; max-width: 320px; margin: 0 auto;">
+          "I don't celebrate this. It's just Tuesday."
+        </p>
+      </div>
+
+      <!-- Continue Navigation -->
+      <div style="text-align: center; margin-top: var(--space-4); padding-bottom: var(--space-4);">
+        <p style="font-size: var(--font-size-sm); color: var(--color-text-tertiary); margin-bottom: var(--space-3);">
+          Continue to afternoon →
+        </p>
+        <a href="./afternoon.html" class="btn btn--secondary">
+          Credit Line Review
+        </a>
+      </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="scene-nav">
+      <a href="./morning.html" class="scene-nav__link">
+        <svg class="scene-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <span class="scene-nav__label">Morning</span>
+      </a>
+      <a href="./midday.html" class="scene-nav__link is-active">
+        <svg class="scene-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="scene-nav__label">Midday</span>
+      </a>
+      <a href="./afternoon.html" class="scene-nav__link">
+        <svg class="scene-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+        </svg>
+        <span class="scene-nav__label">Afternoon</span>
+      </a>
+      <a href="./evening.html" class="scene-nav__link">
+        <svg class="scene-nav__icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+        <span class="scene-nav__label">Evening</span>
+      </a>
+    </nav>
+  </div>
+
+  <script src="./scripts/app.js"></script>
+  <script src="./scripts/midday.js"></script>
+</body>
+</html>
