@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bitcoin-Backed Lending Portfolio Analyzer v2 | Efficient Frontier</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    :root {
+      --galoy-blue: #3654FF;
+      --galoy-dark: #0a0a0a;
+      --galoy-gray: #1a1a1a;
+      --btc-orange: #f7931a;
+    }
+    body { background: var(--galoy-dark); color: #fff; }
+    .card { background: var(--galoy-gray); border: 1px solid #333; }
+    .highlight { background: linear-gradient(135deg, rgba(54, 84, 255, 0.15), rgba(54, 84, 255, 0.05)); border-color: var(--galoy-blue); }
+
+    /* Custom range slider */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 3px;
+      background: #333;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--galoy-blue);
+      cursor: pointer;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--galoy-blue);
+      cursor: pointer;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 0%, #3654FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Metric card hover */
+    .metric-card { transition: all 0.3s ease; }
+    .metric-card:hover { transform: translateY(-2px); border-color: var(--galoy-blue); }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--galoy-dark); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #444; }
+
+    /* Input number styling */
+    input[type="number"] {
+      background: #252525;
+      border: 1px solid #444;
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: #fff;
+      width: 100%;
+    }
+    input[type="number"]:focus {
+      outline: none;
+      border-color: var(--galoy-blue);
+    }
+
+    /* Select styling */
+    select {
+      background: #252525;
+      border: 1px solid #444;
+      border-radius: 6px;
+      padding: 6px 10px;
+      color: #fff;
+      width: 100%;
+    }
+    select:focus {
+      outline: none;
+      border-color: var(--galoy-blue);
+    }
+
+    /* Tabs */
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .tab-btn.active {
+      background: var(--galoy-blue);
+      color: #fff;
+    }
+    .tab-btn:not(.active) {
+      background: #252525;
+      color: #999;
+    }
+    .tab-btn:not(.active):hover {
+      background: #333;
+      color: #fff;
+    }
+
+    /* Formula display */
+    .formula {
+      font-family: 'Courier New', monospace;
+      background: #252525;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    /* Tooltip */
+    .tooltip {
+      position: relative;
+    }
+    .tooltip:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      white-space: nowrap;
+      z-index: 100;
+      margin-bottom: 5px;
+    }
+
+    /* Distribution bar */
+    .dist-bar {
+      height: 8px;
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+
+    /* Canvas container */
+    #frontierCanvas {
+      background: #151515;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-opacity-90 backdrop-blur-sm" style="background: rgba(10,10,10,0.9);">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: var(--galoy-blue);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <span class="font-semibold text-white">Portfolio Analyzer</span>
+        <span class="text-xs px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 ml-2">v2 - Efficient Frontier</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="text-sm text-gray-400 hover:text-white transition-colors">← v1 (Simple Model)</a>
+        <a href="https://galoy.io" target="_blank" class="text-sm text-gray-400 hover:text-white transition-colors">galoy.io</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-24 pb-12 px-6">
+    <div class="max-w-7xl mx-auto">
+      <!-- Hero Section -->
+      <div class="mb-8">
+        <p class="text-sm font-medium mb-3" style="color: var(--galoy-blue);">PHASE 1: DATA LAYER & YTM CALCULATIONS</p>
+        <h1 class="text-3xl lg:text-4xl font-bold mb-4">
+          Efficient Frontier <span class="gradient-text">Portfolio Analyzer</span>
+        </h1>
+        <p class="text-gray-400 max-w-3xl mb-4">
+          Model the risk-return tradeoff of bitcoin-backed vs. traditional loans using Yield-to-Maturity calculations,
+          recovery rate modeling, and return distribution analysis. This builds the foundation for efficient frontier visualization.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs" style="background: rgba(54, 84, 255, 0.15); border: 1px solid rgba(54, 84, 255, 0.3);">
+            <span class="w-2 h-2 rounded-full bg-green-400"></span>
+            <span class="text-gray-300">YTM-Based Returns</span>
+          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs" style="background: rgba(54, 84, 255, 0.15); border: 1px solid rgba(54, 84, 255, 0.3);">
+            <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+            <span class="text-gray-300">Recovery Rate Modeling</span>
+          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs" style="background: rgba(54, 84, 255, 0.15); border: 1px solid rgba(54, 84, 255, 0.3);">
+            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+            <span class="text-gray-300">Return Distribution</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Grid -->
+      <div class="grid lg:grid-cols-12 gap-6">
+        <!-- Input Panel - Left Side -->
+        <div class="lg:col-span-4">
+          <div class="card rounded-2xl p-5 sticky top-24 space-y-6">
+            <!-- Tab Navigation -->
+            <div class="flex gap-2">
+              <button class="tab-btn active" data-tab="traditional" onclick="switchTab('traditional')">Traditional</button>
+              <button class="tab-btn" data-tab="bitcoin" onclick="switchTab('bitcoin')">Bitcoin-Backed</button>
+              <button class="tab-btn" data-tab="market" onclick="switchTab('market')">Market</button>
+            </div>
+
+            <!-- Traditional Loan Parameters -->
+            <div id="tab-traditional" class="tab-content space-y-5">
+              <div>
+                <h3 class="text-sm font-semibold text-gray-300 mb-4 flex items-center gap-2">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="text-gray-500"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                  Traditional Loan Parameters
+                </h3>
+
+                <!-- Interest Rate -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">Annual Interest Rate</label>
+                    <span id="tradRateDisplay" class="text-sm font-semibold">6.00%</span>
+                  </div>
+                  <input type="range" id="tradRate" min="3" max="15" step="0.25" value="6" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>3%</span><span>15%</span></div>
+                </div>
+
+                <!-- Loan Term -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">Loan Term (months)</label>
+                    <span id="tradTermDisplay" class="text-sm font-semibold">36</span>
+                  </div>
+                  <input type="range" id="tradTerm" min="12" max="120" step="6" value="36" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>12</span><span>120</span></div>
+                </div>
+
+                <!-- Origination Fee -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">Origination Fee</label>
+                    <span id="tradOrigFeeDisplay" class="text-sm font-semibold">1.00%</span>
+                  </div>
+                  <input type="range" id="tradOrigFee" min="0" max="3" step="0.25" value="1" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>0%</span><span>3%</span></div>
+                </div>
+
+                <!-- Default Rate -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">Annual Default Rate</label>
+                    <span id="tradDefaultDisplay" class="text-sm font-semibold text-red-400">2.00%</span>
+                  </div>
+                  <input type="range" id="tradDefault" min="0" max="10" step="0.25" value="2" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>0%</span><span>10%</span></div>
+                </div>
+
+                <!-- Recovery Rate -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">Recovery Rate (on default)</label>
+                    <span id="tradRecoveryDisplay" class="text-sm font-semibold text-green-400">50%</span>
+                  </div>
+                  <input type="range" id="tradRecovery" min="0" max="100" step="5" value="50" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>0%</span><span>100%</span></div>
+                </div>
+
+                <!-- Collateral Type Info -->
+                <div class="rounded-lg p-3 text-xs" style="background: rgba(107, 114, 128, 0.15); border: 1px solid rgba(107, 114, 128, 0.3);">
+                  <p class="text-gray-400">
+                    <strong class="text-gray-300">Typical Recovery Rates:</strong><br>
+                    • Commercial Real Estate: 50-65%<br>
+                    • Equipment: 40-55%<br>
+                    • Unsecured: 20-35%
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bitcoin Loan Parameters -->
+            <div id="tab-bitcoin" class="tab-content space-y-5 hidden">
+              <div>
+                <h3 class="text-sm font-semibold text-gray-300 mb-4 flex items-center gap-2">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--btc-orange);"><circle cx="12" cy="12" r="10"/><path d="M9.5 9.5c0-1.1.9-2 2-2h1c1.1 0 2 .9 2 2s-.9 2-2 2h-3m0 0c0 1.1.9 2 2 2h1c1.1 0 2-.9 2-2m-5-2V7m0 10v-2m4-8V7m0 10v-2"/></svg>
+                  Bitcoin-Backed Loan Parameters
+                </h3>
+
+                <!-- Interest Rate -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">Annual Interest Rate</label>
+                    <span id="btcRateDisplay" class="text-sm font-semibold" style="color: var(--btc-orange);">10.00%</span>
+                  </div>
+                  <input type="range" id="btcRate" min="5" max="20" step="0.25" value="10" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>5%</span><span>20%</span></div>
+                </div>
+
+                <!-- Loan Term -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">Loan Term (months)</label>
+                    <span id="btcTermDisplay" class="text-sm font-semibold">12</span>
+                  </div>
+                  <input type="range" id="btcTerm" min="3" max="36" step="3" value="12" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>3</span><span>36</span></div>
+                </div>
+
+                <!-- Origination Fee -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">Origination Fee</label>
+                    <span id="btcOrigFeeDisplay" class="text-sm font-semibold">2.00%</span>
+                  </div>
+                  <input type="range" id="btcOrigFee" min="0" max="5" step="0.25" value="2" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>0%</span><span>5%</span></div>
+                </div>
+
+                <!-- Initial LTV -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">Initial LTV</label>
+                    <span id="btcLtvDisplay" class="text-sm font-semibold">50%</span>
+                  </div>
+                  <input type="range" id="btcLtv" min="20" max="70" step="5" value="50" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>20%</span><span>70%</span></div>
+                </div>
+
+                <!-- Liquidation Threshold -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">Liquidation Threshold</label>
+                    <span id="btcLiqThreshDisplay" class="text-sm font-semibold text-red-400">80%</span>
+                  </div>
+                  <input type="range" id="btcLiqThresh" min="60" max="95" step="5" value="80" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>60%</span><span>95%</span></div>
+                </div>
+
+                <!-- Default Rate -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">Annual Default Rate</label>
+                    <span id="btcDefaultDisplay" class="text-sm font-semibold text-red-400">1.00%</span>
+                  </div>
+                  <input type="range" id="btcDefault" min="0" max="5" step="0.25" value="1" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>0%</span><span>5%</span></div>
+                  <p class="text-xs text-gray-500 mt-1">Lower due to over-collateralization & margin calls</p>
+                </div>
+
+                <!-- Bitcoin Collateral Info -->
+                <div class="rounded-lg p-3 text-xs" style="background: rgba(247, 147, 26, 0.1); border: 1px solid rgba(247, 147, 26, 0.3);">
+                  <p class="text-gray-400">
+                    <strong style="color: var(--btc-orange);">BTC Recovery Model:</strong><br>
+                    Recovery depends on BTC price at liquidation. With <span id="infoLtv">50</span>% LTV and <span id="infoLiqThresh">80</span>% liquidation threshold,
+                    BTC can drop <span id="infoPriceDrop">37.5</span>% before triggering liquidation.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Market Parameters -->
+            <div id="tab-market" class="tab-content space-y-5 hidden">
+              <div>
+                <h3 class="text-sm font-semibold text-gray-300 mb-4 flex items-center gap-2">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="text-purple-400"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                  Market & Portfolio Parameters
+                </h3>
+
+                <!-- Loan Book Size -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">Total Loan Book Size</label>
+                    <span id="loanBookDisplay" class="text-sm font-semibold" style="color: var(--galoy-blue);">$1.00B</span>
+                  </div>
+                  <input type="range" id="loanBook" min="100000000" max="10000000000" step="100000000" value="1000000000" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>$100M</span><span>$10B</span></div>
+                </div>
+
+                <!-- Cost of Funds -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">Cost of Funds</label>
+                    <span id="cofDisplay" class="text-sm font-semibold">4.00%</span>
+                  </div>
+                  <input type="range" id="cof" min="1" max="8" step="0.25" value="4" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>1%</span><span>8%</span></div>
+                </div>
+
+                <!-- BTC Price Scenario -->
+                <div class="mb-4">
+                  <label class="text-xs text-gray-400 block mb-2">BTC Price Scenario (for recovery calc)</label>
+                  <select id="btcScenario" class="w-full" onchange="updateAll()">
+                    <option value="0.5">Severe Crash (-50%)</option>
+                    <option value="0.7">Major Correction (-30%)</option>
+                    <option value="0.85">Moderate Dip (-15%)</option>
+                    <option value="1" selected>Stable (0%)</option>
+                    <option value="1.15">Moderate Gain (+15%)</option>
+                    <option value="1.3">Strong Rally (+30%)</option>
+                  </select>
+                </div>
+
+                <!-- BTC Volatility -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">BTC Annual Volatility (σ)</label>
+                    <span id="btcVolDisplay" class="text-sm font-semibold">60%</span>
+                  </div>
+                  <input type="range" id="btcVol" min="30" max="120" step="5" value="60" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>30%</span><span>120%</span></div>
+                  <p class="text-xs text-gray-500 mt-1">Historical BTC volatility: ~60-80% annually</p>
+                </div>
+
+                <!-- Default Correlation -->
+                <div class="mb-4">
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label class="text-xs text-gray-400">Default Correlation (ρ)</label>
+                    <span id="corrDisplay" class="text-sm font-semibold">0.20</span>
+                  </div>
+                  <input type="range" id="corr" min="-0.5" max="0.8" step="0.05" value="0.2" class="w-full" oninput="updateAll()">
+                  <div class="flex justify-between text-xs text-gray-600 mt-1"><span>-0.5</span><span>0.8</span></div>
+                  <p class="text-xs text-gray-500 mt-1">Correlation between traditional loan defaults and BTC price</p>
+                </div>
+
+                <!-- Market Info -->
+                <div class="rounded-lg p-3 text-xs" style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.3);">
+                  <p class="text-gray-400">
+                    <strong class="text-purple-400">Correlation Note:</strong><br>
+                    Low/negative correlation between BTC and traditional defaults provides diversification benefit.
+                    If BTC crashes during recession, correlation may be positive.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results Panel - Right Side -->
+        <div class="lg:col-span-8 space-y-6">
+          <!-- YTM Comparison Cards -->
+          <div class="grid md:grid-cols-2 gap-4">
+            <!-- Traditional YTM Card -->
+            <div class="card rounded-xl p-5">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-semibold flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-gray-500"></span>
+                  Traditional Loan
+                </h3>
+                <span class="text-xs text-gray-500">YTM Analysis</span>
+              </div>
+
+              <div class="space-y-3">
+                <div class="flex justify-between items-baseline">
+                  <span class="text-xs text-gray-400">Yield to Maturity (YTM)</span>
+                  <span id="tradYtm" class="text-xl font-bold">7.14%</span>
+                </div>
+                <div class="flex justify-between items-baseline text-sm">
+                  <span class="text-gray-500">Nominal Rate</span>
+                  <span id="tradNominal" class="text-gray-300">6.00%</span>
+                </div>
+                <div class="flex justify-between items-baseline text-sm">
+                  <span class="text-gray-500">+ Origination (annualized)</span>
+                  <span id="tradOrigAnn" class="text-gray-300">+0.33%</span>
+                </div>
+                <div class="flex justify-between items-baseline text-sm">
+                  <span class="text-gray-500">= Gross YTM</span>
+                  <span id="tradGrossYtm" class="text-gray-300">6.33%</span>
+                </div>
+                <div class="border-t border-gray-700 my-2"></div>
+                <div class="flex justify-between items-baseline text-sm">
+                  <span class="text-gray-500">Net Spread (- CoF)</span>
+                  <span id="tradNetSpread" class="text-green-400 font-medium">2.33%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bitcoin YTM Card -->
+            <div class="card rounded-xl p-5 highlight">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-sm font-semibold flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full" style="background: var(--btc-orange);"></span>
+                  Bitcoin-Backed Loan
+                </h3>
+                <span class="text-xs text-gray-500">YTM Analysis</span>
+              </div>
+
+              <div class="space-y-3">
+                <div class="flex justify-between items-baseline">
+                  <span class="text-xs text-gray-400">Yield to Maturity (YTM)</span>
+                  <span id="btcYtm" class="text-xl font-bold" style="color: var(--btc-orange);">12.00%</span>
+                </div>
+                <div class="flex justify-between items-baseline text-sm">
+                  <span class="text-gray-500">Nominal Rate</span>
+                  <span id="btcNominal" class="text-gray-300">10.00%</span>
+                </div>
+                <div class="flex justify-between items-baseline text-sm">
+                  <span class="text-gray-500">+ Origination (annualized)</span>
+                  <span id="btcOrigAnn" class="text-gray-300">+2.00%</span>
+                </div>
+                <div class="flex justify-between items-baseline text-sm">
+                  <span class="text-gray-500">= Gross YTM</span>
+                  <span id="btcGrossYtm" class="text-gray-300">12.00%</span>
+                </div>
+                <div class="border-t border-gray-700 my-2"></div>
+                <div class="flex justify-between items-baseline text-sm">
+                  <span class="text-gray-500">Net Spread (- CoF)</span>
+                  <span id="btcNetSpread" class="text-green-400 font-medium">8.00%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recovery Rate Modeling -->
+          <div class="card rounded-2xl p-6">
+            <h3 class="text-sm font-semibold mb-5 flex items-center gap-2">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              Recovery Rate Modeling
+            </h3>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <!-- Traditional Recovery -->
+              <div>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="w-2 h-2 rounded-full bg-gray-500"></span>
+                  <span class="text-sm font-medium text-gray-300">Traditional Loan Recovery</span>
+                </div>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span class="text-gray-500">Recovery Rate</span>
+                    <span id="tradRecoveryVal" class="text-gray-300">50%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-gray-500">Loss Given Default (LGD)</span>
+                    <span id="tradLgd" class="text-red-400">50%</span>
+                  </div>
+                  <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+                    <div id="tradRecoveryBar" class="dist-bar bg-gradient-to-r from-green-600 to-green-400" style="width: 50%"></div>
+                  </div>
+                  <p class="text-xs text-gray-500 mt-2">Based on historical empirical data for collateral type</p>
+                </div>
+              </div>
+
+              <!-- Bitcoin Recovery -->
+              <div>
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="w-2 h-2 rounded-full" style="background: var(--btc-orange);"></span>
+                  <span class="text-sm font-medium text-gray-300">Bitcoin-Backed Recovery</span>
+                </div>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span class="text-gray-500">BTC Price Scenario</span>
+                    <span id="btcPriceScenario" class="text-gray-300">Stable (0%)</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-gray-500">Collateral Value at Default</span>
+                    <span id="btcCollateralVal" class="text-gray-300">100% of initial</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-gray-500">Recovery Rate</span>
+                    <span id="btcRecoveryVal" class="text-green-400 font-medium">100%</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-gray-500">Loss Given Default (LGD)</span>
+                    <span id="btcLgd" class="text-green-400">0%</span>
+                  </div>
+                  <div class="w-full bg-gray-800 rounded-full h-2 mt-2">
+                    <div id="btcRecoveryBar" class="dist-bar" style="width: 100%; background: linear-gradient(90deg, #f7931a, #ffab40);"></div>
+                  </div>
+                  <p class="text-xs text-gray-500 mt-2">Calculated from LTV, liquidation threshold, and BTC price scenario</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recovery Calculation Formula -->
+            <div class="mt-5 p-4 rounded-lg" style="background: rgba(54, 84, 255, 0.1);">
+              <p class="text-xs text-gray-400 mb-2"><strong class="text-gray-300">BTC Recovery Calculation:</strong></p>
+              <p class="text-xs text-gray-400">
+                <span class="formula">Recovery = min(1, (Collateral Value × BTC Price Change) / Loan Amount)</span>
+              </p>
+              <p class="text-xs text-gray-400 mt-2">
+                With <span id="formulaLtv">50</span>% LTV, collateral = <span id="formulaCollateral">2.00</span>× loan value.
+                At <span id="formulaPriceChange">0%</span> price change: Recovery = <span id="formulaRecovery">100</span>%
+              </p>
+            </div>
+          </div>
+
+          <!-- Expected Return Distribution -->
+          <div class="card rounded-2xl p-6">
+            <h3 class="text-sm font-semibold mb-5 flex items-center gap-2">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              Expected Return Distribution
+            </h3>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <!-- Traditional Distribution -->
+              <div>
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="w-2 h-2 rounded-full bg-gray-500"></span>
+                  <span class="text-sm font-medium text-gray-300">Traditional Loan Returns</span>
+                </div>
+
+                <!-- Scenario breakdown -->
+                <div class="space-y-3">
+                  <div class="p-3 rounded-lg bg-gray-800/50">
+                    <div class="flex justify-between items-center mb-1">
+                      <span class="text-xs text-gray-400">Performing Scenario</span>
+                      <span id="tradPerfProb" class="text-xs text-gray-500">98.0% probability</span>
+                    </div>
+                    <div class="flex justify-between items-baseline">
+                      <span class="text-sm text-gray-300">Return = YTM</span>
+                      <span id="tradPerfReturn" class="font-medium text-green-400">+2.33%</span>
+                    </div>
+                  </div>
+
+                  <div class="p-3 rounded-lg bg-gray-800/50">
+                    <div class="flex justify-between items-center mb-1">
+                      <span class="text-xs text-gray-400">Default Scenario</span>
+                      <span id="tradDefProb" class="text-xs text-gray-500">2.0% probability</span>
+                    </div>
+                    <div class="flex justify-between items-baseline">
+                      <span class="text-sm text-gray-300">Return = Recovery - 1</span>
+                      <span id="tradDefReturn" class="font-medium text-red-400">-50.00%</span>
+                    </div>
+                  </div>
+
+                  <div class="border-t border-gray-700 pt-3 mt-3">
+                    <div class="flex justify-between items-baseline mb-2">
+                      <span class="text-sm text-gray-400">Expected Return (E[R])</span>
+                      <span id="tradExpReturn" class="text-lg font-bold">1.29%</span>
+                    </div>
+                    <div class="flex justify-between items-baseline">
+                      <span class="text-sm text-gray-400">Volatility (σ)</span>
+                      <span id="tradVol" class="text-lg font-bold text-yellow-400">7.21%</span>
+                    </div>
+                    <div class="flex justify-between items-baseline mt-2">
+                      <span class="text-sm text-gray-400">Sharpe Ratio</span>
+                      <span id="tradSharpe" class="text-sm font-medium text-gray-300">0.18</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Bitcoin Distribution -->
+              <div>
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="w-2 h-2 rounded-full" style="background: var(--btc-orange);"></span>
+                  <span class="text-sm font-medium text-gray-300">Bitcoin-Backed Loan Returns</span>
+                </div>
+
+                <!-- Scenario breakdown -->
+                <div class="space-y-3">
+                  <div class="p-3 rounded-lg" style="background: rgba(247, 147, 26, 0.1);">
+                    <div class="flex justify-between items-center mb-1">
+                      <span class="text-xs text-gray-400">Performing Scenario</span>
+                      <span id="btcPerfProb" class="text-xs text-gray-500">99.0% probability</span>
+                    </div>
+                    <div class="flex justify-between items-baseline">
+                      <span class="text-sm text-gray-300">Return = YTM</span>
+                      <span id="btcPerfReturn" class="font-medium text-green-400">+8.00%</span>
+                    </div>
+                  </div>
+
+                  <div class="p-3 rounded-lg" style="background: rgba(247, 147, 26, 0.1);">
+                    <div class="flex justify-between items-center mb-1">
+                      <span class="text-xs text-gray-400">Default Scenario</span>
+                      <span id="btcDefProb" class="text-xs text-gray-500">1.0% probability</span>
+                    </div>
+                    <div class="flex justify-between items-baseline">
+                      <span class="text-sm text-gray-300">Return = Recovery - 1</span>
+                      <span id="btcDefReturn" class="font-medium text-green-400">+0.00%</span>
+                    </div>
+                  </div>
+
+                  <div class="border-t border-gray-700 pt-3 mt-3">
+                    <div class="flex justify-between items-baseline mb-2">
+                      <span class="text-sm text-gray-400">Expected Return (E[R])</span>
+                      <span id="btcExpReturn" class="text-lg font-bold" style="color: var(--btc-orange);">7.92%</span>
+                    </div>
+                    <div class="flex justify-between items-baseline">
+                      <span class="text-sm text-gray-400">Volatility (σ)</span>
+                      <span id="btcVol" class="text-lg font-bold text-yellow-400">0.79%</span>
+                    </div>
+                    <div class="flex justify-between items-baseline mt-2">
+                      <span class="text-sm text-gray-400">Sharpe Ratio</span>
+                      <span id="btcSharpe" class="text-sm font-medium text-gray-300">10.00</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Expected Return Formula -->
+            <div class="mt-5 p-4 rounded-lg" style="background: rgba(139, 92, 246, 0.1);">
+              <p class="text-xs text-gray-400 mb-2"><strong class="text-purple-400">Return Distribution Model:</strong></p>
+              <p class="text-xs text-gray-400">
+                <span class="formula">E[R] = (1 - PD) × YTM + PD × (Recovery - 1)</span>
+              </p>
+              <p class="text-xs text-gray-400 mt-1">
+                <span class="formula">σ = √[PD × (1-PD) × (YTM - (Recovery-1))²]</span>
+              </p>
+              <p class="text-xs text-gray-500 mt-2">
+                Where PD = Probability of Default, YTM = Yield to Maturity (net of CoF), Recovery = Recovery Rate
+              </p>
+            </div>
+          </div>
+
+          <!-- Summary Comparison -->
+          <div class="card rounded-2xl p-6">
+            <h3 class="text-sm font-semibold mb-5 flex items-center gap-2">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              Risk-Return Summary (Phase 1 Foundation)
+            </h3>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-gray-700">
+                    <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Metric</th>
+                    <th class="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Traditional</th>
+                    <th class="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Bitcoin-Backed</th>
+                    <th class="text-right py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Difference</th>
+                  </tr>
+                </thead>
+                <tbody id="summaryTable">
+                  <!-- Generated by JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Next Phase Preview -->
+            <div class="mt-6 p-4 rounded-lg border border-dashed border-gray-600">
+              <p class="text-xs text-gray-400 mb-2"><strong class="text-gray-300">Coming in Phase 2: Efficient Frontier Engine</strong></p>
+              <p class="text-xs text-gray-500">
+                With the YTM, recovery rates, and return distributions calculated above, Phase 2 will:
+              </p>
+              <ul class="text-xs text-gray-500 mt-2 space-y-1">
+                <li>• Generate all portfolio weight combinations [0%, 100%] → [100%, 0%]</li>
+                <li>• Calculate portfolio return and volatility for each combination</li>
+                <li>• Plot the efficient frontier showing optimal risk-return tradeoff</li>
+                <li>• Identify the optimal portfolio mix</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Footer Notes -->
+          <div class="card rounded-2xl p-6">
+            <h4 class="text-sm font-semibold mb-4 flex items-center gap-2">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="text-gray-500"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Phase 1 Model Notes
+            </h4>
+            <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-400">
+              <div class="flex items-start gap-2">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                <span>YTM accounts for origination fees annualized over loan term</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                <span>BTC recovery calculated dynamically based on LTV and price scenario</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                <span>Returns assume loans perform to maturity or default (binary outcome)</span>
+              </div>
+              <div class="flex items-start gap-2">
+                <svg class="w-4 h-4 mt-0.5 flex-shrink-0 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                <span>Volatility derived from return distribution across scenarios</span>
+              </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-4 pt-4 border-t border-gray-800">
+              This model is for illustrative purposes only and does not constitute financial advice.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+        <p>Built by <a href="https://galoy.io" target="_blank" class="hover:text-white transition-colors">Galoy</a> — Bitcoin-native banking infrastructure</p>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    // ==========================================
+    // PHASE 1: DATA LAYER & YTM CALCULATIONS
+    // ==========================================
+
+    // Tab switching
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('tab-' + tabName).classList.remove('hidden');
+      document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+    }
+
+    // Format currency
+    function formatCurrency(value) {
+      if (Math.abs(value) >= 1e9) return '$' + (value / 1e9).toFixed(2) + 'B';
+      if (Math.abs(value) >= 1e6) return '$' + (value / 1e6).toFixed(2) + 'M';
+      if (Math.abs(value) >= 1e3) return '$' + (value / 1e3).toFixed(0) + 'K';
+      return '$' + value.toFixed(0);
+    }
+
+    // Format percentage
+    function formatPct(value, decimals = 2) {
+      return value.toFixed(decimals) + '%';
+    }
+
+    // ==========================================
+    // YTM CALCULATIONS
+    // ==========================================
+
+    /**
+     * Calculate Yield to Maturity (simplified)
+     * For a loan with origination fee, we annualize the fee over the loan term
+     * and add it to the nominal rate.
+     *
+     * More sophisticated: could use IRR calculation with cash flows
+     * but this approximation works well for illustration.
+     */
+    function calculateYTM(nominalRate, origFee, termMonths) {
+      // Annualize origination fee: spread over loan term
+      const termYears = termMonths / 12;
+      const annualizedOrigFee = origFee / termYears;
+
+      // Simple YTM = nominal rate + annualized origination fee
+      // This is an approximation; true YTM would require IRR calculation
+      const ytm = nominalRate + annualizedOrigFee;
+
+      return {
+        nominal: nominalRate,
+        annualizedOrigFee: annualizedOrigFee,
+        grossYtm: ytm,
+        termYears: termYears
+      };
+    }
+
+    // ==========================================
+    // RECOVERY RATE MODELING
+    // ==========================================
+
+    /**
+     * Calculate recovery rate for traditional loan
+     * Uses empirical input directly
+     */
+    function calculateTraditionalRecovery(recoveryRate) {
+      return {
+        recoveryRate: recoveryRate,
+        lgd: 1 - recoveryRate
+      };
+    }
+
+    /**
+     * Calculate recovery rate for Bitcoin-backed loan
+     * Based on LTV, liquidation threshold, and BTC price scenario
+     *
+     * Logic:
+     * - Initial collateral value = Loan Amount / LTV
+     * - Collateral at default = Initial × Price Change
+     * - Recovery = min(100%, Collateral at default / Loan Amount)
+     */
+    function calculateBitcoinRecovery(ltv, priceChangeFactor) {
+      // Collateral multiple = 1 / LTV (e.g., 50% LTV = 2x collateral)
+      const collateralMultiple = 1 / ltv;
+
+      // Collateral value at default (as multiple of loan)
+      const collateralAtDefault = collateralMultiple * priceChangeFactor;
+
+      // Recovery rate: can't exceed 100%
+      const recoveryRate = Math.min(1, collateralAtDefault);
+
+      return {
+        collateralMultiple: collateralMultiple,
+        collateralAtDefault: collateralAtDefault,
+        recoveryRate: recoveryRate,
+        lgd: Math.max(0, 1 - recoveryRate)
+      };
+    }
+
+    /**
+     * Calculate price drop needed to trigger liquidation
+     */
+    function calculatePriceDropToLiquidation(ltv, liquidationThreshold) {
+      // At liquidation: loan / (collateral × price) = liquidationThreshold
+      // Starting: loan / collateral = ltv
+      // So: ltv / (price) = liquidationThreshold
+      // price = ltv / liquidationThreshold
+      const priceAtLiquidation = ltv / liquidationThreshold;
+      const priceDrop = 1 - priceAtLiquidation;
+      return priceDrop;
+    }
+
+    // ==========================================
+    // RETURN DISTRIBUTION CALCULATIONS
+    // ==========================================
+
+    /**
+     * Calculate expected return and volatility for a loan
+     * Using binary outcome model: performs or defaults
+     *
+     * E[R] = (1 - PD) × return_if_performs + PD × return_if_defaults
+     * Var[R] = PD × (1-PD) × (return_if_performs - return_if_defaults)²
+     * σ = √Var[R]
+     */
+    function calculateReturnDistribution(ytmNet, defaultRate, recoveryRate) {
+      const pd = defaultRate; // Probability of default
+      const performProb = 1 - pd;
+
+      const returnIfPerforms = ytmNet; // Net YTM (after cost of funds)
+      const returnIfDefaults = recoveryRate - 1; // Recovery rate - principal
+
+      // Expected return
+      const expectedReturn = performProb * returnIfPerforms + pd * returnIfDefaults;
+
+      // Variance and volatility
+      const variance = pd * performProb * Math.pow(returnIfPerforms - returnIfDefaults, 2);
+      const volatility = Math.sqrt(variance);
+
+      // Sharpe ratio (using 0 as risk-free rate for simplicity)
+      const sharpeRatio = volatility > 0 ? expectedReturn / volatility : 0;
+
+      return {
+        performProb: performProb,
+        defaultProb: pd,
+        returnIfPerforms: returnIfPerforms,
+        returnIfDefaults: returnIfDefaults,
+        expectedReturn: expectedReturn,
+        variance: variance,
+        volatility: volatility,
+        sharpeRatio: sharpeRatio
+      };
+    }
+
+    // ==========================================
+    // MAIN UPDATE FUNCTION
+    // ==========================================
+
+    function updateAll() {
+      // Get all input values
+      const tradRate = parseFloat(document.getElementById('tradRate').value) / 100;
+      const tradTerm = parseFloat(document.getElementById('tradTerm').value);
+      const tradOrigFee = parseFloat(document.getElementById('tradOrigFee').value) / 100;
+      const tradDefault = parseFloat(document.getElementById('tradDefault').value) / 100;
+      const tradRecovery = parseFloat(document.getElementById('tradRecovery').value) / 100;
+
+      const btcRate = parseFloat(document.getElementById('btcRate').value) / 100;
+      const btcTerm = parseFloat(document.getElementById('btcTerm').value);
+      const btcOrigFee = parseFloat(document.getElementById('btcOrigFee').value) / 100;
+      const btcLtv = parseFloat(document.getElementById('btcLtv').value) / 100;
+      const btcLiqThresh = parseFloat(document.getElementById('btcLiqThresh').value) / 100;
+      const btcDefault = parseFloat(document.getElementById('btcDefault').value) / 100;
+
+      const loanBook = parseFloat(document.getElementById('loanBook').value);
+      const cof = parseFloat(document.getElementById('cof').value) / 100;
+      const btcScenario = parseFloat(document.getElementById('btcScenario').value);
+      const btcVolatility = parseFloat(document.getElementById('btcVol').value) / 100;
+      const correlation = parseFloat(document.getElementById('corr').value);
+
+      // Update display values
+      document.getElementById('tradRateDisplay').textContent = formatPct(tradRate * 100);
+      document.getElementById('tradTermDisplay').textContent = tradTerm;
+      document.getElementById('tradOrigFeeDisplay').textContent = formatPct(tradOrigFee * 100);
+      document.getElementById('tradDefaultDisplay').textContent = formatPct(tradDefault * 100);
+      document.getElementById('tradRecoveryDisplay').textContent = formatPct(tradRecovery * 100);
+
+      document.getElementById('btcRateDisplay').textContent = formatPct(btcRate * 100);
+      document.getElementById('btcTermDisplay').textContent = btcTerm;
+      document.getElementById('btcOrigFeeDisplay').textContent = formatPct(btcOrigFee * 100);
+      document.getElementById('btcLtvDisplay').textContent = formatPct(btcLtv * 100);
+      document.getElementById('btcLiqThreshDisplay').textContent = formatPct(btcLiqThresh * 100);
+      document.getElementById('btcDefaultDisplay').textContent = formatPct(btcDefault * 100);
+
+      document.getElementById('loanBookDisplay').textContent = formatCurrency(loanBook);
+      document.getElementById('cofDisplay').textContent = formatPct(cof * 100);
+      document.getElementById('btcVolDisplay').textContent = formatPct(btcVolatility * 100);
+      document.getElementById('corrDisplay').textContent = correlation.toFixed(2);
+
+      // Calculate price drop to liquidation for info box
+      const priceDropToLiq = calculatePriceDropToLiquidation(btcLtv, btcLiqThresh);
+      document.getElementById('infoLtv').textContent = (btcLtv * 100).toFixed(0);
+      document.getElementById('infoLiqThresh').textContent = (btcLiqThresh * 100).toFixed(0);
+      document.getElementById('infoPriceDrop').textContent = (priceDropToLiq * 100).toFixed(1);
+
+      // ==========================================
+      // CALCULATE YTM
+      // ==========================================
+      const tradYtmData = calculateYTM(tradRate, tradOrigFee, tradTerm);
+      const btcYtmData = calculateYTM(btcRate, btcOrigFee, btcTerm);
+
+      const tradNetSpread = tradYtmData.grossYtm - cof;
+      const btcNetSpread = btcYtmData.grossYtm - cof;
+
+      // Update YTM displays
+      document.getElementById('tradYtm').textContent = formatPct(tradYtmData.grossYtm * 100);
+      document.getElementById('tradNominal').textContent = formatPct(tradYtmData.nominal * 100);
+      document.getElementById('tradOrigAnn').textContent = '+' + formatPct(tradYtmData.annualizedOrigFee * 100);
+      document.getElementById('tradGrossYtm').textContent = formatPct(tradYtmData.grossYtm * 100);
+      document.getElementById('tradNetSpread').textContent = formatPct(tradNetSpread * 100);
+
+      document.getElementById('btcYtm').textContent = formatPct(btcYtmData.grossYtm * 100);
+      document.getElementById('btcNominal').textContent = formatPct(btcYtmData.nominal * 100);
+      document.getElementById('btcOrigAnn').textContent = '+' + formatPct(btcYtmData.annualizedOrigFee * 100);
+      document.getElementById('btcGrossYtm').textContent = formatPct(btcYtmData.grossYtm * 100);
+      document.getElementById('btcNetSpread').textContent = formatPct(btcNetSpread * 100);
+
+      // ==========================================
+      // CALCULATE RECOVERY RATES
+      // ==========================================
+      const tradRecoveryData = calculateTraditionalRecovery(tradRecovery);
+      const btcRecoveryData = calculateBitcoinRecovery(btcLtv, btcScenario);
+
+      // Update recovery displays
+      document.getElementById('tradRecoveryVal').textContent = formatPct(tradRecoveryData.recoveryRate * 100);
+      document.getElementById('tradLgd').textContent = formatPct(tradRecoveryData.lgd * 100);
+      document.getElementById('tradRecoveryBar').style.width = (tradRecoveryData.recoveryRate * 100) + '%';
+
+      // BTC recovery
+      const btcPriceChangeText = btcScenario === 1 ? 'Stable (0%)' :
+        btcScenario > 1 ? `+${((btcScenario - 1) * 100).toFixed(0)}%` : `${((btcScenario - 1) * 100).toFixed(0)}%`;
+      document.getElementById('btcPriceScenario').textContent = btcPriceChangeText;
+      document.getElementById('btcCollateralVal').textContent = formatPct(btcScenario * 100) + ' of initial';
+      document.getElementById('btcRecoveryVal').textContent = formatPct(btcRecoveryData.recoveryRate * 100);
+      document.getElementById('btcLgd').textContent = formatPct(btcRecoveryData.lgd * 100);
+      document.getElementById('btcRecoveryBar').style.width = (btcRecoveryData.recoveryRate * 100) + '%';
+
+      // Color coding for BTC recovery
+      if (btcRecoveryData.recoveryRate >= 1) {
+        document.getElementById('btcRecoveryVal').className = 'text-green-400 font-medium';
+        document.getElementById('btcLgd').className = 'text-green-400';
+      } else if (btcRecoveryData.recoveryRate >= 0.8) {
+        document.getElementById('btcRecoveryVal').className = 'text-yellow-400 font-medium';
+        document.getElementById('btcLgd').className = 'text-yellow-400';
+      } else {
+        document.getElementById('btcRecoveryVal').className = 'text-red-400 font-medium';
+        document.getElementById('btcLgd').className = 'text-red-400';
+      }
+
+      // Update formula display
+      document.getElementById('formulaLtv').textContent = (btcLtv * 100).toFixed(0);
+      document.getElementById('formulaCollateral').textContent = btcRecoveryData.collateralMultiple.toFixed(2);
+      document.getElementById('formulaPriceChange').textContent = btcPriceChangeText;
+      document.getElementById('formulaRecovery').textContent = (btcRecoveryData.recoveryRate * 100).toFixed(0);
+
+      // ==========================================
+      // CALCULATE RETURN DISTRIBUTIONS
+      // ==========================================
+      const tradDistribution = calculateReturnDistribution(tradNetSpread, tradDefault, tradRecoveryData.recoveryRate);
+      const btcDistribution = calculateReturnDistribution(btcNetSpread, btcDefault, btcRecoveryData.recoveryRate);
+
+      // Update traditional distribution displays
+      document.getElementById('tradPerfProb').textContent = formatPct(tradDistribution.performProb * 100, 1) + ' probability';
+      document.getElementById('tradDefProb').textContent = formatPct(tradDistribution.defaultProb * 100, 1) + ' probability';
+      document.getElementById('tradPerfReturn').textContent = (tradDistribution.returnIfPerforms >= 0 ? '+' : '') + formatPct(tradDistribution.returnIfPerforms * 100);
+      document.getElementById('tradDefReturn').textContent = formatPct(tradDistribution.returnIfDefaults * 100);
+      document.getElementById('tradExpReturn').textContent = formatPct(tradDistribution.expectedReturn * 100);
+      document.getElementById('tradVol').textContent = formatPct(tradDistribution.volatility * 100);
+      document.getElementById('tradSharpe').textContent = tradDistribution.sharpeRatio.toFixed(2);
+
+      // Update BTC distribution displays
+      document.getElementById('btcPerfProb').textContent = formatPct(btcDistribution.performProb * 100, 1) + ' probability';
+      document.getElementById('btcDefProb').textContent = formatPct(btcDistribution.defaultProb * 100, 1) + ' probability';
+      document.getElementById('btcPerfReturn').textContent = (btcDistribution.returnIfPerforms >= 0 ? '+' : '') + formatPct(btcDistribution.returnIfPerforms * 100);
+
+      const btcDefReturnText = btcDistribution.returnIfDefaults >= 0 ?
+        '+' + formatPct(btcDistribution.returnIfDefaults * 100) :
+        formatPct(btcDistribution.returnIfDefaults * 100);
+      document.getElementById('btcDefReturn').textContent = btcDefReturnText;
+      document.getElementById('btcDefReturn').className = btcDistribution.returnIfDefaults >= 0 ? 'font-medium text-green-400' : 'font-medium text-red-400';
+
+      document.getElementById('btcExpReturn').textContent = formatPct(btcDistribution.expectedReturn * 100);
+      document.getElementById('btcVol').textContent = formatPct(btcDistribution.volatility * 100);
+      document.getElementById('btcSharpe').textContent = btcDistribution.sharpeRatio.toFixed(2);
+
+      // ==========================================
+      // UPDATE SUMMARY TABLE
+      // ==========================================
+      updateSummaryTable(tradYtmData, btcYtmData, tradNetSpread, btcNetSpread,
+                         tradRecoveryData, btcRecoveryData, tradDistribution, btcDistribution,
+                         cof, tradDefault, btcDefault);
+    }
+
+    function updateSummaryTable(tradYtm, btcYtm, tradSpread, btcSpread,
+                                tradRecovery, btcRecovery, tradDist, btcDist,
+                                cof, tradDefault, btcDefault) {
+      const tbody = document.getElementById('summaryTable');
+
+      const rows = [
+        {
+          metric: 'Gross YTM',
+          trad: formatPct(tradYtm.grossYtm * 100),
+          btc: formatPct(btcYtm.grossYtm * 100),
+          diff: formatPct((btcYtm.grossYtm - tradYtm.grossYtm) * 100),
+          diffPositive: btcYtm.grossYtm > tradYtm.grossYtm
+        },
+        {
+          metric: 'Net Spread (- CoF)',
+          trad: formatPct(tradSpread * 100),
+          btc: formatPct(btcSpread * 100),
+          diff: formatPct((btcSpread - tradSpread) * 100),
+          diffPositive: btcSpread > tradSpread
+        },
+        {
+          metric: 'Default Rate',
+          trad: formatPct(tradDefault * 100),
+          btc: formatPct(btcDefault * 100),
+          diff: formatPct((btcDefault - tradDefault) * 100),
+          diffPositive: btcDefault < tradDefault,
+          lowerBetter: true
+        },
+        {
+          metric: 'Recovery Rate',
+          trad: formatPct(tradRecovery.recoveryRate * 100),
+          btc: formatPct(btcRecovery.recoveryRate * 100),
+          diff: formatPct((btcRecovery.recoveryRate - tradRecovery.recoveryRate) * 100),
+          diffPositive: btcRecovery.recoveryRate > tradRecovery.recoveryRate
+        },
+        {
+          metric: 'Expected Return E[R]',
+          trad: formatPct(tradDist.expectedReturn * 100),
+          btc: formatPct(btcDist.expectedReturn * 100),
+          diff: formatPct((btcDist.expectedReturn - tradDist.expectedReturn) * 100),
+          diffPositive: btcDist.expectedReturn > tradDist.expectedReturn,
+          highlight: true
+        },
+        {
+          metric: 'Volatility σ',
+          trad: formatPct(tradDist.volatility * 100),
+          btc: formatPct(btcDist.volatility * 100),
+          diff: formatPct((btcDist.volatility - tradDist.volatility) * 100),
+          diffPositive: btcDist.volatility < tradDist.volatility,
+          lowerBetter: true
+        },
+        {
+          metric: 'Sharpe Ratio',
+          trad: tradDist.sharpeRatio.toFixed(2),
+          btc: btcDist.sharpeRatio.toFixed(2),
+          diff: (btcDist.sharpeRatio - tradDist.sharpeRatio).toFixed(2),
+          diffPositive: btcDist.sharpeRatio > tradDist.sharpeRatio,
+          highlight: true
+        }
+      ];
+
+      tbody.innerHTML = rows.map(row => `
+        <tr class="border-b border-gray-800 ${row.highlight ? 'bg-gray-800/30' : ''}">
+          <td class="py-3 px-4 text-gray-300 ${row.highlight ? 'font-medium' : ''}">${row.metric}</td>
+          <td class="py-3 px-4 text-right text-gray-300">${row.trad}</td>
+          <td class="py-3 px-4 text-right font-medium" style="color: var(--btc-orange);">${row.btc}</td>
+          <td class="py-3 px-4 text-right font-medium ${row.diffPositive ? 'text-green-400' : 'text-red-400'}">
+            ${row.diffPositive ? '+' : ''}${row.diff}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', updateAll);
+  </script>
+</body>
+</html>
