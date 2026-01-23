@@ -186,7 +186,7 @@
     <div class="max-w-7xl mx-auto">
       <!-- Hero Section -->
       <div class="mb-8">
-        <p class="text-sm font-medium mb-3" style="color: var(--galoy-blue);">PHASE 1: DATA LAYER & YTM CALCULATIONS</p>
+        <p class="text-sm font-medium mb-3" style="color: var(--galoy-blue);">EFFICIENT FRONTIER ANALYSIS</p>
         <h1 class="text-3xl lg:text-4xl font-bold mb-4">
           Efficient Frontier <span class="gradient-text">Portfolio Analyzer</span>
         </h1>
@@ -206,6 +206,10 @@
           <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs" style="background: rgba(54, 84, 255, 0.15); border: 1px solid rgba(54, 84, 255, 0.3);">
             <span class="w-2 h-2 rounded-full bg-purple-400"></span>
             <span class="text-gray-300">Return Distribution</span>
+          </div>
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs" style="background: rgba(54, 84, 255, 0.15); border: 1px solid rgba(54, 84, 255, 0.3);">
+            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+            <span class="text-gray-300">Efficient Frontier</span>
           </div>
         </div>
       </div>
@@ -523,6 +527,109 @@
             </div>
           </div>
 
+          <!-- PHASE 2: Efficient Frontier Chart -->
+          <div class="card rounded-2xl p-6">
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="text-sm font-semibold flex items-center gap-2">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color: var(--galoy-blue);"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                Efficient Frontier
+              </h3>
+              <span class="text-xs px-2 py-1 rounded-full bg-blue-500/20 text-blue-400">Phase 2</span>
+            </div>
+
+            <!-- Frontier Chart Container -->
+            <div class="relative">
+              <canvas id="frontierCanvas" width="600" height="400" class="w-full"></canvas>
+
+              <!-- Chart Legend -->
+              <div class="flex flex-wrap gap-4 mt-4 text-xs">
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-gray-500"></span>
+                  <span class="text-gray-400">100% Traditional</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full" style="background: var(--btc-orange);"></span>
+                  <span class="text-gray-400">100% Bitcoin-Backed</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full" style="background: var(--galoy-blue);"></span>
+                  <span class="text-gray-400">Optimal Portfolio</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="w-6 h-0.5 bg-gradient-to-r from-gray-500 via-purple-500 to-orange-500"></div>
+                  <span class="text-gray-400">Frontier Curve</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Portfolio Weight Slider -->
+            <div class="mt-6 p-4 rounded-lg" style="background: rgba(54, 84, 255, 0.1);">
+              <div class="flex justify-between items-baseline mb-2">
+                <label class="text-sm font-medium text-gray-300">Explore Portfolio Mix</label>
+                <span id="sliderWeightDisplay" class="text-lg font-bold" style="color: var(--galoy-blue);">0% BTC</span>
+              </div>
+              <input type="range" id="portfolioWeight" min="0" max="100" step="1" value="0" class="w-full" oninput="updatePortfolioSlider()">
+              <div class="flex justify-between text-xs text-gray-500 mt-1">
+                <span>100% Traditional</span>
+                <span>50/50</span>
+                <span>100% Bitcoin</span>
+              </div>
+
+              <!-- Selected Portfolio Stats -->
+              <div class="grid grid-cols-4 gap-4 mt-4">
+                <div class="text-center">
+                  <p class="text-xs text-gray-500">Expected Return</p>
+                  <p id="sliderReturn" class="text-sm font-bold text-green-400">1.29%</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-xs text-gray-500">Volatility</p>
+                  <p id="sliderVol" class="text-sm font-bold text-yellow-400">7.33%</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-xs text-gray-500">Sharpe Ratio</p>
+                  <p id="sliderSharpe" class="text-sm font-bold text-gray-300">0.18</p>
+                </div>
+                <div class="text-center">
+                  <p class="text-xs text-gray-500">vs Optimal</p>
+                  <p id="sliderVsOptimal" class="text-sm font-bold text-gray-400">—</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Key Portfolios Comparison -->
+            <div class="mt-5">
+              <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Key Portfolios</h4>
+              <div class="grid grid-cols-3 gap-3">
+                <div class="p-3 rounded-lg bg-gray-800/50 text-center">
+                  <div class="w-2 h-2 rounded-full bg-gray-500 mx-auto mb-2"></div>
+                  <p class="text-xs text-gray-400 mb-1">100% Traditional</p>
+                  <p id="keyTradReturn" class="text-sm font-bold">1.29%</p>
+                  <p id="keyTradVol" class="text-xs text-gray-500">σ: 7.33%</p>
+                </div>
+                <div class="p-3 rounded-lg text-center" style="background: rgba(54, 84, 255, 0.15);">
+                  <div class="w-2 h-2 rounded-full mx-auto mb-2" style="background: var(--galoy-blue);"></div>
+                  <p class="text-xs text-gray-400 mb-1">Optimal (<span id="optimalWeight">100</span>% BTC)</p>
+                  <p id="keyOptimalReturn" class="text-sm font-bold" style="color: var(--galoy-blue);">7.92%</p>
+                  <p id="keyOptimalVol" class="text-xs text-gray-500">σ: 0.80%</p>
+                </div>
+                <div class="p-3 rounded-lg text-center" style="background: rgba(247, 147, 26, 0.1);">
+                  <div class="w-2 h-2 rounded-full mx-auto mb-2" style="background: var(--btc-orange);"></div>
+                  <p class="text-xs text-gray-400 mb-1">100% Bitcoin</p>
+                  <p id="keyBtcReturn" class="text-sm font-bold" style="color: var(--btc-orange);">7.92%</p>
+                  <p id="keyBtcVol" class="text-xs text-gray-500">σ: 0.80%</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Frontier Insights -->
+            <div class="mt-5 p-4 rounded-lg border border-gray-700">
+              <h4 class="text-xs font-semibold text-gray-400 mb-2">Frontier Insights</h4>
+              <p id="frontierInsight" class="text-sm text-gray-300">
+                Loading analysis...
+              </p>
+            </div>
+          </div>
+
           <!-- Recovery Rate Modeling -->
           <div class="card rounded-2xl p-6">
             <h3 class="text-sm font-semibold mb-5 flex items-center gap-2">
@@ -742,15 +849,11 @@
 
             <!-- Next Phase Preview -->
             <div class="mt-6 p-4 rounded-lg border border-dashed border-gray-600">
-              <p class="text-xs text-gray-400 mb-2"><strong class="text-gray-300">Coming in Phase 2: Efficient Frontier Engine</strong></p>
-              <p class="text-xs text-gray-500">
-                With the YTM, recovery rates, and return distributions calculated above, Phase 2 will:
-              </p>
+              <p class="text-xs text-gray-400 mb-2"><strong class="text-gray-300">Coming in Future Phases</strong></p>
               <ul class="text-xs text-gray-500 mt-2 space-y-1">
-                <li>• Generate all portfolio weight combinations [0%, 100%] → [100%, 0%]</li>
-                <li>• Calculate portfolio return and volatility for each combination</li>
-                <li>• Plot the efficient frontier showing optimal risk-return tradeoff</li>
-                <li>• Identify the optimal portfolio mix</li>
+                <li>• <strong>Phase 3:</strong> Historical scenario analysis across different time periods</li>
+                <li>• <strong>Phase 4:</strong> Multi-period frontier evolution visualization</li>
+                <li>• <strong>Phase 5:</strong> Statistical validation and dominance testing</li>
               </ul>
             </div>
           </div>
@@ -945,6 +1048,337 @@
     }
 
     // ==========================================
+    // PHASE 2: EFFICIENT FRONTIER ENGINE
+    // ==========================================
+
+    // Global state for frontier data
+    let frontierData = {
+      points: [],
+      optimalPortfolio: null,
+      tradPortfolio: null,
+      btcPortfolio: null
+    };
+
+    /**
+     * Calculate portfolio return and volatility for a given weight
+     * Using the two-asset portfolio formulas:
+     * E[Rp] = w1 * E[R1] + w2 * E[R2]
+     * σp = √(w1²σ1² + w2²σ2² + 2*w1*w2*ρ*σ1*σ2)
+     */
+    function calculatePortfolioMetrics(btcWeight, tradDist, btcDist, correlation) {
+      const tradWeight = 1 - btcWeight;
+
+      // Portfolio expected return (linear combination)
+      const portfolioReturn = tradWeight * tradDist.expectedReturn + btcWeight * btcDist.expectedReturn;
+
+      // Portfolio volatility (accounts for correlation)
+      const variance = Math.pow(tradWeight, 2) * tradDist.variance +
+                       Math.pow(btcWeight, 2) * btcDist.variance +
+                       2 * tradWeight * btcWeight * correlation * tradDist.volatility * btcDist.volatility;
+      const portfolioVolatility = Math.sqrt(Math.max(0, variance));
+
+      // Sharpe ratio
+      const sharpeRatio = portfolioVolatility > 0 ? portfolioReturn / portfolioVolatility : 0;
+
+      return {
+        btcWeight: btcWeight,
+        tradWeight: tradWeight,
+        expectedReturn: portfolioReturn,
+        volatility: portfolioVolatility,
+        variance: variance,
+        sharpeRatio: sharpeRatio
+      };
+    }
+
+    /**
+     * Generate all points on the efficient frontier
+     */
+    function generateFrontierPoints(tradDist, btcDist, correlation, steps = 100) {
+      const points = [];
+
+      for (let i = 0; i <= steps; i++) {
+        const btcWeight = i / steps;
+        const metrics = calculatePortfolioMetrics(btcWeight, tradDist, btcDist, correlation);
+        points.push(metrics);
+      }
+
+      return points;
+    }
+
+    /**
+     * Find the optimal portfolio (highest Sharpe ratio)
+     */
+    function findOptimalPortfolio(points) {
+      let optimal = points[0];
+      for (const point of points) {
+        if (point.sharpeRatio > optimal.sharpeRatio) {
+          optimal = point;
+        }
+      }
+      return optimal;
+    }
+
+    /**
+     * Draw the efficient frontier on canvas
+     */
+    function drawFrontierChart(points, optimal, selectedWeight) {
+      const canvas = document.getElementById('frontierCanvas');
+      if (!canvas) return;
+
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+
+      // Set canvas size for high DPI displays
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+
+      const width = rect.width;
+      const height = rect.height;
+      const padding = { top: 30, right: 30, bottom: 50, left: 60 };
+      const chartWidth = width - padding.left - padding.right;
+      const chartHeight = height - padding.top - padding.bottom;
+
+      // Clear canvas
+      ctx.fillStyle = '#151515';
+      ctx.fillRect(0, 0, width, height);
+
+      // Find data bounds
+      const volatilities = points.map(p => p.volatility);
+      const returns = points.map(p => p.expectedReturn);
+      const minVol = Math.min(...volatilities) * 0.9;
+      const maxVol = Math.max(...volatilities) * 1.1;
+      const minRet = Math.min(...returns) * 0.9;
+      const maxRet = Math.max(...returns) * 1.1;
+
+      // Scale functions
+      const scaleX = (vol) => padding.left + ((vol - minVol) / (maxVol - minVol)) * chartWidth;
+      const scaleY = (ret) => padding.top + chartHeight - ((ret - minRet) / (maxRet - minRet)) * chartHeight;
+
+      // Draw grid
+      ctx.strokeStyle = '#333';
+      ctx.lineWidth = 0.5;
+
+      // Vertical grid lines (volatility)
+      for (let i = 0; i <= 5; i++) {
+        const vol = minVol + (maxVol - minVol) * i / 5;
+        const x = scaleX(vol);
+        ctx.beginPath();
+        ctx.moveTo(x, padding.top);
+        ctx.lineTo(x, height - padding.bottom);
+        ctx.stroke();
+
+        // Label
+        ctx.fillStyle = '#666';
+        ctx.font = '10px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText((vol * 100).toFixed(1) + '%', x, height - padding.bottom + 15);
+      }
+
+      // Horizontal grid lines (return)
+      for (let i = 0; i <= 5; i++) {
+        const ret = minRet + (maxRet - minRet) * i / 5;
+        const y = scaleY(ret);
+        ctx.beginPath();
+        ctx.moveTo(padding.left, y);
+        ctx.lineTo(width - padding.right, y);
+        ctx.stroke();
+
+        // Label
+        ctx.fillStyle = '#666';
+        ctx.font = '10px Inter, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText((ret * 100).toFixed(1) + '%', padding.left - 8, y + 3);
+      }
+
+      // Axis labels
+      ctx.fillStyle = '#888';
+      ctx.font = '11px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Volatility (σ)', width / 2, height - 10);
+
+      ctx.save();
+      ctx.translate(15, height / 2);
+      ctx.rotate(-Math.PI / 2);
+      ctx.fillText('Expected Return E[R]', 0, 0);
+      ctx.restore();
+
+      // Draw frontier curve with gradient
+      ctx.beginPath();
+      ctx.moveTo(scaleX(points[0].volatility), scaleY(points[0].expectedReturn));
+
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(scaleX(points[i].volatility), scaleY(points[i].expectedReturn));
+      }
+
+      // Create gradient for the line
+      const gradient = ctx.createLinearGradient(
+        scaleX(points[0].volatility), 0,
+        scaleX(points[points.length - 1].volatility), 0
+      );
+      gradient.addColorStop(0, '#6b7280');
+      gradient.addColorStop(0.5, '#8b5cf6');
+      gradient.addColorStop(1, '#f7931a');
+
+      ctx.strokeStyle = gradient;
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // Draw all points as small dots
+      for (const point of points) {
+        const x = scaleX(point.volatility);
+        const y = scaleY(point.expectedReturn);
+
+        ctx.beginPath();
+        ctx.arc(x, y, 2, 0, Math.PI * 2);
+
+        // Color based on weight
+        const hue = point.btcWeight * 30; // 0 (gray) to 30 (orange)
+        ctx.fillStyle = `hsl(${hue}, ${50 + point.btcWeight * 50}%, ${50}%)`;
+        ctx.fill();
+      }
+
+      // Draw 100% Traditional point (larger)
+      const tradPoint = points[0];
+      ctx.beginPath();
+      ctx.arc(scaleX(tradPoint.volatility), scaleY(tradPoint.expectedReturn), 8, 0, Math.PI * 2);
+      ctx.fillStyle = '#6b7280';
+      ctx.fill();
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Draw 100% Bitcoin point (larger)
+      const btcPoint = points[points.length - 1];
+      ctx.beginPath();
+      ctx.arc(scaleX(btcPoint.volatility), scaleY(btcPoint.expectedReturn), 8, 0, Math.PI * 2);
+      ctx.fillStyle = '#f7931a';
+      ctx.fill();
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Draw optimal portfolio point (largest, with glow)
+      ctx.shadowColor = '#3654FF';
+      ctx.shadowBlur = 15;
+      ctx.beginPath();
+      ctx.arc(scaleX(optimal.volatility), scaleY(optimal.expectedReturn), 10, 0, Math.PI * 2);
+      ctx.fillStyle = '#3654FF';
+      ctx.fill();
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // Draw selected portfolio point (if different from others)
+      if (selectedWeight !== undefined) {
+        const selectedIndex = Math.round(selectedWeight * (points.length - 1));
+        const selectedPoint = points[selectedIndex];
+
+        ctx.beginPath();
+        ctx.arc(scaleX(selectedPoint.volatility), scaleY(selectedPoint.expectedReturn), 6, 0, Math.PI * 2);
+        ctx.fillStyle = '#22c55e';
+        ctx.fill();
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+
+      // Labels for key points
+      ctx.font = '10px Inter, sans-serif';
+      ctx.fillStyle = '#999';
+
+      // Traditional label
+      ctx.textAlign = 'right';
+      ctx.fillText('Traditional', scaleX(tradPoint.volatility) - 12, scaleY(tradPoint.expectedReturn) + 4);
+
+      // BTC label
+      ctx.textAlign = 'left';
+      ctx.fillText('Bitcoin', scaleX(btcPoint.volatility) + 12, scaleY(btcPoint.expectedReturn) + 4);
+
+      // Optimal label
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#3654FF';
+      ctx.fillText('Optimal', scaleX(optimal.volatility), scaleY(optimal.expectedReturn) - 15);
+    }
+
+    /**
+     * Update portfolio slider display
+     */
+    function updatePortfolioSlider() {
+      const weight = parseFloat(document.getElementById('portfolioWeight').value) / 100;
+      document.getElementById('sliderWeightDisplay').textContent = (weight * 100).toFixed(0) + '% BTC';
+
+      // Find the point for this weight
+      const index = Math.round(weight * (frontierData.points.length - 1));
+      const point = frontierData.points[index];
+
+      if (point) {
+        document.getElementById('sliderReturn').textContent = formatPct(point.expectedReturn * 100);
+        document.getElementById('sliderVol').textContent = formatPct(point.volatility * 100);
+        document.getElementById('sliderSharpe').textContent = point.sharpeRatio.toFixed(2);
+
+        // Compare to optimal
+        if (frontierData.optimalPortfolio) {
+          const diff = point.sharpeRatio - frontierData.optimalPortfolio.sharpeRatio;
+          if (Math.abs(diff) < 0.01) {
+            document.getElementById('sliderVsOptimal').textContent = '★ Optimal';
+            document.getElementById('sliderVsOptimal').className = 'text-sm font-bold text-blue-400';
+          } else {
+            document.getElementById('sliderVsOptimal').textContent = (diff >= 0 ? '+' : '') + diff.toFixed(2);
+            document.getElementById('sliderVsOptimal').className = 'text-sm font-bold ' + (diff >= 0 ? 'text-green-400' : 'text-red-400');
+          }
+        }
+      }
+
+      // Redraw chart with selected point
+      if (frontierData.points.length > 0) {
+        drawFrontierChart(frontierData.points, frontierData.optimalPortfolio, weight);
+      }
+    }
+
+    /**
+     * Generate frontier insight text
+     */
+    function generateFrontierInsight(tradDist, btcDist, optimal, correlation) {
+      const tradSharpe = tradDist.sharpeRatio;
+      const btcSharpe = btcDist.sharpeRatio;
+      const optSharpe = optimal.sharpeRatio;
+      const optWeight = optimal.btcWeight;
+
+      let insight = '';
+
+      // Determine the dominant strategy
+      if (optWeight > 0.95) {
+        insight = `<strong>Bitcoin dominates:</strong> The optimal portfolio is nearly 100% bitcoin-backed loans (${(optWeight * 100).toFixed(0)}%). `;
+        insight += `With a Sharpe ratio of ${optSharpe.toFixed(2)} vs ${tradSharpe.toFixed(2)} for traditional loans, `;
+        insight += `bitcoin-backed loans offer significantly better risk-adjusted returns under current parameters.`;
+      } else if (optWeight < 0.05) {
+        insight = `<strong>Traditional dominates:</strong> The optimal portfolio is nearly 100% traditional loans (${((1 - optWeight) * 100).toFixed(0)}%). `;
+        insight += `This suggests bitcoin-backed loans don't improve the risk-return profile under current parameters.`;
+      } else {
+        insight = `<strong>Diversification benefits:</strong> The optimal portfolio is a ${(optWeight * 100).toFixed(0)}% bitcoin / ${((1 - optWeight) * 100).toFixed(0)}% traditional mix. `;
+        insight += `This achieves a Sharpe ratio of ${optSharpe.toFixed(2)}, `;
+
+        const improvement = ((optSharpe / Math.max(tradSharpe, btcSharpe)) - 1) * 100;
+        if (improvement > 0) {
+          insight += `${improvement.toFixed(1)}% better than either pure portfolio. `;
+        }
+
+        if (correlation < 0) {
+          insight += `The negative correlation (${correlation.toFixed(2)}) provides strong diversification benefits.`;
+        } else if (correlation < 0.3) {
+          insight += `The low correlation (${correlation.toFixed(2)}) enables meaningful diversification.`;
+        } else {
+          insight += `Despite moderate correlation (${correlation.toFixed(2)}), the return differential drives the optimal mix.`;
+        }
+      }
+
+      return insight;
+    }
+
+    // ==========================================
     // MAIN UPDATE FUNCTION
     // ==========================================
 
@@ -1090,6 +1524,46 @@
       updateSummaryTable(tradYtmData, btcYtmData, tradNetSpread, btcNetSpread,
                          tradRecoveryData, btcRecoveryData, tradDistribution, btcDistribution,
                          cof, tradDefault, btcDefault);
+
+      // ==========================================
+      // PHASE 2: UPDATE EFFICIENT FRONTIER
+      // ==========================================
+      updateEfficientFrontier(tradDistribution, btcDistribution, correlation);
+    }
+
+    /**
+     * Update the efficient frontier chart and related displays
+     */
+    function updateEfficientFrontier(tradDist, btcDist, correlation) {
+      // Generate frontier points
+      frontierData.points = generateFrontierPoints(tradDist, btcDist, correlation, 100);
+
+      // Find optimal portfolio
+      frontierData.optimalPortfolio = findOptimalPortfolio(frontierData.points);
+      frontierData.tradPortfolio = frontierData.points[0];
+      frontierData.btcPortfolio = frontierData.points[frontierData.points.length - 1];
+
+      // Update key portfolio displays
+      document.getElementById('keyTradReturn').textContent = formatPct(frontierData.tradPortfolio.expectedReturn * 100);
+      document.getElementById('keyTradVol').textContent = 'σ: ' + formatPct(frontierData.tradPortfolio.volatility * 100);
+
+      document.getElementById('keyBtcReturn').textContent = formatPct(frontierData.btcPortfolio.expectedReturn * 100);
+      document.getElementById('keyBtcVol').textContent = 'σ: ' + formatPct(frontierData.btcPortfolio.volatility * 100);
+
+      document.getElementById('optimalWeight').textContent = (frontierData.optimalPortfolio.btcWeight * 100).toFixed(0);
+      document.getElementById('keyOptimalReturn').textContent = formatPct(frontierData.optimalPortfolio.expectedReturn * 100);
+      document.getElementById('keyOptimalVol').textContent = 'σ: ' + formatPct(frontierData.optimalPortfolio.volatility * 100);
+
+      // Generate insight
+      const insight = generateFrontierInsight(tradDist, btcDist, frontierData.optimalPortfolio, correlation);
+      document.getElementById('frontierInsight').innerHTML = insight;
+
+      // Draw the chart
+      const selectedWeight = parseFloat(document.getElementById('portfolioWeight').value) / 100;
+      drawFrontierChart(frontierData.points, frontierData.optimalPortfolio, selectedWeight);
+
+      // Update slider display
+      updatePortfolioSlider();
     }
 
     function updateSummaryTable(tradYtm, btcYtm, tradSpread, btcSpread,
