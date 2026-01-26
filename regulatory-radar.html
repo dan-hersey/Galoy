@@ -104,34 +104,6 @@
           </p>
         </div>
 
-        <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
-          <div class="card stat-card rounded-2xl p-6">
-            <p class="text-xs text-gray-400 mb-2 uppercase tracking-wide">Total Signals</p>
-            <p class="text-4xl font-extrabold" id="statTotal">103</p>
-            <p class="text-xs text-green-400 mt-2">+67 from OCC only</p>
-          </div>
-          <div class="card stat-card rounded-2xl p-6">
-            <p class="text-xs text-gray-400 mb-2 uppercase tracking-wide">Direct Crypto</p>
-            <p class="text-4xl font-extrabold text-emerald-400" id="statDirect">0</p>
-            <p class="text-xs text-gray-500 mt-2">Bitcoin & Digital Assets</p>
-          </div>
-          <div class="card stat-card rounded-2xl p-6">
-            <p class="text-xs text-gray-400 mb-2 uppercase tracking-wide">Adjacent</p>
-            <p class="text-4xl font-extrabold text-amber-400" id="statAdjacent">0</p>
-            <p class="text-xs text-gray-500 mt-2">Enabling Infrastructure</p>
-          </div>
-          <div class="card stat-card rounded-2xl p-6">
-            <p class="text-xs text-gray-400 mb-2 uppercase tracking-wide">Agencies</p>
-            <p class="text-4xl font-extrabold text-purple-400">10</p>
-            <p class="text-xs text-gray-500 mt-2">Federal + State</p>
-          </div>
-          <div class="card stat-card rounded-2xl p-6">
-            <p class="text-xs text-gray-400 mb-2 uppercase tracking-wide">Enforcement Reset</p>
-            <p class="text-4xl font-extrabold" style="color: var(--galoy-blue);">5+</p>
-            <p class="text-xs text-gray-500 mt-2">Cases Dropped</p>
-          </div>
-        </div>
-
         <div class="card rounded-xl p-4 mb-10 flex flex-wrap items-center gap-6">
           <span class="text-sm text-gray-400 font-medium">Crypto Relevance:</span>
           <div class="flex items-center gap-2">
@@ -143,11 +115,6 @@
             <span class="w-3 h-3 rounded-full bg-amber-500"></span>
             <span class="text-sm text-gray-300">Adjacent</span>
             <span class="text-xs text-gray-500 ml-1">— Debanking, fintech, payments innovation</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 rounded-full bg-gray-500"></span>
-            <span class="text-sm text-gray-300">General</span>
-            <span class="text-xs text-gray-500 ml-1">— Traditional banking regulation</span>
           </div>
         </div>
 
@@ -162,12 +129,20 @@
         </div>
 
         <div class="mb-10">
-          <h2 class="text-xl font-bold mb-6 flex items-center gap-3">
-            <span class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: rgba(54, 84, 255, 0.2);">
-              <svg width="16" height="16" fill="none" stroke="#3654FF" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            </span>
-            Featured Signals
-          </h2>
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-bold flex items-center gap-3">
+              <span class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: rgba(54, 84, 255, 0.2);">
+                <svg width="16" height="16" fill="none" stroke="#3654FF" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </span>
+              Latest Signals
+            </h2>
+            <a href="#" onclick="document.querySelector('[data-section=explorer]').click(); return false;"
+               class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all hover:scale-105"
+               style="background: var(--galoy-blue);">
+              View All Regulatory Signals
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
           <div class="grid lg:grid-cols-2 gap-4" id="featuredSignals"></div>
         </div>
 
@@ -193,7 +168,7 @@
       <div id="section-explorer" class="section">
         <div class="mb-8">
           <h1 class="text-3xl font-bold mb-4">Data Explorer</h1>
-          <p class="text-gray-400">Search and filter all 103 regulatory signals.</p>
+          <p class="text-gray-400">Search and filter crypto-relevant regulatory signals.</p>
         </div>
         <div class="card rounded-2xl p-4 mb-6">
           <div class="flex flex-wrap gap-4 items-center">
@@ -233,7 +208,6 @@
               <option value="all">All Relevance</option>
               <option value="direct">🟢 Direct Crypto</option>
               <option value="adjacent">🟡 Adjacent</option>
-              <option value="general">⚪ General Banking</option>
             </select>
             <div class="px-4 py-3 bg-black bg-opacity-40 rounded-xl text-sm">
               <span id="filteredCount" class="font-bold" style="color: var(--galoy-blue);">103</span>
@@ -593,11 +567,14 @@
       return `<span class="px-2 py-0.5 rounded text-xs font-medium ${c.class}">${c.text}</span>`;
     }
 
+    // Filter out general relevance signals - only show Direct and Adjacent
+    const relevantData = rawData.filter(d => getCryptoRelevance(d) !== 'general');
+
     // Render Theme Cards for Overview
     function renderThemeCardsOverview() {
       const container = document.getElementById('themeCardsOverview');
       container.innerHTML = themes.map(theme => {
-        const count = rawData.filter(d => {
+        const count = relevantData.filter(d => {
           const text = `${d.Title} ${d.ThemeTags}`.toLowerCase();
           return theme.keywords.some(kw => text.includes(kw));
         }).length;
@@ -612,10 +589,10 @@
       }).join('');
     }
 
-    // Render Featured Signals
+    // Render Featured Signals (now "Latest Signals")
     function renderFeaturedSignals() {
       const container = document.getElementById('featuredSignals');
-      const featured = rawData.filter(d => d.LeadSignal === 'High' && getCryptoRelevance(d) === 'direct').slice(0, 6);
+      const featured = relevantData.filter(d => d.LeadSignal === 'High' && getCryptoRelevance(d) === 'direct').slice(0, 6);
       container.innerHTML = featured.map(item => {
         const relevance = getCryptoRelevance(item);
         return `
@@ -638,7 +615,7 @@
     function renderAgencyBreakdown() {
       const container = document.getElementById('agencyBreakdown');
       const agencies = Object.keys(agencyColors);
-      const counts = agencies.map(a => ({ agency: a, count: rawData.filter(d => d.Agency === a).length }));
+      const counts = agencies.map(a => ({ agency: a, count: relevantData.filter(d => d.Agency === a).length }));
       counts.sort((a, b) => b.count - a.count);
       const max = Math.max(...counts.map(c => c.count));
 
@@ -658,7 +635,7 @@
     function renderThemeDetails() {
       const container = document.getElementById('themeDetails');
       container.innerHTML = themes.map(theme => {
-        const signals = rawData.filter(d => {
+        const signals = relevantData.filter(d => {
           const text = `${d.Title} ${d.ThemeTags}`.toLowerCase();
           return theme.keywords.some(kw => text.includes(kw));
         }).slice(0, 5);
@@ -720,22 +697,21 @@
       document.getElementById('filteredCount').textContent = data.length;
     }
 
-    // Update Stats
+    // Update Stats (uses relevantData which excludes general signals)
     function updateStats() {
-      const direct = rawData.filter(d => getCryptoRelevance(d) === 'direct').length;
-      const adjacent = rawData.filter(d => getCryptoRelevance(d) === 'adjacent').length;
-      document.getElementById('statDirect').textContent = direct;
-      document.getElementById('statAdjacent').textContent = adjacent;
+      const direct = relevantData.filter(d => getCryptoRelevance(d) === 'direct').length;
+      const adjacent = relevantData.filter(d => getCryptoRelevance(d) === 'adjacent').length;
+      // Stats cards have been removed, but keeping this function for potential future use
     }
 
-    // Filter Data
+    // Filter Data (uses relevantData which excludes general signals)
     function filterData() {
       const search = document.getElementById('searchInput').value.toLowerCase();
       const agency = document.getElementById('agencyFilter').value;
       const month = document.getElementById('monthFilter').value;
       const relevance = document.getElementById('relevanceFilter').value;
 
-      let filtered = rawData.filter(item => {
+      let filtered = relevantData.filter(item => {
         const matchSearch = !search ||
           item.Title.toLowerCase().includes(search) ||
           item.Agency.toLowerCase().includes(search) ||
@@ -814,7 +790,7 @@
         `<div class="flex items-start gap-2"><span style="color: ${theme.color};">→</span><span class="text-gray-300 text-sm">${o}</span></div>`
       ).join('');
 
-      const signals = rawData.filter(d => {
+      const signals = relevantData.filter(d => {
         const text = `${d.Title} ${d.ThemeTags}`.toLowerCase();
         return theme.keywords.some(kw => text.includes(kw));
       });
@@ -858,12 +834,12 @@
     document.getElementById('modal').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeModal(); });
     document.getElementById('themeModal').addEventListener('click', (e) => { if (e.target === e.currentTarget) closeThemeModal(); });
 
-    // Initialize
+    // Initialize (uses relevantData which excludes general signals)
     renderThemeCardsOverview();
     renderFeaturedSignals();
     renderAgencyBreakdown();
     renderThemeDetails();
-    renderTable(rawData);
+    renderTable(relevantData);
     updateStats();
   </script>
 </body>
