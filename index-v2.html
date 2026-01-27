@@ -545,21 +545,22 @@
               <div class="flex flex-wrap gap-4 mt-4 text-xs">
                 <div class="flex items-center gap-2">
                   <span class="w-3 h-3 rounded-full bg-gray-500"></span>
-                  <span class="text-gray-400">100% Traditional</span>
+                  <span class="text-gray-400">100% Traditional (long only)</span>
                 </div>
                 <div class="flex items-center gap-2">
                   <span class="w-3 h-3 rounded-full" style="background: var(--btc-orange);"></span>
-                  <span class="text-gray-400">100% Bitcoin-Backed</span>
+                  <span class="text-gray-400">100% Bitcoin (long only)</span>
                 </div>
                 <div class="flex items-center gap-2">
                   <span class="w-3 h-3 rounded-full" style="background: var(--galoy-blue);"></span>
-                  <span class="text-gray-400">Optimal Portfolio</span>
+                  <span class="text-gray-400">Optimal (max Sharpe)</span>
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="w-6 h-0.5 bg-gradient-to-r from-gray-500 via-purple-500 to-orange-500"></div>
-                  <span class="text-gray-400">Frontier Curve</span>
+                  <span class="text-gray-400">Full Hyperbola (-100% to +200%)</span>
                 </div>
               </div>
+              <p class="text-xs text-gray-500 mt-2">The hyperbola shows all possible portfolios including short positions. The efficient frontier is the upper-left edge where you get maximum return for each volatility level.</p>
             </div>
 
             <!-- Portfolio Weight Slider -->
@@ -568,11 +569,11 @@
                 <label class="text-sm font-medium text-gray-300">Explore Portfolio Mix</label>
                 <span id="sliderWeightDisplay" class="text-lg font-bold" style="color: var(--galoy-blue);">0% BTC</span>
               </div>
-              <input type="range" id="portfolioWeight" min="0" max="100" step="1" value="0" class="w-full" oninput="updatePortfolioSlider()">
+              <input type="range" id="portfolioWeight" min="-100" max="200" step="1" value="0" class="w-full" oninput="updatePortfolioSlider()">
               <div class="flex justify-between text-xs text-gray-500 mt-1">
-                <span>100% Traditional</span>
+                <span>-100% BTC (short)</span>
                 <span>50/50</span>
-                <span>100% Bitcoin</span>
+                <span>+200% BTC (levered)</span>
               </div>
 
               <!-- Selected Portfolio Stats -->
@@ -1092,12 +1093,20 @@
 
     /**
      * Generate all points on the efficient frontier
+     * Extended to include short positions: -100% to +200% for full hyperbola
+     * This shows the complete set of possible portfolios
      */
-    function generateFrontierPoints(tradDist, btcDist, correlation, steps = 100) {
+    function generateFrontierPoints(tradDist, btcDist, correlation, steps = 300) {
       const points = [];
 
+      // Range from -100% to +200% BTC weight
+      // -100% BTC = 200% traditional (short BTC, long trad)
+      // +200% BTC = -100% traditional (short trad, long BTC)
+      const minWeight = -1.0;  // -100% BTC
+      const maxWeight = 2.0;   // +200% BTC
+
       for (let i = 0; i <= steps; i++) {
-        const btcWeight = i / steps;
+        const btcWeight = minWeight + (maxWeight - minWeight) * (i / steps);
         const metrics = calculatePortfolioMetrics(btcWeight, tradDist, btcDist, correlation);
         points.push(metrics);
       }
@@ -1144,13 +1153,23 @@
       ctx.fillStyle = '#151515';
       ctx.fillRect(0, 0, width, height);
 
-      // Find data bounds
+      // Find data bounds with proper padding for negative values
       const volatilities = points.map(p => p.volatility);
       const returns = points.map(p => p.expectedReturn);
-      const minVol = Math.min(...volatilities) * 0.9;
-      const maxVol = Math.max(...volatilities) * 1.1;
-      const minRet = Math.min(...returns) * 0.9;
-      const maxRet = Math.max(...returns) * 1.1;
+
+      const minVolRaw = Math.min(...volatilities);
+      const maxVolRaw = Math.max(...volatilities);
+      const minRetRaw = Math.min(...returns);
+      const maxRetRaw = Math.max(...returns);
+
+      // Add padding as absolute values, not percentages (handles negatives correctly)
+      const volPadding = (maxVolRaw - minVolRaw) * 0.1;
+      const retPadding = (maxRetRaw - minRetRaw) * 0.1;
+
+      const minVol = Math.max(0, minVolRaw - volPadding); // Volatility can't be negative
+      const maxVol = maxVolRaw + volPadding;
+      const minRet = minRetRaw - retPadding;
+      const maxRet = maxRetRaw + retPadding;
 
       // Scale functions
       const scaleX = (vol) => padding.left + ((vol - minVol) / (maxVol - minVol)) * chartWidth;
@@ -1239,8 +1258,11 @@
         ctx.fill();
       }
 
+      // Find the long-only endpoints (0% and 100% BTC)
+      const tradPoint = points.find(p => Math.abs(p.btcWeight) < 0.01) || points[Math.floor(points.length / 3)];
+      const btcPoint = points.find(p => Math.abs(p.btcWeight - 1) < 0.01) || points[Math.floor(2 * points.length / 3)];
+
       // Draw 100% Traditional point (larger)
-      const tradPoint = points[0];
       ctx.beginPath();
       ctx.arc(scaleX(tradPoint.volatility), scaleY(tradPoint.expectedReturn), 8, 0, Math.PI * 2);
       ctx.fillStyle = '#6b7280';
@@ -1250,7 +1272,6 @@
       ctx.stroke();
 
       // Draw 100% Bitcoin point (larger)
-      const btcPoint = points[points.length - 1];
       ctx.beginPath();
       ctx.arc(scaleX(btcPoint.volatility), scaleY(btcPoint.expectedReturn), 8, 0, Math.PI * 2);
       ctx.fillStyle = '#f7931a';
@@ -1273,16 +1294,23 @@
 
       // Draw selected portfolio point (if different from others)
       if (selectedWeight !== undefined) {
-        const selectedIndex = Math.round(selectedWeight * (points.length - 1));
-        const selectedPoint = points[selectedIndex];
+        // Convert weight (-1 to +2) to index (0 to points.length-1)
+        const minWeight = -1.0;
+        const maxWeight = 2.0;
+        const normalizedWeight = (selectedWeight - minWeight) / (maxWeight - minWeight);
+        const selectedIndex = Math.round(normalizedWeight * (points.length - 1));
+        const clampedIndex = Math.max(0, Math.min(selectedIndex, points.length - 1));
+        const selectedPoint = points[clampedIndex];
 
-        ctx.beginPath();
-        ctx.arc(scaleX(selectedPoint.volatility), scaleY(selectedPoint.expectedReturn), 6, 0, Math.PI * 2);
-        ctx.fillStyle = '#22c55e';
-        ctx.fill();
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 2;
-        ctx.stroke();
+        if (selectedPoint) {
+          ctx.beginPath();
+          ctx.arc(scaleX(selectedPoint.volatility), scaleY(selectedPoint.expectedReturn), 6, 0, Math.PI * 2);
+          ctx.fillStyle = '#22c55e';
+          ctx.fill();
+          ctx.strokeStyle = '#fff';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
       }
 
       // Labels for key points
@@ -1308,11 +1336,24 @@
      */
     function updatePortfolioSlider() {
       const weight = parseFloat(document.getElementById('portfolioWeight').value) / 100;
-      document.getElementById('sliderWeightDisplay').textContent = (weight * 100).toFixed(0) + '% BTC';
 
-      // Find the point for this weight
-      const index = Math.round(weight * (frontierData.points.length - 1));
-      const point = frontierData.points[index];
+      // Format display based on weight
+      let displayText;
+      if (weight < 0) {
+        displayText = (weight * 100).toFixed(0) + '% BTC (short)';
+      } else if (weight > 1) {
+        displayText = '+' + (weight * 100).toFixed(0) + '% BTC (levered)';
+      } else {
+        displayText = (weight * 100).toFixed(0) + '% BTC';
+      }
+      document.getElementById('sliderWeightDisplay').textContent = displayText;
+
+      // Find the point for this weight (range is -1 to +2, so normalize)
+      const minWeight = -1.0;
+      const maxWeight = 2.0;
+      const normalizedIndex = (weight - minWeight) / (maxWeight - minWeight);
+      const index = Math.round(normalizedIndex * (frontierData.points.length - 1));
+      const point = frontierData.points[Math.max(0, Math.min(index, frontierData.points.length - 1))];
 
       if (point) {
         document.getElementById('sliderReturn').textContent = formatPct(point.expectedReturn * 100);
@@ -1350,30 +1391,39 @@
       let insight = '';
 
       // Determine the dominant strategy
-      if (optWeight > 0.95) {
-        insight = `<strong>Bitcoin dominates:</strong> The optimal portfolio is nearly 100% bitcoin-backed loans (${(optWeight * 100).toFixed(0)}%). `;
+      if (optWeight > 0.95 && optWeight <= 1.05) {
+        insight = `<strong>Bitcoin dominates:</strong> The optimal portfolio is ~100% bitcoin-backed loans. `;
         insight += `With a Sharpe ratio of ${optSharpe.toFixed(2)} vs ${tradSharpe.toFixed(2)} for traditional loans, `;
-        insight += `bitcoin-backed loans offer significantly better risk-adjusted returns under current parameters.`;
-      } else if (optWeight < 0.05) {
-        insight = `<strong>Traditional dominates:</strong> The optimal portfolio is nearly 100% traditional loans (${((1 - optWeight) * 100).toFixed(0)}%). `;
-        insight += `This suggests bitcoin-backed loans don't improve the risk-return profile under current parameters.`;
+        insight += `bitcoin-backed loans offer significantly better risk-adjusted returns.`;
+      } else if (optWeight > 1.05) {
+        insight = `<strong>Levered BTC optimal:</strong> The optimal is ${(optWeight * 100).toFixed(0)}% BTC (shorting ${((optWeight - 1) * 100).toFixed(0)}% traditional). `;
+        insight += `This leveraged position achieves Sharpe ${optSharpe.toFixed(2)}, but carries additional risk from short exposure.`;
+      } else if (optWeight < 0.05 && optWeight >= -0.05) {
+        insight = `<strong>Traditional dominates:</strong> The optimal portfolio is ~100% traditional loans. `;
+        insight += `Bitcoin-backed loans don't improve the risk-return profile under current parameters.`;
+      } else if (optWeight < -0.05) {
+        insight = `<strong>Short BTC optimal:</strong> The optimal is ${(optWeight * 100).toFixed(0)}% BTC (shorting BTC-backed loans). `;
+        insight += `This suggests BTC loans have poor risk-adjusted returns under current stress assumptions.`;
       } else {
-        insight = `<strong>Diversification benefits:</strong> The optimal portfolio is a ${(optWeight * 100).toFixed(0)}% bitcoin / ${((1 - optWeight) * 100).toFixed(0)}% traditional mix. `;
-        insight += `This achieves a Sharpe ratio of ${optSharpe.toFixed(2)}, `;
+        insight = `<strong>Diversification benefits:</strong> The optimal is ${(optWeight * 100).toFixed(0)}% BTC / ${((1 - optWeight) * 100).toFixed(0)}% traditional. `;
+        insight += `Sharpe ratio of ${optSharpe.toFixed(2)} `;
 
         const improvement = ((optSharpe / Math.max(tradSharpe, btcSharpe)) - 1) * 100;
         if (improvement > 0) {
-          insight += `${improvement.toFixed(1)}% better than either pure portfolio. `;
+          insight += `(${improvement.toFixed(1)}% better than pure portfolios). `;
         }
 
         if (correlation < 0) {
-          insight += `The negative correlation (${correlation.toFixed(2)}) provides strong diversification benefits.`;
+          insight += `Negative correlation (${correlation.toFixed(2)}) provides strong diversification.`;
         } else if (correlation < 0.3) {
-          insight += `The low correlation (${correlation.toFixed(2)}) enables meaningful diversification.`;
+          insight += `Low correlation (${correlation.toFixed(2)}) enables meaningful diversification.`;
         } else {
-          insight += `Despite moderate correlation (${correlation.toFixed(2)}), the return differential drives the optimal mix.`;
+          insight += `Return differential drives the mix despite correlation of ${correlation.toFixed(2)}.`;
         }
       }
+
+      // Add note about the hyperbola
+      insight += `<br><br><span class="text-gray-500 text-xs">The full hyperbola shows all possible portfolios including short positions. Points above the optimal have higher returns but worse Sharpe ratios (inefficient).</span>`;
 
       return insight;
     }
