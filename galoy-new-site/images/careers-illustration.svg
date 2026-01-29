@@ -1,0 +1,28 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Laptop -->
+  <rect x="100" y="80" width="200" height="130" rx="8" fill="#17181c"/>
+  <rect x="110" y="90" width="180" height="110" rx="4" fill="#3654ff"/>
+
+  <!-- Code on screen -->
+  <rect x="125" y="105" width="80" height="8" rx="2" fill="rgba(255,255,255,0.3)"/>
+  <rect x="125" y="120" width="60" height="8" rx="2" fill="rgba(255,255,255,0.3)"/>
+  <rect x="125" y="135" width="100" height="8" rx="2" fill="#f68e1d"/>
+  <rect x="125" y="150" width="70" height="8" rx="2" fill="rgba(255,255,255,0.3)"/>
+  <rect x="125" y="165" width="90" height="8" rx="2" fill="rgba(255,255,255,0.3)"/>
+
+  <!-- Keyboard base -->
+  <rect x="80" y="210" width="240" height="15" rx="4" fill="#e5e7eb"/>
+
+  <!-- Bitcoin icons floating -->
+  <circle cx="60" cy="100" r="20" fill="#f68e1d" fill-opacity="0.2"/>
+  <text x="60" y="107" font-family="Arial, sans-serif" font-size="16" fill="#f68e1d" text-anchor="middle">₿</text>
+
+  <circle cx="340" cy="120" r="25" fill="#f68e1d" fill-opacity="0.2"/>
+  <text x="340" y="128" font-family="Arial, sans-serif" font-size="20" fill="#f68e1d" text-anchor="middle">₿</text>
+
+  <circle cx="350" cy="200" r="15" fill="#3654ff" fill-opacity="0.2"/>
+  <text x="350" y="206" font-family="Arial, sans-serif" font-size="12" fill="#3654ff" text-anchor="middle">⚡</text>
+
+  <!-- Label -->
+  <text x="200" y="270" font-family="Arial, sans-serif" font-size="12" fill="#6f717d" text-anchor="middle">Build the Future of Finance</text>
+</svg>

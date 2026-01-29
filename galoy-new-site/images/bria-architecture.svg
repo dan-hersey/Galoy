@@ -1,0 +1,32 @@
+<svg width="500" height="350" viewBox="0 0 500 350" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- API Layer -->
+  <rect x="100" y="30" width="300" height="50" rx="8" fill="#f5f7fa" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="250" y="60" font-family="Arial, sans-serif" font-size="12" fill="#17181c" text-anchor="middle">gRPC + GraphQL API</text>
+
+  <!-- Core -->
+  <rect x="100" y="100" width="300" height="100" rx="12" fill="#f68e1d"/>
+  <text x="250" y="140" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="white" text-anchor="middle">Bria Payment Engine</text>
+  <text x="250" y="165" font-family="Arial, sans-serif" font-size="11" fill="rgba(255,255,255,0.8)" text-anchor="middle">Multi-sig • Batching • Monitoring</text>
+
+  <!-- Bottom connections -->
+  <rect x="60" y="230" width="110" height="60" rx="8" fill="#17181c"/>
+  <text x="115" y="255" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Bitcoin</text>
+  <text x="115" y="275" font-family="Arial, sans-serif" font-size="10" fill="#f68e1d" text-anchor="middle">On-chain</text>
+
+  <rect x="195" y="230" width="110" height="60" rx="8" fill="#17181c"/>
+  <text x="250" y="255" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Lightning</text>
+  <text x="250" y="275" font-family="Arial, sans-serif" font-size="10" fill="#f68e1d" text-anchor="middle">LND / CLN</text>
+
+  <rect x="330" y="230" width="110" height="60" rx="8" fill="#17181c"/>
+  <text x="385" y="255" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Signing</text>
+  <text x="385" y="275" font-family="Arial, sans-serif" font-size="10" fill="#f68e1d" text-anchor="middle">Hardware</text>
+
+  <!-- Arrows -->
+  <path d="M250 80V100" stroke="#6f717d" stroke-width="1"/>
+  <path d="M175 200V230" stroke="#6f717d" stroke-width="1" stroke-dasharray="4,4"/>
+  <path d="M250 200V230" stroke="#6f717d" stroke-width="1" stroke-dasharray="4,4"/>
+  <path d="M325 200V230" stroke="#6f717d" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Label -->
+  <text x="250" y="325" font-family="Arial, sans-serif" font-size="10" fill="#6f717d" text-anchor="middle">Enterprise Bitcoin Payment Infrastructure</text>
+</svg>

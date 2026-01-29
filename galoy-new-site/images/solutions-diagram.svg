@@ -1,0 +1,24 @@
+<svg width="600" height="400" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bank box -->
+  <rect x="50" y="100" width="200" height="200" rx="12" fill="#f5f7fa" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="150" y="140" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="#17181c" text-anchor="middle">Existing Core</text>
+  <rect x="80" y="160" width="140" height="40" rx="6" fill="#e5e7eb"/>
+  <text x="150" y="185" font-family="Arial, sans-serif" font-size="12" fill="#6f717d" text-anchor="middle">Fiat Banking</text>
+  <rect x="80" y="220" width="140" height="40" rx="6" fill="#e5e7eb"/>
+  <text x="150" y="245" font-family="Arial, sans-serif" font-size="12" fill="#6f717d" text-anchor="middle">Deposits</text>
+
+  <!-- Arrow -->
+  <path d="M270 200H330" stroke="#3654ff" stroke-width="3"/>
+  <path d="M320 190L335 200L320 210" fill="#3654ff"/>
+
+  <!-- Galoy box -->
+  <rect x="350" y="100" width="200" height="200" rx="12" fill="#3654ff"/>
+  <text x="450" y="140" font-family="Arial, sans-serif" font-size="16" font-weight="600" fill="white" text-anchor="middle">Galoy Sidecar</text>
+  <rect x="380" y="160" width="140" height="40" rx="6" fill="rgba(255,255,255,0.2)"/>
+  <text x="450" y="185" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Bitcoin/Lightning</text>
+  <rect x="380" y="220" width="140" height="40" rx="6" fill="rgba(255,255,255,0.2)"/>
+  <text x="450" y="245" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">BTC Lending</text>
+
+  <!-- Label -->
+  <text x="300" y="350" font-family="Arial, sans-serif" font-size="14" fill="#6f717d" text-anchor="middle">Sidecar Model: Add Bitcoin alongside existing systems</text>
+</svg>

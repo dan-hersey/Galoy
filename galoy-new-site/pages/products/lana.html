@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lana - Bitcoin-Backed Lending Platform | Galoy</title>
+  <meta name="description" content="Lana is a turnkey Bitcoin-backed lending platform for banks and financial institutions. Automated LTV monitoring, margin calls, and liquidation management.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="../../index.html" class="navbar-brand">
+          <img src="../../images/galoy-logo.svg" alt="Galoy" class="navbar-logo">
+        </a>
+
+        <ul class="navbar-nav">
+          <li><a href="../../index.html" class="nav-link">Home</a></li>
+
+          <li>
+            <a href="../products/index.html" class="nav-link nav-link-dropdown">
+              Products
+              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../products/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">apps</span>
+                All Products
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../products/lana.html" class="dropdown-item">
+                <span class="material-symbols-outlined">request_quote</span>
+                Lana – Bitcoin Lending
+              </a>
+              <a href="../products/cala.html" class="dropdown-item">
+                <span class="material-symbols-outlined">account_balance_wallet</span>
+                Cala – Accounting Ledger
+              </a>
+              <a href="../products/bria.html" class="dropdown-item">
+                <span class="material-symbols-outlined">bolt</span>
+                Bria – Payments Bridge
+              </a>
+            </div>
+          </li>
+
+          <li>
+            <a href="../solutions/index.html" class="nav-link nav-link-dropdown">
+              Solutions
+              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../solutions/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">compare</span>
+                Compare Solutions
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../solutions/sidecar.html" class="dropdown-item">
+                <span class="material-symbols-outlined">add_circle</span>
+                Sidecar Model
+              </a>
+              <a href="../solutions/primary-core.html" class="dropdown-item">
+                <span class="material-symbols-outlined">hub</span>
+                Primary Core
+              </a>
+            </div>
+          </li>
+
+          <li>
+            <a href="../research/index.html" class="nav-link nav-link-dropdown">
+              Research
+              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../research/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">library_books</span>
+                All Research
+              </a>
+              <a href="../research/bitcoin-banking-101/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">school</span>
+                Bitcoin Banking 101
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../research/case-studies/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">cases</span>
+                Case Studies
+              </a>
+              <a href="../research/regulatory/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">gavel</span>
+                Regulatory Radar
+              </a>
+              <a href="../research/guides/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">menu_book</span>
+                Guides & Playbooks
+              </a>
+            </div>
+          </li>
+
+          <li>
+            <a href="../company/index.html" class="nav-link nav-link-dropdown">
+              Company
+              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../company/about.html" class="dropdown-item">
+                <span class="material-symbols-outlined">info</span>
+                About
+              </a>
+              <a href="../company/careers.html" class="dropdown-item">
+                <span class="material-symbols-outlined">work</span>
+                Careers
+              </a>
+              <a href="../company/security.html" class="dropdown-item">
+                <span class="material-symbols-outlined">shield</span>
+                Security
+              </a>
+              <a href="../company/press.html" class="dropdown-item">
+                <span class="material-symbols-outlined">newspaper</span>
+                Press & Media
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../company/contact.html" class="dropdown-item">
+                <span class="material-symbols-outlined">mail</span>
+                Contact Us
+              </a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="navbar-social">
+          <a href="https://twitter.com/GaloyMoney" class="social-link" target="_blank" rel="noopener" aria-label="Twitter">
+            <span class="material-symbols-outlined">close</span>
+          </a>
+          <a href="https://github.com/galoymoney" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
+            <span class="material-symbols-outlined">code</span>
+          </a>
+          <a href="https://www.linkedin.com/company/galoymoney" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <span class="material-symbols-outlined">business</span>
+          </a>
+        </div>
+
+        <button class="navbar-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero hero-subpage" style="background: linear-gradient(135deg, var(--galoy-blue) 0%, #1e3a8a 100%);">
+    <div class="hero-pattern"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-split">
+          <div class="hero-text">
+            <span class="section-label section-label--orange"><span class="material-symbols-outlined">request_quote</span> Products</span>
+            <h1>Lana</h1>
+            <p style="font-size: var(--font-size-xl); margin-bottom: var(--space-8);">Bitcoin-Backed Lending Platform. A turnkey solution for managing the digital asset-backed lending lifecycle.</p>
+            <div class="flex gap-4 items-center" style="justify-content: flex-start;">
+              <a href="../company/contact.html" class="btn btn-primary btn-lg" style="background: white; color: var(--galoy-blue);">Request Demo</a>
+              <a href="https://github.com/galoymoney/lana" class="btn btn-secondary btn-lg" style="border-color: white; color: white;" target="_blank" rel="noopener">View on GitHub</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <picture>
+              <source srcset="../../images/desktop-lana.webp" type="image/webp">
+              <img src="../../images/bero-bitcoin-backed-lending-galoy-digital-assets.png" alt="Lana lending platform dashboard" style="border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+            </picture>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem/Solution -->
+  <section class="section">
+    <div class="container">
+      <div class="split-feature">
+        <div class="split-feature-content">
+          <h2>The Bitcoin Lending Opportunity</h2>
+          <p class="text-lg">Bitcoin holders want to borrow against their holdings without selling. Banks want the security of over-collateralized loans. Lana bridges both needs with enterprise-grade infrastructure.</p>
+
+          <div style="margin-top: var(--space-8);">
+            <div style="display: flex; align-items: flex-start; gap: var(--space-4); margin-bottom: var(--space-6);">
+              <span class="material-symbols-outlined" style="color: var(--galoy-blue); font-size: 32px;">trending_up</span>
+              <div>
+                <h4 style="margin-bottom: var(--space-2);">New Revenue Stream</h4>
+                <p class="mb-0 text-grey">Earn interest on loans secured by Bitcoin collateral with conservative LTV ratios.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: flex-start; gap: var(--space-4); margin-bottom: var(--space-6);">
+              <span class="material-symbols-outlined" style="color: var(--galoy-blue); font-size: 32px;">shield</span>
+              <div>
+                <h4 style="margin-bottom: var(--space-2);">Over-Collateralized Security</h4>
+                <p class="mb-0 text-grey">Typical 50-70% LTV means significant cushion against market volatility.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: flex-start; gap: var(--space-4);">
+              <span class="material-symbols-outlined" style="color: var(--galoy-blue); font-size: 32px;">groups</span>
+              <div>
+                <h4 style="margin-bottom: var(--space-2);">Attract New Customers</h4>
+                <p class="mb-0 text-grey">Serve the growing market of Bitcoin holders seeking liquidity without selling.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="split-feature-image">
+          <img src="../../images/bitcoin-backed-loan.svg" alt="Bitcoin lending opportunity" style="background: var(--light-grey); padding: 2rem; border-radius: 12px;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features -->
+  <section class="section section-grey">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2>Complete Lending Lifecycle Management</h2>
+        <p class="text-lg">Everything you need to run a Bitcoin-backed lending program</p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="card-icon">
+            <span class="material-symbols-outlined" style="color: white;">calculate</span>
+          </div>
+          <h3>Automated LTV Monitoring</h3>
+          <p class="mb-0">Real-time loan-to-value ratio tracking with configurable thresholds for margin calls and liquidation triggers.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <span class="material-symbols-outlined" style="color: white;">notifications_active</span>
+          </div>
+          <h3>Smart Margin Calls</h3>
+          <p class="mb-0">Automated borrower notifications when LTV approaches thresholds. Configurable grace periods and escalation paths.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <span class="material-symbols-outlined" style="color: white;">gavel</span>
+          </div>
+          <h3>Liquidation Engine</h3>
+          <p class="mb-0">Automated or manual liquidation workflows when collateral values breach limits. Integrates with major exchanges.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <span class="material-symbols-outlined" style="color: white;">lock</span>
+          </div>
+          <h3>Custody Integration</h3>
+          <p class="mb-0">Connects with qualified custodians for secure collateral storage. Multi-sig support for institutional requirements.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <span class="material-symbols-outlined" style="color: white;">description</span>
+          </div>
+          <h3>Compliance Reporting</h3>
+          <p class="mb-0">Built-in reporting for regulatory examination. Full audit trail of all loan activities and decisions.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">
+            <span class="material-symbols-outlined" style="color: white;">api</span>
+          </div>
+          <h3>API-First Design</h3>
+          <p class="mb-0">Complete API access for integration with your existing loan origination and servicing systems.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center mb-12">How Bitcoin-Backed Lending Works</h2>
+
+      <div class="grid grid-4" style="gap: var(--space-8);">
+        <div class="text-center">
+          <div style="width: 64px; height: 64px; background: var(--galoy-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4);">
+            <span style="color: white; font-size: 24px; font-weight: 700;">1</span>
+          </div>
+          <h4>Customer Applies</h4>
+          <p class="text-sm text-grey mb-0">Borrower requests loan amount and transfers Bitcoin collateral to custody.</p>
+        </div>
+
+        <div class="text-center">
+          <div style="width: 64px; height: 64px; background: var(--galoy-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4);">
+            <span style="color: white; font-size: 24px; font-weight: 700;">2</span>
+          </div>
+          <h4>Loan Originated</h4>
+          <p class="text-sm text-grey mb-0">Lana calculates LTV, sets terms, and funds loan to borrower's account.</p>
+        </div>
+
+        <div class="text-center">
+          <div style="width: 64px; height: 64px; background: var(--galoy-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4);">
+            <span style="color: white; font-size: 24px; font-weight: 700;">3</span>
+          </div>
+          <h4>Continuous Monitoring</h4>
+          <p class="text-sm text-grey mb-0">Real-time LTV tracking with automated margin calls if thresholds approach.</p>
+        </div>
+
+        <div class="text-center">
+          <div style="width: 64px; height: 64px; background: var(--galoy-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--space-4);">
+            <span style="color: white; font-size: 24px; font-weight: 700;">4</span>
+          </div>
+          <h4>Loan Closes</h4>
+          <p class="text-sm text-grey mb-0">Borrower repays loan. Collateral released minus any fees or interest.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Specs -->
+  <section class="section section-grey">
+    <div class="container">
+      <div class="split-feature reverse">
+        <div class="split-feature-content">
+          <h2>Built for Enterprise</h2>
+          <p>Lana is designed to meet the technical and compliance requirements of regulated financial institutions.</p>
+
+          <div style="margin-top: var(--space-6);">
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">Architecture</span>
+              <span><strong>Cloud-native, API-first</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">Database</span>
+              <span><strong>PostgreSQL with full audit log</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">Price Feeds</span>
+              <span><strong>Multiple exchange aggregation</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">Custody</span>
+              <span><strong>Custodian-agnostic integration</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">Deployment</span>
+              <span><strong>Self-hosted or managed</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0;">
+              <span class="text-grey">License</span>
+              <span><strong>Open source (MIT)</strong></span>
+            </div>
+          </div>
+        </div>
+        <div class="split-feature-image">
+          <img src="../../images/lana-architecture.svg" alt="Lana technical architecture">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration -->
+  <section class="section">
+    <div class="container container-sm text-center">
+      <h2>Works With Your Existing Stack</h2>
+      <p class="text-lg mb-8">Lana integrates with the tools and systems you already use.</p>
+
+      <div class="grid grid-4" style="gap: var(--space-8); margin-bottom: var(--space-8);">
+        <div class="text-center">
+          <span class="material-symbols-outlined" style="font-size: 48px; color: var(--font-grey);">account_balance</span>
+          <p class="text-sm mt-2 mb-0">Core Banking</p>
+        </div>
+        <div class="text-center">
+          <span class="material-symbols-outlined" style="font-size: 48px; color: var(--font-grey);">lock</span>
+          <p class="text-sm mt-2 mb-0">Qualified Custodians</p>
+        </div>
+        <div class="text-center">
+          <span class="material-symbols-outlined" style="font-size: 48px; color: var(--font-grey);">currency_exchange</span>
+          <p class="text-sm mt-2 mb-0">Exchanges</p>
+        </div>
+        <div class="text-center">
+          <span class="material-symbols-outlined" style="font-size: 48px; color: var(--font-grey);">policy</span>
+          <p class="text-sm mt-2 mb-0">Compliance Tools</p>
+        </div>
+      </div>
+
+      <a href="../company/contact.html" class="btn btn-primary btn-lg">Discuss Integration</a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Launch Bitcoin-Backed Lending?</h2>
+      <p>See how Lana can help your institution capture the Bitcoin lending opportunity.</p>
+      <div class="cta-buttons">
+        <a href="../company/contact.html" class="btn btn-primary btn-lg">Request Demo</a>
+        <a href="../research/guides/bitcoin-backed-lending.html" class="btn btn-secondary btn-lg">Read the Guide</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../../images/galoy-logo-white.svg" alt="Galoy" style="height: 32px; margin-bottom: var(--space-4);">
+          <p>Banking software for the Bitcoin age.</p>
+          <div class="footer-social">
+            <a href="https://github.com/galoymoney" target="_blank" rel="noopener"><span class="material-symbols-outlined">code</span></a>
+            <a href="https://twitter.com/GaloyMoney" target="_blank" rel="noopener"><span class="material-symbols-outlined">close</span></a>
+            <a href="https://t.me/galoyofficial" target="_blank" rel="noopener"><span class="material-symbols-outlined">send</span></a>
+            <a href="https://www.linkedin.com/company/galoymoney" target="_blank" rel="noopener"><span class="material-symbols-outlined">business</span></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Products</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">All Products</a></li>
+            <li><a href="lana.html">Lana</a></li>
+            <li><a href="cala.html">Cala</a></li>
+            <li><a href="bria.html">Bria</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Solutions</h4>
+          <ul class="footer-links">
+            <li><a href="../solutions/sidecar.html">Sidecar Model</a></li>
+            <li><a href="../solutions/primary-core.html">Primary Core</a></li>
+            <li><a href="https://dev.galoy.io" target="_blank">Developer Docs</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="../company/about.html">About</a></li>
+            <li><a href="../company/careers.html">Careers</a></li>
+            <li><a href="../company/security.html">Security</a></li>
+            <li><a href="../company/contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 Galoy Inc. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../terms.html">Terms</a>
+          <a href="../privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

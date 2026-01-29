@@ -1,0 +1,24 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Building blocks -->
+  <rect x="100" y="180" width="60" height="60" rx="4" fill="#f68e1d"/>
+  <rect x="170" y="180" width="60" height="60" rx="4" fill="#f68e1d" fill-opacity="0.8"/>
+  <rect x="240" y="180" width="60" height="60" rx="4" fill="#f68e1d" fill-opacity="0.6"/>
+
+  <rect x="135" y="110" width="60" height="60" rx="4" fill="#3654ff"/>
+  <rect x="205" y="110" width="60" height="60" rx="4" fill="#3654ff" fill-opacity="0.8"/>
+
+  <rect x="170" y="40" width="60" height="60" rx="4" fill="#10b981"/>
+
+  <!-- Icons in blocks -->
+  <text x="130" y="218" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle">₿</text>
+  <text x="200" y="218" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle">⚡</text>
+  <text x="270" y="218" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle">$</text>
+
+  <text x="165" y="148" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle">API</text>
+  <text x="235" y="148" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle">☁</text>
+
+  <text x="200" y="78" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle">🏦</text>
+
+  <!-- Label -->
+  <text x="200" y="275" font-family="Arial, sans-serif" font-size="12" fill="#6f717d" text-anchor="middle">Build Modern Banking from Scratch</text>
+</svg>

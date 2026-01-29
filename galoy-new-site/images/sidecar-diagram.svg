@@ -1,0 +1,43 @@
+<svg width="700" height="450" viewBox="0 0 700 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="350" y="40" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#17181c" text-anchor="middle">Sidecar Model Architecture</text>
+
+  <!-- Existing Core Banking -->
+  <rect x="50" y="80" width="250" height="300" rx="16" fill="#f5f7fa" stroke="#e5e7eb" stroke-width="2"/>
+  <text x="175" y="115" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#17181c" text-anchor="middle">Existing Core Banking</text>
+
+  <rect x="75" y="140" width="200" height="50" rx="8" fill="white" stroke="#e5e7eb"/>
+  <text x="175" y="170" font-family="Arial, sans-serif" font-size="12" fill="#6f717d" text-anchor="middle">Deposit Accounts</text>
+
+  <rect x="75" y="200" width="200" height="50" rx="8" fill="white" stroke="#e5e7eb"/>
+  <text x="175" y="230" font-family="Arial, sans-serif" font-size="12" fill="#6f717d" text-anchor="middle">Traditional Loans</text>
+
+  <rect x="75" y="260" width="200" height="50" rx="8" fill="white" stroke="#e5e7eb"/>
+  <text x="175" y="290" font-family="Arial, sans-serif" font-size="12" fill="#6f717d" text-anchor="middle">Payments (ACH, Wire)</text>
+
+  <rect x="75" y="320" width="200" height="50" rx="8" fill="white" stroke="#e5e7eb"/>
+  <text x="175" y="350" font-family="Arial, sans-serif" font-size="12" fill="#6f717d" text-anchor="middle">Compliance/Reporting</text>
+
+  <!-- Connection Arrow -->
+  <path d="M320 230H380" stroke="#3654ff" stroke-width="3" stroke-dasharray="8,4"/>
+  <text x="350" y="260" font-family="Arial, sans-serif" font-size="10" fill="#3654ff" text-anchor="middle">API</text>
+
+  <!-- Galoy Sidecar -->
+  <rect x="400" y="80" width="250" height="300" rx="16" fill="#3654ff"/>
+  <text x="525" y="115" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="white" text-anchor="middle">Galoy Bitcoin Stack</text>
+
+  <rect x="425" y="140" width="200" height="50" rx="8" fill="rgba(255,255,255,0.15)"/>
+  <text x="525" y="170" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Cala (Ledger)</text>
+
+  <rect x="425" y="200" width="200" height="50" rx="8" fill="rgba(255,255,255,0.15)"/>
+  <text x="525" y="230" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Lana (BTC Lending)</text>
+
+  <rect x="425" y="260" width="200" height="50" rx="8" fill="rgba(255,255,255,0.15)"/>
+  <text x="525" y="290" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Bria (BTC/Lightning)</text>
+
+  <rect x="425" y="320" width="200" height="50" rx="8" fill="rgba(255,255,255,0.15)"/>
+  <text x="525" y="350" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Custody Integration</text>
+
+  <!-- Bottom Label -->
+  <text x="350" y="420" font-family="Arial, sans-serif" font-size="12" fill="#6f717d" text-anchor="middle">No core replacement required • API-connected • Maintain existing compliance</text>
+</svg>

@@ -1,0 +1,30 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Payment flow -->
+  <circle cx="80" cy="150" r="40" fill="#f5f7fa" stroke="#f68e1d" stroke-width="2"/>
+  <text x="80" y="158" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#f68e1d" text-anchor="middle">₿</text>
+
+  <!-- Arrow 1 -->
+  <path d="M130 150H170" stroke="#f68e1d" stroke-width="2"/>
+  <path d="M165 145L175 150L165 155" fill="#f68e1d"/>
+
+  <!-- Processing box -->
+  <rect x="180" y="110" width="80" height="80" rx="8" fill="#f68e1d"/>
+  <text x="220" y="145" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle">⚡</text>
+  <text x="220" y="165" font-family="Arial, sans-serif" font-size="9" fill="white" text-anchor="middle">INSTANT</text>
+
+  <!-- Arrow 2 -->
+  <path d="M270 150H310" stroke="#f68e1d" stroke-width="2"/>
+  <path d="M305 145L315 150L305 155" fill="#f68e1d"/>
+
+  <!-- Recipient -->
+  <circle cx="360" cy="150" r="40" fill="#f5f7fa" stroke="#10b981" stroke-width="2"/>
+  <text x="360" y="155" font-family="Arial, sans-serif" font-size="20" fill="#10b981" text-anchor="middle">✓</text>
+
+  <!-- Labels -->
+  <text x="80" y="210" font-family="Arial, sans-serif" font-size="10" fill="#6f717d" text-anchor="middle">Sender</text>
+  <text x="220" y="210" font-family="Arial, sans-serif" font-size="10" fill="#6f717d" text-anchor="middle">Bria</text>
+  <text x="360" y="210" font-family="Arial, sans-serif" font-size="10" fill="#6f717d" text-anchor="middle">Recipient</text>
+
+  <!-- Bottom label -->
+  <text x="200" y="270" font-family="Arial, sans-serif" font-size="12" fill="#6f717d" text-anchor="middle">Bitcoin & Lightning Payments</text>
+</svg>

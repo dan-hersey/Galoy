@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cala - Core Accounting Ledger | Galoy</title>
+  <meta name="description" content="Cala is an embeddable double-entry accounting ledger for managing multiple user accounts. Built for fintech applications and financial institutions.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="../../index.html" class="navbar-brand">
+          <img src="../../images/galoy-logo.svg" alt="Galoy" class="navbar-logo">
+        </a>
+
+        <ul class="navbar-nav">
+          <li><a href="../../index.html" class="nav-link">Home</a></li>
+
+          <li>
+            <a href="../products/index.html" class="nav-link nav-link-dropdown">
+              Products
+              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../products/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">apps</span>
+                All Products
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../products/lana.html" class="dropdown-item">
+                <span class="material-symbols-outlined">request_quote</span>
+                Lana – Bitcoin Lending
+              </a>
+              <a href="../products/cala.html" class="dropdown-item">
+                <span class="material-symbols-outlined">account_balance_wallet</span>
+                Cala – Accounting Ledger
+              </a>
+              <a href="../products/bria.html" class="dropdown-item">
+                <span class="material-symbols-outlined">bolt</span>
+                Bria – Payments Bridge
+              </a>
+            </div>
+          </li>
+
+          <li>
+            <a href="../solutions/index.html" class="nav-link nav-link-dropdown">
+              Solutions
+              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../solutions/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">compare</span>
+                Compare Solutions
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../solutions/sidecar.html" class="dropdown-item">
+                <span class="material-symbols-outlined">add_circle</span>
+                Sidecar Model
+              </a>
+              <a href="../solutions/primary-core.html" class="dropdown-item">
+                <span class="material-symbols-outlined">hub</span>
+                Primary Core
+              </a>
+            </div>
+          </li>
+
+          <li>
+            <a href="../research/index.html" class="nav-link nav-link-dropdown">
+              Research
+              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../research/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">library_books</span>
+                All Research
+              </a>
+              <a href="../research/bitcoin-banking-101/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">school</span>
+                Bitcoin Banking 101
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../research/case-studies/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">cases</span>
+                Case Studies
+              </a>
+              <a href="../research/regulatory/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">gavel</span>
+                Regulatory Radar
+              </a>
+              <a href="../research/guides/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">menu_book</span>
+                Guides & Playbooks
+              </a>
+            </div>
+          </li>
+
+          <li>
+            <a href="../company/index.html" class="nav-link nav-link-dropdown">
+              Company
+              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../company/about.html" class="dropdown-item">
+                <span class="material-symbols-outlined">info</span>
+                About
+              </a>
+              <a href="../company/careers.html" class="dropdown-item">
+                <span class="material-symbols-outlined">work</span>
+                Careers
+              </a>
+              <a href="../company/security.html" class="dropdown-item">
+                <span class="material-symbols-outlined">shield</span>
+                Security
+              </a>
+              <a href="../company/press.html" class="dropdown-item">
+                <span class="material-symbols-outlined">newspaper</span>
+                Press & Media
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../company/contact.html" class="dropdown-item">
+                <span class="material-symbols-outlined">mail</span>
+                Contact Us
+              </a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="navbar-social">
+          <a href="https://twitter.com/GaloyMoney" class="social-link" target="_blank" rel="noopener" aria-label="Twitter">
+            <span class="material-symbols-outlined">close</span>
+          </a>
+          <a href="https://github.com/galoymoney" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
+            <span class="material-symbols-outlined">code</span>
+          </a>
+          <a href="https://www.linkedin.com/company/galoymoney" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <span class="material-symbols-outlined">business</span>
+          </a>
+        </div>
+
+        <button class="navbar-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero hero-subpage" style="background: linear-gradient(135deg, #10b981 0%, #047857 100%);">
+    <div class="hero-pattern"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-split">
+          <div class="hero-text">
+            <span class="section-label section-label--orange"><span class="material-symbols-outlined">account_balance_wallet</span> Products</span>
+            <h1>Cala</h1>
+            <p style="font-size: var(--font-size-xl); margin-bottom: var(--space-8);">Core Accounting Ledger. An embeddable double-entry accounting system for managing multiple user accounts at scale.</p>
+            <div class="flex gap-4 items-center" style="justify-content: flex-start;">
+              <a href="../company/contact.html" class="btn btn-primary btn-lg" style="background: white; color: #047857;">Request Demo</a>
+              <a href="https://github.com/galoymoney/cala" class="btn btn-secondary btn-lg" style="border-color: white; color: white;" target="_blank" rel="noopener">View on GitHub</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="../../images/cala-bitcoin-core-ledger-accounting-digital-assets.png" alt="Cala accounting ledger dashboard" style="border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem/Solution -->
+  <section class="section">
+    <div class="container">
+      <div class="split-feature">
+        <div class="split-feature-content">
+          <h2>The Foundation of Financial Software</h2>
+          <p class="text-lg">Every financial application needs a ledger. Cala provides the double-entry accounting foundation that fintech companies and banks need, without building from scratch.</p>
+
+          <div style="margin-top: var(--space-8);">
+            <div style="display: flex; align-items: flex-start; gap: var(--space-4); margin-bottom: var(--space-6);">
+              <span class="material-symbols-outlined" style="color: #10b981; font-size: 32px;">speed</span>
+              <div>
+                <h4 style="margin-bottom: var(--space-2);">Ship Faster</h4>
+                <p class="mb-0 text-grey">Don't spend months building accounting infrastructure. Embed Cala and focus on your product.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: flex-start; gap: var(--space-4); margin-bottom: var(--space-6);">
+              <span class="material-symbols-outlined" style="color: #10b981; font-size: 32px;">balance</span>
+              <div>
+                <h4 style="margin-bottom: var(--space-2);">Always Balanced</h4>
+                <p class="mb-0 text-grey">True double-entry accounting means your books always balance. No reconciliation nightmares.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: flex-start; gap: var(--space-4);">
+              <span class="material-symbols-outlined" style="color: #10b981; font-size: 32px;">history</span>
+              <div>
+                <h4 style="margin-bottom: var(--space-2);">Complete Audit Trail</h4>
+                <p class="mb-0 text-grey">Every transaction recorded with full history. Ready for regulators and auditors.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="split-feature-image">
+          <img src="../../images/ledger-illustration.svg" alt="Double-entry ledger concept">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features -->
+  <section class="section section-grey">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2>Enterprise-Grade Ledger Capabilities</h2>
+        <p class="text-lg">Everything you need for sophisticated financial accounting</p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="card-icon" style="background: #10b981;">
+            <span class="material-symbols-outlined" style="color: white;">account_balance_wallet</span>
+          </div>
+          <h3>Multi-Currency Support</h3>
+          <p class="mb-0">Native support for multiple currencies including fiat (USD, EUR, etc.) and cryptocurrencies (BTC, sats) in the same ledger.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" style="background: #10b981;">
+            <span class="material-symbols-outlined" style="color: white;">swap_horiz</span>
+          </div>
+          <h3>Atomic Transactions</h3>
+          <p class="mb-0">All-or-nothing transaction processing ensures consistency even in complex multi-account operations.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" style="background: #10b981;">
+            <span class="material-symbols-outlined" style="color: white;">account_tree</span>
+          </div>
+          <h3>Flexible Account Hierarchy</h3>
+          <p class="mb-0">Create any account structure you need: assets, liabilities, equity, income, expenses with unlimited nesting.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" style="background: #10b981;">
+            <span class="material-symbols-outlined" style="color: white;">query_stats</span>
+          </div>
+          <h3>Real-Time Balances</h3>
+          <p class="mb-0">Instant balance queries across any account, time period, or currency. No batch processing delays.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" style="background: #10b981;">
+            <span class="material-symbols-outlined" style="color: white;">backup</span>
+          </div>
+          <h3>Immutable History</h3>
+          <p class="mb-0">Append-only transaction log means nothing is ever deleted. Perfect for compliance and auditing.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" style="background: #10b981;">
+            <span class="material-symbols-outlined" style="color: white;">api</span>
+          </div>
+          <h3>GraphQL API</h3>
+          <p class="mb-0">Modern GraphQL interface for querying accounts, transactions, and balances with precise data fetching.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center mb-12">Built For</h2>
+
+      <div class="grid grid-3" style="gap: var(--space-8);">
+        <div class="card text-center" style="padding: var(--space-8);">
+          <span class="material-symbols-outlined" style="font-size: 48px; color: #10b981; margin-bottom: var(--space-4);">account_balance</span>
+          <h3>Banks & Credit Unions</h3>
+          <p class="text-grey">Bitcoin subledger that runs alongside your existing core for digital asset accounting.</p>
+        </div>
+
+        <div class="card text-center" style="padding: var(--space-8);">
+          <span class="material-symbols-outlined" style="font-size: 48px; color: #10b981; margin-bottom: var(--space-4);">payments</span>
+          <h3>Payment Platforms</h3>
+          <p class="text-grey">Track user balances, merchant settlements, and fund flows with guaranteed consistency.</p>
+        </div>
+
+        <div class="card text-center" style="padding: var(--space-8);">
+          <span class="material-symbols-outlined" style="font-size: 48px; color: #10b981; margin-bottom: var(--space-4);">currency_exchange</span>
+          <h3>Exchanges & Custody</h3>
+          <p class="text-grey">Multi-asset accounting for trading platforms, custodians, and digital asset businesses.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Specs -->
+  <section class="section section-grey">
+    <div class="container">
+      <div class="split-feature reverse">
+        <div class="split-feature-content">
+          <h2>Technical Specifications</h2>
+          <p>Cala is built with modern infrastructure patterns for reliability and scale.</p>
+
+          <div style="margin-top: var(--space-6);">
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">Language</span>
+              <span><strong>Rust</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">Database</span>
+              <span><strong>PostgreSQL</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">API</span>
+              <span><strong>GraphQL</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">Performance</span>
+              <span><strong>1000s TPS per instance</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">Deployment</span>
+              <span><strong>Self-hosted or managed</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0;">
+              <span class="text-grey">License</span>
+              <span><strong>Open source (MIT)</strong></span>
+            </div>
+          </div>
+        </div>
+        <div class="split-feature-image">
+          <img src="../../images/cala-architecture.svg" alt="Cala technical architecture">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Code Example -->
+  <section class="section">
+    <div class="container container-sm">
+      <h2 class="text-center mb-8">Simple to Integrate</h2>
+      <div style="background: var(--galoy-grey); border-radius: var(--radius-lg); padding: var(--space-6); overflow-x: auto;">
+        <pre style="color: #e5e7eb; margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.6;"><code><span style="color: #9ca3af;"># Create accounts</span>
+<span style="color: #fbbf24;">mutation</span> {
+  createAccount(input: {
+    name: <span style="color: #34d399;">"Customer USD Wallet"</span>
+    code: <span style="color: #34d399;">"customer-123-usd"</span>
+    normalBalanceType: DEBIT
+  }) {
+    accountId
+  }
+}
+
+<span style="color: #9ca3af;"># Record a transaction</span>
+<span style="color: #fbbf24;">mutation</span> {
+  postTransaction(input: {
+    transactionId: <span style="color: #34d399;">"txn-456"</span>
+    journalId: <span style="color: #34d399;">"main-journal"</span>
+    entries: [
+      { accountId: <span style="color: #34d399;">"customer-123-usd"</span>, amount: <span style="color: #60a5fa;">10000</span>, currency: <span style="color: #34d399;">"USD"</span>, direction: DEBIT }
+      { accountId: <span style="color: #34d399;">"revenue-fees"</span>, amount: <span style="color: #60a5fa;">10000</span>, currency: <span style="color: #34d399;">"USD"</span>, direction: CREDIT }
+    ]
+  }) {
+    transactionId
+  }
+}</code></pre>
+      </div>
+      <p class="text-center text-grey text-sm mt-4">GraphQL mutations for creating accounts and posting transactions</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" style="background: linear-gradient(135deg, #10b981 0%, #047857 100%);">
+    <div class="container">
+      <h2>Ready to Build on Cala?</h2>
+      <p>See how Cala can power your financial application's accounting infrastructure.</p>
+      <div class="cta-buttons">
+        <a href="../company/contact.html" class="btn btn-primary btn-lg" style="background: white; color: #047857;">Request Demo</a>
+        <a href="https://dev.galoy.io/cala" class="btn btn-secondary btn-lg" target="_blank" rel="noopener">Read the Docs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../../images/galoy-logo-white.svg" alt="Galoy" style="height: 32px; margin-bottom: var(--space-4);">
+          <p>Banking software for the Bitcoin age.</p>
+          <div class="footer-social">
+            <a href="https://github.com/galoymoney" target="_blank" rel="noopener"><span class="material-symbols-outlined">code</span></a>
+            <a href="https://twitter.com/GaloyMoney" target="_blank" rel="noopener"><span class="material-symbols-outlined">close</span></a>
+            <a href="https://t.me/galoyofficial" target="_blank" rel="noopener"><span class="material-symbols-outlined">send</span></a>
+            <a href="https://www.linkedin.com/company/galoymoney" target="_blank" rel="noopener"><span class="material-symbols-outlined">business</span></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Products</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">All Products</a></li>
+            <li><a href="lana.html">Lana</a></li>
+            <li><a href="cala.html">Cala</a></li>
+            <li><a href="bria.html">Bria</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Solutions</h4>
+          <ul class="footer-links">
+            <li><a href="../solutions/sidecar.html">Sidecar Model</a></li>
+            <li><a href="../solutions/primary-core.html">Primary Core</a></li>
+            <li><a href="https://dev.galoy.io" target="_blank">Developer Docs</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="../company/about.html">About</a></li>
+            <li><a href="../company/careers.html">Careers</a></li>
+            <li><a href="../company/security.html">Security</a></li>
+            <li><a href="../company/contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 Galoy Inc. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../terms.html">Terms</a>
+          <a href="../privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
