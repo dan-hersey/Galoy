@@ -391,9 +391,22 @@ export const DASHBOARD_HTML = `<!DOCTYPE html>
   </style>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root"><div style="color:#707070;text-align:center;padding:48px">Loading BTC Loan Monitor...</div></div>
 
-  <script type="text/babel">
+  <script>
+    window.onerror = function(msg, url, line, col, error) {
+      var root = document.getElementById('root');
+      root.innerHTML = '<div style="color:#ff1744;padding:24px;font-family:monospace">' +
+        '<h3>Dashboard Error</h3>' +
+        '<p>' + msg + '</p>' +
+        '<p>Line: ' + line + ', Col: ' + col + '</p>' +
+        '<p>' + (error && error.stack ? error.stack : '') + '</p>' +
+        '</div>';
+      return false;
+    };
+  </script>
+
+  <script type="text/babel" data-presets="env,react">
     const { useState, useEffect, useRef, useCallback } = React;
 
     const COLOR_THRESHOLDS = {
@@ -505,8 +518,8 @@ export const DASHBOARD_HTML = `<!DOCTYPE html>
             </div>
           </div>
           <div className="metric">
-            <span className="metric-label">Collateral Value</span>
-            <span className="metric-value">₿ {(data.collateralValue || 0).toFixed(8)}</span>
+            <span className="metric-label">Collateral</span>
+            <span className="metric-value">₿ {(data.collateralValue || 0).toFixed(4)} (\${(data.collateralUsd || 0).toLocaleString('en-US', { maximumFractionDigits: 0 })})</span>
           </div>
           <div className="metric">
             <span className="metric-label">Loan Amount</span>
@@ -531,31 +544,63 @@ export const DASHBOARD_HTML = `<!DOCTYPE html>
     function StressTest({ data }) {
       if (!data) return null;
 
+      const stressKeys = [
+        { key: '5pct_drop', label: '-5%' },
+        { key: '10pct_drop', label: '-10%' },
+        { key: '20pct_drop', label: '-20%' },
+        { key: '30pct_drop', label: '-30%' },
+      ];
+
+      // If we have server-computed stress test, use that
+      if (data.stressTest) {
+        return (
+          <div className="card">
+            <div className="card-title">Stress Test</div>
+            <div className="stress-cards">
+              {stressKeys.map(({ key, label }) => {
+                const s = data.stressTest[key];
+                if (!s) return null;
+                const ltvPct = (s.ltv || 0) * 100;
+                return (
+                  <div key={key} className="stress-card">
+                    <div className="stress-drop">{label}</div>
+                    <div className="stress-price">\${Math.round(s.price).toLocaleString()}</div>
+                    <div className="stress-ltv">{ltvPct.toFixed(1)}%</div>
+                    <div className="stress-tier">
+                      <span className={\`tier-badge \${getTierBadge(ltvPct)}\`}>
+                        {getTierName(ltvPct)}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      }
+
+      // Fallback: compute locally
       const drops = [-5, -10, -20, -30];
       const currentPrice = data.currentPrice || 0;
-
-      const simulatePrice = (percentDrop) => {
-        const simulatedPrice = currentPrice * (1 + percentDrop / 100);
-        const collateral = data.collateralValue || 0;
-        const collateralUsd = collateral * simulatedPrice;
-        const loanAmount = data.loanAmount || 0;
-        const ltv = loanAmount > 0 ? (loanAmount / collateralUsd) * 100 : 0;
-        return { ltv: Math.min(ltv, 1000), price: simulatedPrice };
-      };
+      const btcCollateral = data.collateralValue || 0;
+      const loanAmount = data.loanAmount || 0;
 
       return (
         <div className="card">
           <div className="card-title">Stress Test</div>
           <div className="stress-cards">
             {drops.map((drop) => {
-              const result = simulatePrice(drop);
+              const simPrice = currentPrice * (1 + drop / 100);
+              const collUsd = btcCollateral * simPrice;
+              const ltv = collUsd > 0 ? (loanAmount / collUsd) * 100 : 0;
               return (
                 <div key={drop} className="stress-card">
                   <div className="stress-drop">{drop}%</div>
-                  <div className="stress-ltv">{result.ltv.toFixed(2)}%</div>
+                  <div className="stress-price">\${Math.round(simPrice).toLocaleString()}</div>
+                  <div className="stress-ltv">{Math.min(ltv, 999).toFixed(1)}%</div>
                   <div className="stress-tier">
-                    <span className={\`tier-badge \${getTierBadge(result.ltv)}\`}>
-                      {getTierName(result.ltv)}
+                    <span className={\`tier-badge \${getTierBadge(ltv)}\`}>
+                      {getTierName(ltv)}
                     </span>
                   </div>
                 </div>
@@ -567,8 +612,8 @@ export const DASHBOARD_HTML = `<!DOCTYPE html>
     }
 
     function PriceSimulator({ token, data }) {
-      const [simulatedPrice, setSimulatedPrice] = useState(data?.currentPrice || 50000);
-      const [simulatedLtv, setSimulatedLtv] = useState(data?.ltv || 0);
+      const [simulatedPrice, setSimulatedPrice] = useState((data && data.currentPrice) || 50000);
+      const [simulatedLtv, setSimulatedLtv] = useState((data && data.ltv) || 0);
       const [loading, setLoading] = useState(false);
 
       const handleSliderChange = useCallback((e) => {
@@ -579,7 +624,7 @@ export const DASHBOARD_HTML = `<!DOCTYPE html>
         fetch(\`/api/loan/\${token}/simulate?price=\${price}\`)
           .then(res => res.json())
           .then(result => {
-            setSimulatedLtv(result.ltv || 0);
+            setSimulatedLtv((result.current_ltv || 0) * 100);
             setLoading(false);
           })
           .catch(() => setLoading(false));
@@ -829,6 +874,29 @@ export const DASHBOARD_HTML = `<!DOCTYPE html>
 
       const token = window.__TOKEN__;
 
+      // Transform API snake_case response to what components expect
+      function transformApiData(raw) {
+        if (!raw) return null;
+        return {
+          ltv: (raw.current_ltv || 0) * 100,
+          currentPrice: raw.btc_price || 0,
+          collateralValue: raw.btc_collateral || 0,
+          collateralUsd: raw.collateral_usd || 0,
+          loanAmount: raw.loan_amount_usd || 0,
+          marginCallPrice: raw.margin_call_price || 0,
+          liquidationPrice: raw.liquidation_price || 0,
+          riskTier: raw.risk_tier || 'GREEN',
+          interestRate: raw.interest_rate || 0,
+          endDate: raw.end_date || null,
+          daysRemaining: raw.days_remaining,
+          lenderName: raw.lender_name || null,
+          createdAt: raw.created_at || Date.now(),
+          marginCallLtv: raw.margin_call_ltv || 0.75,
+          liquidationLtv: raw.liquidation_ltv || 0.90,
+          stressTest: raw.stress_test || null,
+        };
+      }
+
       const fetchLoanData = useCallback(() => {
         if (!token) return;
 
@@ -843,7 +911,7 @@ export const DASHBOARD_HTML = `<!DOCTYPE html>
           })
           .then(data => {
             if (data) {
-              setLoanData(data);
+              setLoanData(transformApiData(data));
               setError(null);
             }
           })
@@ -882,8 +950,10 @@ export const DASHBOARD_HTML = `<!DOCTYPE html>
             wsRef.current.onmessage = (event) => {
               try {
                 const msg = JSON.parse(event.data);
-                if (msg.type === 'PRICE_UPDATE') {
-                  setLoanData(prev => prev ? { ...prev, currentPrice: msg.price } : null);
+                if (msg.type === 'price' && msg.data) {
+                  setLoanData(prev => prev ? { ...prev, currentPrice: msg.data.price } : null);
+                  // Also re-fetch full data for accurate LTV
+                  fetchLoanData();
                 }
               } catch (err) {
                 console.error('WS message parse error:', err);
@@ -920,7 +990,7 @@ export const DASHBOARD_HTML = `<!DOCTYPE html>
       return (
         <div className="container">
           <Header
-            lenderName={loanData?.lenderName}
+            lenderName={loanData && loanData.lenderName}
             token={token}
             isOnline={isOnline}
             priceSource={priceSource}
@@ -949,8 +1019,14 @@ export const DASHBOARD_HTML = `<!DOCTYPE html>
       );
     }
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<Dashboard />);
+    try {
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<Dashboard />);
+    } catch (err) {
+      document.getElementById('root').innerHTML =
+        '<div style="color:#ff1744;padding:24px;font-family:monospace">' +
+        '<h3>Render Error</h3><p>' + err.message + '</p></div>';
+    }
   </script>
 </body>
 </html>
