@@ -1,0 +1,220 @@
+<!-- =============================================
+     GALOY SURVEY - WEBFLOW EMBED HTML
+
+     SETUP:
+     1. Create a new page in Webflow at /survey
+     2. Add the class "survey-page-body" to the Body element
+     3. Delete all default content from the page
+     4. Add an Embed element
+     5. Paste this entire code into the Embed
+     ============================================= -->
+
+<div class="survey-container">
+  <!-- Header -->
+  <div class="survey-header">
+    <!-- UPDATE THIS: Replace with your logo URL from Webflow Assets -->
+    <img src="https://uploads-ssl.webflow.com/YOUR_SITE_ID/galoy-logo-white.svg" alt="Galoy">
+    <h1>Digital Asset Readiness Pulse</h1>
+    <p>See how your digital asset strategy compares to peers in banking</p>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-container" id="progressContainer">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-text">
+      <span id="stepIndicator">Question 1 of 5</span>
+      <span id="percentComplete">0% complete</span>
+    </div>
+  </div>
+
+  <!-- Survey Content -->
+  <div class="survey-content">
+
+    <!-- Step 1: Current Posture -->
+    <div class="survey-step active" data-step="1">
+      <h2 class="step-question">Which best describes your bank's current posture on digital assets?</h2>
+      <p class="step-hint">Select one</p>
+
+      <div class="options-list" data-type="radio" data-name="posture">
+        <label class="option-card">
+          <input type="radio" name="posture" value="actively_exploring">
+          <span class="option-radio"></span>
+          <span class="option-text">Actively exploring or building products</span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="posture" value="monitoring">
+          <span class="option-radio"></span>
+          <span class="option-text">Monitoring / researching, but no active initiatives</span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="posture" value="not_priority">
+          <span class="option-radio"></span>
+          <span class="option-text">Not a priority right now</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 2: Ranking -->
+    <div class="survey-step" data-step="2">
+      <h2 class="step-question">Rank the following digital asset categories in order of relevance for your banking customers.</h2>
+      <p class="step-hint">Reorder to rank (1 = Most relevant, 4 = Least relevant)</p>
+
+      <div class="ranking-options" id="rankingList">
+        <div class="ranking-option" draggable="true" data-value="bitcoin">
+          <span class="ranking-number">1</span>
+          <span class="option-text">Bitcoin</span>
+          <span class="material-symbols-outlined ranking-handle">drag_indicator</span>
+          <div class="ranking-buttons">
+            <button type="button" class="ranking-btn ranking-up" aria-label="Move up"><span class="material-symbols-outlined">keyboard_arrow_up</span></button>
+            <button type="button" class="ranking-btn ranking-down" aria-label="Move down"><span class="material-symbols-outlined">keyboard_arrow_down</span></button>
+          </div>
+        </div>
+        <div class="ranking-option" draggable="true" data-value="stablecoins">
+          <span class="ranking-number">2</span>
+          <span class="option-text">Stablecoins / Tokenized Deposits</span>
+          <span class="material-symbols-outlined ranking-handle">drag_indicator</span>
+          <div class="ranking-buttons">
+            <button type="button" class="ranking-btn ranking-up" aria-label="Move up"><span class="material-symbols-outlined">keyboard_arrow_up</span></button>
+            <button type="button" class="ranking-btn ranking-down" aria-label="Move down"><span class="material-symbols-outlined">keyboard_arrow_down</span></button>
+          </div>
+        </div>
+        <div class="ranking-option" draggable="true" data-value="other_crypto">
+          <span class="ranking-number">3</span>
+          <span class="option-text">Other cryptocurrencies (e.g., ETH, SOL)</span>
+          <span class="material-symbols-outlined ranking-handle">drag_indicator</span>
+          <div class="ranking-buttons">
+            <button type="button" class="ranking-btn ranking-up" aria-label="Move up"><span class="material-symbols-outlined">keyboard_arrow_up</span></button>
+            <button type="button" class="ranking-btn ranking-down" aria-label="Move down"><span class="material-symbols-outlined">keyboard_arrow_down</span></button>
+          </div>
+        </div>
+        <div class="ranking-option" draggable="true" data-value="none_relevant">
+          <span class="ranking-number">4</span>
+          <span class="option-text">None are currently relevant</span>
+          <span class="material-symbols-outlined ranking-handle">drag_indicator</span>
+          <div class="ranking-buttons">
+            <button type="button" class="ranking-btn ranking-up" aria-label="Move up"><span class="material-symbols-outlined">keyboard_arrow_up</span></button>
+            <button type="button" class="ranking-btn ranking-down" aria-label="Move down"><span class="material-symbols-outlined">keyboard_arrow_down</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Capabilities -->
+    <div class="survey-step" data-step="3">
+      <h2 class="step-question">If regulatory clarity and implementation risk were sufficiently addressed, which capabilities would your bank be most interested in exploring?</h2>
+      <p class="step-hint">Select up to two</p>
+
+      <div class="options-list" data-type="checkbox" data-name="capabilities" data-max="2">
+        <label class="option-card">
+          <input type="checkbox" name="capabilities" value="custody">
+          <span class="option-checkbox"><span class="material-symbols-outlined">check</span></span>
+          <span class="option-text">Digital asset custody</span>
+        </label>
+        <label class="option-card">
+          <input type="checkbox" name="capabilities" value="buy_sell">
+          <span class="option-checkbox"><span class="material-symbols-outlined">check</span></span>
+          <span class="option-text">Customer buy / sell access</span>
+        </label>
+        <label class="option-card">
+          <input type="checkbox" name="capabilities" value="lending">
+          <span class="option-checkbox"><span class="material-symbols-outlined">check</span></span>
+          <span class="option-text">Asset-backed lending</span>
+        </label>
+        <label class="option-card">
+          <input type="checkbox" name="capabilities" value="payments">
+          <span class="option-checkbox"><span class="material-symbols-outlined">check</span></span>
+          <span class="option-text">Payments or settlement use cases</span>
+        </label>
+        <label class="option-card">
+          <input type="checkbox" name="capabilities" value="none">
+          <span class="option-checkbox"><span class="material-symbols-outlined">check</span></span>
+          <span class="option-text">None of the above</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 4: Leadership -->
+    <div class="survey-step" data-step="4">
+      <h2 class="step-question">Who leads digital asset strategy at your bank?</h2>
+      <p class="step-hint">Select one</p>
+
+      <div class="options-list" data-type="radio" data-name="leadership">
+        <label class="option-card">
+          <input type="radio" name="leadership" value="executive">
+          <span class="option-radio"></span>
+          <span class="option-text">Executive leadership (CEO, CIO, COO)</span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="leadership" value="strategy">
+          <span class="option-radio"></span>
+          <span class="option-text">Strategy / innovation</span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="leadership" value="risk">
+          <span class="option-radio"></span>
+          <span class="option-text">Risk / compliance</span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="leadership" value="technology">
+          <span class="option-radio"></span>
+          <span class="option-text">Technology / core banking</span>
+        </label>
+        <label class="option-card">
+          <input type="radio" name="leadership" value="not_defined">
+          <span class="option-radio"></span>
+          <span class="option-text">Not formally defined yet</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Step 5: Contact Info -->
+    <div class="survey-step" data-step="5">
+      <h2 class="step-question">Almost done! Please share your contact information.</h2>
+      <p class="step-hint">We'll use this to share relevant insights with you.</p>
+
+      <div class="survey-form-group">
+        <label class="survey-form-label" for="firstName">First Name *</label>
+        <input type="text" id="firstName" class="survey-form-input" placeholder="Enter your first name" required>
+      </div>
+
+      <div class="survey-form-group">
+        <label class="survey-form-label" for="lastName">Last Name *</label>
+        <input type="text" id="lastName" class="survey-form-input" placeholder="Enter your last name" required>
+      </div>
+
+      <div class="survey-form-group">
+        <label class="survey-form-label" for="email">Email Address *</label>
+        <input type="email" id="email" class="survey-form-input" placeholder="you@company.com" required>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Navigation -->
+  <div class="survey-nav" id="surveyNav">
+    <button class="survey-btn survey-btn-secondary" id="prevBtn" style="visibility: hidden;">
+      <span class="material-symbols-outlined">arrow_back</span>
+      Back
+    </button>
+    <button class="survey-btn survey-btn-primary" id="nextBtn">
+      Next
+      <span class="material-symbols-outlined">arrow_forward</span>
+    </button>
+  </div>
+
+  <!-- Thank You Screen -->
+  <div class="thank-you-screen" id="thankYouScreen">
+    <div class="thank-you-icon">
+      <span class="material-symbols-outlined">check</span>
+    </div>
+    <h2>Thank You!</h2>
+    <p>Your responses have been recorded. We appreciate you taking the time to share your insights on digital asset readiness.</p>
+    <p style="font-size: 0.875rem;">A member of our team may reach out to discuss how Galoy can support your digital asset journey.</p>
+    <a href="/" class="survey-btn survey-btn-primary">
+      Return to Homepage
+      <span class="material-symbols-outlined">arrow_forward</span>
+    </a>
+  </div>
+</div>

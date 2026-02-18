@@ -1,0 +1,366 @@
+<!-- =============================================
+     GALOY SURVEY - WEBFLOW FOOTER CODE
+     Paste this in: Page Settings → Custom Code → Footer Code
+     ============================================= -->
+
+<script>
+// ===========================================
+// GALOY SURVEY WIZARD LOGIC
+// ===========================================
+
+const TOTAL_STEPS = 5;
+let currentStep = 1;
+const responses = {};
+
+// DOM Elements
+const steps = document.querySelectorAll('.survey-step');
+const progressFill = document.getElementById('progressFill');
+const stepIndicator = document.getElementById('stepIndicator');
+const percentComplete = document.getElementById('percentComplete');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const progressContainer = document.getElementById('progressContainer');
+const surveyNav = document.getElementById('surveyNav');
+const thankYouScreen = document.getElementById('thankYouScreen');
+
+// Initialize
+function init() {
+  updateProgress();
+  setupOptionCards();
+  setupRanking();
+  setupNavigation();
+}
+
+// Update progress bar
+function updateProgress() {
+  const progress = ((currentStep - 1) / TOTAL_STEPS) * 100;
+  progressFill.style.width = progress + '%';
+  stepIndicator.textContent = `Question ${currentStep} of ${TOTAL_STEPS}`;
+  percentComplete.textContent = Math.round(progress) + '% complete';
+
+  // Update back button visibility
+  prevBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+
+  // Update next button text
+  if (currentStep === TOTAL_STEPS) {
+    nextBtn.innerHTML = 'Submit <span class="material-symbols-outlined">send</span>';
+  } else {
+    nextBtn.innerHTML = 'Next <span class="material-symbols-outlined">arrow_forward</span>';
+  }
+}
+
+// Show specific step
+function showStep(stepNumber) {
+  steps.forEach(step => {
+    step.classList.remove('active');
+    if (parseInt(step.dataset.step) === stepNumber) {
+      step.classList.add('active');
+    }
+  });
+  currentStep = stepNumber;
+  updateProgress();
+}
+
+// Setup option card click handlers
+function setupOptionCards() {
+  document.querySelectorAll('.option-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      // Prevent default label behavior to avoid double-toggle
+      e.preventDefault();
+
+      const input = this.querySelector('input');
+      const optionsList = this.closest('.options-list');
+      const type = optionsList?.dataset.type;
+      const maxSelections = parseInt(optionsList?.dataset.max) || Infinity;
+
+      if (type === 'radio') {
+        // Deselect all others in the group
+        optionsList.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+        input.checked = true;
+      } else if (type === 'checkbox') {
+        const selectedCount = optionsList.querySelectorAll('.option-card.selected').length;
+        const isCurrentlySelected = this.classList.contains('selected');
+
+        if (isCurrentlySelected) {
+          // Deselect this option
+          this.classList.remove('selected');
+          input.checked = false;
+        } else if (selectedCount < maxSelections) {
+          // Select this option (if under limit)
+          this.classList.add('selected');
+          input.checked = true;
+        } else {
+          // At max selections - show feedback
+          this.style.animation = 'surveyShake 0.3s ease';
+          setTimeout(() => this.style.animation = '', 300);
+        }
+      }
+    });
+  });
+}
+
+// Setup ranking drag and drop (desktop) + button controls (mobile)
+function setupRanking() {
+  const rankingList = document.getElementById('rankingList');
+  if (!rankingList) return;
+
+  let draggedItem = null;
+
+  rankingList.querySelectorAll('.ranking-option').forEach(item => {
+    // Desktop drag events
+    item.addEventListener('dragstart', function() {
+      draggedItem = this;
+      setTimeout(() => this.classList.add('dragging'), 0);
+    });
+
+    item.addEventListener('dragend', function() {
+      this.classList.remove('dragging');
+      updateRankingNumbers();
+      updateRankingButtons();
+    });
+
+    item.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      const afterElement = getDragAfterElement(rankingList, e.clientY);
+      if (afterElement == null) {
+        rankingList.appendChild(draggedItem);
+      } else {
+        rankingList.insertBefore(draggedItem, afterElement);
+      }
+    });
+  });
+
+  // Mobile button controls
+  rankingList.querySelectorAll('.ranking-up').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const item = this.closest('.ranking-option');
+      const prev = item.previousElementSibling;
+      if (prev) {
+        rankingList.insertBefore(item, prev);
+        updateRankingNumbers();
+        updateRankingButtons();
+      }
+    });
+  });
+
+  rankingList.querySelectorAll('.ranking-down').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      const item = this.closest('.ranking-option');
+      const next = item.nextElementSibling;
+      if (next) {
+        rankingList.insertBefore(next, item);
+        updateRankingNumbers();
+        updateRankingButtons();
+      }
+    });
+  });
+
+  // Initial button state
+  updateRankingButtons();
+}
+
+// Update disabled state of ranking buttons
+function updateRankingButtons() {
+  const rankingList = document.getElementById('rankingList');
+  if (!rankingList) return;
+
+  const items = rankingList.querySelectorAll('.ranking-option');
+  items.forEach((item, index) => {
+    const upBtn = item.querySelector('.ranking-up');
+    const downBtn = item.querySelector('.ranking-down');
+
+    if (upBtn) upBtn.disabled = (index === 0);
+    if (downBtn) downBtn.disabled = (index === items.length - 1);
+  });
+}
+
+function getDragAfterElement(container, y) {
+  const draggableElements = [...container.querySelectorAll('.ranking-option:not(.dragging)')];
+
+  return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+    if (offset < 0 && offset > closest.offset) {
+      return { offset: offset, element: child };
+    } else {
+      return closest;
+    }
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+function updateRankingNumbers() {
+  document.querySelectorAll('.ranking-option').forEach((item, index) => {
+    item.querySelector('.ranking-number').textContent = index + 1;
+  });
+}
+
+// Setup navigation
+function setupNavigation() {
+  prevBtn.addEventListener('click', () => {
+    if (currentStep > 1) {
+      showStep(currentStep - 1);
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (validateCurrentStep()) {
+      collectStepData();
+
+      if (currentStep < TOTAL_STEPS) {
+        showStep(currentStep + 1);
+      } else {
+        submitSurvey();
+      }
+    }
+  });
+}
+
+// Validate current step
+function validateCurrentStep() {
+  const activeStep = document.querySelector('.survey-step.active');
+
+  // Step 1, 3, 4: Radio/Checkbox selection
+  const optionsList = activeStep.querySelector('.options-list');
+  if (optionsList) {
+    const type = optionsList.dataset.type;
+    if (type === 'radio') {
+      const selected = activeStep.querySelector('input[type="radio"]:checked');
+      if (!selected) {
+        alert('Please select an option to continue.');
+        return false;
+      }
+    }
+    // Checkboxes are optional (can select 0)
+  }
+
+  // Step 5: Contact form
+  if (currentStep === 5) {
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    if (!firstName || !lastName || !email) {
+      alert('Please fill in all required fields.');
+      return false;
+    }
+
+    if (!isValidEmail(email)) {
+      alert('Please enter a valid email address.');
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Collect data from current step
+function collectStepData() {
+  const activeStep = document.querySelector('.survey-step.active');
+
+  // Radio selections
+  const radioInputs = activeStep.querySelectorAll('input[type="radio"]:checked');
+  radioInputs.forEach(input => {
+    responses[input.name] = input.value;
+  });
+
+  // Checkbox selections
+  const checkboxInputs = activeStep.querySelectorAll('input[type="checkbox"]:checked');
+  if (checkboxInputs.length > 0) {
+    const name = checkboxInputs[0].name;
+    responses[name] = Array.from(checkboxInputs).map(input => input.value);
+  }
+
+  // Ranking
+  if (currentStep === 2) {
+    const rankings = [];
+    document.querySelectorAll('.ranking-option').forEach(item => {
+      rankings.push(item.dataset.value);
+    });
+    responses.ranking = rankings;
+  }
+
+  // Contact info
+  if (currentStep === 5) {
+    responses.firstName = document.getElementById('firstName').value.trim();
+    responses.lastName = document.getElementById('lastName').value.trim();
+    responses.email = document.getElementById('email').value.trim();
+    responses.submittedAt = new Date().toISOString();
+  }
+}
+
+// Submit survey
+async function submitSurvey() {
+  nextBtn.disabled = true;
+  nextBtn.innerHTML = 'Submitting... <span class="material-symbols-outlined">hourglass_empty</span>';
+
+  try {
+    // Send to Google Sheets via Apps Script Web App
+    await sendToGoogleSheets(responses);
+
+    // Show thank you screen
+    progressContainer.style.display = 'none';
+    surveyNav.style.display = 'none';
+    document.querySelector('.survey-content').style.display = 'none';
+    thankYouScreen.classList.add('active');
+
+  } catch (error) {
+    console.error('Submission error:', error);
+    alert('There was an error submitting your response. Please try again.');
+    nextBtn.disabled = false;
+    nextBtn.innerHTML = 'Submit <span class="material-symbols-outlined">send</span>';
+  }
+}
+
+// ===========================================
+// GOOGLE SHEETS INTEGRATION
+// ===========================================
+
+// Google Apps Script Web App URL
+const GOOGLE_SHEETS_URL = 'https://script.google.com/a/macros/galoy.io/s/AKfycbwj7N2_De77aI0MHLW4OmaX1FOBZlqaZmhbhquP2zYyIVDR3zvgTTI0-771bElrknCO/exec';
+
+async function sendToGoogleSheets(data) {
+  // Format the data for the spreadsheet
+  const payload = {
+    timestamp: data.submittedAt,
+    firstName: data.firstName,
+    lastName: data.lastName,
+    email: data.email,
+    posture: data.posture || '',
+    ranking: data.ranking ? data.ranking.join(', ') : '',
+    capabilities: Array.isArray(data.capabilities) ? data.capabilities.join(', ') : '',
+    leadership: data.leadership || ''
+  };
+
+  // If no Google Sheets URL configured, log to console
+  if (GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
+    console.log('Survey Response (Google Sheets not configured):', payload);
+    // Simulate delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    return;
+  }
+
+  // Send to Google Sheets
+  const response = await fetch(GOOGLE_SHEETS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload)
+  });
+
+  return response;
+}
+
+// Initialize on load
+init();
+</script>

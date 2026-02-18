@@ -63,11 +63,7 @@
     <div class="max-w-7xl mx-auto px-6 py-4">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, var(--galoy-blue), #1a3aff);">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
-              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
-            </svg>
-          </div>
+          <img src="../../../images/galoy-logo-white.svg" alt="Galoy" class="h-8" style="object-fit: contain;">
           <div>
             <span class="font-bold text-white text-lg">Regulatory Radar</span>
             <p class="text-xs text-gray-500">Digital Asset Banking Intelligence</p>
@@ -79,9 +75,8 @@
           <button class="nav-tab text-gray-400 font-medium py-2" data-section="explorer">Data Explorer</button>
         </nav>
         <div class="flex items-center gap-4">
-          <span class="text-xs text-gray-500 hidden md:block">Last updated: January 2026</span>
-          <a href="../index.html" class="text-sm text-gray-400 hover:text-white transition-colors">← Back to Research</a>
-          <a href="../../../index.html" class="text-sm px-3 py-1.5 rounded-lg transition-colors" style="background: var(--galoy-blue);">galoy.io</a>
+          <span class="text-xs text-gray-500 hidden md:block">Last updated: February 17, 2026</span>
+          <a href="https://galoy.io" target="_blank" class="text-sm text-gray-400 hover:text-white transition-colors">galoy.io</a>
         </div>
       </div>
     </div>
@@ -92,67 +87,17 @@
       <!-- SECTION: Overview -->
       <div id="section-overview" class="section active">
         <div class="mb-10">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider" style="background: linear-gradient(135deg, #3654FF 0%, #1e3a8a 100%); color: #fff; box-shadow: 0 4px 15px rgba(54, 84, 255, 0.4);">
-              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
-              Research
-            </span>
-            <span class="text-gray-500 text-sm">10 Agencies Tracked</span>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background: rgba(16, 185, 129, 0.2); color: #10b981;">🔴 LIVE TRACKER</span>
+            <span class="text-gray-500 text-sm">13 Agencies Tracked</span>
           </div>
           <h1 class="text-4xl lg:text-5xl font-extrabold mb-4">
             Digital Asset <span class="gradient-text">Regulatory Radar</span>
           </h1>
           <p class="text-gray-400 max-w-3xl text-lg">
             Comprehensive intelligence dashboard tracking regulatory developments enabling bitcoin and digital assets in traditional banking.
-            103 signals across SEC, OCC, FDIC, Federal Reserve, CFTC, FinCEN, NY DFS, CFPB, FTC, and California DFPI.
+            90 high-priority signals across SEC, OCC, FDIC, Federal Reserve, CFTC, FinCEN, NY DFS, CFPB, FTC, California DFPI, and state legislatures.
           </p>
-        </div>
-
-        <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
-          <div class="card stat-card rounded-2xl p-6">
-            <p class="text-xs text-gray-400 mb-2 uppercase tracking-wide">Total Signals</p>
-            <p class="text-4xl font-extrabold" id="statTotal">103</p>
-            <p class="text-xs text-green-400 mt-2">+67 from OCC only</p>
-          </div>
-          <div class="card stat-card rounded-2xl p-6">
-            <p class="text-xs text-gray-400 mb-2 uppercase tracking-wide">Direct Crypto</p>
-            <p class="text-4xl font-extrabold text-emerald-400" id="statDirect">0</p>
-            <p class="text-xs text-gray-500 mt-2">Bitcoin & Digital Assets</p>
-          </div>
-          <div class="card stat-card rounded-2xl p-6">
-            <p class="text-xs text-gray-400 mb-2 uppercase tracking-wide">Adjacent</p>
-            <p class="text-4xl font-extrabold text-amber-400" id="statAdjacent">0</p>
-            <p class="text-xs text-gray-500 mt-2">Enabling Infrastructure</p>
-          </div>
-          <div class="card stat-card rounded-2xl p-6">
-            <p class="text-xs text-gray-400 mb-2 uppercase tracking-wide">Agencies</p>
-            <p class="text-4xl font-extrabold text-purple-400">10</p>
-            <p class="text-xs text-gray-500 mt-2">Federal + State</p>
-          </div>
-          <div class="card stat-card rounded-2xl p-6">
-            <p class="text-xs text-gray-400 mb-2 uppercase tracking-wide">Enforcement Reset</p>
-            <p class="text-4xl font-extrabold" style="color: var(--galoy-blue);">5+</p>
-            <p class="text-xs text-gray-500 mt-2">Cases Dropped</p>
-          </div>
-        </div>
-
-        <div class="card rounded-xl p-4 mb-10 flex flex-wrap items-center gap-6">
-          <span class="text-sm text-gray-400 font-medium">Crypto Relevance:</span>
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
-            <span class="text-sm text-gray-300">Direct</span>
-            <span class="text-xs text-gray-500 ml-1">— Crypto, bitcoin, stablecoins, DLT</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
-            <span class="text-sm text-gray-300">Adjacent</span>
-            <span class="text-xs text-gray-500 ml-1">— Debanking, fintech, payments innovation</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 rounded-full bg-gray-500"></span>
-            <span class="text-sm text-gray-300">General</span>
-            <span class="text-xs text-gray-500 ml-1">— Traditional banking regulation</span>
-          </div>
         </div>
 
         <div class="mb-10">
@@ -166,12 +111,20 @@
         </div>
 
         <div class="mb-10">
-          <h2 class="text-xl font-bold mb-6 flex items-center gap-3">
-            <span class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: rgba(54, 84, 255, 0.2);">
-              <svg width="16" height="16" fill="none" stroke="#3654FF" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            </span>
-            Featured Signals
-          </h2>
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-xl font-bold flex items-center gap-3">
+              <span class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: rgba(54, 84, 255, 0.2);">
+                <svg width="16" height="16" fill="none" stroke="#3654FF" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              </span>
+              Latest Signals
+            </h2>
+            <a href="#" onclick="document.querySelector('[data-section=explorer]').click(); return false;"
+               class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all hover:scale-105"
+               style="background: var(--galoy-blue);">
+              View All Regulatory Signals
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
           <div class="grid lg:grid-cols-2 gap-4" id="featuredSignals"></div>
         </div>
 
@@ -197,7 +150,20 @@
       <div id="section-explorer" class="section">
         <div class="mb-8">
           <h1 class="text-3xl font-bold mb-4">Data Explorer</h1>
-          <p class="text-gray-400">Search and filter all 103 regulatory signals.</p>
+          <p class="text-gray-400">Search and filter crypto-relevant regulatory signals.</p>
+        </div>
+        <div class="card rounded-xl p-4 mb-6 flex flex-wrap items-center gap-6">
+          <span class="text-sm text-gray-400 font-medium">Crypto Relevance:</span>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+            <span class="text-sm text-gray-300">Direct</span>
+            <span class="text-xs text-gray-500 ml-1">— Crypto, bitcoin, stablecoins, DLT</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+            <span class="text-sm text-gray-300">Adjacent</span>
+            <span class="text-xs text-gray-500 ml-1">— Debanking, fintech, payments innovation</span>
+          </div>
         </div>
         <div class="card rounded-2xl p-4 mb-6">
           <div class="flex flex-wrap gap-4 items-center">
@@ -217,9 +183,13 @@
               <option value="CFPB">CFPB</option>
               <option value="FTC">FTC</option>
               <option value="California DFPI">California DFPI</option>
+              <option value="Senate Banking">Senate Banking</option>
+              <option value="NY Legislature">NY Legislature</option>
+              <option value="South Dakota">South Dakota</option>
             </select>
             <select id="monthFilter" class="px-4 py-3 bg-black bg-opacity-40 border border-gray-700 rounded-xl text-sm text-white cursor-pointer">
               <option value="all">All Months</option>
+              <option value="2026-01">January 2026</option>
               <option value="2025-12">December 2025</option>
               <option value="2025-11">November 2025</option>
               <option value="2025-10">October 2025</option>
@@ -237,10 +207,9 @@
               <option value="all">All Relevance</option>
               <option value="direct">🟢 Direct Crypto</option>
               <option value="adjacent">🟡 Adjacent</option>
-              <option value="general">⚪ General Banking</option>
             </select>
             <div class="px-4 py-3 bg-black bg-opacity-40 rounded-xl text-sm">
-              <span id="filteredCount" class="font-bold" style="color: var(--galoy-blue);">103</span>
+              <span id="filteredCount" class="font-bold" style="color: var(--galoy-blue);">90</span>
               <span class="text-gray-500"> signals</span>
             </div>
           </div>
@@ -335,90 +304,80 @@
   <script>
     // Regulatory Data
     const rawData = [
-      {"Agency":"FTC","Date":"2025-12-31","DocumentType":"Enforcement","DocumentID":"","Title":"Illusory Systems Inc. (Nomad) - Security Breach and Data Security Violations","URL":"https://www.ftc.gov/enforcement","ThemeTags":"enforcement; data security; consumer protection; crypto fraud","LeadSignal":"Medium","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"FTC action against Nomad exchange for lax security resulting in $186M theft; $37.5M restitution required"},
+      {"Agency":"OCC","Date":"","DocumentType":"Conditional Approval","DocumentID":"CA 1349","Title":"Boston Trust Walden Company conversion to a national bank (Control No. 2025-Conversion-342326)","URL":"https://www.occ.gov/topics/charters-and-licensing/interpretations-and-actions/2025/ca1349.pdf","ThemeTags":"conversion; national bank","LeadSignal":"Medium","ActionType":"Conditional Approval","ComplianceDeadline":"","ImpactSummary":""},
+      {"Agency":"OCC","Date":"","DocumentType":"Conditional Approval","DocumentID":"CA 1348","Title":"Application to charter Erebor Bank, National Association (Control No. 2025-Charter-342076)","URL":"https://www.occ.gov/topics/charters-and-licensing/interpretations-and-actions/2025/ca1348.pdf","ThemeTags":"chartering; de novo","LeadSignal":"High","ActionType":"Conditional Approval","ComplianceDeadline":"","ImpactSummary":""},
+
+      {"Agency":"CFTC","Date":"2026-01-29","DocumentType":"Chairman Speech","DocumentID":"opaselig1","Title":"The Next Phase of Project Crypto: Unleashing Innovation for Finance","URL":"https://www.cftc.gov/PressRoom/SpeechesTestimony/opaselig1","ThemeTags":"crypto derivatives; tokenized collateral; perpetual derivatives; innovation","LeadSignal":"High","ActionType":"Speech","ComplianceDeadline":"","ImpactSummary":"Chairman Selig outlined priorities: leveraged crypto trading rules, expanded tokenized collateral, onshore perpetuals"},
+      {"Agency":"SEC","Date":"2026-01-29","DocumentType":"Joint Announcement","DocumentID":"","Title":"Project Crypto Joint SEC-CFTC Harmonization Event Launch","URL":"https://www.sec.gov/newsroom/speeches-statements/atkins-remarks-joint-sec-cftc-harmonization-event-project-crypto-012926","ThemeTags":"Project Crypto; SEC-CFTC coordination; regulatory harmonization; taxonomy","LeadSignal":"High","ActionType":"Announcement","ComplianceDeadline":"","ImpactSummary":"SEC and CFTC formally launch joint \"Project Crypto\" initiative to create unified regulatory framework and shared taxonomy"},
+      {"Agency":"SEC","Date":"2026-01-29","DocumentType":"Commissioner Statement","DocumentID":"","Title":"Hester Peirce on Crypto Self-Custody Rights","URL":"https://www.sec.gov/newsroom/speeches-statements/peirce-self-custody-012926","ThemeTags":"self-custody; fundamental rights; digital asset freedom","LeadSignal":"Medium","ActionType":"Speech","ComplianceDeadline":"","ImpactSummary":"Commissioner Peirce affirms self-custody of crypto as fundamental right and signals iterative approach to tokenized securities"},
+      {"Agency":"SEC","Date":"2026-01-28","DocumentType":"Staff Guidance","DocumentID":"","Title":"Statement on Tokenized Securities","URL":"https://www.sec.gov/newsroom/speeches-statements/corp-fin-statement-tokenized-securities-012826","ThemeTags":"tokenized securities; blockchain; on-chain trading","LeadSignal":"High","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"Three SEC divisions issue landmark guidance clarifying tokenization format does not affect securities law application"},
+      {"Agency":"SEC","Date":"2026-01-23","DocumentType":"Enforcement Dismissal","DocumentID":"LR-26465","Title":"SEC Dismissal of Gemini Trust Company Enforcement Action","URL":"https://www.sec.gov/litigation/litreleases/lr-26465","ThemeTags":"enforcement; dismissal; crypto lending; Gemini","LeadSignal":"High","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"SEC dismisses with prejudice enforcement action against Gemini over Earn lending program after full investor recovery"},
+      {"Agency":"CFTC","Date":"2026-01-22","DocumentType":"Joint Press Release","DocumentID":"9170-26","Title":"CFTC and SEC to Hold Joint Event on Harmonization in Crypto Era","URL":"https://www.cftc.gov/PressRoom/PressReleases/9170-26","ThemeTags":"SEC-CFTC coordination; regulatory harmonization; jurisdictional clarity","LeadSignal":"High","ActionType":"Announcement","ComplianceDeadline":"","ImpactSummary":"Announcement of coordinated SEC-CFTC event to present unified regulatory framework addressing fragmentation"},
+      {"Agency":"CFTC","Date":"2026-01-20","DocumentType":"Press Release","DocumentID":"9169-26","Title":"CFTC Chairman Selig Announces Senior Staff Appointments","URL":"https://www.cftc.gov/PressRoom/PressReleases/9169-26","ThemeTags":"leadership; crypto expertise; agency staffing","LeadSignal":"Medium","ActionType":"Announcement","ComplianceDeadline":"","ImpactSummary":"New Chair Selig appointed crypto-specialist advisors signaling crypto-focused leadership strategy"},
+      {"Agency":"NY Legislature","Date":"2026-01-15","DocumentType":"Legislative Proposal","DocumentID":"CRYPTO Act","Title":"CRYPTO Act - Criminalizing Unlicensed Virtual Currency Business in New York","URL":"https://manhattanda.org/d-a-bragg-senator-myrie-announce-new-bill-to-combat-use-of-cryptocurrency-to-commit-crimes/","ThemeTags":"criminal enforcement; BitLicense violations; unlicensed operations","LeadSignal":"High","ActionType":"Legislation","ComplianceDeadline":"","ImpactSummary":"Criminal penalties (misdemeanor to C felony, 5-15 years) for unlicensed crypto operations over $1M threshold"},
+      {"Agency":"South Dakota","Date":"2026-01-15","DocumentType":"Legislative Bill","DocumentID":"Senate Bill 43","Title":"South Dakota Bill to Authorize Law Enforcement Seizure of Digital Currency","URL":"https://sdlegislature.gov/Session/Bill/24972","ThemeTags":"law enforcement; asset forfeiture; criminal investigation","LeadSignal":"Medium","ActionType":"Legislation","ComplianceDeadline":"","ImpactSummary":"Committee approved bill enabling law enforcement to seize digital currency tied to criminal investigations"},
+      {"Agency":"California DFPI","Date":"2026-01-14","DocumentType":"Consent Order","DocumentID":"","Title":"DFPI Consent Order and $500K Penalty Against Nexo Capital for Unlicensed Crypto Lending","URL":"https://dfpi.ca.gov/enforcement-actions/","ThemeTags":"enforcement; unlicensed lending; consumer protection","LeadSignal":"High","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"$500K penalty for operating crypto-backed lending without required finance lender license, affecting 5,456 consumers"},
+      {"Agency":"CFTC","Date":"2026-01-12","DocumentType":"Press Release","DocumentID":"9167-26","Title":"Chairman Selig Launches the CFTC Innovation Advisory Committee","URL":"https://www.cftc.gov/PressRoom/PressReleases/9167-26","ThemeTags":"innovation; crypto technology; governance","LeadSignal":"High","ActionType":"Announcement","ComplianceDeadline":"","ImpactSummary":"New advisory committee with crypto CEOs (Tyler Winklevoss, Shayne Coplan) to guide CFTC policy on blockchain"},
+      {"Agency":"Senate Banking","Date":"2026-01-12","DocumentType":"Legislative Bill","DocumentID":"","Title":"Digital Asset Market Clarity Act - Bipartisan Market Structure Bill","URL":"https://www.banking.senate.gov/newsroom/majority/chairman-scott-releases-bipartisan-negotiated-market-structure-bill-text","ThemeTags":"market structure; securities classification; DeFi protections; stablecoin regulations","LeadSignal":"High","ActionType":"Legislation","ComplianceDeadline":"","ImpactSummary":"278-page framework establishing CFTC authority, clarifying network tokens not securities by default"},
+      {"Agency":"SEC","Date":"2026-01-09","DocumentType":"Task Force Submission","DocumentID":"","Title":"Ripple Letter to SEC Crypto Task Force - Digital Asset Classification","URL":"https://www.sec.gov/files/ripple-letter-crypto-task-force-010926.pdf","ThemeTags":"Crypto Task Force; digital asset classification; securities framework","LeadSignal":"High","ActionType":"Submission","ComplianceDeadline":"","ImpactSummary":"Ripple urges SEC to adopt \"privity\" standard to distinguish securities offerings from secondary market trading"},
+      {"Agency":"OCC","Date":"2026-01-08","DocumentType":"Proposed Rule","DocumentID":"Bulletin 2026-1","Title":"National Bank Chartering - Clarifying Amendments to National Trust Bank Chartering Rule","URL":"https://www.occ.gov/news-issuances/bulletins/2026/bulletin-2026-1.html","ThemeTags":"trust bank charters; digital asset custody; non-fiduciary activities","LeadSignal":"High","ActionType":"Proposed Rule","ComplianceDeadline":"2026-02-11","ImpactSummary":"Clarifies OCC authority to charter national trust banks with permissible non-fiduciary digital asset activities"},
+      {"Agency":"CFTC","Date":"2026-01-08","DocumentType":"No-Action Letter","DocumentID":"Letter No. 26-01","Title":"No-Action Letter Regarding Event Contracts for Bitnomial Exchange","URL":"https://www.cftc.gov/csl/26-01/download","ThemeTags":"prediction markets; event contracts; crypto derivatives","LeadSignal":"High","ActionType":"No-Action Letter","ComplianceDeadline":"","ImpactSummary":"Clears Bitnomial to offer event contracts and prediction markets tied to crypto prices"},
+      {"Agency":"OCC","Date":"2026-01-07","DocumentType":"Charter Application","DocumentID":"","Title":"World Liberty Financial - Application for National Trust Bank Charter (USD1 Stablecoin)","URL":"https://www.occ.gov/topics/charters-and-licensing/public-bank-application-filings/index-public-bank-application-filings.html","ThemeTags":"stablecoin issuance; trust bank charter; USD-backed assets","LeadSignal":"High","ActionType":"Application","ComplianceDeadline":"","ImpactSummary":"Major stablecoin issuer submits de novo application for national trust bank charter for USD1 stablecoin operations"},
+      {"Agency":"SEC","Date":"2026-01-06","DocumentType":"ETF Filing","DocumentID":"","Title":"Morgan Stanley Bitcoin and Solana ETF Filing","URL":"https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&company=morgan+stanley&type=S-1","ThemeTags":"ETF; Bitcoin; Solana; institutional adoption","LeadSignal":"Medium","ActionType":"Filing","ComplianceDeadline":"","ImpactSummary":"Morgan Stanley files for spot Bitcoin and Solana ETFs, marking first major bank crypto ETF entry into market"},
+      {"Agency":"FTC","Date":"2025-12-31","DocumentType":"Enforcement","DocumentID":"","Title":"Illusory Systems Inc. (Nomad) - Security Breach and Data Security Violations","URL":"https://www.ftc.gov/legal-library/browse/cases-proceedings/illusory-systemsnomad","ThemeTags":"enforcement; data security; consumer protection; crypto fraud","LeadSignal":"Medium","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"FTC action against Nomad exchange for lax security resulting in $186M theft; $37.5M restitution required"},
       {"Agency":"Federal Reserve","Date":"2025-12-19","DocumentType":"RFI","DocumentID":"BCREG20251219a","Title":"Federal Reserve Requests Public Input on \"Payment Accounts\" (Skinny Master Accounts)","URL":"https://www.federalreserve.gov/newsevents/pressreleases/bcreg20251219a.htm","ThemeTags":"master account; payments; crypto access; Fed infrastructure","LeadSignal":"High","ActionType":"RFI","ComplianceDeadline":"","ImpactSummary":"Seeks 45-day public comment on narrower \"payment accounts\"; target Q4 2026 implementation"},
-      {"Agency":"Federal Reserve","Date":"2025-12-17","DocumentType":"Policy Statement","DocumentID":"BCREG20251217a","Title":"Federal Reserve Issues New Policy on Permissible Novel Activities for State Member Banks","URL":"https://www.federalreserve.gov/newsevents/pressreleases/bcreg20251217a.htm","ThemeTags":"novel activities; crypto; supervision; policy framework","LeadSignal":"High","ActionType":"Final Rule","ComplianceDeadline":"","ImpactSummary":"Replaces presumption against novel activities with risk-based framework; removes language disfavoring decentralized networks"},
       {"Agency":"SEC","Date":"2025-12-17","DocumentType":"FAQs","DocumentID":"","Title":"Division of Trading and Markets FAQs on Crypto Asset Activities and DLT","URL":"https://www.sec.gov/rules-regulations/staff-guidance/trading-markets-frequently-asked-questions","ThemeTags":"crypto; trading; settlement; guidance","LeadSignal":"High","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"Provides clarity on pairs trading, transaction reporting, and settlement for crypto asset trading"},
+      {"Agency":"Federal Reserve","Date":"2025-12-17","DocumentType":"Policy Statement","DocumentID":"BCREG20251217a","Title":"Federal Reserve Issues New Policy on Permissible Novel Activities for State Member Banks","URL":"https://www.federalreserve.gov/newsevents/pressreleases/bcreg20251217a.htm","ThemeTags":"novel activities; crypto; supervision; policy framework","LeadSignal":"High","ActionType":"Final Rule","ComplianceDeadline":"","ImpactSummary":"Replaces presumption against novel activities with risk-based framework; removes language disfavoring decentralized networks"},
       {"Agency":"SEC","Date":"2025-12-17","DocumentType":"Guidance","DocumentID":"","Title":"Statement on the Custody of Crypto Asset Securities by Broker-Dealers","URL":"https://www.sec.gov/newsroom/speeches-statements/trading-markets-121725","ThemeTags":"custody; broker-dealer; guidance","LeadSignal":"High","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"Clarifies physical possession standards for crypto security custody; enables broker-dealer crypto services"},
-      {"Agency":"FDIC","Date":"2025-12-16","DocumentType":"Proposed Rule","DocumentID":"NPR","Title":"FDIC Approves Proposal to Establish GENIUS Act Application Procedures","URL":"https://www.fdic.gov/news/press-releases/2025/fdic-approves-genius-act-application-procedures-fdic","ThemeTags":"stablecoins; GENIUS Act; deposit insurance; issuance approval","LeadSignal":"High","ActionType":"Proposed Rule","ComplianceDeadline":"2026-02-17","ImpactSummary":"FDIC Board approved proposed rule implementing GENIUS Act stablecoin issuance framework for bank subsidiaries"},
+      {"Agency":"FDIC","Date":"2025-12-16","DocumentType":"Proposed Rule","DocumentID":"NPR","Title":"FDIC Approves Proposal to Establish GENIUS Act Application Procedures","URL":"https://www.fdic.gov/news/press-releases/2025/fdic-approves-proposal-establish-genius-act-application-procedures-fdic","ThemeTags":"stablecoins; GENIUS Act; deposit insurance; issuance approval","LeadSignal":"High","ActionType":"Proposed Rule","ComplianceDeadline":"2026-02-17","ImpactSummary":"FDIC Board approved proposed rule implementing GENIUS Act stablecoin issuance framework for bank subsidiaries"},
       {"Agency":"OCC","Date":"2025-12-12","DocumentType":"News Release","DocumentID":"NR 2025-125","Title":"OCC Announces Conditional Approvals for Five National Trust Bank Charter Applications","URL":"https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-125.html","ThemeTags":"trust bank; charters","LeadSignal":"High","ActionType":"News Release","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"CFTC","Date":"2025-12-11","DocumentType":"Withdrawal","DocumentID":"PR 9152-25","Title":"Withdrawal of Outdated Digital Assets Guidance","URL":"https://www.cftc.gov/PressRoom/PressReleases/9152-25","ThemeTags":"crypto; guidance; virtual currencies; retail","LeadSignal":"Medium","ActionType":"Withdrawal","ComplianceDeadline":"","ImpactSummary":"Withdraws 2020 interpretive guidance on \"actual delivery\" in leveraged retail commodity transactions"},
       {"Agency":"SEC","Date":"2025-12-11","DocumentType":"No-Action Letter","DocumentID":"DTC NAL","Title":"DTC Tokenization Pilot No-Action Letter","URL":"https://www.sec.gov/files/tm/no-action/dtc-nal-121125.pdf","ThemeTags":"tokenization; custody; DTC; settlement","LeadSignal":"High","ActionType":"No-Action Letter","ComplianceDeadline":"","ImpactSummary":"Authorizes 3-year pilot for tokenizing DTC-custodied assets on blockchain; enables immediate settlement"},
       {"Agency":"OCC","Date":"2025-12-10","DocumentType":"News Release","DocumentID":"NR 2025-123","Title":"OCC Releases Preliminary Findings from Its Review of Large Banks' Debanking Activities","URL":"https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-123.html","ThemeTags":"debanking; supervision","LeadSignal":"High","ActionType":"News Release","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"OCC","Date":"2025-12-09","DocumentType":"News Release","DocumentID":"NR 2025-121","Title":"OCC Confirms Bank Authority to Engage in Riskless Principal Crypto-Asset Transactions","URL":"https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-121.html","ThemeTags":"crypto; execution; riskless principal","LeadSignal":"High","ActionType":"News Release","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"FinCEN","Date":"2025-12-09","DocumentType":"Enforcement","DocumentID":"Consent Order","Title":"Paxful P2P Exchange Enforcement & Consent Order","URL":"https://www.fincen.gov/system/files/2025-12/PaxfulConsentOrder.pdf","ThemeTags":"crypto; AML; enforcement; KYC","LeadSignal":"High","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"$3.5M civil penalty for failing to register as MSB, maintain AML program, and report suspicious activity"},
+      {"Agency":"FinCEN","Date":"2025-12-09","DocumentType":"Enforcement","DocumentID":"Consent Order","Title":"Paxful P2P Exchange Enforcement & Consent Order","URL":"https://www.fincen.gov/news/news-releases/fincen-assesses-35-million-penalty-against-paxful-facilitating-suspicious","ThemeTags":"crypto; AML; enforcement; KYC","LeadSignal":"High","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"$3.5M civil penalty for failing to register as MSB, maintain AML program, and report suspicious activity"},
       {"Agency":"OCC","Date":"2025-12-09","DocumentType":"Interpretive Letter","DocumentID":"IL 1188","Title":"Banks may engage in riskless principal transactions in crypto-assets as part of the business of banking","URL":"https://www.occ.gov/topics/charters-and-licensing/interpretations-and-actions/2025/int1188.pdf","ThemeTags":"crypto; execution; riskless principal","LeadSignal":"High","ActionType":"Interpretive Letter","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"CFTC","Date":"2025-12-08","DocumentType":"No-Action Letter","DocumentID":"Letter 25-40","Title":"Digital Assets Pilot Program - No-Action Relief","URL":"https://www.cftc.gov/csl/25-40/download","ThemeTags":"crypto; collateral; bitcoin; ethereum; derivatives","LeadSignal":"High","ActionType":"No-Action Letter","ComplianceDeadline":"","ImpactSummary":"No-action relief allowing FCMs to accept BTC, ETH, and USDC as customer margin collateral"},
       {"Agency":"CFTC","Date":"2025-12-08","DocumentType":"Guidance","DocumentID":"Letter 25-39","Title":"Tokenized Collateral Guidance","URL":"https://www.cftc.gov/csl/25-39/download","ThemeTags":"crypto; tokenized assets; collateral; derivatives","LeadSignal":"High","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"Joint guidance on use of tokenized assets as derivatives collateral; addresses eligibility, custody, haircuts"},
       {"Agency":"OCC","Date":"2025-12-05","DocumentType":"Bulletin","DocumentID":"OCC 2025-45","Title":"Commercial Lending: Venture Loans to Companies in Early/Expansion/Late Stage Development","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-45.html","ThemeTags":"venture debt; lending","LeadSignal":"Medium","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-12-05","DocumentType":"Bulletin","DocumentID":"OCC 2025-44","Title":"Leveraged Lending: Interagency Statement on Recission of Interagency Leveraged Lending Guidance Issuances","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-44.html","ThemeTags":"leveraged lending; guidance","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"CFTC","Date":"2025-12-04","DocumentType":"Announcement","DocumentID":"PR 9145-25","Title":"First-Ever Listed Spot Crypto Trading on Regulated Exchanges","URL":"https://www.cftc.gov/PressRoom/PressReleases/9145-25","ThemeTags":"crypto; spot trading; bitcoin; derivatives","LeadSignal":"High","ActionType":"Announcement","ComplianceDeadline":"","ImpactSummary":"First leverage spot cryptocurrency product listed on CFTC-registered futures exchanges"},
-      {"Agency":"OCC","Date":"2025-12-01","DocumentType":"Bulletin","DocumentID":"OCC 2025-43","Title":"Fees and Assessments: Calendar Year 2026 Fees and Assessments Structure","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-43.html","ThemeTags":"fees","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-12-01","DocumentType":"Bulletin","DocumentID":"OCC 2025-42","Title":"Consolidated Reports of Condition and Income: RFI on Regulatory Reporting Burden","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-42.html","ThemeTags":"call report; burden","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-11-25","DocumentType":"Bulletin","DocumentID":"OCC 2025-41","Title":"Final Rule: Modifications to the Enhanced Supplementary Leverage Ratio (eSLR) Standards","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-41.html","ThemeTags":"capital; eSLR","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-11-25","DocumentType":"Bulletin","DocumentID":"OCC 2025-40","Title":"Community Bank Leverage Ratio: Notice of Proposed Rulemaking","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-40.html","ThemeTags":"capital; CBLR","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-11-24","DocumentType":"Bulletin","DocumentID":"OCC 2025-37","Title":"BSA/AML: Community Bank Minimum BSA/AML Examination Procedures","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-37.html","ThemeTags":"BSA/AML; exams","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"OCC","Date":"2025-11-24","DocumentType":"Bulletin","DocumentID":"OCC 2025-39","Title":"Bank Activities: RFI on Community Banks' Engagement with Core Service Providers","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-39.html","ThemeTags":"third-party; core processors","LeadSignal":"High","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-11-24","DocumentType":"Bulletin","DocumentID":"OCC 2025-38","Title":"BSA/AML: Discontinuation of Annual Money Laundering Risk System Data Collection","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-38.html","ThemeTags":"BSA/AML; data","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"OCC","Date":"2025-11-18","DocumentType":"Interpretive Letter","DocumentID":"IL 1186","Title":"Banks may pay blockchain network fees and hold limited crypto as principal","URL":"https://www.occ.gov/topics/charters-and-licensing/interpretations-and-actions/2025/int1186.pdf","ThemeTags":"crypto; network fees; operations","LeadSignal":"High","ActionType":"Interpretive Letter","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"OCC","Date":"2025-11-18","DocumentType":"News Release","DocumentID":"NR 2025-108","Title":"OCC Confirms Bank Authority to Hold Crypto-Assets for Paying Network Fees","URL":"https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-108.html","ThemeTags":"crypto; network fees","LeadSignal":"High","ActionType":"News Release","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-11-13","DocumentType":"Bulletin","DocumentID":"OCC 2025-36","Title":"Servicemembers Civil Relief Act: Updated Handbook Booklet","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-36.html","ThemeTags":"SCRA; handbook","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-10-27","DocumentType":"Bulletin","DocumentID":"OCC 2025-35","Title":"NPR: Standards for Recovery Planning by Certain Large Insured Banks","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-35.html","ThemeTags":"recovery planning; large banks","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"Federal Reserve","Date":"2025-10-21","DocumentType":"Speech","DocumentID":"","Title":"Governor Waller - \"Skinny\" Master Account Proposal for Crypto Firms","URL":"https://www.federalreserve.gov/newsevents/speech/waller20251021a.htm","ThemeTags":"master account; payments innovation; crypto firms; access to Fed","LeadSignal":"High","ActionType":"Speech","ComplianceDeadline":"","ImpactSummary":"Introduced concept of narrower \"payment accounts\" for crypto-focused firms; signals Fed embracing payments disruption"},
-      {"Agency":"OCC","Date":"2025-10-16","DocumentType":"Bulletin","DocumentID":"OCC 2025-33","Title":"Interest Rate Risk: Interest Rate Risk Statistics Report","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-33.html","ThemeTags":"IRR; risk","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-10-16","DocumentType":"Bulletin","DocumentID":"OCC 2025-34","Title":"Risk Management: Rescission of Climate-Related Financial Risk Principles","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-34.html","ThemeTags":"climate; risk mgmt","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-10-15","DocumentType":"Bulletin","DocumentID":"OCC 2025-32","Title":"Fair Housing Act: Update to Fair Housing Lender Posters","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-32.html","ThemeTags":"fair housing","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"OCC","Date":"2025-10-15","DocumentType":"News Release","DocumentID":"NR 2025-101","Title":"OCC Announces Conditional Approval for Chartering Erebor Bank","URL":"https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-101.html","ThemeTags":"chartering; de novo","LeadSignal":"High","ActionType":"News Release","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"FinCEN","Date":"2025-10-14","DocumentType":"Final Rule","DocumentID":"Section 311","Title":"Huione Group Severed from U.S. Financial System","URL":"https://www.fincen.gov/news/news-releases/fincen-issues-final-rule-severing-huione-group","ThemeTags":"crypto; enforcement; sanctions; money laundering","LeadSignal":"High","ActionType":"Final Rule","ComplianceDeadline":"","ImpactSummary":"Blocks Cambodia-based Huione Group from U.S. financial system for laundering $4B+ in illicit crypto"},
-      {"Agency":"OCC","Date":"2025-10-09","DocumentType":"Bulletin","DocumentID":"OCC 2025-31","Title":"BSA/AML: FinCEN FAQs on Suspicious Activity Reporting","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-31.html","ThemeTags":"BSA/AML; SAR","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"OCC","Date":"2025-10-07","DocumentType":"Bulletin","DocumentID":"OCC 2025-29","Title":"Interagency NPR: Defining 'Unsafe or Unsound Practice' and Revising the MRA Framework","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-29.html","ThemeTags":"supervision; MRAs","LeadSignal":"Medium","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"OCC","Date":"2025-10-07","DocumentType":"Bulletin","DocumentID":"OCC 2025-30","Title":"NPR: Prohibition on Use of Reputation Risk by Regulators","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-30.html","ThemeTags":"reputation risk; supervision","LeadSignal":"High","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-10-06","DocumentType":"Bulletin","DocumentID":"OCC 2025-24","Title":"Examinations: Frequency and Scope for Community Banks","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-24.html","ThemeTags":"supervision; exams","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-10-06","DocumentType":"Bulletin","DocumentID":"OCC 2025-27","Title":"NPR: Rescission of Fair Housing Home Loan Data System","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-27.html","ThemeTags":"fair housing; data","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-10-06","DocumentType":"Bulletin","DocumentID":"OCC 2025-26","Title":"Model Risk Management: Clarification for Community Banks","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-26.html","ThemeTags":"model risk","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-10-06","DocumentType":"Bulletin","DocumentID":"OCC 2025-25","Title":"Retail Nondeposit Investment Products: Exam Procedures","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-25.html","ThemeTags":"RNDIP; exams","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"OCC","Date":"2025-10-06","DocumentType":"Bulletin","DocumentID":"OCC 2025-28","Title":"NPR: Community Bank Licensing Amendments","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-28.html","ThemeTags":"licensing; community banks","LeadSignal":"Medium","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"NY DFS","Date":"2025-09-30","DocumentType":"Industry Letter","DocumentID":"IL20250930","Title":"Updated Guidance on Custodial Structures for Customer Protection","URL":"https://www.dfs.ny.gov/industry-guidance/industry-letters/il20250930-updated-guidance-custodial-structures","ThemeTags":"BitLicense; custody; consumer protection; segregation","LeadSignal":"High","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"NY DFS updated custodial guidance emphasizing segregation requirements and sub-custodian standards"},
       {"Agency":"CFTC","Date":"2025-09-23","DocumentType":"Announcement","DocumentID":"PR 9130-25","Title":"Tokenized Collateral and Stablecoins Initiative","URL":"https://www.cftc.gov/PressRoom/PressReleases/9130-25","ThemeTags":"crypto; stablecoins; tokenized assets; collateral","LeadSignal":"High","ActionType":"Announcement","ComplianceDeadline":"","ImpactSummary":"CFTC announces initiative to enable tokenized collateral (including stablecoins) in derivatives markets"},
-      {"Agency":"SEC","Date":"2025-09-17","DocumentType":"Final Rule","DocumentID":"PR 2025-121","Title":"SEC Approves Generic Listing Standards for Commodity-Based Trust Shares","URL":"https://www.sec.gov/newsroom/press-releases/2025-121","ThemeTags":"ETF; bitcoin; ethereum; crypto; listing","LeadSignal":"High","ActionType":"Final Rule","ComplianceDeadline":"","ImpactSummary":"Streamlines approval process for spot crypto ETPs; eliminates need for individual exchange rule approvals"},
       {"Agency":"NY DFS","Date":"2025-09-17","DocumentType":"Industry Letter","DocumentID":"IL20250917","Title":"Notice on Use of Blockchain Analytics for New York Banking Organizations","URL":"https://www.dfs.ny.gov/industry-guidance/industry-letters/il20250917-blockchain","ThemeTags":"blockchain analytics; compliance; AML; risk management","LeadSignal":"High","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"NY DFS extended blockchain analytics guidance to all NY banking organizations for virtual currency monitoring"},
-      {"Agency":"OCC","Date":"2025-09-08","DocumentType":"Bulletin","DocumentID":"OCC 2025-23","Title":"Protecting Customer Financial Records","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-23.html","ThemeTags":"privacy; records","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
+      {"Agency":"SEC","Date":"2025-09-17","DocumentType":"Final Rule","DocumentID":"PR 2025-121","Title":"SEC Approves Generic Listing Standards for Commodity-Based Trust Shares","URL":"https://www.sec.gov/newsroom/press-releases/2025-121","ThemeTags":"ETF; bitcoin; ethereum; crypto; listing","LeadSignal":"High","ActionType":"Final Rule","ComplianceDeadline":"","ImpactSummary":"Streamlines approval process for spot crypto ETPs; eliminates need for individual exchange rule approvals"},
       {"Agency":"OCC","Date":"2025-09-08","DocumentType":"Bulletin","DocumentID":"OCC 2025-22","Title":"Licensing and CRA: Consideration of Politicized or Unlawful Debanking","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-22.html","ThemeTags":"debanking; licensing; CRA","LeadSignal":"High","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"FinCEN","Date":"2025-09-01","DocumentType":"Proposed Rule","DocumentID":"Mixer Rule","Title":"CVC Mixing Special Measure Proposed Rule","URL":"https://www.fincen.gov/news/news-releases/fincen-proposes-new-regulation-enhance-transparency","ThemeTags":"crypto; AML; mixer; money laundering; terrorism","LeadSignal":"High","ActionType":"Proposed Rule","ComplianceDeadline":"","ImpactSummary":"Designates CVC mixing/tumbler services as Primary Money Laundering Concern under Section 311"},
-      {"Agency":"OCC","Date":"2025-08-29","DocumentType":"Bulletin","DocumentID":"OCC 2025-21","Title":"Fees and Assessments: Interim Calendar Year 2025 Structure","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-21.html","ThemeTags":"fees","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"NY DFS","Date":"2025-08-15","DocumentType":"Enforcement","DocumentID":"","Title":"Paxos Trust Company Settlement - $48.5 Million for AML Failures","URL":"https://www.dfs.ny.gov/reports_and_publications/press_releases","ThemeTags":"enforcement; AML; stablecoin; due diligence","LeadSignal":"High","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"Paxos agreed to pay $48.5M penalty for insufficient due diligence on Binance and AML compliance failures"},
-      {"Agency":"OCC","Date":"2025-08-15","DocumentType":"Bulletin","DocumentID":"OCC 2025-20","Title":"Accounting: Bank Accounting Advisory Series Updated","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-20.html","ThemeTags":"accounting","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
+      {"Agency":"NY DFS","Date":"2025-08-06","DocumentType":"Enforcement","DocumentID":"","Title":"Paxos Trust Company Settlement - $48.5 Million for AML Failures","URL":"https://www.dfs.ny.gov/reports_and_publications/press_releases/pr20250806","ThemeTags":"enforcement; AML; stablecoin; due diligence","LeadSignal":"High","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"Paxos agreed to pay $48.5M penalty for insufficient due diligence on Binance and AML compliance failures"},
       {"Agency":"Federal Reserve","Date":"2025-08-15","DocumentType":"Press Release","DocumentID":"BCREG20250815a","Title":"Federal Reserve Announces Rescission of Novel Activities Supervision Program (SR 23-7)","URL":"https://www.federalreserve.gov/newsevents/pressreleases/bcreg20250815a.htm","ThemeTags":"supervision; novel activities; crypto; policy reversal","LeadSignal":"High","ActionType":"Withdrawal","ComplianceDeadline":"","ImpactSummary":"Sunset the formal Novel Activities Supervision Program; integration of crypto supervision back into standard process"},
       {"Agency":"CFTC","Date":"2025-08-04","DocumentType":"Announcement","DocumentID":"PR 9105-25","Title":"Launch of Listed Spot Crypto Trading Initiative","URL":"https://www.cftc.gov/PressRoom/PressReleases/9105-25","ThemeTags":"crypto; spot trading; derivatives; bitcoin","LeadSignal":"High","ActionType":"Announcement","ComplianceDeadline":"","ImpactSummary":"CFTC initiates spot crypto asset contracts listed on CFTC-registered futures exchanges"},
       {"Agency":"FinCEN","Date":"2025-08-04","DocumentType":"Notice","DocumentID":"FIN-2025-NTC1","Title":"CVC Kiosk Notice - Illicit Activity Warning","URL":"https://www.fincen.gov/news/news-releases/fincen-issues-notice-use-convertible-virtual-currency-kiosks","ThemeTags":"crypto; AML; advisory; fraud","LeadSignal":"High","ActionType":"Advisory","ComplianceDeadline":"","ImpactSummary":"Alerts to 99% increase in crypto ATM fraud complaints; requires MSB registration, AML programs, KYC procedures"},
       {"Agency":"CFTC","Date":"2025-08-01","DocumentType":"Announcement","DocumentID":"PR 9104-25","Title":"CFTC Announces Crypto Sprint Initiative","URL":"https://www.cftc.gov/PressRoom/PressReleases/9104-25","ThemeTags":"crypto; policy; derivatives; innovation","LeadSignal":"High","ActionType":"Announcement","ComplianceDeadline":"","ImpactSummary":"Launch of 12-month \"Crypto Sprint\" to implement recommendations on digital asset markets"},
       {"Agency":"SEC","Date":"2025-07-29","DocumentType":"Final Order","DocumentID":"PR 2025-101","Title":"SEC Permits In-Kind Creations and Redemptions for Crypto ETPs","URL":"https://www.sec.gov/newsroom/press-releases/2025-101","ThemeTags":"ETF; bitcoin; ethereum; guidance","LeadSignal":"High","ActionType":"Final Rule","ComplianceDeadline":"","ImpactSummary":"Improves operational efficiency for spot Bitcoin and Ethereum ETFs; reduces transaction costs"},
-      {"Agency":"OCC","Date":"2025-07-25","DocumentType":"Bulletin","DocumentID":"OCC 2025-19","Title":"EGRPRA: Regulatory Review to Identify Outdated Regulations","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-19.html","ThemeTags":"reg burden; EGRPRA","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"Federal Reserve","Date":"2025-07-18","DocumentType":"Legislation","DocumentID":"GENIUS Act","Title":"GENIUS Act Signed into Law","URL":"https://www.whitehouse.gov/fact-sheets/2025/07/","ThemeTags":"stablecoins; policy framework; federal regulation","LeadSignal":"High","ActionType":"Legislation","ComplianceDeadline":"","ImpactSummary":"First comprehensive federal framework for stablecoin issuance by banks and nonbanks"},
-      {"Agency":"OCC","Date":"2025-07-16","DocumentType":"Bulletin","DocumentID":"OCC 2025-18","Title":"CRA: Interagency NPR to Rescind and Replace the 2023 CRA Final Rule","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-18.html","ThemeTags":"CRA; rulemaking","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-07-14","DocumentType":"Bulletin","DocumentID":"OCC 2025-16","Title":"Fair Lending: Removing References to Disparate Impact","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-16.html","ThemeTags":"fair lending; policy","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"FDIC","Date":"2025-07-14","DocumentType":"Joint Statement","DocumentID":"","Title":"Agencies Issue Joint Statement on Crypto-Asset Safekeeping Risk Management","URL":"https://www.fdic.gov/news/press-releases/2025/agencies-issue-joint-statement-risk-management-considerations-crypto-asset","ThemeTags":"custody; safekeeping; risk management; supervision","LeadSignal":"Medium","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"Federal Reserve, FDIC, and OCC issued guidance on crypto-asset safekeeping by banks"},
+      {"Agency":"Federal Reserve","Date":"2025-07-18","DocumentType":"Legislation","DocumentID":"GENIUS Act","Title":"GENIUS Act Signed into Law","URL":"https://www.congress.gov/bill/119th-congress/senate-bill/394","ThemeTags":"stablecoins; policy framework; federal regulation","LeadSignal":"High","ActionType":"Legislation","ComplianceDeadline":"","ImpactSummary":"First comprehensive federal framework for stablecoin issuance by banks and nonbanks"},
       {"Agency":"Federal Reserve","Date":"2025-07-14","DocumentType":"Joint Statement","DocumentID":"BCREG20250714a","Title":"Agencies Issue Joint Statement on Crypto-Asset Safekeeping Risk Management","URL":"https://www.federalreserve.gov/newsevents/pressreleases/bcreg20250714a.htm","ThemeTags":"crypto; supervision; safekeeping; risk management","LeadSignal":"Medium","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"Established risk-management framework for banks engaging in crypto-asset custody activities"},
       {"Agency":"OCC","Date":"2025-07-14","DocumentType":"Bulletin","DocumentID":"OCC 2025-17","Title":"Bank Activities: Crypto-Asset Safekeeping Services","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-17.html","ThemeTags":"crypto; custody; safekeeping","LeadSignal":"High","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"OCC","Date":"2025-07-14","DocumentType":"News Release","DocumentID":"NR 2025-68","Title":"Agencies Issue Joint Statement on Crypto-Asset Safekeeping","URL":"https://www.occ.gov/news-issuances/news-releases/2025/nr-ia-2025-68.html","ThemeTags":"crypto; safekeeping; risk mgmt","LeadSignal":"High","ActionType":"News Release","ComplianceDeadline":"","ImpactSummary":""},
+      {"Agency":"FDIC","Date":"2025-07-14","DocumentType":"Joint Statement","DocumentID":"","Title":"Agencies Issue Joint Statement on Crypto-Asset Safekeeping Risk Management","URL":"https://www.fdic.gov/news/press-releases/2025/agencies-issue-joint-statement-risk-management-considerations-crypto-asset","ThemeTags":"custody; safekeeping; risk management; supervision","LeadSignal":"Medium","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"Federal Reserve, FDIC, and OCC issued guidance on crypto-asset safekeeping by banks"},
       {"Agency":"California DFPI","Date":"2025-07-01","DocumentType":"Regulatory Deadline","DocumentID":"","Title":"California Digital Financial Assets Law (DFAL) - Extended Licensing Deadline","URL":"https://dfpi.ca.gov/regulated-industries/digital-financial-assets/","ThemeTags":"licensing; compliance; digital financial assets","LeadSignal":"Medium","ActionType":"Deadline","ComplianceDeadline":"2026-07-01","ImpactSummary":"California extended crypto business licensing deadline to July 1, 2026 under DFAL"},
-      {"Agency":"OCC","Date":"2025-06-27","DocumentType":"Bulletin","DocumentID":"OCC 2025-15","Title":"BSA/AML: Customer Identification Program TIN Alternative Collection","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-15.html","ThemeTags":"BSA/AML; CIP","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-06-27","DocumentType":"Bulletin","DocumentID":"OCC 2025-14","Title":"NPR: Modifications to Enhanced Supplementary Leverage Ratio Standards","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-14.html","ThemeTags":"capital; leverage; GSIB","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-06-23","DocumentType":"Bulletin","DocumentID":"OCC 2025-13","Title":"Guidance on Referrals for Potential Criminal Enforcement","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-13.html","ThemeTags":"enforcement; referrals","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"OCC","Date":"2025-06-16","DocumentType":"Bulletin","DocumentID":"OCC 2025-12","Title":"Payments Fraud: RFI on Potential Actions to Address Payments Fraud","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-12.html","ThemeTags":"payments; fraud; risk","LeadSignal":"Medium","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"SEC","Date":"2025-05-29","DocumentType":"Guidance","DocumentID":"","Title":"Statement on Certain Protocol Staking Activities","URL":"https://www.sec.gov/newsroom/speeches-statements/statement-certain-protocol-staking-activities-052925","ThemeTags":"staking; crypto; guidance; proof-of-stake","LeadSignal":"High","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"Clarified proof-of-stake staking is not a securities transaction; opens pathway for staking services"},
       {"Agency":"SEC","Date":"2025-05-19","DocumentType":"Speech","DocumentID":"","Title":"New Paradigm - Commissioner Peirce at SEC Speaks Conference","URL":"https://www.sec.gov/newsroom/speeches-statements/peirce-remarks-sec-speaks-051925-new-paradigm-remarks-sec-speaks","ThemeTags":"crypto; securities; policy; speech","LeadSignal":"High","ActionType":"Speech","ComplianceDeadline":"","ImpactSummary":"Clarified most crypto assets (payment tokens, utilities, collectibles) are not securities; signals policy shift"},
-      {"Agency":"CFPB","Date":"2025-05-15","DocumentType":"Withdrawal","DocumentID":"","Title":"CFPB Withdraws Proposed Interpretive Rule on Emerging Payment Mechanisms","URL":"https://www.consumerfinance.gov/about-us/newsroom/","ThemeTags":"consumer protection; policy shift; withdrawal","LeadSignal":"Medium","ActionType":"Withdrawal","ComplianceDeadline":"","ImpactSummary":"CFPB withdrew January 2025 proposed rule extending Regulation E to crypto; signals reduced focus on crypto"},
-      {"Agency":"OCC","Date":"2025-05-12","DocumentType":"Bulletin","DocumentID":"OCC 2025-10","Title":"Prohibition Against Interstate Deposits: Annual Loan-to-Deposit Ratios","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-10.html","ThemeTags":"interstate deposits; ratios","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"2025-05-08","DocumentType":"Bulletin","DocumentID":"OCC 2025-9","Title":"Business Combinations Under the Bank Merger Act: Rescission","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-9.html","ThemeTags":"M&A; bank merger act","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
+      {"Agency":"CFPB","Date":"2025-05-15","DocumentType":"Withdrawal","DocumentID":"","Title":"CFPB Withdraws Proposed Interpretive Rule on Emerging Payment Mechanisms","URL":"https://www.federalregister.gov/documents/2025/05/15/2025-08646/electronic-fund-transfers-through-accounts-established-primarily-for-personal-family-or-household","ThemeTags":"consumer protection; policy shift; withdrawal","LeadSignal":"Medium","ActionType":"Withdrawal","ComplianceDeadline":"","ImpactSummary":"CFPB withdrew January 2025 proposed rule extending Regulation E to crypto; signals reduced focus on crypto"},
       {"Agency":"OCC","Date":"2025-05-07","DocumentType":"News Release","DocumentID":"NR 2025-42","Title":"OCC Clarifies Bank Authority for Crypto-Asset Custody and Execution Services","URL":"https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-42.html","ThemeTags":"crypto; custody; execution","LeadSignal":"High","ActionType":"News Release","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"OCC","Date":"2025-05-05","DocumentType":"Bulletin","DocumentID":"OCC 2025-8","Title":"Bank Activities: RFI on Community Bank Digitalization","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-8.html","ThemeTags":"digitalization; community banks","LeadSignal":"Medium","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"Federal Reserve","Date":"2025-04-24","DocumentType":"Press Release","DocumentID":"BCREG20250424a","Title":"Withdrawal of Guidance for Banks Related to Crypto-Asset and Dollar Token Activities","URL":"https://www.federalreserve.gov/newsevents/pressreleases/bcreg20250424a.htm","ThemeTags":"crypto; supervision; policy reversal","LeadSignal":"High","ActionType":"Withdrawal","ComplianceDeadline":"","ImpactSummary":"Rescinded SR 23-8 on dollar token activities and 2022 crypto notification requirements; major reversal"},
       {"Agency":"FDIC","Date":"2025-04-24","DocumentType":"Joint Statement","DocumentID":"","Title":"Agencies Withdraw Joint Statements on Crypto-Assets","URL":"https://www.fdic.gov/news/press-releases/2025/agencies-withdraw-joint-statements-crypto-assets","ThemeTags":"crypto; supervision; interagency; deregulation","LeadSignal":"High","ActionType":"Withdrawal","ComplianceDeadline":"","ImpactSummary":"FDIC and Federal Reserve withdrew January 3, 2023 and February 23, 2023 joint statements on crypto-asset risks"},
-      {"Agency":"OCC","Date":"2025-04-15","DocumentType":"Bulletin","DocumentID":"OCC 2025-7","Title":"Real Estate Appraisals: Temporary Exceptions for LA Wildfires","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-7.html","ThemeTags":"appraisals; disaster relief","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
+      {"Agency":"Federal Reserve","Date":"2025-04-24","DocumentType":"Press Release","DocumentID":"BCREG20250424a","Title":"Withdrawal of Guidance for Banks Related to Crypto-Asset and Dollar Token Activities","URL":"https://www.federalreserve.gov/newsevents/pressreleases/bcreg20250424a.htm","ThemeTags":"crypto; supervision; policy reversal","LeadSignal":"High","ActionType":"Withdrawal","ComplianceDeadline":"","ImpactSummary":"Rescinded SR 23-8 on dollar token activities and 2022 crypto notification requirements; major reversal"},
       {"Agency":"SEC","Date":"2025-04-10","DocumentType":"Guidance","DocumentID":"","Title":"Staff Statement on Offerings and Registrations in Crypto Asset Markets","URL":"https://www.sec.gov/newsroom/speeches-statements/statement-offerings-registrations","ThemeTags":"crypto; securities; registration; guidance","LeadSignal":"Medium","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"Provides pathway for crypto asset securities registration; supports institutional adoption"},
       {"Agency":"FDIC","Date":"2025-04-08","DocumentType":"Speech","DocumentID":"","Title":"View from the FDIC: Update on Key Policy Issues","URL":"https://www.fdic.gov/news/speeches/2025/view-fdic-update-key-policy-issues","ThemeTags":"crypto; policy; regulatory framework; banking innovation","LeadSignal":"High","ActionType":"Speech","ComplianceDeadline":"","ImpactSummary":"Acting Chairman Travis Hill outlined FDIC commitment to crypto and digital asset innovation"},
-      {"Agency":"OCC","Date":"2025-04-08","DocumentType":"Bulletin","DocumentID":"OCC 2025-6","Title":"CRA, Fair Housing Act, and ECOA: OCC Contact Information","URL":"https://www.occ.gov/news-issuances/bulletins/2025/bulletin-2025-6.html","ThemeTags":"CRA; consumer compliance","LeadSignal":"Low","ActionType":"Bulletin","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"SEC","Date":"2025-04-04","DocumentType":"Guidance","DocumentID":"","Title":"Statement on Stablecoins (Covered Stablecoins)","URL":"https://www.sec.gov/newsroom/speeches-statements/statement-stablecoins-040425","ThemeTags":"stablecoin; crypto; guidance; securities","LeadSignal":"High","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"USD-pegged stablecoins with 1:1 backing not securities; clarifies regulatory treatment for major stablecoin issuers"},
       {"Agency":"FDIC","Date":"2025-03-28","DocumentType":"FIL","DocumentID":"FIL-7-2025","Title":"Clarifies Process for Banks to Engage in Crypto-Related Activities","URL":"https://www.fdic.gov/news/press-releases/2025/fdic-clarifies-process-banks-engage-crypto-related-activities","ThemeTags":"crypto; guidance; custody; stablecoins; supervision","LeadSignal":"High","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"Rescinded FIL-16-2022 notification requirement; banks may engage in permissible crypto activities without prior approval"},
       {"Agency":"SEC","Date":"2025-03-20","DocumentType":"Guidance","DocumentID":"","Title":"Statement on Certain Proof-of-Work Mining Activities","URL":"https://www.sec.gov/newsroom/speeches-statements/statement-certain-proof-work-mining-activities-032025","ThemeTags":"bitcoin; mining; crypto; guidance","LeadSignal":"High","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"Clarified mining does not constitute securities offering; eliminates regulatory uncertainty for Bitcoin mining"},
@@ -428,36 +387,36 @@
       {"Agency":"OCC","Date":"2025-03-07","DocumentType":"News Release","DocumentID":"NR 2025-16","Title":"OCC Clarifies Bank Authority to Engage in Certain Cryptocurrency Activities","URL":"https://www.occ.gov/news-issuances/news-releases/2025/nr-occ-2025-16.html","ThemeTags":"crypto; permissibility","LeadSignal":"High","ActionType":"News Release","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"SEC","Date":"2025-02-27","DocumentType":"Guidance","DocumentID":"","Title":"Staff Statement on Meme Coins","URL":"https://www.sec.gov/newsroom/speeches-statements/staff-statement-meme-coins","ThemeTags":"crypto; securities; meme coins; guidance","LeadSignal":"Medium","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"Clarified meme coins are not securities under securities laws; collectibles-like treatment"},
       {"Agency":"SEC","Date":"2025-02-27","DocumentType":"Enforcement Dismissal","DocumentID":"PR 2025-47","Title":"SEC Announces Dismissal of Civil Enforcement Action Against Coinbase","URL":"https://www.sec.gov/newsroom/press-releases/2025-47","ThemeTags":"coinbase; enforcement; securities","LeadSignal":"High","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"First major enforcement dismissal; removes threat of unregistered securities charges for Coinbase"},
-      {"Agency":"SEC","Date":"2025-02-26","DocumentType":"Investigation Closure","DocumentID":"","Title":"SEC Closes Investigation into Gemini","URL":"https://www.sec.gov/newsroom","ThemeTags":"crypto; enforcement; custody","LeadSignal":"High","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"699-day investigation closed with no enforcement; major reversal for crypto exchange regulation"},
-      {"Agency":"SEC","Date":"2025-02-24","DocumentType":"Investigation Closure","DocumentID":"","Title":"SEC Closes Investigation into Robinhood Crypto","URL":"https://www.sec.gov/newsroom","ThemeTags":"enforcement; trading; policy shift","LeadSignal":"High","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"Reversal of Wells Notice enforcement threat; signals shift away from crypto trading platforms enforcement"},
-      {"Agency":"SEC","Date":"2025-02-21","DocumentType":"Investigation Closure","DocumentID":"","Title":"SEC Closes Investigation into OpenSea","URL":"https://www.sec.gov/newsroom","ThemeTags":"NFT; enforcement; policy shift","LeadSignal":"High","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"Major enforcement reversal; no enforcement action against largest NFT marketplace"},
-      {"Agency":"FDIC","Date":"2025-02-05","DocumentType":"Press Release","DocumentID":"","Title":"FDIC Releases Documents Related to Supervision of Crypto-Related Activities","URL":"https://fdic.gov/news/press-releases/2025/fdic-releases-documents-related-supervision-crypto-related-activities","ThemeTags":"supervision; transparency; pause letters; enforcement","LeadSignal":"High","ActionType":"Transparency","ComplianceDeadline":"","ImpactSummary":"FDIC released 175 supervisory documents including 25 \"pause\" letters sent to banks seeking crypto activities"},
+      {"Agency":"SEC","Date":"2025-02-26","DocumentType":"Investigation Closure","DocumentID":"","Title":"SEC Closes Investigation into Gemini","URL":"https://www.sec.gov/newsroom/press-releases/2025-38","ThemeTags":"crypto; enforcement; custody","LeadSignal":"High","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"699-day investigation closed with no enforcement; major reversal for crypto exchange regulation"},
+      {"Agency":"SEC","Date":"2025-02-24","DocumentType":"Investigation Closure","DocumentID":"","Title":"SEC Closes Investigation into Robinhood Crypto","URL":"https://newsroom.aboutrobinhood.com/sec-closes-investigation-into-robinhood-crypto-with-no-action/","ThemeTags":"enforcement; trading; policy shift","LeadSignal":"High","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"Reversal of Wells Notice enforcement threat; signals shift away from crypto trading platforms enforcement"},
+      {"Agency":"SEC","Date":"2025-02-21","DocumentType":"Investigation Closure","DocumentID":"","Title":"SEC Closes Investigation into OpenSea","URL":"https://www.coindesk.com/markets/2025/02/22/sec-drops-opensea-investigation-easing-pressure-on-nft-market","ThemeTags":"NFT; enforcement; policy shift","LeadSignal":"High","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"Major enforcement reversal; no enforcement action against largest NFT marketplace"},
+      {"Agency":"FDIC","Date":"2025-02-05","DocumentType":"Press Release","DocumentID":"","Title":"FDIC Releases Documents Related to Supervision of Crypto-Related Activities","URL":"https://www.fdic.gov/news/press-releases/2025/fdic-releases-documents-related-supervision-crypto-related-activities","ThemeTags":"supervision; transparency; pause letters; enforcement","LeadSignal":"High","ActionType":"Transparency","ComplianceDeadline":"","ImpactSummary":"FDIC released 175 supervisory documents including 25 \"pause\" letters sent to banks seeking crypto activities"},
       {"Agency":"SEC","Date":"2025-02-04","DocumentType":"Speech","DocumentID":"","Title":"The Journey Begins - Commissioner Peirce Outlines Crypto Task Force Priorities","URL":"https://www.sec.gov/newsroom/speeches-statements/peirce-journey-begins-020425","ThemeTags":"crypto; task force; policy; speech","LeadSignal":"High","ActionType":"Speech","ComplianceDeadline":"","ImpactSummary":"Commissioner Peirce outlined 10 key priorities including security status clarification, registration pathways"},
       {"Agency":"SEC","Date":"2025-01-21","DocumentType":"Policy Statement","DocumentID":"PR 2025-30","Title":"SEC Crypto 2.0: Acting Chairman Uyeda Announces Formation of New Crypto Task Force","URL":"https://www.sec.gov/newsroom/press-releases/2025-30","ThemeTags":"crypto; task force; policy","LeadSignal":"High","ActionType":"Announcement","ComplianceDeadline":"","ImpactSummary":"Established comprehensive framework initiative led by Commissioner Peirce; signals major shift from enforcement to proactive regulation"},
       {"Agency":"CFPB","Date":"2025-01-10","DocumentType":"Proposed Rule","DocumentID":"","Title":"Proposed Interpretive Rule - Electronic Fund Transfers Using Emerging Payment Mechanisms","URL":"https://www.consumerfinance.gov/about-us/newsroom/cfpb-seeks-input-on-digital-payment-privacy","ThemeTags":"consumer protection; stablecoins; Regulation E; EFTA","LeadSignal":"Medium","ActionType":"Proposed Rule","ComplianceDeadline":"","ImpactSummary":"CFPB proposed extending EFTA/Reg E consumer protections to stablecoins/crypto (withdrawn May 15, 2025)"},
-      {"Agency":"CFTC","Date":"2025-01-01","DocumentType":"Enforcement","DocumentID":"PR 9032-25","Title":"Mosaic Exchange Ltd. and CEO Default Judgment","URL":"https://www.cftc.gov/PressRoom/PressReleases/9032-25","ThemeTags":"crypto; enforcement; fraud; digital assets","LeadSignal":"Medium","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"Default judgment against fraudulent digital asset scheme; $1.1M penalty"},
-      {"Agency":"OCC","Date":"","DocumentType":"Conditional Approval","DocumentID":"CA 1348","Title":"Application to charter Erebor Bank, National Association","URL":"https://www.occ.gov/topics/charters-and-licensing/interpretations-and-actions/2025/ca1348.pdf","ThemeTags":"chartering; de novo","LeadSignal":"High","ActionType":"Conditional Approval","ComplianceDeadline":"","ImpactSummary":""},
-      {"Agency":"OCC","Date":"","DocumentType":"Conditional Approval","DocumentID":"CA 1349","Title":"Boston Trust Walden Company conversion to a national bank","URL":"https://www.occ.gov/topics/charters-and-licensing/interpretations-and-actions/2025/ca1349.pdf","ThemeTags":"conversion; national bank","LeadSignal":"Medium","ActionType":"Conditional Approval","ComplianceDeadline":"","ImpactSummary":""}
+      {"Agency":"CFTC","Date":"2025-01-01","DocumentType":"Enforcement","DocumentID":"PR 9032-25","Title":"Mosaic Exchange Ltd. and CEO Default Judgment","URL":"https://www.cftc.gov/PressRoom/PressReleases/9032-25","ThemeTags":"crypto; enforcement; fraud; digital assets","LeadSignal":"Medium","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"Default judgment against fraudulent digital asset scheme; $1.1M penalty"}
     ];
 
-    // Theme Definitions
+    // Theme Definitions - Updated with January 2026 developments
     const themes = [
       {
         id: 'stablecoin',
         title: 'Stablecoin Framework',
         icon: '🪙',
         color: '#10b981',
-        description: 'Comprehensive federal framework emerging for bank-issued stablecoins through the GENIUS Act and regulatory guidance.',
-        keywords: ['stablecoin', 'dollar token', 'GENIUS', 'reserve', 'payment token'],
+        description: 'Comprehensive federal framework emerging for bank-issued stablecoins through the GENIUS Act, Digital Asset Market Clarity Act, and regulatory guidance.',
+        keywords: ['stablecoin', 'dollar token', 'GENIUS', 'reserve', 'payment token', 'USD1'],
         developments: [
           'GENIUS Act signed into law (July 2025) - first federal stablecoin framework',
-          'SEC clarity on USD-pegged stablecoins not being securities',
-          'FDIC proposed rule for GENIUS Act implementation',
-          'OCC reaffirmed stablecoin reserve deposit permissibility'
+          'Digital Asset Market Clarity Act introduced (January 2026) - 278-page bipartisan bill',
+          'FDIC proposed rule for GENIUS Act implementation (December 2025)',
+          'World Liberty Financial applies for national trust bank charter for USD1 stablecoin (January 2026)',
+          'SEC clarity on USD-pegged stablecoins not being securities'
         ],
         opportunities: [
           'Bank-issued stablecoins for payments and settlement',
           'Stablecoin reserve custody services',
+          'National trust bank charters for stablecoin issuance',
           'Integration with existing payment infrastructure'
         ]
       },
@@ -466,18 +425,21 @@
         title: 'Custody & Safekeeping',
         icon: '🔐',
         color: '#3b82f6',
-        description: 'Clear regulatory pathway for banks to provide crypto custody and safekeeping services.',
-        keywords: ['custody', 'safekeeping', 'storage', 'wallet', 'keys', 'BitLicense'],
+        description: 'Clear regulatory pathway for banks to provide crypto custody and safekeeping services, with new trust bank charters and tokenization initiatives.',
+        keywords: ['custody', 'safekeeping', 'storage', 'wallet', 'keys', 'BitLicense', 'tokenized', 'tokenization'],
         developments: [
+          'SEC Statement on Tokenized Securities (January 2026) - landmark guidance',
+          'DTC Tokenization Pilot No-Action Letter (December 2025)',
+          'OCC approved five national trust bank charter applications (December 2025)',
           'Interagency joint statement on crypto-asset safekeeping (July 2025)',
-          'OCC confirmed custody as permissible bank activity',
-          'SEC broker-dealer custody guidance issued',
-          'NY DFS updated custodial structure guidance'
+          'SEC broker-dealer custody guidance issued (December 2025)',
+          'NY DFS updated custodial structure guidance (September 2025)'
         ],
         opportunities: [
           'Institutional-grade crypto custody services',
-          'Integration with traditional asset custody',
-          'Multi-asset custody platforms'
+          'Tokenized securities custody and settlement',
+          'Multi-asset custody platforms',
+          'Trust bank charters for digital assets'
         ]
       },
       {
@@ -485,18 +447,20 @@
         title: 'End of Debanking',
         icon: '🏦',
         color: '#f59e0b',
-        description: 'Regulatory pivot away from "Operation Chokepoint 2.0" with explicit protections for crypto businesses.',
+        description: 'Regulatory pivot away from "Operation Chokepoint 2.0" with explicit protections for crypto businesses and enhanced banking access.',
         keywords: ['debanking', 'chokepoint', 'reputation risk', 'account termination', 'fair access'],
         developments: [
-          'OCC ceased examinations for reputation risk',
-          'OCC preliminary findings on large bank debanking',
-          'Proposed rule prohibiting reputation risk by regulators',
-          'FDIC released 175 "pause letter" documents'
+          'OCC ceased examinations for reputation risk (March 2025)',
+          'OCC preliminary findings on large bank debanking (December 2025)',
+          'Proposed rule prohibiting reputation risk by regulators (October 2025)',
+          'FDIC released 175 "pause letter" documents (February 2025)',
+          'OCC licensing consideration for politicized debanking (September 2025)'
         ],
         opportunities: [
           'Banking services for crypto businesses',
           'Fintech partnership expansion',
-          'Reduced compliance friction for crypto clients'
+          'Reduced compliance friction for crypto clients',
+          'New market opportunities in underserved sectors'
         ]
       },
       {
@@ -504,17 +468,20 @@
         title: 'Enforcement Reset',
         icon: '⚖️',
         color: '#ef4444',
-        description: 'Major shift from "regulation by enforcement" to proactive regulatory frameworks.',
-        keywords: ['enforcement', 'investigation', 'Wells Notice', 'task force', 'dismissal'],
+        description: 'Major shift from "regulation by enforcement" to proactive regulatory frameworks with inter-agency harmonization.',
+        keywords: ['enforcement', 'investigation', 'Wells Notice', 'task force', 'dismissal', 'Project Crypto'],
         developments: [
+          'Project Crypto joint SEC-CFTC harmonization launch (January 2026)',
+          'SEC dismisses Gemini enforcement action with prejudice (January 2026)',
           'SEC Crypto Task Force established (January 2025)',
-          'Coinbase enforcement action dismissed',
+          'Coinbase enforcement action dismissed (February 2025)',
           'Investigations closed: Gemini, Robinhood, OpenSea',
           'SEC clarity on meme coins, staking, mining not being securities'
         ],
         opportunities: [
           'Reduced legal uncertainty for crypto services',
           'Clear registration pathways emerging',
+          'Inter-agency coordination reducing compliance burden',
           'Innovation without enforcement threat'
         ]
       },
@@ -523,23 +490,27 @@
         title: 'Trading Infrastructure',
         icon: '📈',
         color: '#8b5cf6',
-        description: 'New frameworks enabling banks to participate in crypto trading and execution.',
-        keywords: ['trading', 'execution', 'riskless principal', 'ETF', 'spot', 'derivatives', 'collateral', 'tokenized'],
+        description: 'New frameworks enabling banks to participate in crypto trading, execution, and derivatives markets with tokenized collateral.',
+        keywords: ['trading', 'execution', 'riskless principal', 'ETF', 'spot', 'derivatives', 'collateral', 'perpetual'],
         developments: [
-          'OCC confirmed riskless principal crypto transactions',
-          'CFTC launched spot crypto trading initiative',
-          'SEC approved generic listing for crypto ETPs',
-          'CFTC no-action relief for BTC/ETH/USDC as margin collateral'
+          'CFTC Innovation Advisory Committee launched (January 2026)',
+          'CFTC Chairman outlines perpetual derivatives, tokenized collateral priorities (January 2026)',
+          'Morgan Stanley files for spot Bitcoin and Solana ETFs (January 2026)',
+          'OCC confirmed riskless principal crypto transactions (December 2025)',
+          'CFTC first-ever listed spot crypto trading (December 2025)',
+          'CFTC no-action relief for BTC/ETH/USDC as margin collateral (December 2025)',
+          'SEC approved generic listing for crypto ETPs (September 2025)'
         ],
         opportunities: [
           'Crypto execution services for clients',
           'ETF custody and administration',
-          'Derivatives collateral services'
+          'Derivatives collateral services',
+          'Perpetual derivatives market access'
         ]
       }
     ];
 
-    // Agency Colors
+    // Agency Colors - Updated with new agencies
     const agencyColors = {
       'SEC': '#3b82f6',
       'OCC': '#10b981',
@@ -550,13 +521,16 @@
       'NY DFS': '#06b6d4',
       'CFPB': '#84cc16',
       'FTC': '#f97316',
-      'California DFPI': '#14b8a6'
+      'California DFPI': '#14b8a6',
+      'Senate Banking': '#6366f1',
+      'NY Legislature': '#0ea5e9',
+      'South Dakota': '#a855f7'
     };
 
     // Crypto Relevance Classification
     function getCryptoRelevance(item) {
-      const text = `${item.Title} ${item.ThemeTags} ${item.ImpactSummary}`.toLowerCase();
-      const directKeywords = ['crypto', 'bitcoin', 'btc', 'ethereum', 'eth', 'stablecoin', 'digital asset', 'virtual currency', 'dlt', 'blockchain', 'token', 'nft', 'defi', 'mining', 'custody', 'wallet'];
+      const text = (item.Title + ' ' + item.ThemeTags + ' ' + item.ImpactSummary).toLowerCase();
+      const directKeywords = ['crypto', 'bitcoin', 'btc', 'ethereum', 'eth', 'stablecoin', 'digital asset', 'virtual currency', 'dlt', 'blockchain', 'token', 'nft', 'defi', 'mining', 'custody', 'wallet', 'project crypto'];
       const adjacentKeywords = ['debanking', 'fintech', 'payments innovation', 'novel activities', 'master account', 'etf', 'etp', 'derivatives', 'collateral', 'margin'];
 
       for (const kw of directKeywords) {
@@ -575,66 +549,40 @@
       return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     }
 
-    // Get theme for signal
-    function getThemeForSignal(item) {
-      const text = `${item.Title} ${item.ThemeTags}`.toLowerCase();
-      for (const theme of themes) {
-        for (const kw of theme.keywords) {
-          if (text.includes(kw)) return theme;
-        }
-      }
-      return null;
-    }
-
     // Get relevance badge HTML
     function getRelevanceBadge(relevance) {
       const config = {
-        direct: { class: 'relevance-direct', text: 'Direct' },
-        adjacent: { class: 'relevance-adjacent', text: 'Adjacent' },
-        general: { class: 'relevance-general', text: 'General' }
+        direct: { cls: 'relevance-direct', text: 'Direct' },
+        adjacent: { cls: 'relevance-adjacent', text: 'Adjacent' },
+        general: { cls: 'relevance-general', text: 'General' }
       };
       const c = config[relevance] || config.general;
-      return `<span class="px-2 py-0.5 rounded text-xs font-medium ${c.class}">${c.text}</span>`;
+      return '<span class="px-2 py-0.5 rounded text-xs font-medium ' + c.cls + '">' + c.text + '</span>';
     }
+
+    // Filter out general relevance signals
+    const relevantData = rawData.filter(d => getCryptoRelevance(d) !== 'general');
 
     // Render Theme Cards for Overview
     function renderThemeCardsOverview() {
       const container = document.getElementById('themeCardsOverview');
       container.innerHTML = themes.map(theme => {
-        const count = rawData.filter(d => {
-          const text = `${d.Title} ${d.ThemeTags}`.toLowerCase();
+        const count = relevantData.filter(d => {
+          const text = (d.Title + ' ' + d.ThemeTags).toLowerCase();
           return theme.keywords.some(kw => text.includes(kw));
         }).length;
-        return `
-          <div class="theme-card card rounded-2xl p-5 cursor-pointer" onclick="openThemeModal('${theme.id}')" style="border-left: 4px solid ${theme.color};">
-            <div class="text-3xl mb-3">${theme.icon}</div>
-            <h3 class="font-bold text-white mb-2">${theme.title}</h3>
-            <p class="text-xs text-gray-400 mb-3 line-clamp-2">${theme.description}</p>
-            <p class="text-sm font-semibold" style="color: ${theme.color};">${count} signals →</p>
-          </div>
-        `;
+        return '<div class="theme-card card rounded-2xl p-5 cursor-pointer" onclick="openThemeModal(\'' + theme.id + '\')" style="border-left: 4px solid ' + theme.color + ';"><div class="text-3xl mb-3">' + theme.icon + '</div><h3 class="font-bold text-white mb-2">' + theme.title + '</h3><p class="text-xs text-gray-400 mb-3 line-clamp-2">' + theme.description + '</p><p class="text-sm font-semibold" style="color: ' + theme.color + ';">' + count + ' signals →</p></div>';
       }).join('');
     }
 
-    // Render Featured Signals
+    // Render Latest Signals
     function renderFeaturedSignals() {
       const container = document.getElementById('featuredSignals');
-      const featured = rawData.filter(d => d.LeadSignal === 'High' && getCryptoRelevance(d) === 'direct').slice(0, 6);
+      const featured = relevantData.filter(d => d.LeadSignal === 'High' && getCryptoRelevance(d) === 'direct').slice(0, 6);
       container.innerHTML = featured.map(item => {
         const relevance = getCryptoRelevance(item);
-        return `
-          <div class="signal-card card rounded-xl p-5" onclick="openModal(${rawData.indexOf(item)})">
-            <div class="flex items-start justify-between mb-3">
-              <div class="flex items-center gap-2">
-                <span class="px-2 py-0.5 rounded text-xs font-medium" style="background: ${agencyColors[item.Agency]}20; color: ${agencyColors[item.Agency]};">${item.Agency}</span>
-                ${getRelevanceBadge(relevance)}
-              </div>
-              <span class="text-xs text-gray-500">${formatDate(item.Date)}</span>
-            </div>
-            <h4 class="font-semibold text-white mb-2 line-clamp-2">${item.Title}</h4>
-            <p class="text-sm text-gray-400 line-clamp-2">${item.ImpactSummary || 'Click for details'}</p>
-          </div>
-        `;
+        const agencyColor = agencyColors[item.Agency] || '#666';
+        return '<div class="signal-card card rounded-xl p-5" onclick="openModal(' + rawData.indexOf(item) + ')"><div class="flex items-start justify-between mb-3"><div class="flex items-center gap-2"><span class="px-2 py-0.5 rounded text-xs font-medium" style="background: ' + agencyColor + '20; color: ' + agencyColor + ';">' + item.Agency + '</span>' + getRelevanceBadge(relevance) + '</div><span class="text-xs text-gray-500">' + formatDate(item.Date) + '</span></div><h4 class="font-semibold text-white mb-2 line-clamp-2">' + item.Title + '</h4><p class="text-sm text-gray-400 line-clamp-2">' + (item.ImpactSummary || 'Click for details') + '</p></div>';
       }).join('');
     }
 
@@ -642,95 +590,44 @@
     function renderAgencyBreakdown() {
       const container = document.getElementById('agencyBreakdown');
       const agencies = Object.keys(agencyColors);
-      const counts = agencies.map(a => ({ agency: a, count: rawData.filter(d => d.Agency === a).length }));
+      const counts = agencies.map(a => ({ agency: a, count: relevantData.filter(d => d.Agency === a).length })).filter(c => c.count > 0);
       counts.sort((a, b) => b.count - a.count);
       const max = Math.max(...counts.map(c => c.count));
 
-      container.innerHTML = counts.map(({ agency, count }) => `
-        <div class="flex items-center gap-4">
-          <span class="w-32 text-sm text-gray-400 truncate">${agency}</span>
-          <div class="flex-1 h-6 bg-black bg-opacity-40 rounded-full overflow-hidden">
-            <div class="agency-bar h-full rounded-full flex items-center justify-end pr-3" style="width: ${(count/max)*100}%; background: ${agencyColors[agency]};">
-              <span class="text-xs font-bold text-white">${count}</span>
-            </div>
-          </div>
-        </div>
-      `).join('');
+      container.innerHTML = counts.map(function(c) {
+        return '<div class="flex items-center gap-4"><span class="w-32 text-sm text-gray-400 truncate">' + c.agency + '</span><div class="flex-1 h-6 bg-black bg-opacity-40 rounded-full overflow-hidden"><div class="agency-bar h-full rounded-full flex items-center justify-end pr-3" style="width: ' + (c.count/max)*100 + '%; background: ' + agencyColors[c.agency] + ';"><span class="text-xs font-bold text-white">' + c.count + '</span></div></div></div>';
+      }).join('');
     }
 
     // Render Theme Details
     function renderThemeDetails() {
       const container = document.getElementById('themeDetails');
       container.innerHTML = themes.map(theme => {
-        const signals = rawData.filter(d => {
-          const text = `${d.Title} ${d.ThemeTags}`.toLowerCase();
+        const signals = relevantData.filter(d => {
+          const text = (d.Title + ' ' + d.ThemeTags).toLowerCase();
           return theme.keywords.some(kw => text.includes(kw));
         }).slice(0, 5);
 
-        return `
-          <div class="card rounded-2xl overflow-hidden">
-            <div class="p-6 border-b border-gray-800 flex items-start gap-4" style="border-left: 4px solid ${theme.color};">
-              <span class="text-4xl">${theme.icon}</span>
-              <div>
-                <h2 class="text-xl font-bold mb-2">${theme.title}</h2>
-                <p class="text-gray-400">${theme.description}</p>
-              </div>
-            </div>
-            <div class="p-6 grid md:grid-cols-2 gap-6">
-              <div>
-                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">Key Developments</h3>
-                <ul class="space-y-2">
-                  ${theme.developments.map(d => `<li class="text-sm text-gray-300 flex items-start gap-2"><span style="color: ${theme.color};">•</span>${d}</li>`).join('')}
-                </ul>
-              </div>
-              <div>
-                <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">Related Signals</h3>
-                <div class="space-y-2">
-                  ${signals.map(s => `
-                    <div class="p-3 bg-black bg-opacity-40 rounded-lg cursor-pointer hover:bg-opacity-60 transition-colors" onclick="openModal(${rawData.indexOf(s)})">
-                      <div class="flex items-center gap-2 mb-1">
-                        <span class="text-xs font-medium" style="color: ${agencyColors[s.Agency]};">${s.Agency}</span>
-                        <span class="text-xs text-gray-500">${formatDate(s.Date)}</span>
-                      </div>
-                      <p class="text-sm text-white line-clamp-1">${s.Title}</p>
-                    </div>
-                  `).join('')}
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
+        const devItems = theme.developments.map(d => '<li class="text-sm text-gray-300 flex items-start gap-2"><span style="color: ' + theme.color + ';">•</span>' + d + '</li>').join('');
+        const sigItems = signals.map(s => '<div class="p-3 bg-black bg-opacity-40 rounded-lg cursor-pointer hover:bg-opacity-60 transition-colors" onclick="openModal(' + rawData.indexOf(s) + ')"><div class="flex items-center gap-2 mb-1"><span class="text-xs font-medium" style="color: ' + (agencyColors[s.Agency] || '#999') + ';">' + s.Agency + '</span><span class="text-xs text-gray-500">' + formatDate(s.Date) + '</span></div><p class="text-sm text-white line-clamp-1">' + s.Title + '</p></div>').join('');
+
+        return '<div class="card rounded-2xl overflow-hidden"><div class="p-6 border-b border-gray-800 flex items-start gap-4" style="border-left: 4px solid ' + theme.color + ';"><span class="text-4xl">' + theme.icon + '</span><div><h2 class="text-xl font-bold mb-2">' + theme.title + '</h2><p class="text-gray-400">' + theme.description + '</p></div></div><div class="p-6 grid md:grid-cols-2 gap-6"><div><h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">Key Developments</h3><ul class="space-y-2">' + devItems + '</ul></div><div><h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">Related Signals</h3><div class="space-y-2">' + sigItems + '</div></div></div></div>';
       }).join('');
     }
 
     // Render Table
     function renderTable(data) {
       const tbody = document.getElementById('tableBody');
-      tbody.innerHTML = data.map((item, idx) => {
+      tbody.innerHTML = data.map(function(item) {
         const relevance = getCryptoRelevance(item);
         const originalIdx = rawData.indexOf(item);
-        return `
-          <tr class="table-row border-b border-gray-800 cursor-pointer" onclick="openModal(${originalIdx})">
-            <td class="py-4 px-6 text-sm text-gray-400">${formatDate(item.Date)}</td>
-            <td class="py-4 px-6">
-              <span class="px-2 py-1 rounded text-xs font-medium" style="background: ${agencyColors[item.Agency]}20; color: ${agencyColors[item.Agency]};">${item.Agency}</span>
-            </td>
-            <td class="py-4 px-6 text-sm text-white">${item.Title}</td>
-            <td class="py-4 px-6 text-xs text-gray-400">${item.DocumentType}</td>
-            <td class="py-4 px-6">${getRelevanceBadge(relevance)}</td>
-          </tr>
-        `;
+        const agencyColor = agencyColors[item.Agency] || '#666';
+        return '<tr class="table-row border-b border-gray-800 cursor-pointer" onclick="openModal(' + originalIdx + ')"><td class="py-4 px-6 text-sm text-gray-400">' + formatDate(item.Date) + '</td><td class="py-4 px-6"><span class="px-2 py-1 rounded text-xs font-medium" style="background: ' + agencyColor + '20; color: ' + agencyColor + ';">' + item.Agency + '</span></td><td class="py-4 px-6 text-sm text-white">' + item.Title + '</td><td class="py-4 px-6 text-xs text-gray-400">' + item.DocumentType + '</td><td class="py-4 px-6">' + getRelevanceBadge(relevance) + '</td></tr>';
       }).join('');
       document.getElementById('filteredCount').textContent = data.length;
     }
 
-    // Update Stats
-    function updateStats() {
-      const direct = rawData.filter(d => getCryptoRelevance(d) === 'direct').length;
-      const adjacent = rawData.filter(d => getCryptoRelevance(d) === 'adjacent').length;
-      document.getElementById('statDirect').textContent = direct;
-      document.getElementById('statAdjacent').textContent = adjacent;
-    }
+    function updateStats() {}
 
     // Filter Data
     function filterData() {
@@ -739,7 +636,7 @@
       const month = document.getElementById('monthFilter').value;
       const relevance = document.getElementById('relevanceFilter').value;
 
-      let filtered = rawData.filter(item => {
+      let filtered = relevantData.filter(function(item) {
         const matchSearch = !search ||
           item.Title.toLowerCase().includes(search) ||
           item.Agency.toLowerCase().includes(search) ||
@@ -759,16 +656,16 @@
     function openModal(idx) {
       const item = rawData[idx];
       const relevance = getCryptoRelevance(item);
+      const agencyColor = agencyColors[item.Agency] || '#666';
       document.getElementById('modalAgency').textContent = item.Agency;
-      document.getElementById('modalAgency').style.background = `${agencyColors[item.Agency]}20`;
-      document.getElementById('modalAgency').style.color = agencyColors[item.Agency];
+      document.getElementById('modalAgency').style.background = agencyColor + '20';
+      document.getElementById('modalAgency').style.color = agencyColor;
       document.getElementById('modalType').textContent = item.DocumentType;
       document.getElementById('modalTitle').textContent = item.Title;
       document.getElementById('modalDate').textContent = formatDate(item.Date);
       document.getElementById('modalId').textContent = item.DocumentID || 'N/A';
 
-      const badgesContainer = document.getElementById('modalBadges');
-      badgesContainer.innerHTML = getRelevanceBadge(relevance);
+      document.getElementById('modalBadges').innerHTML = getRelevanceBadge(relevance);
 
       const summarySection = document.getElementById('modalSummarySection');
       const summaryEl = document.getElementById('modalSummary');
@@ -788,9 +685,7 @@
       }
 
       const tags = item.ThemeTags.split(';').map(t => t.trim()).filter(t => t);
-      document.getElementById('modalThemes').innerHTML = tags.map(t =>
-        `<span class="px-2 py-1 rounded text-xs bg-gray-700 text-gray-300">${t}</span>`
-      ).join('');
+      document.getElementById('modalThemes').innerHTML = tags.map(t => '<span class="px-2 py-1 rounded text-xs bg-gray-700 text-gray-300">' + t + '</span>').join('');
 
       document.getElementById('modalLink').href = item.URL || '#';
       document.getElementById('modal').classList.remove('hidden');
@@ -810,29 +705,17 @@
       document.getElementById('themeModalTitle').textContent = theme.title;
       document.getElementById('themeModalDescription').textContent = theme.description;
 
-      document.getElementById('themeModalDevelopments').innerHTML = theme.developments.map(d =>
-        `<div class="flex items-start gap-2"><span style="color: ${theme.color};">✓</span><span class="text-gray-300 text-sm">${d}</span></div>`
-      ).join('');
+      document.getElementById('themeModalDevelopments').innerHTML = theme.developments.map(d => '<div class="flex items-start gap-2"><span style="color: ' + theme.color + ';">✓</span><span class="text-gray-300 text-sm">' + d + '</span></div>').join('');
 
-      document.getElementById('themeModalOpportunities').innerHTML = theme.opportunities.map(o =>
-        `<div class="flex items-start gap-2"><span style="color: ${theme.color};">→</span><span class="text-gray-300 text-sm">${o}</span></div>`
-      ).join('');
+      document.getElementById('themeModalOpportunities').innerHTML = theme.opportunities.map(o => '<div class="flex items-start gap-2"><span style="color: ' + theme.color + ';">→</span><span class="text-gray-300 text-sm">' + o + '</span></div>').join('');
 
-      const signals = rawData.filter(d => {
-        const text = `${d.Title} ${d.ThemeTags}`.toLowerCase();
+      const signals = relevantData.filter(d => {
+        const text = (d.Title + ' ' + d.ThemeTags).toLowerCase();
         return theme.keywords.some(kw => text.includes(kw));
       });
 
       document.getElementById('themeModalCount').textContent = signals.length;
-      document.getElementById('themeModalSignals').innerHTML = signals.slice(0, 10).map(s => `
-        <div class="p-3 bg-black bg-opacity-40 rounded-lg cursor-pointer hover:bg-opacity-60 transition-colors" onclick="closeThemeModal(); openModal(${rawData.indexOf(s)});">
-          <div class="flex items-center gap-2 mb-1">
-            <span class="text-xs font-medium" style="color: ${agencyColors[s.Agency]};">${s.Agency}</span>
-            <span class="text-xs text-gray-500">${formatDate(s.Date)}</span>
-          </div>
-          <p class="text-sm text-white">${s.Title}</p>
-        </div>
-      `).join('');
+      document.getElementById('themeModalSignals').innerHTML = signals.slice(0, 10).map(s => '<div class="p-3 bg-black bg-opacity-40 rounded-lg cursor-pointer hover:bg-opacity-60 transition-colors" onclick="closeThemeModal(); openModal(' + rawData.indexOf(s) + ');"><div class="flex items-center gap-2 mb-1"><span class="text-xs font-medium" style="color: ' + (agencyColors[s.Agency] || '#999') + ';">' + s.Agency + '</span><span class="text-xs text-gray-500">' + formatDate(s.Date) + '</span></div><p class="text-sm text-white">' + s.Title + '</p></div>').join('');
 
       document.getElementById('themeModal').classList.remove('hidden');
       document.getElementById('themeModal').classList.add('flex');
@@ -850,7 +733,7 @@
         tab.classList.add('active');
         const section = tab.dataset.section;
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.getElementById(`section-${section}`).classList.add('active');
+        document.getElementById('section-' + section).classList.add('active');
       });
     });
 
@@ -867,7 +750,7 @@
     renderFeaturedSignals();
     renderAgencyBreakdown();
     renderThemeDetails();
-    renderTable(rawData);
+    renderTable(relevantData);
     updateStats();
   </script>
 </body>
