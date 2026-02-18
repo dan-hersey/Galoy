@@ -139,13 +139,8 @@ export class DashboardServer {
   // ── Dashboard ────────────────────────────────────────────
 
   private serveDashboard(res: http.ServerResponse, token: string) {
-    const loan = this.store.getLoan(token);
-    if (!loan) {
-      this.json(res, 404, { error: "Loan not found" });
-      return;
-    }
-
-    // Inject the token into the HTML via a script tag before </head>
+    // Always serve the dashboard HTML — let the React app handle missing loans
+    // with a proper error state rather than returning raw JSON 404
     const tokenScript = `<script>window.__TOKEN__ = "${token}";</script>`;
     const html = DASHBOARD_HTML.replace("</head>", `${tokenScript}\n</head>`);
     res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
