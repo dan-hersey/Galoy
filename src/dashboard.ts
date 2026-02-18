@@ -391,9 +391,22 @@ export const DASHBOARD_HTML = `<!DOCTYPE html>
   </style>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root"><div style="color:#707070;text-align:center;padding:48px">Loading BTC Loan Monitor...</div></div>
 
-  <script type="text/babel">
+  <script>
+    window.onerror = function(msg, url, line, col, error) {
+      var root = document.getElementById('root');
+      root.innerHTML = '<div style="color:#ff1744;padding:24px;font-family:monospace">' +
+        '<h3>Dashboard Error</h3>' +
+        '<p>' + msg + '</p>' +
+        '<p>Line: ' + line + ', Col: ' + col + '</p>' +
+        '<p>' + (error && error.stack ? error.stack : '') + '</p>' +
+        '</div>';
+      return false;
+    };
+  </script>
+
+  <script type="text/babel" data-presets="env,react">
     const { useState, useEffect, useRef, useCallback } = React;
 
     const COLOR_THRESHOLDS = {
@@ -599,8 +612,8 @@ export const DASHBOARD_HTML = `<!DOCTYPE html>
     }
 
     function PriceSimulator({ token, data }) {
-      const [simulatedPrice, setSimulatedPrice] = useState(data?.currentPrice || 50000);
-      const [simulatedLtv, setSimulatedLtv] = useState(data?.ltv || 0);
+      const [simulatedPrice, setSimulatedPrice] = useState((data && data.currentPrice) || 50000);
+      const [simulatedLtv, setSimulatedLtv] = useState((data && data.ltv) || 0);
       const [loading, setLoading] = useState(false);
 
       const handleSliderChange = useCallback((e) => {
@@ -977,7 +990,7 @@ export const DASHBOARD_HTML = `<!DOCTYPE html>
       return (
         <div className="container">
           <Header
-            lenderName={loanData?.lenderName}
+            lenderName={loanData && loanData.lenderName}
             token={token}
             isOnline={isOnline}
             priceSource={priceSource}
@@ -1006,8 +1019,14 @@ export const DASHBOARD_HTML = `<!DOCTYPE html>
       );
     }
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<Dashboard />);
+    try {
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<Dashboard />);
+    } catch (err) {
+      document.getElementById('root').innerHTML =
+        '<div style="color:#ff1744;padding:24px;font-family:monospace">' +
+        '<h3>Render Error</h3><p>' + err.message + '</p></div>';
+    }
   </script>
 </body>
 </html>
