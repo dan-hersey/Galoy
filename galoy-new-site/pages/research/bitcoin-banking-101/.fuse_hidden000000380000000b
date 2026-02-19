@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Products as a Retention Strategy - Bitcoin Banking 101 Part C | Galoy</title>
+    <meta content="Why offering Bitcoin services isn't about chasing trends - it's about defending your customer relationships and market position." name="description">
+    <meta content="Bitcoin Products as a Retention Strategy - Bitcoin Banking 101 | Galoy" property="og:title">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Icons: Lucide -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background: #000;
+            color: #fff;
+        }
+
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+        body::-webkit-scrollbar-track-piece {
+            background: #000;
+        }
+        body::-webkit-scrollbar-thumb {
+            background: #555;
+            width: 8px;
+            border-radius: 4px;
+        }
+        body::-webkit-scrollbar-thumb:hover {
+            background: #888;
+        }
+
+        :root {
+            --primary-blue: #3654FF;
+            --bg-dark: #000;
+            --bg-section: #0a0a0a;
+            --text-white: #fff;
+            --text-gray: #888;
+            --text-light-gray: #ccc;
+            --border-color: #222;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-white);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navigation */
+        .navbar-no-shadow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .navbar-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 28px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: var(--text-gray);
+        }
+
+        .header-social-icons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .header-icon-link {
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .header-icon-link:hover {
+            opacity: 1;
+        }
+
+        .header-icon {
+            width: 20px;
+            height: 20px;
+            filter: invert(1);
+        }
+
+        /* Article Hero */
+        .article-hero {
+            padding: 140px 0 60px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .article-hero-inner {
+            max-width: 800px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .breadcrumb a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary-blue);
+        }
+
+        .breadcrumb span {
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        .part-badge {
+            display: inline-block;
+            background: var(--primary-blue);
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .article-title {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+        }
+
+        .article-subtitle {
+            font-size: 20px;
+            color: var(--text-light-gray);
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+
+        .meta-item svg {
+            width: 18px;
+            height: 18px;
+            opacity: 0.7;
+        }
+
+        /* Series Navigation */
+        .series-nav {
+            background: var(--bg-section);
+            border-bottom: 1px solid var(--border-color);
+            padding: 24px 0;
+        }
+
+        .series-nav-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .series-parts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .series-part {
+            padding: 16px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .series-part:hover {
+            border-color: var(--primary-blue);
+        }
+
+        .series-part.active {
+            border-color: var(--primary-blue);
+            background: rgba(54, 84, 255, 0.1);
+        }
+
+        .part-number {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .series-part.active .part-number {
+            color: var(--primary-blue);
+        }
+
+        .part-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-gray);
+            line-height: 1.4;
+        }
+
+        .series-part.active .part-title {
+            color: var(--text-white);
+        }
+
+        /* Article Content */
+        .article-content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        .content-section {
+            margin-bottom: 48px;
+        }
+
+        .section-heading {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-white);
+        }
+
+        .article-content p {
+            font-size: 17px;
+            color: var(--text-light-gray);
+            margin-bottom: 24px;
+            line-height: 1.8;
+        }
+
+        .highlight-box {
+            background: var(--bg-section);
+            border-left: 3px solid var(--primary-blue);
+            padding: 24px 28px;
+            margin: 32px 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-size: 18px;
+            font-style: italic;
+            color: var(--text-white);
+        }
+
+        .key-points {
+            background: var(--bg-section);
+            border: 1px solid var(--border-color);
+            padding: 28px;
+            margin: 40px 0;
+        }
+
+        .key-points-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .key-points ul {
+            list-style: none;
+        }
+
+        .key-points li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-light-gray);
+            font-size: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .key-points li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .key-points li::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: var(--primary-blue);
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: var(--bg-section);
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+
+        /* Product Box */
+        .product-box {
+            background: var(--bg-section);
+            border: 1px solid var(--border-color);
+            padding: 28px;
+            margin: 24px 0;
+        }
+
+        .product-icon {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .product-icon svg {
+            width: 20px;
+            height: 20px;
+            color: white;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-white);
+            margin-bottom: 12px;
+        }
+
+        .product-box p {
+            font-size: 15px;
+            color: var(--text-light-gray);
+            line-height: 1.7;
+            margin-bottom: 0;
+        }
+
+        /* Next Article */
+        .article-nav {
+            display: flex;
+            gap: 16px;
+            margin-top: 48px;
+        }
+
+        .prev-article,
+        .next-article {
+            flex: 1;
+            background: var(--bg-section);
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .prev-article:hover,
+        .next-article:hover {
+            border-color: var(--primary-blue);
+        }
+
+        .next-article {
+            text-align: right;
+        }
+
+        .nav-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .nav-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-white);
+        }
+
+        /* CTA Section */
+        .section-cta {
+            padding: 80px 0;
+            background: var(--bg-section);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .cta-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 60px;
+            border: 1px solid var(--border-color);
+        }
+
+        .cta-wrapper h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .cta-wrapper p {
+            font-size: 17px;
+            color: var(--text-light-gray);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .button {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: var(--text-white);
+            padding: 14px 28px;
+            border-radius: 0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #4a66ff;
+            transform: translateY(-1px);
+        }
+
+        .button-secondary {
+            background: transparent;
+            border: 1px solid var(--text-white);
+            margin-left: 16px;
+        }
+
+        .button-secondary:hover {
+            background: var(--text-white);
+            color: var(--bg-dark);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-section);
+            border-top: 1px solid var(--border-color);
+            padding: 80px 0 40px;
+        }
+
+        .footer-wrapper {
+            display: flex;
+            justify-content: space-between;
+            gap: 60px;
+        }
+
+        .footer-logos {
+            flex-shrink: 0;
+        }
+
+        .footer-logo {
+            height: 28px;
+        }
+
+        .footer-content {
+            display: flex;
+            gap: 80px;
+        }
+
+        .footer-block {
+            min-width: 140px;
+        }
+
+        .footer-heading {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-white);
+        }
+
+        .footer-social-link-three {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 12px;
+            transition: color 0.2s;
+        }
+
+        .footer-social-link-three:hover {
+            color: var(--text-white);
+        }
+
+        .footer-copyright {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+
+        .footer-copyright a {
+            color: var(--text-gray);
+        }
+
+        .footer-copyright a:hover {
+            color: var(--text-white);
+        }
+
+        .es-40 {
+            height: 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .article-title {
+                font-size: 36px;
+            }
+
+            .series-parts {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-wrapper {
+                flex-direction: column;
+            }
+
+            .footer-content {
+                flex-wrap: wrap;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 28px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .article-nav {
+                flex-direction: column;
+            }
+
+            .next-article {
+                text-align: left;
+            }
+
+            .cta-wrapper {
+                padding: 40px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="navbar-no-shadow">
+        <div class="container">
+            <div class="navbar-wrapper">
+                <a href="https://www.galoy.io/" class="navbar-brand">
+                    <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/656106c240ef09d6b11f4673_logo.svg" loading="lazy" alt="Galoy" class="logo">
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="https://www.galoy.io/about" class="nav-link">About</a></li>
+                    <li><a href="https://www.galoy.io/bitcoin-core-banking-products" class="nav-link">Products</a></li>
+                    <li><a href="https://www.galoy.io/blog-posts/blog" class="nav-link">Blog</a></li>
+                    <li><a href="https://www.galoy.io/join-the-team" class="nav-link">Join the team</a></li>
+                </ul>
+                <div class="header-social-icons">
+                    <a href="https://twitter.com/GaloyMoney" target="_blank" class="header-icon-link">
+                        <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/655ff5fd54fed21ec663fc70_x-icon.svg" loading="lazy" alt="X" class="header-icon">
+                    </a>
+                    <a href="https://github.com/GaloyMoney" target="_blank" class="header-icon-link">
+                        <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/655ff5fef3d4df47892c63cf_logo-github.svg" loading="lazy" alt="GitHub" class="header-icon">
+                    </a>
+                    <a href="https://www.linkedin.com/company/galoymoney" target="_blank" class="header-icon-link">
+                        <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/6787d7884f49c6423d3a1227_logo-linkedin.svg" loading="lazy" alt="LinkedIn" class="header-icon">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Article Hero -->
+    <section class="article-hero">
+        <div class="container">
+            <div class="article-hero-inner">
+                <div class="breadcrumb">
+                    <a href="index.html">Bitcoin Banking 101</a>
+                    <span>/</span>
+                    <span>Part C</span>
+                </div>
+                <div class="part-badge">Part C of 4</div>
+                <h1 class="article-title">Bitcoin Products as a Retention Strategy</h1>
+                <p class="article-subtitle">The knee-jerk reaction in many banks when Bitcoin comes up is, "Our customers aren't asking for it." This perspective misses a critical point: offering Bitcoin services at this stage isn't about chasing trends - it's about defending your turf.</p>
+                <div class="article-meta">
+                    <div class="meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        Galoy Team
+                    </div>
+                    <div class="meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12,6 12,12 16,14"/>
+                        </svg>
+                        9 min read
+                    </div>
+                    <div class="meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        January 2026
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Series Navigation -->
+    <div class="series-nav">
+        <div class="container">
+            <div class="series-nav-label">Complete Series</div>
+            <div class="series-parts">
+                <a href="part-a.html" class="series-part">
+                    <div class="part-number">Part A</div>
+                    <div class="part-title">Bitcoin Is Disruptive, Not Destructive</div>
+                </a>
+                <a href="part-b.html" class="series-part">
+                    <div class="part-number">Part B</div>
+                    <div class="part-title">Why Customers Are Adopting Bitcoin</div>
+                </a>
+                <a href="part-c.html" class="series-part active">
+                    <div class="part-number">Part C</div>
+                    <div class="part-title">Bitcoin Products as Retention Strategy</div>
+                </a>
+                <a href="part-d.html" class="series-part">
+                    <div class="part-number">Part D</div>
+                    <div class="part-title">ROE Thought Experiment</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <div class="content-section">
+            <p>The knee-jerk reaction in many banks when Bitcoin comes up is, "Our customers aren't asking for it" or "It's too niche - we'll wait until it's bigger to consider it." This perspective misses a critical point: offering Bitcoin services at this stage isn't about chasing a trendy growth opportunity, it's about defending your turf.</p>
+
+            <p>Just as online banking and mobile apps were once optional and became essential, Bitcoin-related products are evolving from a differentiator to a baseline expectation for a segment of valuable clients.</p>
+
+            <div class="highlight-box">
+                <p>"This isn't about pushing customers into Bitcoin - it's about not losing them when they get there."</p>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-heading">Learning from Past Tech Shifts</h2>
+            <p>Think back on previous technological waves in banking - online banking in the 2000s, mobile banking in the 2010s. Early on, these were viewed as novel services that only a subset of customers wanted. Some banks held off, thinking their core clients weren't asking for mobile check deposit or bill-pay.</p>
+
+            <p>But over time, those features became hygiene factors - basic expectations to keep customers from switching to competitors. Banks that lagged found out the hard way that customers might not explicitly demand a feature until another institution offers it, at which point the customers quietly slip away.</p>
+
+            <p>Bitcoin is following a similar trajectory. Right now, perhaps only a single-digit percentage of your customer base actively uses it. But those customers are disproportionately often the younger, more tech-forward, or higher-net-worth individuals - the very segments you don't want to lose.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">75%</div>
+                <div class="stat-label">of consumers trust their bank more than fintechs or crypto exchanges to manage digital assets</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">60%</div>
+                <div class="stat-label">of top 25 U.S. banks already developing Bitcoin offerings</div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-heading">A Defensive Posture: Meet Customers Where They're Going</h2>
+            <p>Rather than framing a Bitcoin offering as a bold expansion into uncharted territory, savvy banks frame it as customer service. You're essentially saying to your clients: "If you decide to engage with Bitcoin, we're here to support you safely - you don't have to go to an outside platform and leave us behind."</p>
+
+            <p>This approach acknowledges that many customers will eventually get into digital assets in some form (if they haven't already), and when they do, they'll remember which institutions helped versus hindered them. As one banking strategist put it, "You do not need to become an exchange to compete. You only need to meet customers where they already are."</p>
+
+            <p>There's evidence that customers want to use their primary bank for digital assets - they trust banks more than the alternatives. A recent report found that 75% of consumers trust their bank more than fintechs or crypto exchanges to manage digital assets safely, and an equal percentage said they'd try things like stablecoins if offered by their bank.</p>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-heading">Early-Stage Bitcoin Products: What to Offer (Safely)</h2>
+            <p>A bank doesn't have to go from zero to a full suite of crypto services overnight. In fact, a measured, risk-first rollout is prudent. Here are practical, early-stage Bitcoin product ideas that a bank can implement primarily as a defensive play:</p>
+        </div>
+
+        <div class="product-box">
+            <div class="product-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+            </div>
+            <h3 class="product-title">Custody Visibility</h3>
+            <p>At minimum, aim for visibility into customers' Bitcoin holdings. This could mean offering a view-only aggregation where customers can see their external crypto wallet balances within your banking app. Better yet, offer custodial wallets or accounts where the bank (or its sub-custodian partner) holds Bitcoin on behalf of the customer. The key is to keep those assets from completely leaving your line of sight.</p>
+        </div>
+
+        <div class="product-box">
+            <div class="product-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="1" x2="12" y2="23"/>
+                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+            </div>
+            <h3 class="product-title">Buy/Sell Rails</h3>
+            <p>Enabling customers to buy or sell Bitcoin for USD through your platform is a straightforward way to stop deposit outflows. Every time a client wants to acquire Bitcoin and you don't offer a way, they will move funds to a third party that does. By providing a basic buy/sell feature (often via a backend partner or API), you capture that activity. The bank can earn a small spread or fee, but more importantly, you've kept the customer's journey within your walls.</p>
+        </div>
+
+        <div class="product-box">
+            <div class="product-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+            </div>
+            <h3 class="product-title">Conservative Bitcoin Lending</h3>
+            <p>One of the most valuable services a bank can offer Bitcoin holders is the ability to borrow against their Bitcoin rather than selling it. This is a classic retention move: if your customer can get liquidity (a loan) by pledging Bitcoin, they have much less reason to liquidate their Bitcoin holdings. Start simple - for example, a line of credit or term loan secured by Bitcoin at a low loan-to-value (say 40-50%).</p>
+        </div>
+
+        <div class="product-box">
+            <div class="product-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                </svg>
+            </div>
+            <h3 class="product-title">Educational and Advisory Support</h3>
+            <p>Another "product" that's more of a service - provide education, guidance, or even just a knowledgeable point of contact about Bitcoin. Many customers dabbling in Bitcoin would love to talk to their banker or advisor about it, but historically they've met either blank stares or disapproval. By training a few financial advisors or support staff on Bitcoin basics, a bank can retain customers who are looking for advice.</p>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-heading">Risk Management and Gradualism</h2>
+            <p>Treating Bitcoin services as a retention strategy also aligns well with a risk-managed approach. You're not betting the farm on a new revenue stream; you're making incremental additions to prevent erosion of your existing base. This means you can start small, test the waters, and scale up as comfort and demand grow.</p>
+
+            <p>Many regulatory and operational tools are available now to do this safely. For example, U.S. regulators (OCC, Fed) have clarified that banks can custody crypto or facilitate client trades as long as proper controls are in place - even allowing certain crypto trades to be treated as "riskless principal" transactions where the bank isn't exposed to market risk during execution.</p>
+
+            <p>What remains is the strategic risk of inaction. By doing nothing, banks implicitly choose to let the quiet outflow of funds and the gradual decline of primacy continue. Every $500 transfer to a Bitcoin service is not just a one-time loss of a fee - it's a crack in the relationship. Over time those cracks can widen.</p>
+        </div>
+
+        <div class="key-points">
+            <div class="key-points-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                Defensive Logic
+            </div>
+            <ul>
+                <li>Bitcoin products at this stage are best seen not as a moonshot for new revenue, but as a shield against attrition</li>
+                <li>Just as offering online bill-pay was about keeping customers from needing another bank, offering Bitcoin access is about keeping them from needing another platform</li>
+                <li>Once you have these capabilities, you're also positioned to capture upside when the next wave of adoption hits</li>
+                <li>Offer Bitcoin services not to lead your customers into the future, but to follow them there - so they aren't lost along the way</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-heading">Cohesion with Bank Strategy</h2>
+            <p>When Bitcoin services are positioned as retention, they naturally align with a bank's core mission: serve the customer, protect the franchise. You're not asking anyone to abandon prudent banking principles. In fact, not offering these services is increasingly looking like the riskier path, as it means ignoring a change in customer behavior.</p>
+
+            <p>High-value and younger clients are adopting Bitcoin (often quietly, as we saw in Part B). They won't all call up customer service to complain that you don't offer it; many will simply move what they need to move and carry on - possibly developing new loyalties to fintechs or competitors that met their needs.</p>
+
+            <p>To sum up: Bitcoin products at this stage of the market are best seen not as a moonshot for new revenue, but as a shield against attrition. The bonus is that once you have these capabilities, you're also positioned to capture upside when the next wave of adoption hits. In doing so, you protect your bank's relevance in an evolving financial landscape and reinforce the message: we're your bank, in all facets of your financial life.</p>
+        </div>
+
+        <div class="article-nav">
+            <a href="part-b.html" class="prev-article">
+                <div class="nav-label">Previous: Part B</div>
+                <div class="nav-title">Why Customers Are Adopting Bitcoin</div>
+            </a>
+            <a href="part-d.html" class="next-article">
+                <div class="nav-label">Up Next: Part D</div>
+                <div class="nav-title">ROE Thought Experiment</div>
+            </a>
+        </div>
+    </article>
+
+    <!-- CTA Section -->
+    <section class="section-cta">
+        <div class="container">
+            <div class="cta-wrapper">
+                <h2>Ready to explore Bitcoin banking?</h2>
+                <p>Galoy provides the infrastructure banks need to offer Bitcoin services safely, compliantly, and profitably. Say hello at biz@galoy.io if you're interested to build together.</p>
+                <a href="https://www.galoy.io/bitcoin-core-banking-products" class="button">Explore products</a>
+                <a href="mailto:biz@galoy.io?subject=Bitcoin%20Banking%20Inquiry" class="button button-secondary">Email biz@galoy.io</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-wrapper">
+                <div class="footer-logos">
+                    <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/656106c240ef09d6b11f4673_logo.svg" loading="lazy" alt="Galoy" class="footer-logo">
+                    <div class="es-40"></div>
+                    <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/679951283f749d905259e06b_A-LIGN_ISO-27001_dark_2.png" loading="lazy" alt="ISO 27001 Certified" style="height: 60px; opacity: 0.8;">
+                </div>
+                <div class="footer-content">
+                    <div class="footer-block">
+                        <h3 class="footer-heading">Contact</h3>
+                        <a href="https://github.com/GaloyMoney/" target="_blank" class="footer-social-link-three">Github</a>
+                        <a href="https://twitter.com/GaloyMoney" target="_blank" class="footer-social-link-three">X</a>
+                        <a href="https://t.me/galoyofficial" target="_blank" class="footer-social-link-three">Telegram</a>
+                        <a href="https://www.linkedin.com/company/galoymoney" target="_blank" class="footer-social-link-three">LinkedIn</a>
+                        <a href="https://www.galoy.io/contact" class="footer-social-link-three">Contact</a>
+                    </div>
+                    <div class="footer-block">
+                        <h3 class="footer-heading">Product</h3>
+                        <a href="https://www.galoy.io/about" class="footer-social-link-three">About Galoy</a>
+                        <a href="https://www.galoy.io/bitcoin-banking-products" class="footer-social-link-three">View all products</a>
+                        <a href="https://www.galoy.io/lana-bitcoin-loans-platform" class="footer-social-link-three">Lana: Bitcoin Loans</a>
+                        <a href="https://dev.galoy.io/" class="footer-social-link-three">Developer Docs</a>
+                    </div>
+                    <div class="footer-block">
+                        <h3 class="footer-heading">Content</h3>
+                        <a href="https://www.galoy.io/modern-bitcoin-core-banking" class="footer-social-link-three">Core Banking Software</a>
+                        <a href="https://www.galoy.io/bitcoin-backed-lending" class="footer-social-link-three">Bitcoin Backed Lending</a>
+                        <a href="https://www.galoy.io/blog-posts/blog" class="footer-social-link-three">Blog</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2025 Galoy Inc. All rights reserved<br>
+                <a href="https://www.galoy.io/terms-conditions">Terms</a> | <a href="https://www.galoy.io/privacy-policy">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+  <!-- Initialize Lucide icons -->
+  <script>lucide.createIcons();</script>
+
+</body>
+</html>

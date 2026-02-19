@@ -9,11 +9,13 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Icons: Lucide -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
   <!-- Styles -->
   <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="icon" href="../../images/favicon.png" type="image/png">
 </head>
 <body>
 
@@ -22,7 +24,7 @@
     <div class="container">
       <div class="navbar-inner">
         <a href="../../index.html" class="navbar-brand">
-          <img src="../../images/galoy-logo.svg" alt="Galoy" class="navbar-logo">
+          <img src="../../images/galoy-logo-white.svg" alt="Galoy" class="navbar-logo">
         </a>
         <ul class="navbar-nav">
           <li><a href="../../index.html" class="nav-link">Home</a></li>
@@ -30,24 +32,24 @@
           <li>
             <a href="../products/index.html" class="nav-link nav-link-dropdown">
               Products
-              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+              <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
             </a>
             <div class="dropdown-menu">
               <a href="../products/index.html" class="dropdown-item">
-                <span class="material-symbols-outlined">apps</span>
+                <i data-lucide="layers"></i>
                 All Products
               </a>
               <div class="dropdown-divider"></div>
               <a href="../products/lana.html" class="dropdown-item">
-                <span class="material-symbols-outlined">request_quote</span>
+                <i data-lucide="landmark"></i>
                 Lana – Bitcoin Lending
               </a>
               <a href="../products/cala.html" class="dropdown-item">
-                <span class="material-symbols-outlined">account_balance_wallet</span>
+                <i data-lucide="book-open"></i>
                 Cala – Accounting Ledger
               </a>
               <a href="../products/bria.html" class="dropdown-item">
-                <span class="material-symbols-outlined">bolt</span>
+                <i data-lucide="zap"></i>
                 Bria – Payments Bridge
               </a>
             </div>
@@ -56,20 +58,20 @@
           <li>
             <a href="../solutions/index.html" class="nav-link nav-link-dropdown">
               Solutions
-              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+              <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
             </a>
             <div class="dropdown-menu">
               <a href="../solutions/index.html" class="dropdown-item">
-                <span class="material-symbols-outlined">compare</span>
+                <i data-lucide="git-compare"></i>
                 Compare Solutions
               </a>
               <div class="dropdown-divider"></div>
               <a href="../solutions/sidecar.html" class="dropdown-item">
-                <span class="material-symbols-outlined">add_circle</span>
+                <i data-lucide="plus-circle"></i>
                 Sidecar Model
               </a>
               <a href="../solutions/primary-core.html" class="dropdown-item">
-                <span class="material-symbols-outlined">hub</span>
+                <i data-lucide="cpu"></i>
                 Primary Core
               </a>
             </div>
@@ -78,28 +80,28 @@
           <li>
             <a href="index.html" class="nav-link nav-link-dropdown active">
               Research
-              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+              <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
             </a>
             <div class="dropdown-menu">
               <a href="index.html" class="dropdown-item">
-                <span class="material-symbols-outlined">library_books</span>
+                <i data-lucide="library"></i>
                 All Research
               </a>
               <a href="bitcoin-banking-101/index.html" class="dropdown-item">
-                <span class="material-symbols-outlined">school</span>
+                <i data-lucide="graduation-cap"></i>
                 Bitcoin Banking 101
               </a>
               <div class="dropdown-divider"></div>
               <a href="case-studies/index.html" class="dropdown-item">
-                <span class="material-symbols-outlined">cases</span>
+                <i data-lucide="briefcase"></i>
                 Case Studies
               </a>
               <a href="regulatory/index.html" class="dropdown-item">
-                <span class="material-symbols-outlined">gavel</span>
+                <i data-lucide="scale"></i>
                 Regulatory Radar
               </a>
               <a href="guides/index.html" class="dropdown-item">
-                <span class="material-symbols-outlined">menu_book</span>
+                <i data-lucide="book-marked"></i>
                 Guides & Playbooks
               </a>
             </div>
@@ -108,28 +110,28 @@
           <li>
             <a href="../company/index.html" class="nav-link nav-link-dropdown">
               Company
-              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+              <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
             </a>
             <div class="dropdown-menu">
               <a href="../company/about.html" class="dropdown-item">
-                <span class="material-symbols-outlined">info</span>
+                <i data-lucide="info"></i>
                 About
               </a>
               <a href="../company/careers.html" class="dropdown-item">
-                <span class="material-symbols-outlined">work</span>
+                <i data-lucide="users"></i>
                 Careers
               </a>
               <a href="../company/security.html" class="dropdown-item">
-                <span class="material-symbols-outlined">shield</span>
+                <i data-lucide="shield"></i>
                 Security
               </a>
               <a href="../company/press.html" class="dropdown-item">
-                <span class="material-symbols-outlined">newspaper</span>
+                <i data-lucide="newspaper"></i>
                 Press & Media
               </a>
               <div class="dropdown-divider"></div>
               <a href="../company/contact.html" class="dropdown-item">
-                <span class="material-symbols-outlined">mail</span>
+                <i data-lucide="mail"></i>
                 Contact Us
               </a>
             </div>
@@ -158,7 +160,7 @@
     <div class="hero-pattern"></div>
     <div class="container">
       <div class="hero-content">
-        <span class="section-label"><span class="material-symbols-outlined">library_books</span> Research</span>
+        <span class="section-label"><i data-lucide="library"></i> Research</span>
         <h1>Research</h1>
         <p style="max-width: 700px; margin: 0 auto;">Insights, analysis, and thought leadership on Bitcoin banking, regulation, and the future of financial infrastructure.</p>
       </div>
@@ -170,12 +172,8 @@
     <div class="container">
       <nav class="research-nav">
         <a href="index.html" class="research-nav-link active">All</a>
-        <a href="case-studies/index.html" class="research-nav-link">Case Studies</a>
-        <a href="reports/index.html" class="research-nav-link">Reports</a>
+        <a href="bitcoin-banking-101/index.html" class="research-nav-link">Bitcoin Banking 101</a>
         <a href="regulatory/index.html" class="research-nav-link">Regulatory Radar</a>
-        <a href="guides/index.html" class="research-nav-link">Guides</a>
-        <a href="news/index.html" class="research-nav-link">News</a>
-        <a href="engineering/index.html" class="research-nav-link">Engineering</a>
       </nav>
     </div>
   </section>
@@ -185,15 +183,15 @@
     <div class="container">
       <h2 class="mb-8">Featured</h2>
 
-      <div class="split-feature" style="background: var(--light-grey); border-radius: var(--radius-lg); overflow: hidden;">
+      <div class="split-feature" style="background: var(--neutral-50); border-radius: var(--radius-lg); overflow: hidden;">
         <div style="padding: var(--space-10);">
-          <span class="text-sm" style="color: var(--bitcoin-orange); font-weight: 500;">REPORTS</span>
-          <h2 style="margin-top: var(--space-3);">The Bitcoin Banking Standard – Edition 7</h2>
-          <p>Our flagship research report analyzing the state of Bitcoin adoption in traditional banking, regulatory developments, and market trends.</p>
-          <a href="/research/reports/bitcoin-banking-standard-7" class="btn btn-primary">Read Report</a>
+          <span class="text-sm" style="color: var(--color-accent); font-weight: 500;">NEWS</span>
+          <h2 style="margin-top: var(--space-3);">The Bitcoin Banking Standard – Edition 8</h2>
+          <p>The latest on stablecoins, bank charters, ETFs, and regulation — tracking how Bitcoin is moving inside the banking perimeter.</p>
+          <a href="blog/bitcoin-banking-standard-edition-8.html" class="btn btn-primary">Read Report</a>
         </div>
         <div class="split-feature-image">
-          <img src="../../images/blog-placeholder.svg" alt="Bitcoin Banking Standard Report" style="width: 100%; height: 100%; object-fit: cover;">
+          <img src="../../images/blog/bbse8.png" alt="Bitcoin Banking Standard Edition 8" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
       </div>
     </div>
@@ -204,126 +202,421 @@
     <div class="container">
       <div class="grid grid-3" style="gap: var(--space-8);">
 
-        <!-- Case Studies -->
+        <!-- Bitcoin Banking 101 -->
         <div class="card">
-          <div class="card-icon" style="background: var(--bitcoin-orange);">
-            <span class="material-symbols-outlined" style="color: white;">cases</span>
+          <div class="card-icon" style="background: var(--color-primary);">
+            <i data-lucide="graduation-cap"></i>
           </div>
-          <h3>Case Studies</h3>
-          <p>Real-world implementation stories from banks that have launched Bitcoin services with Galoy.</p>
-          <a href="/research/case-studies" class="btn btn-secondary btn-sm" style="margin-top: var(--space-4);">View Case Studies</a>
+          <h3>Bitcoin Banking 101</h3>
+          <p>A comprehensive four-part series on Bitcoin's role in the future of banking, from architecture to regulation.</p>
+          <a href="bitcoin-banking-101/index.html" class="btn btn-secondary btn-sm" style="margin-top: var(--space-4);">Read the Series</a>
         </div>
 
         <!-- Regulatory Radar -->
         <div class="card">
           <div class="card-icon" style="background: #10b981;">
-            <span class="material-symbols-outlined" style="color: white;">gavel</span>
+            <i data-lucide="scale"></i>
           </div>
           <h3>Regulatory Radar</h3>
-          <p>Track regulatory developments affecting Bitcoin banking, including OCC, Fed, and FDIC guidance.</p>
-          <a href="/research/regulatory" class="btn btn-secondary btn-sm" style="margin-top: var(--space-4);">View Regulatory</a>
+          <p>Track 90+ regulatory developments affecting Bitcoin banking, including OCC, Fed, SEC, and FDIC guidance.</p>
+          <a href="regulatory/index.html" class="btn btn-secondary btn-sm" style="margin-top: var(--space-4);">View Regulatory</a>
         </div>
 
-        <!-- Guides -->
+        <!-- Bitcoin Banking Standard -->
         <div class="card">
-          <div class="card-icon" style="background: #8b5cf6;">
-            <span class="material-symbols-outlined" style="color: white;">menu_book</span>
+          <div class="card-icon" style="background: var(--color-accent);">
+            <i data-lucide="newspaper"></i>
           </div>
-          <h3>Guides & Playbooks</h3>
-          <p>In-depth educational content on Bitcoin banking, lending, compliance, and implementation.</p>
-          <a href="/research/guides" class="btn btn-secondary btn-sm" style="margin-top: var(--space-4);">View Guides</a>
+          <h3>The Bitcoin Banking Standard</h3>
+          <p>Our flagship newsletter series tracking how Bitcoin is integrating into the traditional banking system.</p>
+          <a href="blog/bitcoin-banking-standard-edition-8.html" class="btn btn-secondary btn-sm" style="margin-top: var(--space-4);">Latest Edition</a>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ========== LATEST ARTICLES ========== -->
-  <section class="section section-grey">
+  <!-- ========== ALL BLOG POSTS ========== -->
+  <section class="section section-alt">
     <div class="container">
       <div class="flex justify-between items-center mb-8">
-        <h2 class="mb-0">Latest Articles</h2>
+        <h2 class="mb-0">All Articles</h2>
       </div>
 
-      <div class="grid grid-3">
-        <!-- Article 1 -->
-        <a href="/research/reports/bitcoin-banking-standard-7" class="blog-card">
-          <div class="blog-card-image">
-            <img src="../../images/blog-placeholder.svg" alt="">
-          </div>
+      <!-- Category Filter -->
+      <div class="filter-bar" style="display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-8);">
+        <button class="filter-btn active" data-filter="all" style="padding: 6px 16px; border-radius: var(--radius-full); border: 1px solid var(--border-default); background: var(--color-primary); color: white; font-size: var(--font-size-sm); font-weight: 500; cursor: pointer; transition: all 0.2s;">All</button>
+        <button class="filter-btn" data-filter="news" style="padding: 6px 16px; border-radius: var(--radius-full); border: 1px solid var(--border-default); background: white; color: var(--text-secondary); font-size: var(--font-size-sm); font-weight: 500; cursor: pointer; transition: all 0.2s;">News</button>
+        <button class="filter-btn" data-filter="enterprise-adoption" style="padding: 6px 16px; border-radius: var(--radius-full); border: 1px solid var(--border-default); background: white; color: var(--text-secondary); font-size: var(--font-size-sm); font-weight: 500; cursor: pointer; transition: all 0.2s;">Enterprise Adoption</button>
+        <button class="filter-btn" data-filter="research" style="padding: 6px 16px; border-radius: var(--radius-full); border: 1px solid var(--border-default); background: white; color: var(--text-secondary); font-size: var(--font-size-sm); font-weight: 500; cursor: pointer; transition: all 0.2s;">Research</button>
+        <button class="filter-btn" data-filter="engineering" style="padding: 6px 16px; border-radius: var(--radius-full); border: 1px solid var(--border-default); background: white; color: var(--text-secondary); font-size: var(--font-size-sm); font-weight: 500; cursor: pointer; transition: all 0.2s;">Engineering</button>
+      </div>
+
+      <div class="grid grid-3" id="articles-grid">
+
+        <a href="blog/bitcoin-banking-standard-edition-8.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/bbse8.png" alt=""></div>
           <div class="blog-card-content">
-            <div class="blog-card-meta">Reports · January 6, 2026</div>
+            <div class="blog-card-meta">News · February 4, 2026</div>
+            <h3 class="blog-card-title">The Bitcoin Banking Standard – Edition 8</h3>
+            <p class="blog-card-excerpt">The latest on stablecoins, bank charters, ETFs, and regulation.</p>
+          </div>
+        </a>
+
+        <a href="blog/bitcoin-banking-standard-edition-7.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/bbse7.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">News · January 6, 2026</div>
             <h3 class="blog-card-title">The Bitcoin Banking Standard – Edition 7</h3>
-            <p class="blog-card-excerpt">Our latest analysis of Bitcoin adoption trends in traditional banking institutions.</p>
+            <p class="blog-card-excerpt">From OCC clarity to normalized Fed oversight and stablecoin rails.</p>
           </div>
         </a>
 
-        <!-- Article 2 -->
-        <a href="/research/reports/bitcoin-banking-standard-6" class="blog-card">
-          <div class="blog-card-image">
-            <img src="../../images/blog-placeholder.svg" alt="">
-          </div>
+        <a href="blog/bitcoin-banking-standard-edition-6.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/bbse6.png" alt=""></div>
           <div class="blog-card-content">
-            <div class="blog-card-meta">Reports · August 26, 2025</div>
+            <div class="blog-card-meta">News · August 26, 2025</div>
             <h3 class="blog-card-title">The Bitcoin Banking Standard – Edition 6</h3>
-            <p class="blog-card-excerpt">Mid-year review of regulatory changes and market developments.</p>
+            <p class="blog-card-excerpt">From de-banking relief to Citi's custody signals and lighter Fed scrutiny.</p>
           </div>
         </a>
 
-        <!-- Article 3 -->
-        <a href="/research/news/bitcoin-backed-lending-win" class="blog-card">
-          <div class="blog-card-image">
-            <img src="../../images/blog-placeholder.svg" alt="">
-          </div>
+        <a href="blog/bitcoin-backed-lending.html" class="blog-card" data-category="enterprise-adoption">
+          <div class="blog-card-image"><img src="../../images/blog/bitcoin-backed-lending.png" alt=""></div>
           <div class="blog-card-content">
-            <div class="blog-card-meta">News · August 11, 2025</div>
+            <div class="blog-card-meta">Enterprise Adoption · August 11, 2025</div>
             <h3 class="blog-card-title">Bitcoin Backed Lending: A Win/Win/Win</h3>
-            <p class="blog-card-excerpt">Why Bitcoin-collateralized loans benefit banks, customers, and regulators.</p>
+            <p class="blog-card-excerpt">Bitcoin backed loans offer high interest spreads and tax-efficient borrowing.</p>
           </div>
         </a>
 
-        <!-- Article 4 -->
-        <a href="/research/regulatory/occ-guidance-withdrawal" class="blog-card">
-          <div class="blog-card-image">
-            <img src="../../images/blog-placeholder.svg" alt="">
-          </div>
+        <a href="blog/bitcoin-banking-standard-edition-5.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/bbse5.png" alt=""></div>
           <div class="blog-card-content">
-            <div class="blog-card-meta">Regulatory Radar · April 2025</div>
-            <h3 class="blog-card-title">OCC Withdraws Anti-Bitcoin Guidance</h3>
-            <p class="blog-card-excerpt">Analysis of the regulatory shift enabling bank Bitcoin services.</p>
+            <div class="blog-card-meta">News · July 25, 2025</div>
+            <h3 class="blog-card-title">The Bitcoin Banking Standard – Edition 5</h3>
+            <p class="blog-card-excerpt">PNC partners with Coinbase, JPMorgan explores BTC-backed loans.</p>
           </div>
         </a>
 
-        <!-- Article 5 -->
-        <a href="/research/guides/bitcoin-backed-lending" class="blog-card">
-          <div class="blog-card-image">
-            <img src="../../images/blog-placeholder.svg" alt="">
-          </div>
+        <a href="blog/bitcoin-banking-standard-edition-4.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/bbse4.png" alt=""></div>
           <div class="blog-card-content">
-            <div class="blog-card-meta">Guides · March 2025</div>
-            <h3 class="blog-card-title">The Complete Guide to Bitcoin-Backed Lending</h3>
-            <p class="blog-card-excerpt">Everything banks need to know about offering BTC-collateralized loans.</p>
+            <div class="blog-card-meta">News · July 4, 2025</div>
+            <h3 class="blog-card-title">The Bitcoin Banking Standard – Edition 4</h3>
+            <p class="blog-card-excerpt">The regulatory landscape evolves favorably for Bitcoin banking.</p>
           </div>
         </a>
 
-        <!-- Article 6 -->
-        <a href="/research/engineering/lightning-integration" class="blog-card">
-          <div class="blog-card-image">
-            <img src="../../images/blog-placeholder.svg" alt="">
-          </div>
+        <a href="blog/bitcoin-banking-standard-edition-3.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/bbse3.png" alt=""></div>
           <div class="blog-card-content">
-            <div class="blog-card-meta">Engineering · February 2025</div>
-            <h3 class="blog-card-title">Lightning Network Integration Patterns</h3>
-            <p class="blog-card-excerpt">Technical deep-dive into Lightning payment processing architecture.</p>
+            <div class="blog-card-meta">News · June 5, 2025</div>
+            <h3 class="blog-card-title">The Bitcoin Banking Standard – Edition 3</h3>
+            <p class="blog-card-excerpt">Massive banks begin implementing Bitcoin into their products.</p>
           </div>
         </a>
+
+        <a href="blog/bitcoin-banking-standard-edition-2.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/bbse2.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">News · April 11, 2025</div>
+            <h3 class="blog-card-title">The Bitcoin Banking Standard – Edition 2</h3>
+            <p class="blog-card-excerpt">Regulatory bodies provide a more favorable environment for institutions.</p>
+          </div>
+        </a>
+
+        <a href="blog/bitcoin-banking-standard-edition-1.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/bbse1.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">News · March 28, 2025</div>
+            <h3 class="blog-card-title">The Bitcoin Banking Standard: Edition 1</h3>
+            <p class="blog-card-excerpt">A transformative period in Bitcoin's integration within the banking sector.</p>
+          </div>
+        </a>
+
+        <a href="blog/rise-of-bitcoin-banks-slp634.html" class="blog-card" data-category="enterprise-adoption">
+          <div class="blog-card-image"><img src="../../images/blog/slp634-podcast.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Enterprise Adoption · February 11, 2025</div>
+            <h3 class="blog-card-title">The Rise of Bitcoin Banks – Stephan Livera Pod</h3>
+            <p class="blog-card-excerpt">Nicolas Burtey discusses the evolution of Bitcoin banking.</p>
+          </div>
+        </a>
+
+        <a href="blog/galoy-launches-lana.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/lana-launch.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">News · February 6, 2025</div>
+            <h3 class="blog-card-title">Galoy Launches Lana for Digital Asset Lending</h3>
+            <p class="blog-card-excerpt">New service enables institutions to offer Bitcoin-backed loans.</p>
+          </div>
+        </a>
+
+        <a href="blog/bitcoin-banking-sab121-withdrawal.html" class="blog-card" data-category="enterprise-adoption">
+          <div class="blog-card-image"><img src="../../images/blog/sab121-withdrawal.webp" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Enterprise Adoption · December 19, 2024</div>
+            <h3 class="blog-card-title">How SAB121's Withdrawal Unleashes Banking Innovation</h3>
+            <p class="blog-card-excerpt">What the SEC's SAB 121 withdrawal means for banks.</p>
+          </div>
+        </a>
+
+        <a href="blog/banks-and-bitcoin-collide.html" class="blog-card" data-category="enterprise-adoption">
+          <div class="blog-card-image"><img src="../../images/blog/banks-bitcoin-collide.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Enterprise Adoption · December 3, 2024</div>
+            <h3 class="blog-card-title">When Banks and Bitcoin Collide</h3>
+            <p class="blog-card-excerpt">Nicolas Burtey at Adopting Bitcoin 2024.</p>
+          </div>
+        </a>
+
+        <a href="blog/blink-completes-transaction.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/blink-transaction.webp" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">News · October 21, 2024</div>
+            <h3 class="blog-card-title">Blink Completes Transaction to Accelerate Growth</h3>
+            <p class="blog-card-excerpt">Blink positioned for expansion under new CEO Lukas Duczko.</p>
+          </div>
+        </a>
+
+        <a href="blog/how-will-enterprises-adopt-bitcoin.html" class="blog-card" data-category="enterprise-adoption">
+          <div class="blog-card-image"><img src="../../images/blog/enterprise-bitcoin-adoption.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Enterprise Adoption · July 23, 2024</div>
+            <h3 class="blog-card-title">How Will Enterprises Adopt Bitcoin?</h3>
+            <p class="blog-card-excerpt">Companies that wield Bitcoin early will make money and differentiate.</p>
+          </div>
+        </a>
+
+        <a href="blog/github-repository-renaming.html" class="blog-card" data-category="engineering">
+          <div class="blog-card-image"><img src="../../images/blog/github-renaming.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Engineering · May 1, 2024</div>
+            <h3 class="blog-card-title">From Galoy to Blink – GitHub Repositories Renamed</h3>
+            <p class="blog-card-excerpt">Repositories rebranded to reflect core functionalities.</p>
+          </div>
+        </a>
+
+        <a href="blog/moving-open-source-up-the-bitcoin-stack.html" class="blog-card" data-category="engineering">
+          <div class="blog-card-image"><img src="../../images/blog/open-source-bitcoin-stack.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Engineering · September 11, 2023</div>
+            <h3 class="blog-card-title">Moving Open Source Up the Bitcoin Stack</h3>
+            <p class="blog-card-excerpt">Nicolas Burtey at Baltic Honeybadger 2023.</p>
+          </div>
+        </a>
+
+        <a href="blog/be-your-own-bank-for-corporations.html" class="blog-card" data-category="enterprise-adoption">
+          <div class="blog-card-image"><img src="../../images/blog/mstr-world-2023.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Enterprise Adoption · May 13, 2023</div>
+            <h3 class="blog-card-title">Be Your Own Bank (For Corporations)</h3>
+            <p class="blog-card-excerpt">Nicolas Burtey presents at MSTR World 2023.</p>
+          </div>
+        </a>
+
+        <a href="blog/lightning-network-industry-use-cases.html" class="blog-card" data-category="research">
+          <div class="blog-card-image"><img src="../../images/blog/ln-industry-usecases.jpg" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Research · December 14, 2022</div>
+            <h3 class="blog-card-title">Industry Use Cases of the Lightning Network</h3>
+            <p class="blog-card-excerpt">Machine-to-machine payments, power grids, and cross-border settlement.</p>
+          </div>
+        </a>
+
+        <a href="blog/lightning-cash-register.html" class="blog-card" data-category="engineering">
+          <div class="blog-card-image"><img src="../../images/blog/lightning-cash-register.jpg" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Engineering · December 6, 2022</div>
+            <h3 class="blog-card-title">The Lightning Cash Register</h3>
+            <p class="blog-card-excerpt">POS payments on the Lightning Network for merchants.</p>
+          </div>
+        </a>
+
+        <a href="blog/announcing-stablesats.html" class="blog-card" data-category="engineering">
+          <div class="blog-card-image"><img src="../../images/blog/stablesats.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Engineering · August 3, 2022</div>
+            <h3 class="blog-card-title">Announcing Stablesats</h3>
+            <p class="blog-card-excerpt">Bringing USD to the Lightning Network.</p>
+          </div>
+        </a>
+
+        <a href="blog/inbound-liquidity-fee-structures.html" class="blog-card" data-category="research">
+          <div class="blog-card-image"><img src="../../images/blog/inbound-liquidity.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Research · March 10, 2022</div>
+            <h3 class="blog-card-title">Inbound Liquidity &amp; Fee Structures on Lightning</h3>
+            <p class="blog-card-excerpt">Pricing liquidity for Lightning wallets and banking systems.</p>
+          </div>
+        </a>
+
+        <a href="blog/newsletter-4-bitcoin-mortgages.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/newsletter4-mortgages.jpg" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">News · February 17, 2022</div>
+            <h3 class="blog-card-title">Newsletter #4: Bitcoin Mortgages &amp; Open Source</h3>
+            <p class="blog-card-excerpt">New Story partnering with Bitcoin Beach for homeownership.</p>
+          </div>
+        </a>
+
+        <a href="blog/bitcoin-mortgage-payments-el-zonte.html" class="blog-card" data-category="enterprise-adoption">
+          <div class="blog-card-image"><img src="../../images/blog/bitcoin-mortgages-elzonte.jpg" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Enterprise Adoption · February 16, 2022</div>
+            <h3 class="blog-card-title">Bitcoin Mortgage Payments in El Zonte</h3>
+            <p class="blog-card-excerpt">Making homeownership possible with Bitcoin.</p>
+          </div>
+        </a>
+
+        <a href="blog/newsletter-3-bitcoin-for-communities.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/newsletter3-communities.jpeg" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">News · January 24, 2022</div>
+            <h3 class="blog-card-title">Newsletter #3: Bitcoin For Communities</h3>
+            <p class="blog-card-excerpt">Support for Tonga, Cash App adds Lightning.</p>
+          </div>
+        </a>
+
+        <a href="blog/bitcoin-for-communities.html" class="blog-card" data-category="enterprise-adoption">
+          <div class="blog-card-image"><img src="../../images/blog/bitcoin-for-communities.jpeg" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Enterprise Adoption · January 22, 2022</div>
+            <h3 class="blog-card-title">Bitcoin For Communities</h3>
+            <p class="blog-card-excerpt">42 million sats donated to 10 Bitcoin projects worldwide.</p>
+          </div>
+        </a>
+
+        <a href="blog/lightning-address-bitcoin-beach.html" class="blog-card" data-category="engineering">
+          <div class="blog-card-image"><img src="../../images/blog/lightning-address.jpg" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Engineering · December 22, 2021</div>
+            <h3 class="blog-card-title">Receive Payment Via Lightning Address</h3>
+            <p class="blog-card-excerpt">Lightning Addresses simplify Bitcoin transactions.</p>
+          </div>
+        </a>
+
+        <a href="blog/newsletter-2-seed-round.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/newsletter2-seed-round.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">News · December 16, 2021</div>
+            <h3 class="blog-card-title">Newsletter #2: $3m Seed Round</h3>
+            <p class="blog-card-excerpt">Adopting Bitcoin videos, Lightning Network news.</p>
+          </div>
+        </a>
+
+        <a href="blog/galoy-raises-3m-seed-round.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/seed-round.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">News · December 15, 2021</div>
+            <h3 class="blog-card-title">Galoy Raises $3m Seed Round</h3>
+            <p class="blog-card-excerpt">Craft Ventures leads round for Bitcoin banking infrastructure.</p>
+          </div>
+        </a>
+
+        <a href="blog/adopting-bitcoin-summit-recap.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/adopting-bitcoin-summit.jpeg" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">News · November 22, 2021</div>
+            <h3 class="blog-card-title">Recap: Adopting Bitcoin Lightning Summit</h3>
+            <p class="blog-card-excerpt">700+ attendees and 75 speakers in El Salvador.</p>
+          </div>
+        </a>
+
+        <a href="blog/newsletter-1-adopting-bitcoin.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/newsletter1-adopting.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">News · November 11, 2021</div>
+            <h3 class="blog-card-title">Newsletter #1: Adopting Bitcoin</h3>
+            <p class="blog-card-excerpt">Bitcoin banking for communities and Lightning Network news.</p>
+          </div>
+        </a>
+
+        <a href="blog/bitcoin-banking-for-communities.html" class="blog-card" data-category="enterprise-adoption">
+          <div class="blog-card-image"><img src="../../images/blog/bitcoin-beach-lessons.jpg" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Enterprise Adoption · November 10, 2021</div>
+            <h3 class="blog-card-title">Bitcoin Banking for Communities</h3>
+            <p class="blog-card-excerpt">Lessons learned from Bitcoin Beach.</p>
+          </div>
+        </a>
+
+        <a href="blog/galoy-origin-story.html" class="blog-card" data-category="news">
+          <div class="blog-card-image"><img src="../../images/blog/galoy-origin-story.webp" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">News · November 8, 2021</div>
+            <h3 class="blog-card-title">The Galoy Origin Story</h3>
+            <p class="blog-card-excerpt">How we got our name — from the Gauls to Bitcoin.</p>
+          </div>
+        </a>
+
+        <a href="blog/lightning-as-retail-payment-system.html" class="blog-card" data-category="research">
+          <div class="blog-card-image"><img src="../../images/blog/lightning-retail-payment.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Research · July 22, 2020</div>
+            <h3 class="blog-card-title">Lightning as a Retail Payment System</h3>
+            <p class="blog-card-excerpt">Layered scaling of Bitcoin and Lightning for retail payments.</p>
+          </div>
+        </a>
+
+        <a href="blog/visa-and-lightning-comparison.html" class="blog-card" data-category="research">
+          <div class="blog-card-image"><img src="../../images/blog/visa-vs-lightning.png" alt=""></div>
+          <div class="blog-card-content">
+            <div class="blog-card-meta">Research · December 9, 2019</div>
+            <h3 class="blog-card-title">Visa and Lightning: How Do They Compare?</h3>
+            <p class="blog-card-excerpt">Side-by-side comparison of card networks and Lightning.</p>
+          </div>
+        </a>
+
       </div>
 
-      <div class="text-center mt-12">
-        <a href="#" class="btn btn-secondary">Load More Articles</a>
+      <!-- No results message -->
+      <div id="no-results" style="display: none; text-align: center; padding: var(--space-12) 0; color: var(--text-secondary);">
+        <i data-lucide="search" style="width: 48px; height: 48px; margin-bottom: var(--space-4); opacity: 0.3;"></i>
+        <p>No articles found in this category.</p>
       </div>
     </div>
   </section>
+
+  <!-- Filter Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('#articles-grid .blog-card');
+      const noResults = document.getElementById('no-results');
+
+      filterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const filter = this.getAttribute('data-filter');
+
+          // Update active button styles
+          filterBtns.forEach(function(b) {
+            b.style.background = 'white';
+            b.style.color = 'var(--text-secondary)';
+            b.classList.remove('active');
+          });
+          this.style.background = 'var(--color-primary)';
+          this.style.color = 'white';
+          this.classList.add('active');
+
+          // Filter cards
+          var visibleCount = 0;
+          cards.forEach(function(card) {
+            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+              card.style.display = '';
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          // Show/hide no results
+          noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        });
+      });
+    });
+  </script>
 
   <!-- ========== NEWSLETTER CTA ========== -->
   <section class="cta-section">
@@ -332,7 +625,7 @@
       <p>Subscribe to the Bitcoin Banking Standard for monthly insights on Bitcoin banking trends and regulatory developments.</p>
       <div style="max-width: 500px; margin: 0 auto;">
         <form style="display: flex; gap: var(--space-3);">
-          <input type="email" placeholder="Enter your email" style="flex: 1; padding: var(--space-3) var(--space-4); border: 1px solid var(--border-grey); border-radius: var(--radius-md); font-size: var(--font-size-base);">
+          <input type="email" placeholder="Enter your email" style="flex: 1; padding: var(--space-3) var(--space-4); border: 1px solid var(--border-default); border-radius: var(--radius-md); font-size: var(--font-size-base);">
           <button type="submit" class="btn btn-primary">Subscribe</button>
         </form>
       </div>
@@ -393,6 +686,9 @@
       </div>
     </div>
   </footer>
+
+  <!-- Initialize Lucide icons -->
+  <script>lucide.createIcons();</script>
 
 </body>
 </html>

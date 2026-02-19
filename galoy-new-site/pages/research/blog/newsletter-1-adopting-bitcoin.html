@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galoy Newsletter #1: Adopting Bitcoin and Lightning Network News | Galoy</title>
+  <meta name="description" content="Monthly newsletter covering insights, articles and news about onboarding communities to Bitcoin.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="../../../css/styles.css">
+  <link rel="icon" href="../../../images/favicon.png" type="image/png">
+  <style>
+    .blog-hero { background: var(--neutral-50); padding: var(--space-16) 0 var(--space-8); }
+    .blog-hero-image { max-width: 800px; margin: 0 auto var(--space-8); border-radius: var(--radius-lg); overflow: hidden; }
+    .blog-hero-image img { width: 100%; height: auto; display: block; }
+    .blog-meta { display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-4); color: var(--text-secondary); font-size: var(--font-size-sm); }
+    .blog-meta-tag { background: var(--color-primary); color: white; padding: 2px 10px; border-radius: var(--radius-full); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .blog-article { max-width: 800px; margin: 0 auto; padding: var(--space-8) var(--space-4); }
+    .blog-article h2 { margin-top: var(--space-10); margin-bottom: var(--space-4); font-size: var(--font-size-2xl); }
+    .blog-article h3 { margin-top: var(--space-8); margin-bottom: var(--space-3); font-size: var(--font-size-xl); }
+    .blog-article h4 { margin-top: var(--space-6); margin-bottom: var(--space-3); font-size: var(--font-size-lg); font-weight: 600; }
+    .blog-article p { margin-bottom: var(--space-4); line-height: 1.75; color: var(--text-secondary); }
+    .blog-article ul, .blog-article ol { margin-bottom: var(--space-4); padding-left: var(--space-6); color: var(--text-secondary); }
+    .blog-article li { margin-bottom: var(--space-2); line-height: 1.75; }
+    .blog-article blockquote { border-left: 3px solid var(--color-primary); padding: var(--space-4) var(--space-6); margin: var(--space-6) 0; background: var(--neutral-50); border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+    .blog-article blockquote p { color: var(--text-primary); font-style: italic; margin-bottom: 0; }
+    .blog-article strong { color: var(--text-primary); }
+    .blog-article a { color: var(--color-primary); text-decoration: underline; }
+    .blog-back { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--text-secondary); text-decoration: none; font-size: var(--font-size-sm); margin-bottom: var(--space-6); }
+    .blog-back:hover { color: var(--color-primary); }
+    .blog-article img { max-width: 100%; height: auto; border-radius: var(--radius-md); margin: var(--space-4) 0; }
+    @media (max-width: 768px) {
+      .blog-hero { padding: var(--space-10) 0 var(--space-4); }
+      .blog-article { padding: var(--space-4) var(--space-4); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="../../../index.html" class="navbar-brand">
+          <img src="../../../images/galoy-logo-white.svg" alt="Galoy" class="navbar-logo">
+        </a>
+        <ul class="navbar-nav">
+          <li><a href="../../../index.html" class="nav-link">Home</a></li>
+          <li>
+            <a href="../../products/index.html" class="nav-link nav-link-dropdown">Products<i data-lucide="chevron-down" class="nav-dropdown-icon"></i></a>
+            <div class="dropdown-menu">
+              <a href="../../products/index.html" class="dropdown-item"><i data-lucide="layers"></i>All Products</a>
+              <div class="dropdown-divider"></div>
+              <a href="../../products/lana.html" class="dropdown-item"><i data-lucide="landmark"></i>Lana – Bitcoin Lending</a>
+              <a href="../../products/cala.html" class="dropdown-item"><i data-lucide="book-open"></i>Cala – Accounting Ledger</a>
+              <a href="../../products/bria.html" class="dropdown-item"><i data-lucide="zap"></i>Bria – Payments Bridge</a>
+            </div>
+          </li>
+          <li>
+            <a href="../index.html" class="nav-link nav-link-dropdown active">Research<i data-lucide="chevron-down" class="nav-dropdown-icon"></i></a>
+            <div class="dropdown-menu">
+              <a href="../index.html" class="dropdown-item"><i data-lucide="library"></i>All Research</a>
+              <a href="../bitcoin-banking-101/index.html" class="dropdown-item"><i data-lucide="graduation-cap"></i>Bitcoin Banking 101</a>
+              <div class="dropdown-divider"></div>
+              <a href="../regulatory/index.html" class="dropdown-item"><i data-lucide="scale"></i>Regulatory Radar</a>
+            </div>
+          </li>
+          <li>
+            <a href="../../company/index.html" class="nav-link nav-link-dropdown">Company<i data-lucide="chevron-down" class="nav-dropdown-icon"></i></a>
+            <div class="dropdown-menu">
+              <a href="../../company/about.html" class="dropdown-item"><i data-lucide="info"></i>About</a>
+              <a href="../../company/careers.html" class="dropdown-item"><i data-lucide="users"></i>Careers</a>
+              <a href="../../company/security.html" class="dropdown-item"><i data-lucide="shield"></i>Security</a>
+              <a href="../../company/press.html" class="dropdown-item"><i data-lucide="newspaper"></i>Press & Media</a>
+              <div class="dropdown-divider"></div>
+              <a href="../../company/contact.html" class="dropdown-item"><i data-lucide="mail"></i>Contact Us</a>
+            </div>
+          </li>
+        </ul>
+        <div class="navbar-social">
+          <a href="https://twitter.com/GaloyMoney" class="social-link" target="_blank" rel="noopener" aria-label="X (Twitter)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://github.com/GaloyMoney" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/galoymoney" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+        <button class="navbar-toggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="blog-hero">
+    <div class="container">
+      <a href="../index.html" class="blog-back"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Back to Research</a>
+      <div class="blog-hero-image">
+        <img src="../../../images/blog/newsletter1-adopting.png" alt="Galoy Newsletter #1: Adopting Bitcoin and Lightning Network News">
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <div class="blog-meta">
+          <span class="blog-meta-tag">News</span>
+          <span>November 11, 2021</span>
+          <span>·</span>
+          <span>Andrew</span>
+        </div>
+        <h1>Galoy Newsletter #1: Adopting Bitcoin and Lightning Network News</h1>
+      </div>
+    </div>
+  </section>
+
+  <article class="blog-article">
+  <h2>Adopting Bitcoin: A Lightning Summit</h2>
+  <p>The Adopting Bitcoin Lightning Summit is only six days away. The conference runs November 16-18 with a packed <a href="https://adoptingbitcoin.org/#schedule">schedule</a> you do not want to miss. If you don't already have your ticket, visit <a href="https://adoptingbitcoin.org/">adoptingbitcoin.org</a> to get one today.</p>
+
+  <h2>Bitcoin Banking for Communities: Lessons Learned from Bitcoin Beach</h2>
+  <p>The Bitcoin Beach Wallet is the first implementation of Galoy software. It was developed in 2020 with the Bitcoin Beach team and the residents and merchants of El Zonte. The passing of "La Ley Bitcoin" (The Bitcoin Law) has surfaced a groundswell of interest in replicating the type of circular Bitcoin economy that Bitcoin Beach pioneered. Today we present "<a href="https://galoy.io/bitcoin-banking-for-communities-lessons-learned-from-el-zonte/">Bitcoin Banking for Communities</a>" to share lessons learned and support adoption of Bitcoin and Lightning around the world.</p>
+
+  <h2>Lightning Network News and Developments</h2>
+
+  <h3>Lightning Developers Prepare for Taproot Activation</h3>
+  <p>The LN developer community is making continuous progress preparing to unleash the potential of Taproot, which is set to activate in three days. <a href="https://twitter.com/roasbeef">Roasbeef</a> shared <a href="https://lists.linuxfoundation.org/pipermail/lightning-dev/2021-November/003336.html">notes</a> from a recent two-day Lightning summit in Zurich where devs discussed potential paths to upgrading the entire network to Taproot. Much attention is being given to the speed and way in which the network should be transitioned to new protocols and specs, which will inevitably be a plus for end users of all Lightning-enabled products.</p>
+
+  <p>Devs convening at <a href="http://adoptingbitcoin.org/">Adopting Bitcoin</a> next week will have another chance to share ideas and plans. Get a head start by listening to T-bast (Bastien Teinturier) of ACINQ and Stephan Livera <a href="https://podcasts.apple.com/us/podcast/stephan-livera-podcast/id1415720320?i=1000540971632">discuss</a> what can be done to improve Lightning Network privacy. <a href="https://adoptingbitcoin.org/speaker/BastienTeinturier">Bastien</a> will be joining a prolific privacy panel that will go into the weeds of on-chain and off-chain UTXO and payment privacy at #adopt21. He will join <a href="https://adoptingbitcoin.org/speaker/PeterTodd">Peter Todd</a>, <a href="https://adoptingbitcoin.org/speaker/Openoms">Openoms</a> and <a href="https://adoptingbitcoin.org/speaker/StephanLivera">Stephan Livera</a>, as well as Wasabi's <a href="https://adoptingbitcoin.org/speaker/AdamFicsor">Adam Ficsor</a>, who promised to announce a research grant that may be just the right incentive to bring financial privacy in Lightning to where it needs to be.</p>
+
+  <p>And since unveiling announcements at conferences are a nice trend of 2021, <a href="https://adoptingbitcoin.org/speaker/JohnCarvalho">John Carvalho</a> will add one more: He has been keeping Bitcoin Twitter in suspense for <a href="https://twitter.com/BitcoinErrorLog/status/1359030084577992705?s=20">more than a year</a> with insinuations about his stealth company. The reveal will take place in San Salvador where he'll present a new set of products and open-source technology to allow for a post-hyperbitcoinization social economy that does not require banks, governments, or Big Tech.</p>
+
+  <h2>Adoption is Reaching Every Corner of the World</h2>
+  <p>Growth of channels, nodes and capacity on the Lightning Network is accelerating at a mind-blowing rate. In case you missed it, "<a href="https://www.research.arcane.no/the-state-of-lightning">The State of The Lightning</a>" report from Arcane Research provides a dive into the growth and potential of the network. To sum up with the report's own words, "What we've seen so far is only the beginning." The report predicts that close to 90% of the grown population in El Salvador will have access to Lightning payments by 2026. That would mark a transition from 70% unbanked to 90% Lightning-enabled in five years. Big if true.</p>
+
+  <p>The rapid emergence of <a href="https://twitter.com/kycjelly">Plebnet</a> into the ecosystem shows how fast the Lightning community is growing. Just months ago the Plebnet was a small Telegram group and a wiki, built to assist in Lightning node setup and channel opening. The group now has more than 5,000 members and was recently featured in <a href="https://www.businessinsider.com/bitcoin-crypto-mining-plebnet-ordinary-people-powering-el-salvador-payments-2021-11">Business Insider</a>.</p>
+
+  <p>Bitcoin community-building efforts are also spreading around the world. From <a href="https://twitter.com/LordFusitua">Lord Fusitu'a</a>'s four-part plan for Tonga, to <a href="https://twitter.com/bitcoinbeachbr">Bitcoin Beach Brasil</a>, to <a href="https://twitter.com/LakeBitcoin">Bitcoin Lake</a> in Guatemala, organizers are stepping up to follow in the footsteps of Bitcoin Beach and El Salvador. Read "<a href="https://medium.com/coinmonks/bitcoin-lake-phase-one-128b54c85907">Bitcoin Lake — Phase One</a>" to learn about building a Bitcoin circular economy in Guatemala. <a href="https://coinos.io/lakebitcoin">Send them sats</a> for support!</p>
+
+  <p>Adoption is happening at every level from individuals to communities. Even the <a href="https://twitter.com/BTC_Archive/status/1456629355111665673?s=20">Mayors of four American cities</a> are asking to be paid in Bitcoin!</p>
+
+  <h2>Investors and Large Corporations are Taking Notice</h2>
+  <p>October was a huge month for Bitcoin and Lightning investment. Umbrel announced a <a href="https://bitcoinmagazine.com/business/today-bitcoin-personal-server-and-node-developer-umbrel-announced-it-has-raised-3-million-in-seed-round-funding">$3m seed round</a> to accelerate development of its plug-and-play software and hardware products. We also saw the launch of <a href="https://bitcoinmagazine.com/culture/ten31-launches-a-new-bitcoin-venture-capitalist-firm">Ten31</a>, a new Bitcoin VC firm providing "Low Time Preference Funds" to fuel hyperbitcoinization. The biggest announcement came when NYDIG <a href="https://www.theblockcrypto.com/post/122564/nydig-acquires-british-crypto-startup-bottlepay-300-million-stock-purchase">announced</a> its $300m acquisition of <a href="https://bottlepay.com/">BottlePay</a>. We might be in for a supply squeeze on LN developers and companies if more global corporations start looking for ways to build on Lightning (<a href="https://twitter.com/BTC_Archive/status/1458093050304024577?s=20">Tim Cook, hello</a>). As <a href="https://adoptingbitcoin.org/speaker/MaxWebster">Max Webster</a> recently wrote in "<a href="https://hivemind.vc/why-lightning-why-now/">Why Lightning, Why Now</a>," Lightning capacity, node, and channel growth charts "sure look like the early stages of a hockey stick! And there's nothing that venture investors love more than hockey sticks"</p>
+
+  <h2>Additional Notes</h2>
+  <ul>
+    <li>Taproot activation is just days away! Check <a href="https://taproot.watch/">taproot.watch</a> by <a href="https://twitter.com/hampus_s">@hampus_s</a> for an up to date count of the blocks left until activation</li>
+    <li>Galoy founders Nicolas Burtey and Chris Hunter appeared on Bitrefill's <a href="https://open.spotify.com/episode/7FFUd6q1GiIlSeCHoLthnq?si=n2M4p6PpQ3GMOHRBSQMsyg">"To the Moon" podcast</a> to share their vision and discuss the upcoming Adopting Bitcoin Lightning Summit</li>
+    <li>Salvadoran President Nayib Bukele is <a href="https://www.nasdaq.com/articles/president-bukele%3A-el-salvador-to-use-bitcoin-profits-to-build-20-schools-2021-11-02">building 20 schools</a> and the first public veterinary hospital with BTC profits (Yes, Steve Hanke is still sending him <a href="https://twitter.com/nayibbukele/status/1457858023800639490?s=20">salty tweets</a>)</li>
+    <li>Stay tuned in December: <a href="https://newstorycharity.org/">New Story</a> has plans to bring affordable housing and novel Bitcoin mortgage solutions to Salvadorans. You can catch Chief of Staff <a href="https://adoptingbitcoin.org/speaker/JoshYoung">Josh Young</a> on the "Bitcoin for Nonprofits" panel on Day 1 of Adopting Bitcoin</li>
+  </ul>
+  </article>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Stay Updated</h2>
+      <p>Subscribe to the Bitcoin Banking Standard for monthly insights on Bitcoin banking trends and regulatory developments.</p>
+      <div style="max-width: 500px; margin: 0 auto;">
+        <form style="display: flex; gap: var(--space-3);">
+          <input type="email" placeholder="Enter your email" style="flex: 1; padding: var(--space-3) var(--space-4); border: 1px solid var(--border-default); border-radius: var(--radius-md); font-size: var(--font-size-base);">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../../../images/galoy-logo-white.svg" alt="Galoy" style="height: 32px; margin-bottom: var(--space-4);">
+          <p>Banking software for the Bitcoin age. Building infrastructure for the future of finance.</p>
+        </div>
+        <div>
+          <h4 class="footer-heading">Products</h4>
+          <ul class="footer-links">
+            <li><a href="../../products/index.html">All Products</a></li>
+            <li><a href="../../products/lana.html">Lana</a></li>
+            <li><a href="../../products/cala.html">Cala</a></li>
+            <li><a href="../../products/bria.html">Bria</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Research</h4>
+          <ul class="footer-links">
+            <li><a href="../index.html">All Research</a></li>
+            <li><a href="../bitcoin-banking-101/index.html">Bitcoin Banking 101</a></li>
+            <li><a href="../regulatory/index.html">Regulatory Radar</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="../../company/about.html">About</a></li>
+            <li><a href="../../company/careers.html">Careers</a></li>
+            <li><a href="../../company/security.html">Security</a></li>
+            <li><a href="../../company/contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 Galoy Inc. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../../terms.html">Terms</a>
+          <a href="../../privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solutions - Bitcoin Banking for Any Institution | Galoy</title>
+  <meta name="description" content="Two paths to Bitcoin banking: Sidecar Model for existing banks, Primary Core for de novo institutions.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Icons: Lucide -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../../css/styles.css">
+  <link rel="icon" href="../../images/favicon.png" type="image/png">
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="../../index.html" class="navbar-brand">
+          <img src="../../images/galoy-logo-white.svg" alt="Galoy" class="navbar-logo">
+        </a>
+
+        <ul class="navbar-nav">
+          <li><a href="../../index.html" class="nav-link">Home</a></li>
+
+          <li>
+            <a href="../products/index.html" class="nav-link nav-link-dropdown">
+              Products
+              <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../products/index.html" class="dropdown-item">
+                <i data-lucide="layers"></i>
+                All Products
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../products/lana.html" class="dropdown-item">
+                <i data-lucide="landmark"></i>
+                Lana – Bitcoin Lending
+              </a>
+              <a href="../products/cala.html" class="dropdown-item">
+                <i data-lucide="book-open"></i>
+                Cala – Accounting Ledger
+              </a>
+              <a href="../products/bria.html" class="dropdown-item">
+                <i data-lucide="zap"></i>
+                Bria – Payments Bridge
+              </a>
+            </div>
+          </li>
+
+          <li>
+            <a href="../solutions/index.html" class="nav-link nav-link-dropdown">
+              Solutions
+              <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../solutions/index.html" class="dropdown-item">
+                <i data-lucide="git-compare"></i>
+                Compare Solutions
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../solutions/sidecar.html" class="dropdown-item">
+                <i data-lucide="plus-circle"></i>
+                Sidecar Model
+              </a>
+              <a href="../solutions/primary-core.html" class="dropdown-item">
+                <i data-lucide="cpu"></i>
+                Primary Core
+              </a>
+            </div>
+          </li>
+
+          <li>
+            <a href="../research/index.html" class="nav-link nav-link-dropdown">
+              Research
+              <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../research/index.html" class="dropdown-item">
+                <i data-lucide="library"></i>
+                All Research
+              </a>
+              <a href="../research/bitcoin-banking-101/index.html" class="dropdown-item">
+                <i data-lucide="graduation-cap"></i>
+                Bitcoin Banking 101
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../research/case-studies/index.html" class="dropdown-item">
+                <i data-lucide="briefcase"></i>
+                Case Studies
+              </a>
+              <a href="../research/regulatory/index.html" class="dropdown-item">
+                <i data-lucide="scale"></i>
+                Regulatory Radar
+              </a>
+              <a href="../research/guides/index.html" class="dropdown-item">
+                <i data-lucide="book-marked"></i>
+                Guides & Playbooks
+              </a>
+            </div>
+          </li>
+
+          <li>
+            <a href="../company/index.html" class="nav-link nav-link-dropdown">
+              Company
+              <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../company/about.html" class="dropdown-item">
+                <i data-lucide="info"></i>
+                About
+              </a>
+              <a href="../company/careers.html" class="dropdown-item">
+                <i data-lucide="users"></i>
+                Careers
+              </a>
+              <a href="../company/security.html" class="dropdown-item">
+                <i data-lucide="shield"></i>
+                Security
+              </a>
+              <a href="../company/press.html" class="dropdown-item">
+                <i data-lucide="newspaper"></i>
+                Press & Media
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../company/contact.html" class="dropdown-item">
+                <i data-lucide="mail"></i>
+                Contact Us
+              </a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="navbar-social">
+          <a href="https://twitter.com/GaloyMoney" class="social-link" target="_blank" rel="noopener" aria-label="Twitter">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://github.com/GaloyMoney" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/galoymoney" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+        </div>
+
+        <button class="navbar-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero hero-subpage">
+    <div class="hero-pattern"></div>
+    <div class="container">
+      <div class="hero-content">
+        <span class="section-label"><i data-lucide="git-compare"></i> Solutions</span>
+        <h1>Two Paths to Bitcoin Banking</h1>
+        <p style="max-width: 700px; margin: 0 auto;">Whether you're modernizing an existing bank or launching a new one, Galoy provides the infrastructure you need.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SOLUTIONS COMPARISON ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2" style="gap: var(--space-12);">
+
+        <!-- Sidecar Model -->
+        <div style="display: flex; flex-direction: column;">
+          <div style="background: linear-gradient(135deg, var(--color-primary) 0%, #1e3a8a 100%); border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding: var(--space-8); color: white;">
+            <span class="text-sm" style="text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">For Existing Banks</span>
+            <h2 style="color: white; margin-top: var(--space-2); margin-bottom: var(--space-4);">Sidecar Model</h2>
+            <p style="color: rgba(255,255,255,0.9); margin-bottom: 0;">Add Bitcoin capabilities alongside your existing core banking system. No rip-and-replace required.</p>
+          </div>
+          <div style="background: var(--neutral-50); border-radius: 0 0 var(--radius-lg) var(--radius-lg); padding: var(--space-8); flex: 1; display: flex; flex-direction: column;">
+            <p class="text-lg" style="margin-bottom: var(--space-6);">Legacy software wasn't designed for digital assets. The Sidecar Model plugs into your existing core to open new revenue streams.</p>
+
+            <h4>Best For:</h4>
+            <ul style="list-style: none; margin-bottom: var(--space-6);">
+              <li style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                <i data-lucide="circle"></i>
+                Community banks adding Bitcoin services
+              </li>
+              <li style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                <i data-lucide="circle"></i>
+                Credit unions expanding offerings
+              </li>
+              <li style="display: flex; align-items: center; gap: var(--space-3);">
+                <i data-lucide="circle"></i>
+                Regional banks modernizing infrastructure
+              </li>
+            </ul>
+
+            <h4>Key Benefits:</h4>
+            <ul style="list-style: none; margin-bottom: var(--space-6);">
+              <li style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                <i data-lucide="circle"></i>
+                Preserves existing core investments
+              </li>
+              <li style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                <i data-lucide="circle"></i>
+                Reduced integration complexity
+              </li>
+              <li style="display: flex; align-items: center; gap: var(--space-3);">
+                <i data-lucide="circle"></i>
+                Isolated Bitcoin operations reduce risk
+              </li>
+            </ul>
+
+            <div style="margin-top: auto;">
+              <a href="sidecar.html" class="btn btn-primary btn-lg" style="width: 100%;">Explore Sidecar Model</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Primary Core -->
+        <div style="display: flex; flex-direction: column;">
+          <div style="background: linear-gradient(135deg, var(--color-accent) 0%, #c2410c 100%); border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding: var(--space-8); color: white;">
+            <span class="text-sm" style="text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8;">For De Novo Banks</span>
+            <h2 style="color: white; margin-top: var(--space-2); margin-bottom: var(--space-4);">Primary Core</h2>
+            <p style="color: rgba(255,255,255,0.9); margin-bottom: 0;">Build a Bitcoin-first institution with Galoy as your primary core banking platform.</p>
+          </div>
+          <div style="background: var(--neutral-50); border-radius: 0 0 var(--radius-lg) var(--radius-lg); padding: var(--space-8); flex: 1; display: flex; flex-direction: column;">
+            <p class="text-lg" style="margin-bottom: var(--space-6);">As a de novo bank, your core is a foundational decision. Galoy provides a cloud-native, API-first core with Bitcoin-native functionality.</p>
+
+            <h4>Best For:</h4>
+            <ul style="list-style: none; margin-bottom: var(--space-6);">
+              <li style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                <i data-lucide="circle"></i>
+                De novo bank charters
+              </li>
+              <li style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                <i data-lucide="circle"></i>
+                Bitcoin-first financial institutions
+              </li>
+              <li style="display: flex; align-items: center; gap: var(--space-3);">
+                <i data-lucide="circle"></i>
+                Digital asset-focused platforms
+              </li>
+            </ul>
+
+            <h4>Key Benefits:</h4>
+            <ul style="list-style: none; margin-bottom: var(--space-6);">
+              <li style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                <i data-lucide="circle"></i>
+                Bitcoin-native architecture
+              </li>
+              <li style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+                <i data-lucide="circle"></i>
+                Cloud-native, API-first architecture
+              </li>
+              <li style="display: flex; align-items: center; gap: var(--space-3);">
+                <i data-lucide="circle"></i>
+                Move from pilot to production with confidence
+              </li>
+            </ul>
+
+            <div style="margin-top: auto;">
+              <a href="primary-core.html" class="btn btn-primary btn-lg" style="width: 100%; background: var(--color-accent);">Explore Primary Core</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== COMMON CAPABILITIES ========== -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2>Capabilities Across Both Models</h2>
+        <p class="text-lg">Regardless of implementation path, Galoy delivers these core capabilities.</p>
+      </div>
+
+      <div class="grid grid-4">
+        <div class="text-center">
+          <div class="feature-icon" style="margin: 0 auto var(--space-4);">
+            <i data-lucide="circle"></i>
+          </div>
+          <h4>Bitcoin Subledger</h4>
+          <p class="mb-0 text-sm">Double-entry BTC accounting with full audit trail</p>
+        </div>
+
+        <div class="text-center">
+          <div class="feature-icon" style="margin: 0 auto var(--space-4);">
+            <i data-lucide="circle"></i>
+          </div>
+          <h4>Custody Integration</h4>
+          <p class="mb-0 text-sm">Bank-grade security with multi-sig support</p>
+        </div>
+
+        <div class="text-center">
+          <div class="feature-icon" style="margin: 0 auto var(--space-4);">
+            <i data-lucide="circle"></i>
+          </div>
+          <h4>Bitcoin-Backed Lending</h4>
+          <p class="mb-0 text-sm">Automated LTV monitoring and collateral management</p>
+        </div>
+
+        <div class="text-center">
+          <div class="feature-icon" style="margin: 0 auto var(--space-4);">
+            <i data-lucide="circle"></i>
+          </div>
+          <h4>Lightning Payments</h4>
+          <p class="mb-0 text-sm">Instant, low-cost Bitcoin transactions</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== NOT SURE ========== -->
+  <section class="section">
+    <div class="container container-sm text-center">
+      <h2>Not Sure Which Model is Right?</h2>
+      <p class="text-lg">Our team can help you evaluate the best approach based on your institution's specific needs, existing infrastructure, and strategic goals.</p>
+      <a href="../company/contact.html" class="btn btn-primary btn-lg">Schedule a Consultation</a>
+    </div>
+  </section>
+
+  <!-- ========== CTA ========== -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Build Bitcoin Banking?</h2>
+      <p>Schedule a demo to see how Galoy can power your institution's Bitcoin services.</p>
+      <div class="cta-buttons">
+        <a href="../company/contact.html" class="btn btn-primary btn-lg">Schedule a demo</a>
+        <a href="../products/index.html" class="btn btn-secondary btn-lg">View Products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../../images/galoy-logo-white.svg" alt="Galoy" style="height: 32px; margin-bottom: var(--space-4);">
+          <p>Banking software for the Bitcoin age. Building infrastructure for the future of finance.</p>
+          <div class="footer-social">
+            <a href="https://github.com/GaloyMoney" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="https://twitter.com/GaloyMoney" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+            <a href="https://t.me/galoyofficial" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+            <a href="https://www.linkedin.com/company/galoymoney" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Products</h4>
+          <ul class="footer-links">
+            <li><a href="../products/index.html">All Products</a></li>
+            <li><a href="../products/lana.html">Lana: Bitcoin Lending</a></li>
+            <li><a href="../products/cala.html">Cala: Accounting Ledger</a></li>
+            <li><a href="../products/bria.html">Bria: Payments Bridge</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Solutions</h4>
+          <ul class="footer-links">
+            <li><a href="sidecar.html">Sidecar Model</a></li>
+            <li><a href="primary-core.html">Primary Core</a></li>
+            <li><a href="https://dev.galoy.io" target="_blank">Developer Docs</a></li>
+            <li><a href="https://github.com/GaloyMoney" target="_blank">GitHub</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="../company/about.html">About</a></li>
+            <li><a href="../company/careers.html">Careers</a></li>
+            <li><a href="../company/security.html">Security</a></li>
+            <li><a href="../company/contact.html">Contact</a></li>
+            <li><a href="../research/index.html">Research</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 Galoy Inc. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../terms.html">Terms</a>
+          <a href="../privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Initialize Lucide icons -->
+  <script>lucide.createIcons();</script>
+
+</body>
+</html>
