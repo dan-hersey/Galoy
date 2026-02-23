@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" fill="none">
+  <!-- Background -->
+  <rect width="560" height="420" rx="16" fill="#0f172a"/>
+  <rect x="1" y="1" width="558" height="418" rx="15" stroke="rgba(54,84,255,0.3)" stroke-width="1"/>
+
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(54,84,255,0.06)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="560" height="420" fill="url(#grid)"/>
+
+  <!-- Title -->
+  <text x="280" y="36" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="rgba(54,84,255,0.8)" letter-spacing="2">GALOY PLATFORM</text>
+
+  <!-- Central Hub -->
+  <rect x="190" y="56" width="180" height="52" rx="10" fill="rgba(54,84,255,0.15)" stroke="#3654FF" stroke-width="1.5"/>
+  <text x="280" y="78" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#94a3ff">Bitcoin-Native</text>
+  <text x="280" y="96" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="white">Banking Core</text>
+
+  <!-- Core attributes row -->
+  <rect x="30" y="126" width="115" height="34" rx="6" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+  <text x="87" y="147" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#10b981">Event Sourced</text>
+
+  <rect x="155" y="126" width="115" height="34" rx="6" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+  <text x="212" y="147" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#10b981">Written in Rust</text>
+
+  <rect x="280" y="126" width="115" height="34" rx="6" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+  <text x="337" y="147" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#10b981">API-First</text>
+
+  <rect x="405" y="126" width="125" height="34" rx="6" fill="rgba(16,185,129,0.1)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+  <text x="467" y="147" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#10b981">Cloud-Native</text>
+
+  <!-- Connector lines from core to solutions -->
+  <line x1="190" y1="82" x2="100" y2="82" stroke="rgba(54,84,255,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="100" y1="82" x2="100" y2="200" stroke="rgba(54,84,255,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <line x1="235" y1="108" x2="235" y2="200" stroke="rgba(54,84,255,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <line x1="325" y1="108" x2="325" y2="200" stroke="rgba(54,84,255,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <line x1="370" y1="82" x2="460" y2="82" stroke="rgba(54,84,255,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="460" y1="82" x2="460" y2="200" stroke="rgba(54,84,255,0.3)" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- Solution 1: Lending -->
+  <rect x="30" y="200" width="140" height="100" rx="10" fill="rgba(54,84,255,0.08)" stroke="rgba(54,84,255,0.25)" stroke-width="1"/>
+  <rect x="46" y="216" width="28" height="28" rx="6" fill="rgba(54,84,255,0.2)"/>
+  <text x="60" y="235" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" fill="#6b82ff">🏦</text>
+  <text x="80" y="226" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="white">Bitcoin-Backed</text>
+  <text x="80" y="240" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="white">Lending</text>
+  <text x="100" y="264" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#9ca3af">Powered by Lana</text>
+  <text x="100" y="278" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#9ca3af">LTV Monitoring</text>
+  <text x="100" y="292" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#9ca3af">Margin Calls</text>
+
+  <!-- Solution 2: Bitcoin Payments -->
+  <rect x="180" y="200" width="110" height="100" rx="10" fill="rgba(245,158,11,0.08)" stroke="rgba(245,158,11,0.25)" stroke-width="1"/>
+  <rect x="196" y="216" width="28" height="28" rx="6" fill="rgba(245,158,11,0.2)"/>
+  <text x="210" y="235" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" fill="#f59e0b">⚡</text>
+  <text x="235" y="230" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="white">Bitcoin</text>
+  <text x="235" y="244" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="white">Payments</text>
+  <text x="235" y="268" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#9ca3af">Lightning Network</text>
+  <text x="235" y="282" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#9ca3af">Instant Settlement</text>
+
+  <!-- Solution 3: Stablecoin Payments -->
+  <rect x="300" y="200" width="110" height="100" rx="10" fill="rgba(16,185,129,0.08)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+  <rect x="316" y="216" width="28" height="28" rx="6" fill="rgba(16,185,129,0.2)"/>
+  <text x="330" y="235" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" fill="#10b981">💲</text>
+  <text x="355" y="230" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="white">Stablecoin</text>
+  <text x="355" y="244" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="white">Payments</text>
+  <text x="355" y="268" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#9ca3af">Cross-Border</text>
+  <text x="355" y="282" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#9ca3af">GENIUS Act Ready</text>
+
+  <!-- Solution 4: Bitcoin Exchange -->
+  <rect x="420" y="200" width="110" height="100" rx="10" fill="rgba(124,58,237,0.08)" stroke="rgba(124,58,237,0.25)" stroke-width="1"/>
+  <rect x="436" y="216" width="28" height="28" rx="6" fill="rgba(124,58,237,0.2)"/>
+  <text x="450" y="235" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" fill="#7c3aed">₿</text>
+  <text x="475" y="230" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="white">Bitcoin</text>
+  <text x="475" y="244" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="white">Exchange</text>
+  <text x="475" y="268" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#9ca3af">Riskless Principal</text>
+  <text x="475" y="282" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#9ca3af">OCC Approved</text>
+
+  <!-- Integration Layer -->
+  <rect x="30" y="320" width="500" height="42" rx="8" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <text x="280" y="336" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" fill="#64748b" letter-spacing="1.5">INTEGRATION LAYER</text>
+  <text x="280" y="352" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#475569">REST &amp; GraphQL APIs  ·  Webhooks  ·  Core Banking Connectors</text>
+
+  <!-- Bottom: Bank + Custodian -->
+  <rect x="60" y="380" width="140" height="30" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <text x="130" y="400" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="500" fill="#94a3b8">🏛  Your Bank Core</text>
+
+  <rect x="220" y="380" width="120" height="30" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <text x="280" y="400" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="500" fill="#94a3b8">🔐  Your Custodian</text>
+
+  <rect x="360" y="380" width="140" height="30" rx="6" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <text x="430" y="400" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="500" fill="#94a3b8">📊  Your Compliance</text>
+
+  <!-- Connection arrows to bottom -->
+  <line x1="130" y1="362" x2="130" y2="380" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <line x1="280" y1="362" x2="280" y2="380" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <line x1="430" y1="362" x2="430" y2="380" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+</svg>

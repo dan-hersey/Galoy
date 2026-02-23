@@ -9,909 +9,548 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <!-- Icons: Lucide -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="../../../css/styles.css">
+  <link rel="icon" href="../../../images/favicon.png" type="image/png">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        ::selection {
-            background: #000;
-            color: #fff;
-        }
-
-        body::-webkit-scrollbar {
-            width: 8px;
-        }
-        body::-webkit-scrollbar-track-piece {
-            background: #000;
-        }
-        body::-webkit-scrollbar-thumb {
-            background: #555;
-            width: 8px;
-            border-radius: 4px;
-        }
-        body::-webkit-scrollbar-thumb:hover {
-            background: #888;
-        }
-
-        :root {
-            --primary-blue: #3654FF;
-            --bg-dark: #000;
-            --bg-section: #0a0a0a;
-            --text-white: #fff;
-            --text-gray: #888;
-            --text-light-gray: #ccc;
-            --border-color: #222;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-white);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* Navigation - Galoy Style */
-        .navbar-no-shadow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            background: rgba(0, 0, 0, 0.8);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .navbar-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px 0;
-        }
-
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo {
-            height: 28px;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: var(--text-white);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-link:hover {
-            color: var(--text-gray);
-        }
-
-        /* Nav Item with Dropdown */
-        .nav-item {
-            position: relative;
-        }
-
-        .nav-link-dropdown {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .nav-dropdown-icon {
-            font-size: 18px;
-            transition: transform 0.2s;
-        }
-
-        .nav-item:hover .nav-dropdown-icon {
-            transform: rotate(180deg);
-        }
-
-        /* Dropdown Menu */
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            min-width: 220px;
-            background: #111;
-            border: 1px solid var(--border-color);
-            padding: 8px 0;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.2s;
-            z-index: 1000;
-            margin-top: 8px;
-        }
-
-        .nav-item:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 16px;
-            color: var(--text-light-gray);
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.15s;
-        }
-
-        .dropdown-item:hover {
-            background: rgba(54, 84, 255, 0.1);
-            color: var(--text-white);
-        }
-
-        .dropdown-item .material-symbols-outlined {
-            font-size: 20px;
-            color: var(--text-gray);
-        }
-
-        .dropdown-item:hover .material-symbols-outlined {
-            color: var(--primary-blue);
-        }
-
-        .dropdown-divider {
-            height: 1px;
-            background: var(--border-color);
-            margin: 8px 0;
-        }
-
-        .header-social-icons {
-            display: flex;
-            gap: 16px;
-        }
-
-        .header-icon-link {
-            opacity: 0.7;
-            transition: opacity 0.2s;
-        }
-
-        .header-icon-link:hover {
-            opacity: 1;
-        }
-
-        .header-icon {
-            width: 20px;
-            height: 20px;
-            filter: invert(1);
-        }
-
-        /* Hero Section - Galoy Style */
-        .hero-section {
-            padding: 160px 0 100px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .hero-split-text {
-            max-width: 560px;
-        }
-
-        .es-20 {
-            height: 20px;
-        }
-
-        .es-40 {
-            height: 40px;
-        }
-
-        .es-100 {
-            height: 100px;
-        }
-
-        h1 {
-            font-size: 52px;
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-
-        h1 .animated-underline {
-            position: relative;
-            display: inline;
-        }
-
-        h1 .animated-underline:after {
-            content: '';
-            position: absolute;
-            bottom: 8px;
-            left: -4px;
-            right: 105%;
-            height: 14px;
-            background: var(--primary-blue);
-            z-index: -1;
-            animation: underline 1.5s 0.5s forwards;
-        }
-
-        @keyframes underline {
-            0% { right: 105%; }
-            100% { right: -5%; }
-        }
-
-        h2 {
-            font-size: 40px;
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: -0.01em;
-        }
-
-        h3 {
-            font-size: 24px;
-            font-weight: 600;
-            line-height: 1.3;
-        }
-
-        .title-desc {
-            font-size: 17px;
-            color: var(--text-light-gray);
-            line-height: 1.7;
-        }
-
-        .text-link {
-            color: var(--text-white);
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
-
-        .text-link:hover {
-            color: var(--primary-blue);
-        }
-
-        /* Button - Galoy Style */
-        .button {
-            display: inline-block;
-            background: var(--primary-blue);
-            color: var(--text-white);
-            padding: 14px 28px;
-            border-radius: 0;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .button:hover {
-            background: #4a66ff;
-            transform: translateY(-1px);
-        }
-
-        .button-secondary {
-            background: transparent;
-            border: 1px solid var(--text-white);
-        }
-
-        .button-secondary:hover {
-            background: var(--text-white);
-            color: var(--bg-dark);
-        }
-
-        /* Stats Row */
-        .stats-row {
-            display: flex;
-            gap: 48px;
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .stat-item {
-            text-align: left;
-        }
-
-        .stat-value {
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--text-white);
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: var(--text-gray);
-            margin-top: 4px;
-        }
-
-        /* Section */
-        .section {
-            padding: 100px 0;
-        }
-
-        .section-dark {
-            background: var(--bg-section);
-        }
-
-        /* Series Grid - Galoy Card Style */
+        /* Page-specific styles for Bitcoin Banking 101 */
         .series-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 24px;
-            margin-top: 60px;
+            margin-top: 32px;
         }
-
         .series-card {
-            background: var(--bg-section);
-            border: 1px solid var(--border-color);
-            padding: 40px;
+            display: block;
+            background: white;
+            border: 1px solid var(--border-default);
+            border-radius: var(--radius-lg);
+            padding: 32px;
             text-decoration: none;
-            transition: all 0.3s ease;
+            color: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
             position: relative;
         }
-
         .series-card:hover {
-            border-color: var(--primary-blue);
-            transform: translateY(-2px);
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 12px rgba(54, 84, 255, 0.1);
         }
-
         .card-header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            align-items: center;
+            margin-bottom: 16px;
         }
-
         .part-badge {
-            background: var(--primary-blue);
-            padding: 6px 14px;
+            background: var(--color-primary);
+            color: white;
+            padding: 4px 12px;
             font-size: 12px;
             font-weight: 600;
-            color: var(--text-white);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
+            border-radius: var(--radius-sm);
         }
-
         .read-time {
             font-size: 13px;
-            color: var(--text-gray);
+            color: var(--text-secondary);
         }
-
         .card-title {
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--text-white);
-            margin-bottom: 16px;
-            line-height: 1.3;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
         }
-
         .card-description {
-            font-size: 15px;
-            color: var(--text-gray);
-            line-height: 1.7;
-            margin-bottom: 24px;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 16px;
         }
-
         .card-topics {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
-
         .topic-tag {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            padding: 6px 12px;
+            background: var(--neutral-100);
+            color: var(--text-secondary);
+            padding: 4px 10px;
             font-size: 12px;
-            color: var(--text-gray);
+            border-radius: var(--radius-full);
         }
-
         .card-arrow {
             position: absolute;
-            bottom: 40px;
-            right: 40px;
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--border-color);
+            bottom: 24px;
+            right: 24px;
+            width: 32px;
+            height: 32px;
+            background: var(--neutral-100);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-gray);
-            transition: all 0.3s ease;
+            transition: background 0.2s;
+        }
+        .series-card:hover .card-arrow {
+            background: var(--color-primary);
+        }
+        .series-card:hover .card-arrow svg path {
+            stroke: white;
         }
 
-        .series-card:hover .card-arrow {
-            background: var(--primary-blue);
-            border-color: var(--primary-blue);
+        /* Article Sections */
+        .article-sections {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .article-section {
+            margin-bottom: 80px;
+            padding-bottom: 80px;
+            border-bottom: 1px solid var(--border-default);
+        }
+        .article-section:last-child {
+            border-bottom: none;
+        }
+        .section-divider {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-default);
+        }
+        .section-divider-badge {
+            background: var(--color-primary);
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 600;
             color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: var(--radius-sm);
+        }
+        .section-divider-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+        }
+        .article-content-inner {
+            max-width: 720px;
+        }
+        .content-section {
+            margin-bottom: 40px;
+        }
+        .section-heading {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+        .content-section p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .highlight-box {
+            background: var(--neutral-50);
+            border-left: 3px solid var(--color-primary);
+            padding: 20px 24px;
+            margin: 24px 0;
+            font-style: italic;
+            color: var(--text-primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+        .key-points {
+            background: var(--neutral-50);
+            border: 1px solid var(--border-default);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .key-points ul {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 0 0;
+        }
+        .key-points li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .key-points li:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 8px;
+            height: 8px;
+            background: var(--color-primary);
+            border-radius: 50%;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .stats-grid.two-col {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .stat-card {
+            background: var(--neutral-50);
+            border: 1px solid var(--border-default);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            text-align: center;
+        }
+        .stat-card .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+        .stat-card .stat-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        /* Driver / Product / Quality Boxes */
+        .driver-box, .product-box, .quality-box {
+            background: var(--neutral-50);
+            border: 1px solid var(--border-default);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin: 20px 0;
+        }
+        .driver-number, .quality-number {
+            display: inline-flex;
+            width: 28px;
+            height: 28px;
+            background: var(--color-primary);
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            margin-right: 12px;
+        }
+        .driver-title, .product-title, .quality-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: inline;
+        }
+        .driver-box p, .product-box p, .quality-box p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-top: 8px;
+            margin-bottom: 0;
+        }
+        .product-icon {
+            display: inline-flex;
+            width: 28px;
+            height: 28px;
+            background: var(--color-primary);
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: var(--radius-sm);
+            margin-right: 12px;
+        }
+        .product-icon svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Scenario Box */
+        .scenario-box {
+            background: var(--neutral-50);
+            border: 1px solid var(--border-default);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            margin: 24px 0;
+        }
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 16px;
+        }
+        .scenario-item h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        .scenario-item p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Revenue Table */
+        .revenue-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-default);
+        }
+        .revenue-table th {
+            background: var(--neutral-100);
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .revenue-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-default);
+            font-size: 15px;
+            color: var(--text-secondary);
+        }
+        .revenue-table td:last-child {
+            font-weight: 600;
+            color: var(--color-primary);
+            text-align: right;
+        }
+        .revenue-table .total-row td {
+            font-weight: 700;
+            color: var(--text-primary);
+            border-top: 2px solid var(--border-default);
+            background: var(--neutral-50);
+        }
+        .revenue-table .total-row td:last-child {
+            color: var(--color-primary);
         }
 
         /* Audience Section */
         .audience-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 60px;
             align-items: center;
         }
-
         .audience-list {
             list-style: none;
-            margin-top: 32px;
+            margin-top: 24px;
+            padding: 0;
         }
-
         .audience-item {
             display: flex;
             align-items: flex-start;
             gap: 16px;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border-color);
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-default);
         }
-
-        .audience-item:last-child {
-            border-bottom: none;
-        }
-
         .audience-icon {
             width: 40px;
             height: 40px;
-            background: var(--primary-blue);
+            background: var(--color-primary);
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
-
-        .audience-text {
-            font-size: 15px;
-            color: var(--text-gray);
-        }
-
         .audience-text strong {
-            color: var(--text-white);
             display: block;
+            font-size: 15px;
+            color: var(--text-primary);
             margin-bottom: 4px;
-            font-size: 16px;
+        }
+        .audience-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
         }
 
-        /* Visual Card */
-        .visual-card {
-            background: var(--bg-dark);
-            border: 1px solid var(--border-color);
-            padding: 32px;
-        }
-
-        .visual-header {
+        /* Hero stats row */
+        .hero-stats-row {
             display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid var(--border-color);
+            gap: 32px;
+            margin-top: 24px;
         }
-
-        .visual-logo {
-            width: 48px;
-            height: 48px;
-            background: var(--primary-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .visual-title {
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .visual-subtitle {
-            font-size: 13px;
-            color: var(--text-gray);
-        }
-
-        .visual-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .v-stat {
-            background: var(--bg-section);
-            padding: 20px;
-        }
-
-        .v-stat-label {
-            font-size: 12px;
-            color: var(--text-gray);
-            margin-bottom: 8px;
-        }
-
-        .v-stat-value {
+        .hero-stat-value {
             font-size: 28px;
             font-weight: 700;
-            color: var(--text-white);
+            color: var(--color-primary);
         }
-
-        /* CTA Section - Galoy Style */
-        .section-cta {
-            padding: 120px 0;
-            text-align: center;
-        }
-
-        .cta-wrapper {
-            max-width: 700px;
-            margin: 0 auto;
-            background: var(--bg-section);
-            border: 1px solid var(--border-color);
-            padding: 60px;
-        }
-
-        .cta-wrapper h2 {
-            margin-bottom: 20px;
-        }
-
-        .cta-wrapper .title-desc {
-            margin-bottom: 32px;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-        }
-
-        /* Footer - Galoy Style */
-        .footer {
-            background: var(--bg-section);
-            border-top: 1px solid var(--border-color);
-            padding: 80px 0 40px;
-        }
-
-        .footer-wrapper {
-            display: flex;
-            justify-content: space-between;
-            gap: 60px;
-        }
-
-        .footer-logos {
-            flex-shrink: 0;
-        }
-
-        .footer-logo {
-            height: 28px;
-        }
-
-        .footer-content {
-            display: flex;
-            gap: 80px;
-        }
-
-        .footer-block {
-            min-width: 140px;
-        }
-
-        .footer-heading {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--text-white);
-        }
-
-        .footer-social-link-three {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-gray);
-            text-decoration: none;
-            font-size: 14px;
-            margin-bottom: 12px;
-            transition: color 0.2s;
-        }
-
-        .footer-social-link-three:hover {
-            color: var(--text-white);
-        }
-
-        .footer-copyright {
-            margin-top: 60px;
-            padding-top: 24px;
-            border-top: 1px solid var(--border-color);
+        .hero-stat-label {
             font-size: 13px;
-            color: var(--text-gray);
-        }
-
-        .footer-copyright a {
-            color: var(--text-gray);
-        }
-
-        .footer-copyright a:hover {
-            color: var(--text-white);
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            h1 {
-                font-size: 40px;
-            }
-
-            h2 {
-                font-size: 32px;
-            }
-
-            .hero-wrapper,
-            .audience-wrapper {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .series-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-wrapper {
-                flex-direction: column;
-            }
-
-            .footer-content {
-                flex-wrap: wrap;
-                gap: 40px;
-            }
+            color: var(--text-secondary);
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 32px;
+            .series-grid, .audience-wrapper, .scenario-grid, .stats-grid {
+                grid-template-columns: 1fr;
             }
-
-            .stats-row {
-                flex-direction: column;
-                gap: 24px;
-            }
-
-            .nav-menu {
-                display: none;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .cta-wrapper {
-                padding: 40px 24px;
+            .hero-stats-row {
+                flex-wrap: wrap;
+                gap: 16px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <div class="navbar-no-shadow">
-        <div class="container">
-            <div class="navbar-wrapper">
-                <a href="https://www.galoy.io/" class="navbar-brand">
-                    <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/656106c240ef09d6b11f4673_logo.svg" loading="lazy" alt="Galoy" class="logo">
-                </a>
-                <ul class="nav-menu">
-                    <li><a href="../../../index.html" class="nav-link">Home</a></li>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="../../../index.html" class="navbar-brand">
+          <img src="../../../images/galoy-logo-white.svg" alt="Galoy" class="navbar-logo">
+        </a>
 
-                    <li class="nav-item">
-                        <a href="../../products/index.html" class="nav-link nav-link-dropdown">
-                            Products
-                            <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="../../products/index.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">apps</span>
-                                All Products
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="../../products/lana.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">request_quote</span>
-                                Lana - Bitcoin Lending
-                            </a>
-                            <a href="../../products/cala.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">account_balance_wallet</span>
-                                Cala - Accounting Ledger
-                            </a>
-                            <a href="../../products/bria.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">bolt</span>
-                                Bria - Payments Bridge
-                            </a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="../../solutions/index.html" class="nav-link nav-link-dropdown">
-                            Solutions
-                            <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="../../solutions/index.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">compare</span>
-                                Compare Solutions
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="../../solutions/sidecar.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">add_circle</span>
-                                Sidecar Model
-                            </a>
-                            <a href="../../solutions/primary-core.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">hub</span>
-                                Primary Core
-                            </a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="../index.html" class="nav-link nav-link-dropdown">
-                            Research
-                            <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="../index.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">library_books</span>
-                                All Research
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="index.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">school</span>
-                                Bitcoin Banking 101
-                            </a>
-                            <a href="../case-studies/index.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">cases</span>
-                                Case Studies
-                            </a>
-                            <a href="../regulatory/index.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">gavel</span>
-                                Regulatory Radar
-                            </a>
-                            <a href="../guides/index.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">menu_book</span>
-                                Guides & Playbooks
-                            </a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="../../company/index.html" class="nav-link nav-link-dropdown">
-                            Company
-                            <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="../../company/about.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">info</span>
-                                About
-                            </a>
-                            <a href="../../company/careers.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">work</span>
-                                Careers
-                            </a>
-                            <a href="../../company/security.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">shield</span>
-                                Security
-                            </a>
-                            <a href="../../company/press.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">newspaper</span>
-                                Press & Media
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a href="../../company/contact.html" class="dropdown-item">
-                                <span class="material-symbols-outlined">mail</span>
-                                Contact Us
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-                <div class="header-social-icons">
-                    <a href="https://twitter.com/GaloyMoney" target="_blank" class="header-icon-link">
-                        <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/655ff5fd54fed21ec663fc70_x-icon.svg" loading="lazy" alt="X" class="header-icon">
-                    </a>
-                    <a href="https://github.com/galoymoney" target="_blank" class="header-icon-link">
-                        <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/655ff5fef3d4df47892c63cf_logo-github.svg" loading="lazy" alt="GitHub" class="header-icon">
-                    </a>
-                    <a href="https://www.linkedin.com/company/galoymoney" target="_blank" class="header-icon-link">
-                        <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/6787d7884f49c6423d3a1227_logo-linkedin.svg" loading="lazy" alt="LinkedIn" class="header-icon">
-                    </a>
-                </div>
+        <ul class="navbar-nav">
+          <li><a href="../../../index.html" class="nav-link">Home</a></li>
+          <!-- Solutions Dropdown -->
+          <li>
+            <a href="../../../pages/solutions/index.html" class="nav-link nav-link-dropdown">
+              Solutions
+              <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../../../pages/solutions/index.html" class="dropdown-item">
+                <i data-lucide="layers"></i>
+                Solutions Overview
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../../../pages/use-cases/bitcoin-backed-lending.html" class="dropdown-item">
+                <i data-lucide="landmark"></i>
+                Bitcoin-Backed Lending
+              </a>
+              <a href="../../../pages/use-cases/bitcoin-payments.html" class="dropdown-item">
+                <i data-lucide="zap"></i>
+                Bitcoin Payments
+              </a>
+              <a href="../../../pages/use-cases/stablecoin-payments.html" class="dropdown-item">
+                <i data-lucide="dollar-sign"></i>
+                Stablecoin Payments
+              </a>
+              <a href="../../../pages/use-cases/bitcoin-exchange.html" class="dropdown-item">
+                <i data-lucide="shopping-cart"></i>
+                Bitcoin Exchange
+              </a>
             </div>
+          </li>
+<li>
+            <a href="../../research/index.html" class="nav-link nav-link-dropdown">
+              Research
+              <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../../research/index.html" class="dropdown-item">
+                <i data-lucide="library"></i>
+                All Research
+              </a>
+              <a href="../../research/index.html#articles" class="dropdown-item">
+                <i data-lucide="file-text"></i>
+                Articles
+              </a>
+              <a href="../../research/bitcoin-banking-101/index.html" class="dropdown-item">
+                <i data-lucide="graduation-cap"></i>
+                Bitcoin Banking 101
+              </a>
+              <a href="../../research/regulatory/index.html" class="dropdown-item">
+                <i data-lucide="scale"></i>
+                Regulatory Radar
+              </a>
+            </div>
+          </li>
+
+          <li>
+            <a href="../../company/index.html" class="nav-link nav-link-dropdown">
+              Company
+              <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../../company/about.html" class="dropdown-item">
+                <i data-lucide="info"></i>
+                About
+              </a>
+              <a href="../../company/careers.html" class="dropdown-item">
+                <i data-lucide="users"></i>
+                Careers
+              </a>
+              <a href="../../company/security.html" class="dropdown-item">
+                <i data-lucide="shield"></i>
+                Security
+              </a>
+              <a href="../../company/press.html" class="dropdown-item">
+                <i data-lucide="newspaper"></i>
+                Press & Media
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../../company/contact.html" class="dropdown-item">
+                <i data-lucide="mail"></i>
+                Contact Us
+              </a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="navbar-social">
+          <a href="https://twitter.com/GaloyMoney" class="social-link" target="_blank" rel="noopener" aria-label="Twitter">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://github.com/GaloyMoney" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/galoymoney" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
         </div>
+
+        <button class="navbar-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
+  </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero hero-subpage">
+        <div class="hero-pattern"></div>
         <div class="container">
-            <div class="hero-wrapper">
-                <div class="hero-split-text">
-                    <div class="es-40"></div>
-                    <span style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: linear-gradient(135deg, #3654FF 0%, #1e3a8a 100%); border-radius: 999px; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(54, 84, 255, 0.4);">
-                        <span class="material-symbols-outlined" style="font-size: 18px;">school</span> Research
-                    </span>
-                    <h1>Bitcoin Banking <span class="animated-underline">101</span></h1>
-                    <div class="es-20"></div>
-                    <p class="title-desc">A comprehensive guide for banking executives and decision-makers exploring how Bitcoin is reshaping financial services – from disruption to practical implementation.</p>
-                    <div class="es-20"></div>
-                    <a href="#series" class="button">Explore the Series</a>
-                    <div class="stats-row">
-                        <div class="stat-item">
-                            <div class="stat-value">4</div>
-                            <div class="stat-label">In-Depth Articles</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">30+</div>
-                            <div class="stat-label">Minutes of Reading</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-value">40+</div>
-                            <div class="stat-label">Expert Citations</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero-split-visual">
-                    <div class="visual-card">
-                        <div class="visual-header">
-                            <div class="visual-logo">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="visual-title">Industry Snapshot</div>
-                                <div class="visual-subtitle">Key metrics driving adoption</div>
-                            </div>
-                        </div>
-                        <div class="visual-stats">
-                            <div class="v-stat">
-                                <div class="v-stat-label">Top 25 Banks Active</div>
-                                <div class="v-stat-value">60%</div>
-                            </div>
-                            <div class="v-stat">
-                                <div class="v-stat-label">Loan Interest Spread</div>
-                                <div class="v-stat-value">2×</div>
-                            </div>
-                            <div class="v-stat">
-                                <div class="v-stat-label">Customer Trust in Banks</div>
-                                <div class="v-stat-value">75%</div>
-                            </div>
-                            <div class="v-stat">
-                                <div class="v-stat-label">Adults Holding Crypto</div>
-                                <div class="v-stat-value">20%</div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="hero-content">
+                <span class="section-label"><i data-lucide="graduation-cap"></i> Educational Series</span>
+                <h1>Bitcoin Banking 101</h1>
+                <p style="max-width: 700px; margin: 0 auto;">A comprehensive guide for banking executives exploring how Bitcoin is reshaping financial services — from disruption to practical implementation.</p>
+                <div class="hero-stats-row" style="justify-content: center; margin-top: var(--space-8);">
+                    <div><div class="hero-stat-value">4</div><div class="hero-stat-label">In-Depth Articles</div></div>
+                    <div><div class="hero-stat-value">30+</div><div class="hero-stat-label">Minutes of Reading</div></div>
+                    <div><div class="hero-stat-value">40+</div><div class="hero-stat-label">Expert Citations</div></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Series Grid -->
-    <section id="series" class="section section-dark">
+    <section id="series" class="section">
         <div class="container">
             <h2>Four pillars of Bitcoin banking knowledge</h2>
             <div class="es-20"></div>
             <p class="title-desc">The complete series covers everything from Bitcoin fundamentals to practical ROE analysis.</p>
 
             <div class="series-grid">
-                <a href="bitcoin-banking-101-part-a.html" class="series-card">
+                <a href="#part-a" class="series-card">
                     <div class="card-header">
                         <div class="part-badge">Part A</div>
                         <div class="read-time">8 min read</div>
@@ -931,7 +570,7 @@
                     </div>
                 </a>
 
-                <a href="bitcoin-banking-101-part-b.html" class="series-card">
+                <a href="#part-b" class="series-card">
                     <div class="card-header">
                         <div class="part-badge">Part B</div>
                         <div class="read-time">10 min read</div>
@@ -951,7 +590,7 @@
                     </div>
                 </a>
 
-                <a href="bitcoin-banking-101-part-c.html" class="series-card">
+                <a href="#part-c" class="series-card">
                     <div class="card-header">
                         <div class="part-badge">Part C</div>
                         <div class="read-time">9 min read</div>
@@ -971,7 +610,7 @@
                     </div>
                 </a>
 
-                <a href="bitcoin-banking-101-part-d.html" class="series-card">
+                <a href="#part-d" class="series-card">
                     <div class="card-header">
                         <div class="part-badge">Part D</div>
                         <div class="read-time">8 min read</div>
@@ -994,6 +633,536 @@
         </div>
     </section>
 
+    <!-- Article Sections -->
+    <section class="article-sections">
+        <div class="container">
+
+            <!-- Part A -->
+            <div id="part-a" class="article-section">
+                <div class="section-divider">
+                    <div class="section-divider-badge">Part A</div>
+                    <h2 class="section-divider-title">Bitcoin Is Disruptive, Not Destructive</h2>
+                </div>
+
+                <div class="article-content-inner">
+                    <div class="content-section">
+                        <p>Bitcoin is often discussed in terms of price swings or ideology, but its real disruptive power lies in how it changes the architecture of finance. For bankers, the key is not hype or speculation - it's understanding Bitcoin in structural terms.</p>
+
+                        <p>This primer explains how Bitcoin's design as a neutral, jurisdictionless, bearer asset with continuous settlement, verifiable supply, and global liquidity is reshaping banking fundamentals.</p>
+
+                        <div class="highlight-box">
+                            <p>"This is not a prediction. It's an architectural shift already underway."</p>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">A Neutral, Borderless Monetary Network</h2>
+                        <p>Bitcoin functions as both an asset and a network. In essence, anyone can send value to anyone else, anywhere in the world, without relying on intermediaries. There are no central banks or correspondent networks in the middle - Bitcoin transactions occur on a decentralized peer-to-peer network.</p>
+
+                        <p>This neutrality means Bitcoin isn't tied to any country or jurisdiction; it's more like a global payments layer that operates above the nation-state level. For a banker, imagine if cash or gold could be teleported instantly across borders - that's the kind of neutral, global value transfer Bitcoin enables.</p>
+
+                        <p>An open network built on a digital asset with a fixed supply raises a provocative question: If we were designing finance from scratch today, would we choose 180+ national currencies and siloed payment systems, or a single open network? Bitcoin's very existence forces this question, because it demonstrates a working alternative.</p>
+                    </div>
+
+                    <div class="key-points">
+                        <div class="key-points-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+                            </svg>
+                            Key Characteristics
+                        </div>
+                        <ul>
+                            <li>Digital Bearer Asset - whoever holds the cryptographic keys owns the value, just like holding a dollar bill or gold coin</li>
+                            <li>Continuous Settlement - 24/7/365 operations with irreversible finality in minutes</li>
+                            <li>Verifiable Scarcity - fixed supply of 21 million with transparent issuance schedule</li>
+                            <li>Global Liquidity - instantly accessible markets worldwide at any time</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">A Digital Bearer Asset</h2>
+                        <p>One of Bitcoin's most disruptive qualities is that it is a bearer asset - whoever holds the cryptographic keys owns the value, just like holding a dollar bill or a gold coin. This concept of self-custody is rare in modern finance. Apart from physical cash and precious metals, very few assets can be held and transferred without a third-party ledger or custodian.</p>
+
+                        <p>Bitcoin extends the bearer-instrument model into the digital realm. For bankers, a useful analogy is to picture Bitcoin as digital cash. Once a client withdraws dollars in cash, the bank's ledger is no longer needed for that value to circulate; similarly, when a client holds bitcoin in their own wallet, they possess value directly, outside of any institution's control.</p>
+
+                        <p>This has far-reaching implications for custody services - customers might not need a traditional custodian at all, or they may demand new forms of custody (like multi-signature wallets or collaborative custody) that give them more direct control. Bitcoin flips the custody model: it's an asset that can be kept in a bank, but doesn't need to be.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">Continuous Settlement & Finality</h2>
+                        <p>Traditional banking runs on schedules - end-of-day batch settlements, weekends off, and holiday closures. Bitcoin operates on internet time: 24/7/365. Transactions are broadcast and typically settled with irreversible finality within minutes, at any time of day or night. There are no cutoff times or holidays on the Bitcoin network.</p>
+
+                        <p>For banks, this continuous settlement is a double-edged sword. On one hand, it opens possibilities for real-time, round-the-clock payments and could alleviate liquidity traps. On the other hand, it challenges banks to manage liquidity and risk in a world where value can move even while the bank's doors are closed.</p>
+
+                        <p>Importantly, Bitcoin transactions achieve final settlement without reversals - once a payment has sufficient confirmations on the blockchain, it's done. This is akin to a cash transaction rather than a credit card payment that can be disputed. Finality reduces certain counterparty risks (no chargebacks) but also means less room for error or fraud resolution.</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">60%</div>
+                            <div class="stat-label">of top 25 U.S. banks developing Bitcoin offerings</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">24/7</div>
+                            <div class="stat-label">Settlement capability vs. traditional banking hours</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">21M</div>
+                            <div class="stat-label">Fixed, verifiable supply cap</div>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">Verifiable Scarcity and Predictable Supply</h2>
+                        <p>Unlike fiat currencies, which can be expanded or contracted by central banks, Bitcoin has a verifiable, fixed supply. Its code permanently caps the total issuable bitcoins at 21 million, with a transparent issuance schedule that halves new supply every four years. Every participant in the network can audit the circulating supply in real time by running a node.</p>
+
+                        <p>For bankers, this feature positions Bitcoin as a sort of digital gold. There's no quantitative easing or dilution beyond the algorithmic schedule. In structural terms, this introduces a new kind of asset for reserves and collateral. Some institutions are already likening Bitcoin to a strategic reserve asset, much as gold was in previous eras.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">Impacts on Key Banking Functions</h2>
+
+                        <p><strong>Custody:</strong> With Bitcoin, custody moves from being a mandatory service to a competitive service. Banks that provide secure Bitcoin custody can retain assets under management for clients who don't want the burden of managing private keys. Banks that don't may see clients withdraw funds to hold Bitcoin on external wallets.</p>
+
+                        <p><strong>Collateral & Lending:</strong> Bitcoin's liquidity and global 24/7 markets make it an intriguing form of loan collateral. Unlike real estate or other hard assets, Bitcoin can be liquidated instantly around the world if a borrower defaults. Banks are finding that Bitcoin-backed loans can carry higher interest spreads and excellent margins - often double those of traditional loans.</p>
+
+                        <p><strong>Payments & Settlement:</strong> Bitcoin and the Lightning Network allow near-instant transfers of value domestically and internationally at low cost. This threatens traditional payment revenue streams by offering an alternative rail, but also presents an opportunity for banks to integrate Bitcoin-based payment rails for customers.</p>
+
+                        <p><strong>Reserves & Asset Management:</strong> A growing number of corporates and financial institutions are allocating a portion of their reserves to Bitcoin as a hedge against currency debasement and as a growth asset. Banks that offer trustworthy channels can keep those assets in-house instead of losing relevance.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">An Architectural Shift Already Underway</h2>
+                        <p>This disruptive re-architecture of financial services is not just theoretical or in the distant future - it's happening now. Innovators have proven the concept, and regulators are rapidly catching up. Notably, over the past year U.S. regulators have moved from hostility or caution to actively crafting guidelines that integrate Bitcoin into the regulated financial system.</p>
+
+                        <p>In early 2025, the Federal Reserve, FDIC, OCC, and SEC rescinded or revised rules that had discouraged banks from engaging with digital assets. Bank regulators are even beginning to penalize banks that unfairly block Bitcoin-related businesses. Meanwhile, many leading banks have quietly begun developing Bitcoin offerings. Nearly 60% of the top 25 U.S. banks are already on a path to dealing in Bitcoin.</p>
+
+                        <p>The takeaway for a banker is clear: Bitcoin's core properties are driving a fundamental change in how value can be stored, moved, and leveraged - and banks must adapt. This isn't about endorsing a fad or taking an ideological stance; it's about responding to a new financial architecture that is emerging organically.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Part B -->
+            <div id="part-b" class="article-section">
+                <div class="section-divider">
+                    <div class="section-divider-badge">Part B</div>
+                    <h2 class="section-divider-title">Why Customers Are Adopting Bitcoin</h2>
+                </div>
+
+                <div class="article-content-inner">
+                    <div class="content-section">
+                        <p>While banks have been debating crypto regulations and risks, a quiet shift has been happening on the ground. Customers - from individuals to businesses - are steadily adopting Bitcoin for practical reasons, not ideological crusades. Importantly, this adoption often flies under the radar of traditional banks.</p>
+
+                        <p>Money is trickling out of conventional accounts into Bitcoin in ways that don't always register in quarterly reports. This section examines why customers are gravitating to Bitcoin and why many banks haven't noticed.</p>
+
+                        <div class="highlight-box">
+                            <p>"Bitcoin adoption is rarely loud - but it's persistent."</p>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">The Quiet Migration of Value</h2>
+                        <p>Forget the flashy headlines of tech enthusiasts pronouncing Bitcoin as the future - consider the everyday behavior of customers. Every week, funds that once sat in checking or savings accounts are being quietly redirected into Bitcoin and other digital assets.</p>
+
+                        <p>One study likened it to a "growing gravitational force quietly pulling deposits, payments, and customer relationships out of the traditional banking system." For example, a customer might deposit their paycheck on Friday, and by Saturday move a portion of it to a Bitcoin exchange or wallet without fanfare. By Monday, the bank's ledger simply shows a lower balance, with no clear indication that the difference is now sitting in Bitcoin.</p>
+
+                        <p>These aren't isolated incidents; they're happening across demographics and geographies daily.</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">20%</div>
+                            <div class="stat-label">of U.S. adults own cryptocurrency</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">40%</div>
+                            <div class="stat-label">of customers at one regional bank held crypto externally</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">$200M</div>
+                            <div class="stat-label">monthly flows traced at one top-20 bank to crypto exchanges</div>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">Why Don't Banks See It Yet?</h2>
+                        <p>Unlike speculative manias, this is not an all-or-nothing mass exodus; it's a steady drip. It doesn't announce itself. Customers typically don't close their bank accounts when they buy bitcoin - they simply allocate a portion of their funds or savings into the new asset.</p>
+
+                        <p>In traditional banking data, that looks like slightly lower deposit growth, or a slow trickle of funds to external accounts. Over time, however, those drips become a river.</p>
+
+                        <p>Some banks have been stunned when they finally looked closer. One community bank discovered millions of dollars leaving via a single wire transfer to a crypto exchange. A regional bank found that more than 40% of its customers - many of whom appeared conventional and even "conservative" - already held cryptocurrency externally. And a top-20 U.S. bank traced about $200 million per month in flows between its accounts and a major crypto exchange.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">Five Behavioral Drivers of Customer Bitcoin Adoption</h2>
+                        <p>What's motivating this silent adoption? It's not a sudden urge to overthrow the banking system or a speculative gold rush; instead, customers have pragmatic reasons to add Bitcoin to their financial lives.</p>
+                    </div>
+
+                    <div class="driver-box">
+                        <span class="driver-number">1</span>
+                        <span class="driver-title">Self-Custody Optionality</span>
+                        <p>Bitcoin offers something almost no other asset does - the option for individuals to be their own bank. Even if a customer doesn't exercise this option, knowing they could hold their wealth directly is powerful. This appeal has grown in a time of wider mistrust in institutions and concerns about account freezes. In essence, Bitcoin provides a form of financial autonomy akin to holding physical cash or gold bars in a personal safe, but with far greater ease of storage and transfer.</p>
+                    </div>
+
+                    <div class="driver-box">
+                        <span class="driver-number">2</span>
+                        <span class="driver-title">Portability and Global Access</span>
+                        <p>We live in an increasingly mobile and global society. Money that can seamlessly cross borders appeals to business owners, expatriates, freelancers, and really anyone who may need to move value without friction. Bitcoin is highly portable: you can memorize 12 words (a recovery phrase) or carry a small hardware wallet and effectively take millions of dollars worth of value anywhere on the planet. No declaration at customs, no waiting for an international wire to clear.</p>
+                    </div>
+
+                    <div class="driver-box">
+                        <span class="driver-number">3</span>
+                        <span class="driver-title">Diversification and Digital Gold Narrative</span>
+                        <p>Many customers adopt Bitcoin as a portfolio diversification play. They may not be true believers in cryptocurrency, but they've heard Bitcoin described as "digital gold" and see it rising in mainstream financial circles. Small allocations - on the order of 1-5% of a portfolio - are increasingly common as a hedge against traditional market risks. Unlike stock in a single company, Bitcoin has a verifiable scarcity and a track record of appreciation over the long term despite volatility.</p>
+                    </div>
+
+                    <div class="driver-box">
+                        <span class="driver-number">4</span>
+                        <span class="driver-title">Concerns About Monetary Dilution (Inflation Hedge)</span>
+                        <p>Especially since the massive monetary expansion of 2020-2021, individuals and businesses have grown wary of currency debasement. We saw the highest inflation in decades, and that rang alarm bells for savers. Bitcoin's fixed supply and algorithmic issuance are attractive as an antidote to monetary dilution. Customers (even those not particularly techy) have read headlines about central banks printing trillions and wonder how to protect their purchasing power.</p>
+                    </div>
+
+                    <div class="driver-box">
+                        <span class="driver-number">5</span>
+                        <span class="driver-title">Ecosystem Gravity (Growing Utility and Services)</span>
+                        <p>The Bitcoin ecosystem is flourishing with new services, apps, and opportunities. There's a kind of gravitational pull once a customer steps into the Bitcoin world. For instance, a person who buys a little bitcoin out of curiosity might soon discover they can earn yield by lending it out, or use it to get a loan, or make lightning-fast payments for small purchases via the Lightning Network. This is akin to a new financial universe forming adjacent to the traditional one.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">What Banks Are Missing</h2>
+                        <p>In aggregate, the above drivers mean customers are moving wealth and financial activity off traditional ledgers. This can manifest as declining deposit balances, fewer fee-generating transactions, or lower demand for certain bank products.</p>
+
+                        <p>Crucially, banks may misattribute these trends to other causes if they're not paying attention. For example, younger customers might appear less interested in bank investment products - one might assume it's because they prefer fintech apps (which is true), but delve deeper and you find they're actually heavily invested in crypto on those apps.</p>
+
+                        <p>Another thing banks miss is how persistent and committed Bitcoin adopters tend to be. The phrase "rarely loud but persistent" is apt - someone who buys into Bitcoin usually continues accumulating or at least holding over years, often through market cycles. So a $5,000 outflow to a Coinbase purchase this quarter might be followed by $5,000 each quarter - a sustained drain - even if the bank's relationship manager is unaware.</p>
+
+                        <p>Finally, banks often overlook early signals because Bitcoin adoption doesn't fit traditional narratives. It's not solely a youth phenomenon - while younger demographics lead, many Gen X and Boomers have also quietly allocated to Bitcoin. It's not solely a high-risk, fringe gamble either - increasingly it's mainstream behavior to own a bit of Bitcoin as part of one's financial mix.</p>
+                    </div>
+
+                    <div class="key-points">
+                        <div class="key-points-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                            Key Takeaway
+                        </div>
+                        <ul>
+                            <li>Banks shouldn't mistake quietude for absence - Bitcoin adoption is happening steadily in the background</li>
+                            <li>Each percentage point of assets moving "off the banking radar" is business the bank has lost</li>
+                            <li>Those percentages are adding up year by year, creating a cumulative effect</li>
+                            <li>Smart institutions will start paying attention to the subtle signs and find ways to retain these customers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Part C -->
+            <div id="part-c" class="article-section">
+                <div class="section-divider">
+                    <div class="section-divider-badge">Part C</div>
+                    <h2 class="section-divider-title">Bitcoin Products as a Retention Strategy</h2>
+                </div>
+
+                <div class="article-content-inner">
+                    <div class="content-section">
+                        <p>The knee-jerk reaction in many banks when Bitcoin comes up is, "Our customers aren't asking for it" or "It's too niche - we'll wait until it's bigger to consider it." This perspective misses a critical point: offering Bitcoin services at this stage isn't about chasing a trendy growth opportunity, it's about defending your turf.</p>
+
+                        <p>Just as online banking and mobile apps were once optional and became essential, Bitcoin-related products are evolving from a differentiator to a baseline expectation for a segment of valuable clients.</p>
+
+                        <div class="highlight-box">
+                            <p>"This isn't about pushing customers into Bitcoin - it's about not losing them when they get there."</p>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">Learning from Past Tech Shifts</h2>
+                        <p>Think back on previous technological waves in banking - online banking in the 2000s, mobile banking in the 2010s. Early on, these were viewed as novel services that only a subset of customers wanted. Some banks held off, thinking their core clients weren't asking for mobile check deposit or bill-pay.</p>
+
+                        <p>But over time, those features became hygiene factors - basic expectations to keep customers from switching to competitors. Banks that lagged found out the hard way that customers might not explicitly demand a feature until another institution offers it, at which point the customers quietly slip away.</p>
+
+                        <p>Bitcoin is following a similar trajectory. Right now, perhaps only a single-digit percentage of your customer base actively uses it. But those customers are disproportionately often the younger, more tech-forward, or higher-net-worth individuals - the very segments you don't want to lose.</p>
+                    </div>
+
+                    <div class="stats-grid two-col">
+                        <div class="stat-card">
+                            <div class="stat-value">75%</div>
+                            <div class="stat-label">of consumers trust their bank more than fintechs or crypto exchanges to manage digital assets</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">60%</div>
+                            <div class="stat-label">of top 25 U.S. banks already developing Bitcoin offerings</div>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">A Defensive Posture: Meet Customers Where They're Going</h2>
+                        <p>Rather than framing a Bitcoin offering as a bold expansion into uncharted territory, savvy banks frame it as customer service. You're essentially saying to your clients: "If you decide to engage with Bitcoin, we're here to support you safely - you don't have to go to an outside platform and leave us behind."</p>
+
+                        <p>This approach acknowledges that many customers will eventually get into digital assets in some form (if they haven't already), and when they do, they'll remember which institutions helped versus hindered them. As one banking strategist put it, "You do not need to become an exchange to compete. You only need to meet customers where they already are."</p>
+
+                        <p>There's evidence that customers want to use their primary bank for digital assets - they trust banks more than the alternatives. A recent report found that 75% of consumers trust their bank more than fintechs or crypto exchanges to manage digital assets safely, and an equal percentage said they'd try things like stablecoins if offered by their bank.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">Early-Stage Bitcoin Products: What to Offer (Safely)</h2>
+                        <p>A bank doesn't have to go from zero to a full suite of crypto services overnight. In fact, a measured, risk-first rollout is prudent. Here are practical, early-stage Bitcoin product ideas that a bank can implement primarily as a defensive play:</p>
+                    </div>
+
+                    <div class="product-box">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </div>
+                        <h3 class="product-title">Custody Visibility</h3>
+                        <p>At minimum, aim for visibility into customers' Bitcoin holdings. This could mean offering a view-only aggregation where customers can see their external crypto wallet balances within your banking app. Better yet, offer custodial wallets or accounts where the bank (or its sub-custodian partner) holds Bitcoin on behalf of the customer. The key is to keep those assets from completely leaving your line of sight.</p>
+                    </div>
+
+                    <div class="product-box">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"/>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                            </svg>
+                        </div>
+                        <h3 class="product-title">Buy/Sell Rails</h3>
+                        <p>Enabling customers to buy or sell Bitcoin for USD through your platform is a straightforward way to stop deposit outflows. Every time a client wants to acquire Bitcoin and you don't offer a way, they will move funds to a third party that does. By providing a basic buy/sell feature (often via a backend partner or API), you capture that activity. The bank can earn a small spread or fee, but more importantly, you've kept the customer's journey within your walls.</p>
+                    </div>
+
+                    <div class="product-box">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3 class="product-title">Conservative Bitcoin Lending</h3>
+                        <p>One of the most valuable services a bank can offer Bitcoin holders is the ability to borrow against their Bitcoin rather than selling it. This is a classic retention move: if your customer can get liquidity (a loan) by pledging Bitcoin, they have much less reason to liquidate their Bitcoin holdings. Start simple - for example, a line of credit or term loan secured by Bitcoin at a low loan-to-value (say 40-50%).</p>
+                    </div>
+
+                    <div class="product-box">
+                        <div class="product-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="product-title">Educational and Advisory Support</h3>
+                        <p>Another "product" that's more of a service - provide education, guidance, or even just a knowledgeable point of contact about Bitcoin. Many customers dabbling in Bitcoin would love to talk to their banker or advisor about it, but historically they've met either blank stares or disapproval. By training a few financial advisors or support staff on Bitcoin basics, a bank can retain customers who are looking for advice.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">Risk Management and Gradualism</h2>
+                        <p>Treating Bitcoin services as a retention strategy also aligns well with a risk-managed approach. You're not betting the farm on a new revenue stream; you're making incremental additions to prevent erosion of your existing base. This means you can start small, test the waters, and scale up as comfort and demand grow.</p>
+
+                        <p>Many regulatory and operational tools are available now to do this safely. For example, U.S. regulators (OCC, Fed) have clarified that banks can custody crypto or facilitate client trades as long as proper controls are in place - even allowing certain crypto trades to be treated as "riskless principal" transactions where the bank isn't exposed to market risk during execution.</p>
+
+                        <p>What remains is the strategic risk of inaction. By doing nothing, banks implicitly choose to let the quiet outflow of funds and the gradual decline of primacy continue. Every $500 transfer to a Bitcoin service is not just a one-time loss of a fee - it's a crack in the relationship. Over time those cracks can widen.</p>
+                    </div>
+
+                    <div class="key-points">
+                        <div class="key-points-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                            Defensive Logic
+                        </div>
+                        <ul>
+                            <li>Bitcoin products at this stage are best seen not as a moonshot for new revenue, but as a shield against attrition</li>
+                            <li>Just as offering online bill-pay was about keeping customers from needing another bank, offering Bitcoin access is about keeping them from needing another platform</li>
+                            <li>Once you have these capabilities, you're also positioned to capture upside when the next wave of adoption hits</li>
+                            <li>Offer Bitcoin services not to lead your customers into the future, but to follow them there - so they aren't lost along the way</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">Cohesion with Bank Strategy</h2>
+                        <p>When Bitcoin services are positioned as retention, they naturally align with a bank's core mission: serve the customer, protect the franchise. You're not asking anyone to abandon prudent banking principles. In fact, not offering these services is increasingly looking like the riskier path, as it means ignoring a change in customer behavior.</p>
+
+                        <p>High-value and younger clients are adopting Bitcoin (often quietly, as we saw in Part B). They won't all call up customer service to complain that you don't offer it; many will simply move what they need to move and carry on - possibly developing new loyalties to fintechs or competitors that met their needs.</p>
+
+                        <p>To sum up: Bitcoin products at this stage of the market are best seen not as a moonshot for new revenue, but as a shield against attrition. The bonus is that once you have these capabilities, you're also positioned to capture upside when the next wave of adoption hits. In doing so, you protect your bank's relevance in an evolving financial landscape and reinforce the message: we're your bank, in all facets of your financial life.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Part D -->
+            <div id="part-d" class="article-section">
+                <div class="section-divider">
+                    <div class="section-divider-badge">Part D</div>
+                    <h2 class="section-divider-title">ROE Thought Experiment</h2>
+                </div>
+
+                <div class="article-content-inner">
+                    <div class="content-section">
+                        <p>So far, we've made the case for Bitcoin products in terms of strategic positioning and retention. But what might the actual numbers look like? This section walks through a conservative thought experiment: a hypothetical mid-sized bank (around $3 billion in assets) implements a basic Bitcoin offering.</p>
+
+                        <p>We'll assume only a small fraction of customers participate, and we'll outline revenue streams from a few Bitcoin-related services. The result isn't jaw-dropping profit - but it shows high-quality, fee-based and interest revenue that can modestly boost ROE, while protecting the bank's franchise.</p>
+
+                        <div class="highlight-box">
+                            <p>"This is not about outsized returns - it's about high-quality returns with optionality."</p>
+                        </div>
+                    </div>
+
+                    <div class="scenario-box">
+                        <div class="scenario-title">Scenario Assumptions</div>
+                        <div class="scenario-grid">
+                            <div class="scenario-item">
+                                <div class="scenario-label">Bank Total Assets</div>
+                                <div class="scenario-value">$3B</div>
+                            </div>
+                            <div class="scenario-item">
+                                <div class="scenario-label">Customer Participation Rate</div>
+                                <div class="scenario-value">3%</div>
+                            </div>
+                            <div class="scenario-item">
+                                <div class="scenario-label">Avg. Bitcoin Exposure per Customer</div>
+                                <div class="scenario-value">$150K</div>
+                            </div>
+                            <div class="scenario-item">
+                                <div class="scenario-label">Total Bitcoin Assets Under Management</div>
+                                <div class="scenario-value">$90M</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">Defining the Scenario</h2>
+                        <p>Our hypothetical bank has $3 billion in total assets. It's a healthy community or regional bank with a diverse customer base. Now imagine that after introducing a cautious Bitcoin service suite, within a year about 3% of the bank's customers have engaged with these Bitcoin offerings.</p>
+
+                        <p>Each of those participating customers has an average Bitcoin exposure of $150,000 through the bank's platform. "Exposure" here could mean the amount of Bitcoin they hold in custody with the bank or the amount they've used as collateral for loans (or a combination thereof). These are likely higher-value clients - a small percentage of clients driving a large share of assets.</p>
+
+                        <p>If the bank has 20,000 customers, that's about 600 participants. 600 customers × $150,000 each = <strong>$90 million</strong> in Bitcoin-related assets that the bank has visibility on. This is just 3% of the bank's asset size - a small slice, reflecting a cautious adoption, yet not trivial in absolute terms.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">Revenue Breakdown</h2>
+                        <p>We assume the bank offers three primary Bitcoin-related services: (1) Trading (buy/sell) facilitation, (2) Custody and basic wallet services, and (3) Bitcoin-collateralized lending. Not every engaged customer uses every service, but for modeling, we'll consider each revenue stream:</p>
+                    </div>
+
+                    <table class="revenue-table">
+                        <thead>
+                            <tr>
+                                <th>Revenue Stream</th>
+                                <th>Assumptions (Annual)</th>
+                                <th>Est. Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Trading/Exchange Fees</strong></td>
+                                <td>~$90M in Bitcoin purchase/sale volume at 1% fee or spread</td>
+                                <td>$0.9M</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Bitcoin Loan Interest</strong></td>
+                                <td>~$45M in loans secured by Bitcoin (50% LTV) at 6% net interest margin</td>
+                                <td>$2.7M</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Custody & Other Fees</strong></td>
+                                <td>~$90M in assets under custody with 0.20% custodial/management fee</td>
+                                <td>$0.18M</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td colspan="2"><strong>Total Annual Revenue</strong></td>
+                                <td>$3.78M</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="content-section">
+                        <p>A note on these numbers: They're illustrative, not predictive. We've assumed a modest 1% trading fee (which could be lower depending on competition or higher if including spread). The Bitcoin loan interest assumes about half of the Bitcoin assets end up being used as collateral for loans. A 6% net interest margin is plausible given Bitcoin-backed loans often carry higher rates (say 8-10%) and the bank's cost of funds might be ~2-3%.</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value">~$3.8M</div>
+                            <div class="stat-label">Annual revenue from Bitcoin products</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">+12%</div>
+                            <div class="stat-label">Potential boost to earnings</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">+0.13%</div>
+                            <div class="stat-label">Potential ROA improvement</div>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">Impact on Bank Performance</h2>
+                        <p>For a $3B asset bank, how meaningful is ~$3.8M? It depends on the bank's overall income, but an extra ~$3.8M of mostly fee and interest income is not chump change. If this bank had, say, a 1% Return on Assets (ROA) pre-Bitcoin, that's ~$30M of annual earnings. An additional $3.8M would add over 12% to earnings, potentially boosting ROA by ~0.13% and ROE accordingly.</p>
+
+                        <p>Banks have costs associated with these services (technology integration, vendor fees, compliance overhead), so not all of that $3.8M is net profit. But even if half were eaten by costs, ~$1.9M net still bumps ROE up a bit and - importantly - this revenue is largely non-interest or low-risk interest income.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">High-Quality Earnings, Low Incremental Risk</h2>
+                        <p>Why do we call these "high-quality" returns? A few reasons stand out:</p>
+                    </div>
+
+                    <div class="quality-box">
+                        <span class="quality-number">1</span>
+                        <span class="quality-title">Fee Dominance</span>
+                        <p>A significant portion of the revenue (trading fees, custody fees) is fee-based. Fee income typically carries a higher ROE because it doesn't consume balance sheet capacity in the way lending does. It's also largely non-cyclical in this context - people trade whether rates are high or low. This diversifies the bank's income away from pure net interest margin dependence.</p>
+                    </div>
+
+                    <div class="quality-box">
+                        <span class="quality-number">2</span>
+                        <span class="quality-title">Secured Lending</span>
+                        <p>The lending we are modeling is over-collateralized and margin-callable. Unlike a mortgage on a house (which can take many months to foreclose and recover), a Bitcoin-collateral loan can be rebalanced or liquidated literally 24/7 if needed. The loans can be very short-term or callable loans, reducing duration risk. From a risk perspective, the bank can manage this book tightly.</p>
+                    </div>
+
+                    <div class="quality-box">
+                        <span class="quality-number">3</span>
+                        <span class="quality-title">Retention Value</span>
+                        <p>Beyond the direct revenue, there's the intangible but critical retention value. By keeping ~600 high-value clients engaged with Bitcoin services, the bank preserves cross-selling opportunities (wealth management, deposits, etc.) and avoids deposit runoff. The long-term value of customer relationships retained may exceed the direct fee income.</p>
+                    </div>
+
+                    <div class="quality-box">
+                        <span class="quality-number">4</span>
+                        <span class="quality-title">Optionality</span>
+                        <p>If Bitcoin adoption accelerates (more customers engage, or existing customers increase exposure), the revenue scales. You've built the infrastructure; incremental customers cost marginally less to serve. On the other hand, if adoption stalls, the bank hasn't bet the farm - it's just a small operation that can remain steady or be wound down with limited sunk cost.</p>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">The Strategic Calculus</h2>
+                        <p>Viewing this through a strategic finance lens: the modest Bitcoin revenue is valuable not for being huge, but for being high-ROE (fee-based, secured) and defensive (protecting the franchise). It's not about Bitcoin services alone boosting your stock price - it's about ensuring that in 5-10 years, you still have the customer base and relevance to generate earnings.</p>
+
+                        <p>If you do nothing, you may not notice the erosion right away. But each year might see a few more customers drift; a few more millions in deposits seep out. Over a decade, that attrition compounds. Conversely, a small but profitable Bitcoin line of business can act as a hedge against that attrition - and if the market grows, you're positioned to scale with it.</p>
+                    </div>
+
+                    <div class="key-points">
+                        <div class="key-points-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+                            </svg>
+                            Key Financial Takeaways
+                        </div>
+                        <ul>
+                            <li>A conservative Bitcoin product offering for a $3B bank can generate ~$3.8M annually in high-quality revenue</li>
+                            <li>Most revenue is fee-based (high ROE) or secured lending (low credit risk due to over-collateralization)</li>
+                            <li>Even after costs, the net contribution improves ROA/ROE modestly while protecting the customer franchise</li>
+                            <li>The real value includes retention of high-value clients and optionality for future growth if adoption accelerates</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h2 class="section-heading">Conclusion</h2>
+                        <p>In conclusion, the financial case for Bitcoin banking products at a mid-sized bank is not a tale of astronomical gains - it's a story of prudent positioning. Banks that proactively adapt are positioning for substantial long-term benefits, whereas those who remain idle risk lost revenue opportunities and reduced market relevance.</p>
+
+                        <p>The numbers we've walked through are conservative and scalable. They won't make or break the bank in year one, but they contribute solid, high-quality earnings while serving as a strategic insurance policy against an evolving customer base.</p>
+
+                        <p>As a final thought for any banker evaluating this space: the ROE from Bitcoin products should be measured not just in dollars, but in customer loyalty preserved and future opportunities opened. In a decade, you'll either be glad you started now - or you'll be playing catch-up with competitors who did.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Audience Section -->
     <section class="section">
         <div class="container">
@@ -1001,7 +1170,7 @@
                 <div class="audience-content">
                     <h2>Who is this series for?</h2>
                     <div class="es-20"></div>
-                    <p class="title-desc">Bitcoin Banking 101 is designed for financial professionals who need to understand the strategic implications of Bitcoin – not the hype.<br><br><a href="https://www.galoy.io/bitcoin-core-banking-products" class="text-link">Explore Galoy Products</a></p>
+                    <p class="title-desc">Bitcoin Banking 101 is designed for financial professionals who need to understand the strategic implications of Bitcoin – not the hype.<br><br><a href="../../use-cases/bitcoin-backed-lending.html" class="text-link">Explore Galoy Products</a></p>
                     <ul class="audience-list">
                         <li class="audience-item">
                             <div class="audience-icon">
@@ -1042,64 +1211,83 @@
                     </ul>
                 </div>
                 <div class="audience-visual">
-                    <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/679e5a9ee9b1259ab2c5271e_desktop-lana.webp" loading="lazy" alt="Galoy Platform" style="width: 100%; border: 1px solid var(--border-color);">
+                    <img src="../../../images/desktop-lana.webp" loading="lazy" alt="Galoy Platform" style="width: 100%; border: 1px solid var(--border-color);">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="section-cta">
+    <section class="cta-section">
         <div class="container">
             <div class="cta-wrapper">
                 <h2>Want to build with Galoy?</h2>
                 <p class="title-desc">Galoy provides the infrastructure banks need to offer Bitcoin services safely, compliantly, and profitably. Say hello at biz@galoy.io if you're interested to build together.</p>
                 <div class="cta-buttons">
-                    <a href="https://www.galoy.io/bitcoin-core-banking-products" class="button">Explore Products</a>
-                    <a href="mailto:biz@galoy.io?subject=Bitcoin%20Banking%20Inquiry" class="button button-secondary">Email biz@galoy.io</a>
+                    <a href="../../solutions/index.html" class="btn btn-primary btn-lg">Explore Solutions</a>
+                    <a href="mailto:biz@galoy.io?subject=Bitcoin%20Banking%20Inquiry" class="btn btn-outline btn-lg">Email biz@galoy.io</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-wrapper">
-                <div class="footer-logos">
-                    <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/656106c240ef09d6b11f4673_logo.svg" loading="lazy" alt="Galoy" class="footer-logo">
-                    <div class="es-40"></div>
-                    <img src="https://cdn.prod.website-files.com/646f9b77a45b9e4c4377b0a2/679951283f749d905259e06b_A-LIGN_ISO-27001_dark_2.png" loading="lazy" alt="ISO 27001 Certified" style="height: 60px; opacity: 0.8;">
-                </div>
-                <div class="footer-content">
-                    <div class="footer-block">
-                        <h3 class="footer-heading">Contact</h3>
-                        <a href="https://github.com/GaloyMoney/" target="_blank" class="footer-social-link-three">Github</a>
-                        <a href="https://twitter.com/GaloyMoney" target="_blank" class="footer-social-link-three">X</a>
-                        <a href="https://t.me/galoyofficial" target="_blank" class="footer-social-link-three">Telegram</a>
-                        <a href="https://www.linkedin.com/company/galoymoney" target="_blank" class="footer-social-link-three">LinkedIn</a>
-                        <a href="https://www.galoy.io/contact" class="footer-social-link-three">Contact</a>
-                    </div>
-                    <div class="footer-block">
-                        <h3 class="footer-heading">Product</h3>
-                        <a href="https://www.galoy.io/about" class="footer-social-link-three">About Galoy</a>
-                        <a href="https://www.galoy.io/bitcoin-banking-products" class="footer-social-link-three">View All Products</a>
-                        <a href="https://www.galoy.io/lana-bitcoin-loans-platform" class="footer-social-link-three">Lana: Bitcoin Loans</a>
-                        <a href="https://dev.galoy.io/" class="footer-social-link-three">Developer Docs</a>
-                    </div>
-                    <div class="footer-block">
-                        <h3 class="footer-heading">Content</h3>
-                        <a href="https://www.galoy.io/modern-bitcoin-core-banking" class="footer-social-link-three">Core Banking Software</a>
-                        <a href="https://www.galoy.io/bitcoin-backed-lending" class="footer-social-link-three">Bitcoin Backed Lending</a>
-                        <a href="https://www.galoy.io/blog-posts/blog" class="footer-social-link-three">Blog</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copyright">
-                © 2025 Galoy Inc. All rights reserved<br>
-                <a href="https://www.galoy.io/terms-conditions">Terms</a> | <a href="https://www.galoy.io/privacy-policy">Privacy Policy</a>
-            </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../../../images/galoy-logo-white.svg" alt="Galoy" style="height: 32px; margin-bottom: var(--space-4);">
+          <p>Banking software for the Bitcoin age.</p>
+          <div class="footer-social">
+            <a href="https://github.com/GaloyMoney" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="https://twitter.com/GaloyMoney" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+            <a href="https://t.me/galoyofficial" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+            <a href="https://www.linkedin.com/company/galoymoney" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
         </div>
-    </footer>
+                <div>
+          <h4 class="footer-heading">Solutions</h4>
+          <ul class="footer-links">
+            <li><a href="../../../pages/solutions/index.html">Solutions Overview</a></li>
+            <li><a href="../../use-cases/bitcoin-backed-lending.html">Bitcoin-Backed Lending</a></li>
+            <li><a href="../../use-cases/bitcoin-payments.html">Bitcoin Payments</a></li>
+            <li><a href="../../use-cases/stablecoin-payments.html">Stablecoin Payments</a></li>
+            <li><a href="../../use-cases/bitcoin-exchange.html">Bitcoin Exchange</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Resources</h4>
+          <ul class="footer-links">
+            <li><a href="https://github.com/GaloyMoney" target="_blank">GitHub</a></li>
+            <li><a href="../../research/index.html">Research</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="../../company/about.html">About</a></li>
+            <li><a href="../../company/careers.html">Careers</a></li>
+            <li><a href="../../company/security.html">Security</a></li>
+            <li><a href="../../company/contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 Galoy Inc. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../../../terms.html">Terms</a>
+          <a href="../../../privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Initialize Lucide icons -->
+  <script src="../../../js/nav.js"></script>
+  <script>lucide.createIcons();</script>
+
 </body>
 </html>

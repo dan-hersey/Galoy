@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bria - Bitcoin Payments Bridge | Galoy</title>
+  <meta name="description" content="Bria is a secure, scalable interface between Bitcoin, Lightning Network and enterprise applications. Process payments at scale with bank-grade security.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="../../index.html" class="navbar-brand">
+          <img src="../../images/galoy-logo.svg" alt="Galoy" class="navbar-logo">
+        </a>
+
+        <ul class="navbar-nav">
+          <li><a href="../../index.html" class="nav-link">Home</a></li>
+
+          <li>
+            <a href="../products/index.html" class="nav-link nav-link-dropdown">
+              Products
+              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../products/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">apps</span>
+                All Products
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../products/lana.html" class="dropdown-item">
+                <span class="material-symbols-outlined">request_quote</span>
+                Lana – Bitcoin Lending
+              </a>
+              <a href="../products/cala.html" class="dropdown-item">
+                <span class="material-symbols-outlined">account_balance_wallet</span>
+                Cala – Accounting Ledger
+              </a>
+              <a href="../products/bria.html" class="dropdown-item">
+                <span class="material-symbols-outlined">bolt</span>
+                Bria – Payments Bridge
+              </a>
+            </div>
+          </li>
+
+          <li>
+            <a href="../solutions/index.html" class="nav-link nav-link-dropdown">
+              Solutions
+              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../solutions/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">compare</span>
+                Compare Solutions
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../solutions/sidecar.html" class="dropdown-item">
+                <span class="material-symbols-outlined">add_circle</span>
+                Sidecar Model
+              </a>
+              <a href="../solutions/primary-core.html" class="dropdown-item">
+                <span class="material-symbols-outlined">hub</span>
+                Primary Core
+              </a>
+            </div>
+          </li>
+
+          <li>
+            <a href="../research/index.html" class="nav-link nav-link-dropdown">
+              Research
+              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../research/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">library_books</span>
+                All Research
+              </a>
+              <a href="../research/bitcoin-banking-101/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">school</span>
+                Bitcoin Banking 101
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../research/case-studies/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">cases</span>
+                Case Studies
+              </a>
+              <a href="../research/regulatory/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">gavel</span>
+                Regulatory Radar
+              </a>
+              <a href="../research/guides/index.html" class="dropdown-item">
+                <span class="material-symbols-outlined">menu_book</span>
+                Guides & Playbooks
+              </a>
+            </div>
+          </li>
+
+          <li>
+            <a href="../company/index.html" class="nav-link nav-link-dropdown">
+              Company
+              <span class="material-symbols-outlined nav-dropdown-icon">expand_more</span>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../company/about.html" class="dropdown-item">
+                <span class="material-symbols-outlined">info</span>
+                About
+              </a>
+              <a href="../company/careers.html" class="dropdown-item">
+                <span class="material-symbols-outlined">work</span>
+                Careers
+              </a>
+              <a href="../company/security.html" class="dropdown-item">
+                <span class="material-symbols-outlined">shield</span>
+                Security
+              </a>
+              <a href="../company/press.html" class="dropdown-item">
+                <span class="material-symbols-outlined">newspaper</span>
+                Press & Media
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../company/contact.html" class="dropdown-item">
+                <span class="material-symbols-outlined">mail</span>
+                Contact Us
+              </a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="navbar-social">
+          <a href="https://twitter.com/GaloyMoney" class="social-link" target="_blank" rel="noopener" aria-label="Twitter">
+            <span class="material-symbols-outlined">close</span>
+          </a>
+          <a href="https://github.com/galoymoney" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
+            <span class="material-symbols-outlined">code</span>
+          </a>
+          <a href="https://www.linkedin.com/company/galoymoney" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <span class="material-symbols-outlined">business</span>
+          </a>
+        </div>
+
+        <button class="navbar-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero hero-subpage" style="background: linear-gradient(135deg, var(--bitcoin-orange) 0%, #c2410c 100%);">
+    <div class="hero-pattern"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-split">
+          <div class="hero-text">
+            <span class="section-label section-label--green"><span class="material-symbols-outlined">bolt</span> Products</span>
+            <h1>Bria</h1>
+            <p style="font-size: var(--font-size-xl); margin-bottom: var(--space-8);">Bitcoin Payments Bridge. Secure, scalable interface between Bitcoin, Lightning and your enterprise applications.</p>
+            <div class="flex gap-4 items-center" style="justify-content: flex-start;">
+              <a href="../company/contact.html" class="btn btn-white btn-lg">Request Demo</a>
+              <a href="https://github.com/galoymoney/bria" class="btn btn-secondary btn-lg" style="border-color: white; color: white;" target="_blank" rel="noopener">View on GitHub</a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="../../images/galoy-bria-bitcoin-infrastructure-bridge.png" alt="Bria payments bridge diagram" style="border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem/Solution -->
+  <section class="section">
+    <div class="container">
+      <div class="split-feature">
+        <div class="split-feature-content">
+          <h2>Enterprise Bitcoin Payments</h2>
+          <p class="text-lg">Connecting enterprise applications to Bitcoin requires more than a node. Bria provides the security, reliability, and operational tooling that institutions need.</p>
+
+          <div style="margin-top: var(--space-8);">
+            <div style="display: flex; align-items: flex-start; gap: var(--space-4); margin-bottom: var(--space-6);">
+              <span class="material-symbols-outlined" style="color: var(--bitcoin-orange); font-size: 32px;">bolt</span>
+              <div>
+                <h4 style="margin-bottom: var(--space-2);">Bitcoin + Lightning</h4>
+                <p class="mb-0 text-grey">Single interface for both on-chain Bitcoin and Lightning Network payments.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: flex-start; gap: var(--space-4); margin-bottom: var(--space-6);">
+              <span class="material-symbols-outlined" style="color: var(--bitcoin-orange); font-size: 32px;">security</span>
+              <div>
+                <h4 style="margin-bottom: var(--space-2);">Bank-Grade Security</h4>
+                <p class="mb-0 text-grey">Multi-signature support, signing device integration, and comprehensive access controls.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: flex-start; gap: var(--space-4);">
+              <span class="material-symbols-outlined" style="color: var(--bitcoin-orange); font-size: 32px;">monitoring</span>
+              <div>
+                <h4 style="margin-bottom: var(--space-2);">Operational Visibility</h4>
+                <p class="mb-0 text-grey">Real-time monitoring, alerting, and full transaction visibility for operations teams.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="split-feature-image">
+          <img src="../../images/payments-illustration.svg" alt="Bitcoin payments flow">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features -->
+  <section class="section section-grey">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2>Payment Processing Features</h2>
+        <p class="text-lg">Everything you need for production Bitcoin payment operations</p>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="card-icon" style="background: var(--bitcoin-orange);">
+            <span class="material-symbols-outlined" style="color: white;">bolt</span>
+          </div>
+          <h3>Lightning Network</h3>
+          <p class="mb-0">Native Lightning support for instant, low-cost payments. Automatic channel management and routing optimization.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" style="background: var(--bitcoin-orange);">
+            <span class="material-symbols-outlined" style="color: white;">currency_bitcoin</span>
+          </div>
+          <h3>On-Chain Bitcoin</h3>
+          <p class="mb-0">Full on-chain transaction support with UTXO management, fee estimation, and RBF (Replace-By-Fee) capabilities.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" style="background: var(--bitcoin-orange);">
+            <span class="material-symbols-outlined" style="color: white;">key</span>
+          </div>
+          <h3>Multi-Signature</h3>
+          <p class="mb-0">Support for multi-sig configurations with hardware signing devices for institutional-grade key management.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" style="background: var(--bitcoin-orange);">
+            <span class="material-symbols-outlined" style="color: white;">receipt_long</span>
+          </div>
+          <h3>Batch Payouts</h3>
+          <p class="mb-0">Efficient batch processing for high-volume payout operations. Reduce fees with transaction batching.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" style="background: var(--bitcoin-orange);">
+            <span class="material-symbols-outlined" style="color: white;">webhook</span>
+          </div>
+          <h3>Webhooks & Events</h3>
+          <p class="mb-0">Real-time notifications for payment status changes. Integrate with your existing systems via webhooks.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon" style="background: var(--bitcoin-orange);">
+            <span class="material-symbols-outlined" style="color: white;">analytics</span>
+          </div>
+          <h3>Reporting & Analytics</h3>
+          <p class="mb-0">Comprehensive reporting on payment volumes, fees, and transaction status for reconciliation and compliance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture -->
+  <section class="section">
+    <div class="container">
+      <h2 class="text-center mb-4">Clean Separation of Concerns</h2>
+      <p class="text-center text-lg mb-12" style="max-width: 700px; margin-left: auto; margin-right: auto;">Bria sits between your application and Bitcoin infrastructure, handling the complexity so you don't have to.</p>
+
+      <div style="background: var(--light-grey); border-radius: var(--radius-lg); padding: var(--space-12);">
+        <div class="grid grid-3" style="gap: var(--space-8); align-items: center;">
+          <!-- Your Application -->
+          <div class="text-center">
+            <div style="background: white; border: 2px solid var(--border-grey); border-radius: var(--radius-lg); padding: var(--space-6);">
+              <span class="material-symbols-outlined" style="font-size: 48px; color: var(--galoy-grey);">apps</span>
+              <h4 class="mt-4 mb-0">Your Application</h4>
+              <p class="text-sm text-grey mb-0">Banking platform, exchange, wallet, payment processor</p>
+            </div>
+          </div>
+
+          <!-- Bria -->
+          <div class="text-center">
+            <div style="background: var(--bitcoin-orange); border-radius: var(--radius-lg); padding: var(--space-6); color: white;">
+              <span class="material-symbols-outlined" style="font-size: 48px;">swap_horiz</span>
+              <h4 class="mt-4 mb-0" style="color: white;">Bria</h4>
+              <p class="text-sm mb-0" style="opacity: 0.9;">API Gateway, Security, Monitoring, Batching</p>
+            </div>
+            <div style="margin-top: var(--space-4);">
+              <span class="material-symbols-outlined" style="font-size: 32px; color: var(--font-grey);">arrow_downward</span>
+            </div>
+          </div>
+
+          <!-- Bitcoin Infrastructure -->
+          <div class="text-center">
+            <div style="background: white; border: 2px solid var(--border-grey); border-radius: var(--radius-lg); padding: var(--space-6);">
+              <span class="material-symbols-outlined" style="font-size: 48px; color: var(--galoy-grey);">dns</span>
+              <h4 class="mt-4 mb-0">Bitcoin Infrastructure</h4>
+              <p class="text-sm text-grey mb-0">Bitcoin nodes, Lightning nodes, signing devices</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Specs -->
+  <section class="section section-grey">
+    <div class="container">
+      <div class="split-feature reverse">
+        <div class="split-feature-content">
+          <h2>Technical Specifications</h2>
+          <p>Bria is built for reliability and performance at enterprise scale.</p>
+
+          <div style="margin-top: var(--space-6);">
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">Language</span>
+              <span><strong>Rust</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">API</span>
+              <span><strong>gRPC + GraphQL</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">Lightning</span>
+              <span><strong>LND, CLN support</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">Signing</span>
+              <span><strong>Hardware device support</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0; border-bottom: 1px solid var(--border-grey);">
+              <span class="text-grey">Deployment</span>
+              <span><strong>Docker, Kubernetes</strong></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-3) 0;">
+              <span class="text-grey">License</span>
+              <span><strong>Available on GitHub</strong></span>
+            </div>
+          </div>
+        </div>
+        <div class="split-feature-image">
+          <img src="../../images/bria-architecture.svg" alt="Bria technical architecture">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center mb-12">
+        <h2>Security First Design</h2>
+        <p class="text-lg">Bitcoin payment security is non-negotiable. Bria is built with institutional security requirements in mind.</p>
+      </div>
+
+      <div class="grid grid-2" style="gap: var(--space-8);">
+        <div class="card" style="padding: var(--space-8);">
+          <h3>Key Management</h3>
+          <ul style="margin: 0; padding-left: var(--space-6);">
+            <li style="margin-bottom: var(--space-3);">Multi-signature wallet configurations (2-of-3, 3-of-5, etc.)</li>
+            <li style="margin-bottom: var(--space-3);">Hardware signing device integration (Ledger, Trezor, etc.)</li>
+            <li style="margin-bottom: var(--space-3);">Segregated hot/warm/cold wallet architectures</li>
+            <li>BIP-39/BIP-44 standard compliance</li>
+          </ul>
+        </div>
+
+        <div class="card" style="padding: var(--space-8);">
+          <h3>Access Control</h3>
+          <ul style="margin: 0; padding-left: var(--space-6);">
+            <li style="margin-bottom: var(--space-3);">Role-based access control (RBAC)</li>
+            <li style="margin-bottom: var(--space-3);">API key management with scoped permissions</li>
+            <li style="margin-bottom: var(--space-3);">Approval workflows for large transactions</li>
+            <li>Complete audit logging of all actions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" style="background: linear-gradient(135deg, var(--bitcoin-orange) 0%, #c2410c 100%);">
+    <div class="container">
+      <h2>Ready to Process Bitcoin Payments?</h2>
+      <p>See how Bria can power your institution's Bitcoin payment infrastructure.</p>
+      <div class="cta-buttons">
+        <a href="../company/contact.html" class="btn btn-white btn-lg">Request Demo</a>
+        <a href="https://dev.galoy.io/bria" class="btn btn-secondary btn-lg" target="_blank" rel="noopener">Read the Docs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../../images/galoy-logo-white.svg" alt="Galoy" style="height: 32px; margin-bottom: var(--space-4);">
+          <p>Banking software for the Bitcoin age.</p>
+          <div class="footer-social">
+            <a href="https://github.com/galoymoney" target="_blank" rel="noopener"><span class="material-symbols-outlined">code</span></a>
+            <a href="https://twitter.com/GaloyMoney" target="_blank" rel="noopener"><span class="material-symbols-outlined">close</span></a>
+            <a href="https://t.me/galoyofficial" target="_blank" rel="noopener"><span class="material-symbols-outlined">send</span></a>
+            <a href="https://www.linkedin.com/company/galoymoney" target="_blank" rel="noopener"><span class="material-symbols-outlined">business</span></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Products</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">All Products</a></li>
+            <li><a href="lana.html">Lana</a></li>
+            <li><a href="cala.html">Cala</a></li>
+            <li><a href="bria.html">Bria</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Solutions</h4>
+          <ul class="footer-links">
+            <li><a href="../solutions/sidecar.html">Sidecar Model</a></li>
+            <li><a href="../solutions/primary-core.html">Primary Core</a></li>
+            <li><a href="https://dev.galoy.io" target="_blank">Developer Docs</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="../company/about.html">About</a></li>
+            <li><a href="../company/careers.html">Careers</a></li>
+            <li><a href="../company/security.html">Security</a></li>
+            <li><a href="../company/contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 Galoy Inc. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../terms.html">Terms</a>
+          <a href="../privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
