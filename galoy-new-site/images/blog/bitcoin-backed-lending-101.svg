@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1a"/>
+      <stop offset="40%" style="stop-color:#111133"/>
+      <stop offset="100%" style="stop-color:#0d0d2b"/>
+    </linearGradient>
+    <linearGradient id="btcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F7931A"/>
+      <stop offset="100%" style="stop-color:#D47A0F"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3654FF"/>
+      <stop offset="100%" style="stop-color:#F7931A"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="75%" cy="20%" r="40%">
+      <stop offset="0%" style="stop-color:rgba(54,84,255,0.15)"/>
+      <stop offset="100%" style="stop-color:transparent"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="25%" cy="85%" r="30%">
+      <stop offset="0%" style="stop-color:rgba(247,147,26,0.1)"/>
+      <stop offset="100%" style="stop-color:transparent"/>
+    </radialGradient>
+    <filter id="btcShadow">
+      <feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#F7931A" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="400" rx="12" fill="url(#bg)"/>
+  <rect width="600" height="400" rx="12" fill="url(#glow1)"/>
+  <rect width="600" height="400" rx="12" fill="url(#glow2)"/>
+  <rect width="600" height="400" rx="12" fill="none" stroke="rgba(54,84,255,0.15)" stroke-width="1"/>
+
+  <!-- Badge -->
+  <rect x="210" y="36" width="180" height="24" rx="12" fill="rgba(54,84,255,0.12)" stroke="rgba(54,84,255,0.25)" stroke-width="1"/>
+  <text x="300" y="52" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10" font-weight="600" fill="#3654FF" letter-spacing="1.5">EDUCATIONAL OVERVIEW</text>
+
+  <!-- Bitcoin circle -->
+  <circle cx="300" cy="120" r="36" fill="url(#btcGrad)" filter="url(#btcShadow)"/>
+  <text x="300" y="135" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="36" font-weight="700" fill="white">&#8383;</text>
+
+  <!-- Title -->
+  <text x="300" y="190" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="26" font-weight="700" fill="white">Bitcoin-Backed Lending 101</text>
+  <text x="300" y="215" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="14" fill="#9CA3AF">What is Bitcoin-Backed Lending?</text>
+
+  <!-- Flow diagram -->
+  <!-- Left box -->
+  <rect x="115" y="248" width="140" height="60" rx="8" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+  <text x="185" y="273" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="22" font-weight="700" fill="white">&#8383;</text>
+  <text x="185" y="296" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="500" fill="#D1D5DB">Bitcoin (Collateral)</text>
+
+  <!-- Arrow -->
+  <line x1="265" y1="278" x2="325" y2="278" stroke="url(#arrowGrad)" stroke-width="2"/>
+  <polygon points="325,274 333,278 325,282" fill="#F7931A"/>
+  <text x="295" y="270" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" font-weight="600" fill="#6B7280" letter-spacing="1">LOAN</text>
+
+  <!-- Right box -->
+  <rect x="345" y="248" width="140" height="60" rx="8" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+  <text x="415" y="273" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="22" font-weight="700" fill="white">$</text>
+  <text x="415" y="296" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="500" fill="#D1D5DB">Dollars (Loan)</text>
+
+  <!-- Stats -->
+  <text x="180" y="352" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="16" font-weight="700" fill="white">24/7</text>
+  <text x="180" y="368" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" font-weight="600" fill="#6B7280" letter-spacing="0.5">MARKET LIQUIDITY</text>
+
+  <text x="300" y="352" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="16" font-weight="700" fill="white">Real-time</text>
+  <text x="300" y="368" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" font-weight="600" fill="#6B7280" letter-spacing="0.5">RISK MONITORING</text>
+
+  <text x="420" y="352" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="16" font-weight="700" fill="white">100%</text>
+  <text x="420" y="368" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="9" font-weight="600" fill="#6B7280" letter-spacing="0.5">VERIFIABLE</text>
+</svg>

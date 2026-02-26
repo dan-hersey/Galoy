@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Analytics (consent-gated) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQDG874Z8M"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', { 'analytics_storage': 'denied' });
+    gtag('js', new Date());
+    gtag('config', 'G-CQDG874Z8M');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What is Bitcoin-Backed Lending? | Galoy</title>
+  <meta name="description" content="A comprehensive educational overview of bitcoin-backed lending — how it works, why bitcoin is superior collateral, risk management, and why banks are uniquely positioned.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="../../../css/styles.css">
+  <link rel="icon" href="../../../images/favicon.png" type="image/png">
+  <style>
+    /* Blog base styles */
+    .blog-hero { background: var(--neutral-50); padding: var(--space-16) 0 var(--space-8); }
+    .blog-meta { display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-4); color: var(--text-secondary); font-size: var(--font-size-sm); }
+    .blog-meta-tag { background: var(--color-primary); color: white; padding: 2px 10px; border-radius: var(--radius-full); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .blog-article { max-width: 800px; margin: 0 auto; padding: var(--space-8) var(--space-4); }
+    .blog-article h2 { margin-top: var(--space-10); margin-bottom: var(--space-4); font-size: var(--font-size-2xl); }
+    .blog-article h3 { margin-top: var(--space-8); margin-bottom: var(--space-3); font-size: var(--font-size-xl); }
+    .blog-article h4 { margin-top: var(--space-6); margin-bottom: var(--space-3); font-size: var(--font-size-lg); font-weight: 600; }
+    .blog-article p { margin-bottom: var(--space-4); line-height: 1.75; color: var(--text-secondary); }
+    .blog-article ul, .blog-article ol { margin-bottom: var(--space-4); padding-left: var(--space-6); color: var(--text-secondary); }
+    .blog-article li { margin-bottom: var(--space-2); line-height: 1.75; }
+    .blog-article blockquote { border-left: 3px solid var(--color-primary); padding: var(--space-4) var(--space-6); margin: var(--space-6) 0; background: var(--neutral-50); border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+    .blog-article blockquote p { color: var(--text-primary); font-style: italic; margin-bottom: 0; }
+    .blog-article strong { color: var(--text-primary); }
+    .blog-article a { color: var(--color-primary); text-decoration: underline; }
+    .blog-back { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--text-secondary); text-decoration: none; font-size: var(--font-size-sm); margin-bottom: var(--space-6); }
+    .blog-back:hover { color: var(--color-primary); }
+    @media (max-width: 768px) {
+      .blog-hero { padding: var(--space-10) 0 var(--space-4); }
+      .blog-article { padding: var(--space-4) var(--space-4); }
+    }
+
+    /* ===== TITLE CARD HERO ===== */
+    .title-card {
+      background: linear-gradient(135deg, #0a0a1a 0%, #111133 40%, #0d0d2b 100%);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px 56px;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(54, 84, 255, 0.15);
+    }
+    .title-card::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 360px;
+      height: 360px;
+      background: radial-gradient(circle, rgba(54,84,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .title-card::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -80px;
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle, rgba(247,147,26,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .title-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; position: relative; z-index: 1; }
+    .title-card-logo { height: 24px; opacity: 0.7; filter: brightness(0) invert(1); }
+    .title-card-badge {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #3654FF;
+      background: rgba(54, 84, 255, 0.12);
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(54, 84, 255, 0.2);
+    }
+    .title-card-center { text-align: center; position: relative; z-index: 1; margin-bottom: 36px; }
+    .title-card-btc {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #F7931A 0%, #D47A0F 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      box-shadow: 0 0 40px rgba(247,147,26,0.25), 0 0 80px rgba(247,147,26,0.1);
+      font-size: 36px;
+      color: white;
+      font-weight: 700;
+    }
+    .title-card h1 { color: white; font-size: 32px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.01em; }
+    .title-card .subtitle { color: #9CA3AF; font-size: 16px; margin: 0; }
+    .title-card-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .title-flow-box {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 10px;
+      padding: 14px 28px;
+      text-align: center;
+    }
+    .title-flow-icon { font-size: 28px; display: block; margin-bottom: 4px; color: white; font-weight: 700; }
+    .title-flow-label { color: #D1D5DB; font-size: 13px; font-weight: 500; }
+    .title-flow-arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .title-flow-arrow-line {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, #3654FF, #F7931A);
+      position: relative;
+    }
+    .title-flow-arrow-line::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: -4px;
+      border: 5px solid transparent;
+      border-left: 6px solid #F7931A;
+    }
+    .title-flow-arrow-label { font-size: 10px; color: #6B7280; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+    .title-card-stats {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 32px;
+      position: relative;
+      z-index: 1;
+    }
+    .title-stat { text-align: center; }
+    .title-stat-value { color: white; font-size: 18px; font-weight: 700; }
+    .title-stat-label { color: #6B7280; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+    @media (max-width: 600px) {
+      .title-card { padding: 32px 20px 40px; }
+      .title-card h1 { font-size: 24px; }
+      .title-flow-box { padding: 10px 16px; }
+      .title-card-stats { gap: 16px; }
+    }
+
+    /* ===== SCROLL ANIMATIONS ===== */
+    .animate-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .animate-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== INTERACTIVE LIFECYCLE TIMELINE ===== */
+    .timeline-nav {
+      display: flex;
+      gap: 0;
+      margin-bottom: var(--space-4);
+      position: relative;
+    }
+    .timeline-nav::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--neutral-200);
+    }
+    .timeline-btn {
+      flex: 1;
+      padding: 12px 8px;
+      background: none;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s;
+      text-align: center;
+    }
+    .timeline-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--color-primary);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+      z-index: 1;
+    }
+    .timeline-btn.active { color: var(--color-primary); font-weight: 600; }
+    .timeline-btn.active::after { transform: scaleX(1); }
+    .timeline-btn:hover { color: var(--color-primary); }
+    .timeline-panel {
+      display: none;
+      animation: fadeSlideIn 0.4s ease;
+    }
+    .timeline-panel.active { display: block; }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateX(12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .timeline-detail {
+      background: white;
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+    }
+    .timeline-detail h4 { margin: 0 0 var(--space-2); font-size: var(--font-size-lg); }
+    .timeline-detail p { margin: 0; color: var(--text-secondary); line-height: 1.7; }
+    .timeline-detail-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--color-primary-lighter);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-4);
+      color: var(--color-primary);
+    }
+
+    /* ===== INTERACTIVE RISK GAUGE ===== */
+    .risk-gauge-container {
+      background: white;
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin: var(--space-6) 0;
+    }
+    .risk-gauge-bar {
+      height: 32px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(90deg, #16a34a 0%, #16a34a 50%, #F7931A 50%, #F7931A 75%, #dc2626 75%, #dc2626 100%);
+      position: relative;
+      margin: var(--space-4) 0;
+      cursor: pointer;
+    }
+    .risk-gauge-marker {
+      position: absolute;
+      top: -6px;
+      width: 4px;
+      height: 44px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: left 0.3s ease;
+      pointer-events: none;
+    }
+    .risk-gauge-marker::after {
+      content: attr(data-ltv);
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+    .risk-gauge-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: var(--space-2);
+    }
+    .risk-gauge-status {
+      text-align: center;
+      margin-top: var(--space-4);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      font-size: var(--font-size-sm);
+      transition: all 0.3s ease;
+    }
+    .risk-safe { background: #dcfce7; color: #166534; }
+    .risk-warning { background: #fef3c7; color: #92400e; }
+    .risk-danger { background: #fee2e2; color: #991b1b; }
+
+    /* ===== ANIMATED SPEED BARS ===== */
+    .speed-bar-fill {
+      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .speed-bar-fill.animate { width: 0 !important; }
+
+    /* ===== INTERACTIVE COMPARISON TABS ===== */
+    .compare-tabs {
+      display: flex;
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+    }
+    .compare-tab {
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-default);
+      background: white;
+      font-family: 'Inter', sans-serif;
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .compare-tab.active {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+    .compare-tab:hover:not(.active) {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+    .compare-panel { display: none; animation: fadeSlideIn 0.4s ease; }
+    .compare-panel.active { display: block; }
+
+    /* === Educational page custom styles === */
+
+    /* Key stats row */
+    .key-stats { display: flex; gap: var(--space-6); margin: var(--space-6) 0; flex-wrap: wrap; }
+    .key-stat { flex: 1; min-width: 140px; background: var(--neutral-50); border-radius: var(--radius-md); padding: var(--space-4); text-align: center; border: 1px solid var(--border-default); }
+    .key-stat-value { font-size: var(--font-size-lg); font-weight: 700; color: var(--color-primary); }
+    .key-stat-label { font-size: var(--font-size-sm); color: var(--text-secondary); margin-top: 4px; }
+
+    /* Flow diagram */
+    .flow-visual { display: flex; align-items: center; justify-content: center; gap: var(--space-4); margin: var(--space-6) 0; padding: var(--space-6); background: var(--neutral-50); border-radius: var(--radius-lg); }
+    .flow-box { background: white; border: 2px solid var(--color-primary); border-radius: var(--radius-md); padding: var(--space-3) var(--space-6); font-weight: 600; color: var(--text-primary); text-align: center; }
+    .flow-arrow { color: var(--color-primary); font-size: 24px; font-weight: 700; }
+
+    /* Lifecycle steps */
+    .lifecycle-steps { display: grid; gap: var(--space-4); margin: var(--space-6) 0; }
+    .lifecycle-step { display: flex; gap: var(--space-4); align-items: flex-start; background: white; border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-5); transition: border-color 0.2s; }
+    .lifecycle-step:hover { border-color: var(--color-primary); }
+    .step-number { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--color-primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--font-size-sm); }
+    .step-content h4 { margin: 0 0 4px; font-size: var(--font-size-base); }
+    .step-content p { margin: 0; font-size: var(--font-size-sm); color: var(--text-secondary); }
+
+    /* LTV Calculator */
+    .ltv-calculator { background: var(--neutral-50); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: var(--space-6); margin: var(--space-6) 0; }
+    .ltv-slider-row { display: flex; align-items: center; gap: var(--space-4); margin: var(--space-4) 0; }
+    .ltv-slider-row label { font-weight: 600; min-width: 80px; color: var(--text-primary); }
+    .ltv-slider-row input[type="range"] { flex: 1; accent-color: var(--color-primary); height: 6px; }
+    .ltv-slider-row .ltv-value { font-weight: 700; color: var(--color-primary); min-width: 50px; text-align: right; font-size: var(--font-size-lg); }
+    .ltv-result { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-4); }
+    .ltv-result-box { background: white; border-radius: var(--radius-md); padding: var(--space-4); text-align: center; border: 1px solid var(--border-default); }
+    .ltv-result-label { font-size: var(--font-size-sm); color: var(--text-secondary); }
+    .ltv-result-value { font-size: var(--font-size-xl); font-weight: 700; color: var(--text-primary); margin-top: 4px; }
+
+    /* Comparison table */
+    .comparison-table { width: 100%; border-collapse: collapse; margin: var(--space-6) 0; font-size: var(--font-size-sm); }
+    .comparison-table th { background: var(--color-primary); color: white; padding: 12px 16px; text-align: left; font-weight: 600; }
+    .comparison-table th:first-child { border-radius: var(--radius-md) 0 0 0; }
+    .comparison-table th:last-child { border-radius: 0 var(--radius-md) 0 0; }
+    .comparison-table td { padding: 12px 16px; border-bottom: 1px solid var(--border-default); color: var(--text-secondary); }
+    .comparison-table tr:last-child td:first-child { border-radius: 0 0 0 var(--radius-md); }
+    .comparison-table tr:last-child td:last-child { border-radius: 0 0 var(--radius-md) 0; }
+    .comparison-table tr:hover td { background: var(--neutral-50); }
+    .check { color: #16a34a; font-weight: 700; }
+    .cross { color: #dc2626; font-weight: 700; }
+    .partial { color: var(--color-accent); font-weight: 700; }
+
+    /* Two-column comparison */
+    .two-col-compare { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-6) 0; }
+    .compare-card { border-radius: var(--radius-lg); padding: var(--space-6); }
+    .compare-card.bitcoin { background: var(--color-primary-lighter); border: 1px solid var(--color-primary); }
+    .compare-card.other { background: var(--neutral-50); border: 1px solid var(--border-default); }
+    .compare-card h4 { margin-top: 0; }
+    .compare-card ul { padding-left: var(--space-4); }
+    .compare-card li { margin-bottom: var(--space-2); font-size: var(--font-size-sm); line-height: 1.6; }
+    @media (max-width: 768px) { .two-col-compare { grid-template-columns: 1fr; } }
+
+    /* Risk zones */
+    .risk-zones { margin: var(--space-6) 0; }
+    .risk-zone { display: flex; align-items: stretch; margin-bottom: 2px; border-radius: var(--radius-sm); overflow: hidden; }
+    .risk-zone-bar { width: 8px; flex-shrink: 0; }
+    .risk-zone-bar.safe { background: #16a34a; }
+    .risk-zone-bar.warning { background: var(--color-accent); }
+    .risk-zone-bar.danger { background: #dc2626; }
+    .risk-zone-content { flex: 1; padding: 12px 16px; background: white; border: 1px solid var(--border-default); border-left: none; }
+    .risk-zone-content strong { display: block; font-size: var(--font-size-sm); }
+    .risk-zone-content span { font-size: var(--font-size-sm); color: var(--text-secondary); }
+
+    /* Why banks cards */
+    .why-banks-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin: var(--space-6) 0; }
+    .why-bank-card { background: white; border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-5); transition: border-color 0.2s; }
+    .why-bank-card:hover { border-color: var(--color-primary); }
+    .why-bank-card h4 { margin: 0 0 var(--space-2); font-size: var(--font-size-base); }
+    .why-bank-card p { margin: 0; font-size: var(--font-size-sm); color: var(--text-secondary); line-height: 1.6; }
+    @media (max-width: 768px) { .why-banks-grid { grid-template-columns: 1fr; } }
+
+    /* Speed comparison */
+    .speed-bars { margin: var(--space-6) 0; }
+    .speed-bar-row { display: flex; align-items: center; gap: var(--space-4); margin-bottom: var(--space-3); }
+    .speed-bar-label { min-width: 180px; font-size: var(--font-size-sm); font-weight: 500; color: var(--text-primary); }
+    .speed-bar-track { flex: 1; height: 28px; background: var(--neutral-100); border-radius: var(--radius-full); position: relative; overflow: hidden; }
+    .speed-bar-fill { height: 100%; border-radius: var(--radius-full); display: flex; align-items: center; justify-content: flex-end; padding-right: 12px; font-size: 12px; font-weight: 600; color: white; }
+    @media (max-width: 600px) { .speed-bar-label { min-width: 120px; font-size: 12px; } }
+
+    /* Takeaway cards */
+    .takeaway-grid { display: grid; gap: var(--space-4); margin: var(--space-6) 0; }
+    .takeaway-card { display: flex; gap: var(--space-4); align-items: flex-start; background: var(--color-primary-lighter); border: 1px solid var(--color-primary-light); border-radius: var(--radius-md); padding: var(--space-5); }
+    .takeaway-num { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: var(--color-primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--font-size-sm); }
+    .takeaway-card p { margin: 0; color: var(--text-primary); line-height: 1.6; }
+
+    /* Resource links */
+    .resource-links { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-4); margin: var(--space-6) 0; }
+    .resource-link { display: block; background: white; border: 1px solid var(--border-default); border-radius: var(--radius-md); padding: var(--space-5); text-decoration: none; color: inherit; transition: border-color 0.2s, box-shadow 0.2s; }
+    .resource-link:hover { border-color: var(--color-primary); box-shadow: 0 4px 12px rgba(54,84,255,0.1); }
+    .resource-link h4 { margin: 0 0 var(--space-2); font-size: var(--font-size-base); color: var(--text-primary); }
+    .resource-link p { margin: 0; font-size: var(--font-size-sm); color: var(--text-secondary); }
+    @media (max-width: 768px) { .resource-links { grid-template-columns: 1fr; } }
+
+    /* Section dividers */
+    .section-label-inline { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-primary); background: var(--color-primary-lighter); padding: 4px 12px; border-radius: var(--radius-full); margin-bottom: var(--space-3); }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-inner">
+        <a href="../../../index.html" class="navbar-brand">
+          <img src="../../../images/galoy-logo-white.svg" alt="Galoy" class="navbar-logo">
+        </a>
+        <ul class="navbar-nav">
+          <li><a href="../../../index.html" class="nav-link">Home</a></li>
+          <li>
+            <a href="../../../pages/solutions/index.html" class="nav-link nav-link-dropdown">
+              Solutions
+              <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../../../pages/solutions/index.html" class="dropdown-item">
+                <i data-lucide="layers"></i>
+                Solutions Overview
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../../../pages/use-cases/bitcoin-backed-lending.html" class="dropdown-item">
+                <i data-lucide="landmark"></i>
+                Bitcoin-Backed Lending
+              </a>
+              <a href="../../../pages/use-cases/bitcoin-payments.html" class="dropdown-item">
+                <i data-lucide="zap"></i>
+                Bitcoin Payments
+              </a>
+              <a href="../../../pages/use-cases/stablecoin-payments.html" class="dropdown-item">
+                <i data-lucide="dollar-sign"></i>
+                Stablecoin Payments
+              </a>
+              <a href="../../../pages/use-cases/bitcoin-exchange.html" class="dropdown-item">
+                <i data-lucide="shopping-cart"></i>
+                Bitcoin Exchange
+              </a>
+            </div>
+          </li>
+          <li>
+            <a href="../index.html" class="nav-link nav-link-dropdown active">
+              Research
+              <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../index.html" class="dropdown-item">
+                <i data-lucide="library"></i>
+                All Research
+              </a>
+              <a href="../index.html#articles" class="dropdown-item">
+                <i data-lucide="file-text"></i>
+                Articles
+              </a>
+              <a href="../bitcoin-banking-101/index.html" class="dropdown-item">
+                <i data-lucide="graduation-cap"></i>
+                Bitcoin Banking 101
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../regulatory/index.html" class="dropdown-item">
+                <i data-lucide="scale"></i>
+                Regulatory Radar
+              </a>
+            </div>
+          </li>
+          <li>
+            <a href="../../company/index.html" class="nav-link nav-link-dropdown">
+              Company
+              <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="../../company/about.html" class="dropdown-item">
+                <i data-lucide="info"></i>
+                About
+              </a>
+              <a href="../../company/careers.html" class="dropdown-item">
+                <i data-lucide="users"></i>
+                Careers
+              </a>
+              <a href="../../company/security.html" class="dropdown-item">
+                <i data-lucide="shield"></i>
+                Security
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="../../company/press.html" class="dropdown-item">
+                <i data-lucide="newspaper"></i>
+                Press
+              </a>
+              <a href="../../company/contact.html" class="dropdown-item">
+                <i data-lucide="mail"></i>
+                Contact
+              </a>
+            </div>
+          </li>
+        </ul>
+        <a href="../../company/contact.html" class="btn btn-primary btn-sm navbar-cta">Get in Touch</a>
+        <button class="navbar-toggle" aria-label="Menu"><i data-lucide="menu"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="blog-hero">
+    <div class="container">
+      <a href="../index.html" class="blog-back"><i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Back to Research</a>
+
+      <!-- Title Card (matching branded design) -->
+      <div class="title-card">
+        <div class="title-card-top">
+          <img src="../../../images/galoy-logo-white.svg" alt="Galoy" class="title-card-logo">
+          <span class="title-card-badge">Educational Overview</span>
+        </div>
+        <div class="title-card-center">
+          <div class="title-card-btc">&#8383;</div>
+          <h1>Bitcoin-Backed Lending 101</h1>
+          <p class="subtitle">What is Bitcoin-Backed Lending?</p>
+        </div>
+        <div class="title-card-flow">
+          <div class="title-flow-box">
+            <span class="title-flow-icon">&#8383;</span>
+            <span class="title-flow-label">Bitcoin (Collateral)</span>
+          </div>
+          <div class="title-flow-arrow">
+            <div class="title-flow-arrow-line"></div>
+            <span class="title-flow-arrow-label">Loan</span>
+          </div>
+          <div class="title-flow-box">
+            <span class="title-flow-icon">$</span>
+            <span class="title-flow-label">Dollars (Loan)</span>
+          </div>
+        </div>
+        <div class="title-card-stats">
+          <div class="title-stat">
+            <div class="title-stat-value">24/7</div>
+            <div class="title-stat-label">Market Liquidity</div>
+          </div>
+          <div class="title-stat">
+            <div class="title-stat-value">Real-time</div>
+            <div class="title-stat-label">Risk Monitoring</div>
+          </div>
+          <div class="title-stat">
+            <div class="title-stat-value">100%</div>
+            <div class="title-stat-label">Verifiable</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== ARTICLE BODY ========== -->
+  <article class="blog-article">
+
+    <p>Bitcoin-backed lending is a form of <strong>asset-based lending</strong> where borrowers pledge bitcoin as collateral in exchange for fiat or digital credit. The borrower retains exposure to bitcoin's potential appreciation while gaining immediate liquidity.</p>
+
+    <blockquote><p>The borrower keeps upside exposure to bitcoin while gaining immediate access to capital.</p></blockquote>
+
+    <!-- ===== THE LOAN LIFECYCLE ===== -->
+    <h2>The Loan Lifecycle</h2>
+    <span class="section-label-inline">How It Works</span>
+    <p>Understanding the end-to-end process of a bitcoin-backed loan, from origination to repayment.</p>
+
+    <!-- Interactive Lifecycle Timeline -->
+    <div class="timeline-nav" id="lifecycle-nav">
+      <button class="timeline-btn active" data-step="0">1. Deposit</button>
+      <button class="timeline-btn" data-step="1">2. Set LTV</button>
+      <button class="timeline-btn" data-step="2">3. Receive</button>
+      <button class="timeline-btn" data-step="3">4. Monitor</button>
+      <button class="timeline-btn" data-step="4">5. Repay</button>
+    </div>
+
+    <div id="lifecycle-panels">
+      <div class="timeline-panel active" data-step="0">
+        <div class="timeline-detail">
+          <div class="timeline-detail-icon"><i data-lucide="download" style="width:24px;height:24px;"></i></div>
+          <h4>Deposit Collateral</h4>
+          <p>Borrower deposits bitcoin into a secure, segregated custody account controlled by the lender. The bitcoin is held in cold storage with multi-signature security, ensuring the collateral is protected throughout the loan term. Proof-of-reserves can be verified on-chain at any time.</p>
+        </div>
+      </div>
+      <div class="timeline-panel" data-step="1">
+        <div class="timeline-detail">
+          <div class="timeline-detail-icon"><i data-lucide="sliders" style="width:24px;height:24px;"></i></div>
+          <h4>Set LTV Ratio</h4>
+          <p>Loan amount is determined by the loan-to-value ratio, typically 50–70% of bitcoin's current market value. A lower LTV provides more buffer against price volatility, while a higher LTV maximizes borrowing power. The LTV is agreed upon at origination and monitored continuously.</p>
+        </div>
+      </div>
+      <div class="timeline-panel" data-step="2">
+        <div class="timeline-detail">
+          <div class="timeline-detail-icon"><i data-lucide="banknote" style="width:24px;height:24px;"></i></div>
+          <h4>Receive Funds</h4>
+          <p>Loan is disbursed in fiat currency (USD, EUR, etc.) directly to the borrower's bank account. The borrower pays interest on the loan but retains full upside exposure to bitcoin's price appreciation. No credit check is required — the collateral secures the loan.</p>
+        </div>
+      </div>
+      <div class="timeline-panel" data-step="3">
+        <div class="timeline-detail">
+          <div class="timeline-detail-icon"><i data-lucide="activity" style="width:24px;height:24px;"></i></div>
+          <h4>Monitor &amp; Manage</h4>
+          <p>Real-time LTV monitoring runs 24/7 using live market data. If bitcoin's price drops and the LTV rises above the margin call threshold, automated systems notify the borrower to add collateral or make a partial repayment. This continuous monitoring is unique to bitcoin — no other collateral type supports it.</p>
+        </div>
+      </div>
+      <div class="timeline-panel" data-step="4">
+        <div class="timeline-detail">
+          <div class="timeline-detail-icon"><i data-lucide="check-circle" style="width:24px;height:24px;"></i></div>
+          <h4>Repay &amp; Retrieve</h4>
+          <p>Borrower repays the loan principal plus accrued interest. Upon full repayment, their bitcoin collateral is released from custody and returned. If bitcoin appreciated during the loan term, the borrower benefited from the upside while having had access to liquidity.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== LTV CALCULATOR ===== -->
+    <h2>Understanding LTV</h2>
+    <p>Loan-to-Value (LTV) ratio determines how much you can borrow against your bitcoin. A lower LTV means more collateral protection for the lender.</p>
+
+    <div class="ltv-calculator">
+      <div class="ltv-slider-row">
+        <label>LTV Ratio</label>
+        <input type="range" id="ltv-slider" min="30" max="80" value="50" step="5">
+        <span class="ltv-value" id="ltv-display">50%</span>
+      </div>
+      <p style="font-size: var(--font-size-sm); color: var(--text-secondary); margin: var(--space-2) 0 0; text-align: center;">If you deposit <strong>1 BTC</strong> worth <strong>$100,000</strong>:</p>
+      <div class="ltv-result">
+        <div class="ltv-result-box">
+          <div class="ltv-result-label">Loan Amount</div>
+          <div class="ltv-result-value" id="loan-amount">$50,000</div>
+        </div>
+        <div class="ltv-result-box">
+          <div class="ltv-result-label">Collateral Buffer</div>
+          <div class="ltv-result-value" id="collateral-buffer">$50,000 (100%)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== BITCOIN VS OTHER ASSETS ===== -->
+    <h2>Why Bitcoin Stands Apart</h2>
+    <span class="section-label-inline">Bitcoin Is Not Crypto</span>
+    <p>Bitcoin is a monetary network. It has unique properties that make it exceptional collateral compared to other digital assets — and even some traditional assets.</p>
+
+    <div class="two-col-compare">
+      <div class="compare-card bitcoin">
+        <h4 style="color: var(--color-primary);"><i data-lucide="shield-check" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;"></i>Bitcoin</h4>
+        <ul>
+          <li><strong>24/7 Liquidity</strong> — Trades continuously on global markets, enabling real-time valuation and liquidation</li>
+          <li><strong>Verifiable Scarcity</strong> — Fixed supply of 21 million coins, cryptographically enforced</li>
+          <li><strong>Bearer Asset</strong> — Direct ownership without counterparty risk, fully auditable on-chain</li>
+          <li><strong>Regulatory Clarity</strong> — Recognized as a commodity, not a security, with clear regulatory treatment</li>
+        </ul>
+      </div>
+      <div class="compare-card other">
+        <h4 style="color: var(--text-secondary);"><i data-lucide="alert-triangle" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;"></i>Other Crypto Tokens</h4>
+        <ul>
+          <li><strong>Variable Supply</strong> — Many tokens have inflationary or unclear supply mechanics</li>
+          <li><strong>Centralized Risk</strong> — Often controlled by foundations, companies, or small groups</li>
+          <li><strong>Regulatory Uncertainty</strong> — Many face securities classification risk</li>
+          <li><strong>Liquidity Fragmentation</strong> — Limited market depth, especially during stress events</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Collateral Comparison</h3>
+
+    <!-- Tabbed comparison view -->
+    <div class="compare-tabs" id="compare-tabs">
+      <button class="compare-tab active" data-tab="table">Table View</button>
+      <button class="compare-tab" data-tab="bitcoin">Bitcoin</button>
+      <button class="compare-tab" data-tab="realestate">Real Estate</button>
+      <button class="compare-tab" data-tab="securities">Securities</button>
+    </div>
+
+    <div class="compare-panel active" data-tab="table">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Bitcoin</th>
+            <th>Real Estate</th>
+            <th>Securities</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>24/7 Market Access</td><td class="check">&#10003;</td><td class="cross">&#10007;</td><td class="cross">&#10007;</td></tr>
+          <tr><td>Instant Valuation</td><td class="check">&#10003;</td><td class="cross">&#10007;</td><td class="cross">&#10007;</td></tr>
+          <tr><td>Same-Day Liquidation</td><td class="check">&#10003;</td><td class="cross">&#10007;</td><td class="partial">T+1</td></tr>
+          <tr><td>No Appraisal Needed</td><td class="check">&#10003;</td><td class="cross">&#10007;</td><td class="check">&#10003;</td></tr>
+          <tr><td>Verifiable Ownership</td><td class="check">&#10003;</td><td class="partial">~</td><td class="check">&#10003;</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="compare-panel" data-tab="bitcoin">
+      <div style="background: var(--color-primary-lighter); border: 1px solid var(--color-primary); border-radius: var(--radius-lg); padding: var(--space-6);">
+        <h4 style="color: var(--color-primary); margin-top: 0;"><i data-lucide="shield-check" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;"></i>Bitcoin — Score: 5/5</h4>
+        <p style="font-size: var(--font-size-sm);">Bitcoin excels across every collateral dimension. Its 24/7 global liquidity, instant valuation, and on-chain verifiability make it the most efficient collateral asset available today.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: var(--space-3);">
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px;"><span class="check">&#10003;</span> 24/7 Market Access</div>
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px;"><span class="check">&#10003;</span> Instant Valuation</div>
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px;"><span class="check">&#10003;</span> Same-Day Liquidation</div>
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px;"><span class="check">&#10003;</span> No Appraisal Needed</div>
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; grid-column: 1/-1;"><span class="check">&#10003;</span> Verifiable Ownership (on-chain)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-panel" data-tab="realestate">
+      <div style="background: var(--neutral-50); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: var(--space-6);">
+        <h4 style="color: var(--text-secondary); margin-top: 0;"><i data-lucide="home" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;"></i>Real Estate — Score: 0.5/5</h4>
+        <p style="font-size: var(--font-size-sm);">Real estate is the traditional secured lending asset, but it suffers from illiquidity, slow appraisal cycles, and complex title verification. Foreclosure can take 6–12 months.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: var(--space-3);">
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px;"><span class="cross">&#10007;</span> No 24/7 Market</div>
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px;"><span class="cross">&#10007;</span> Requires Appraisal</div>
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px;"><span class="cross">&#10007;</span> Months to Liquidate</div>
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px;"><span class="cross">&#10007;</span> Appraisal Required</div>
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; grid-column: 1/-1;"><span class="partial">~</span> Ownership verification requires title search</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-panel" data-tab="securities">
+      <div style="background: var(--neutral-50); border: 1px solid var(--border-default); border-radius: var(--radius-lg); padding: var(--space-6);">
+        <h4 style="color: var(--text-secondary); margin-top: 0;"><i data-lucide="trending-up" style="width:18px;height:18px;vertical-align:middle;margin-right:6px;"></i>Securities — Score: 3/5</h4>
+        <p style="font-size: var(--font-size-sm);">Stocks and bonds are good collateral but operate on market hours only (M–F, 9:30–4). Settlement takes T+1 and they're subject to trading halts and corporate actions.</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: var(--space-3);">
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px;"><span class="cross">&#10007;</span> Market hours only</div>
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px;"><span class="cross">&#10007;</span> Delayed valuation</div>
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px;"><span class="partial">T+1</span> Settlement delay</div>
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px;"><span class="check">&#10003;</span> No Appraisal</div>
+          <div style="background: white; padding: 10px 14px; border-radius: var(--radius-sm); font-size: 13px; grid-column: 1/-1;"><span class="check">&#10003;</span> Verifiable via brokerage records</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== RISK MANAGEMENT ===== -->
+    <h2>Real-Time Risk Controls</h2>
+    <span class="section-label-inline">Risk Management</span>
+    <p>Bitcoin's unique properties enable continuous, automated risk management that traditional collateral cannot match.</p>
+
+    <div class="why-banks-grid" style="margin-bottom: var(--space-6);">
+      <div class="why-bank-card">
+        <h4><i data-lucide="activity" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;color:var(--color-primary);"></i>Continuous Monitoring</h4>
+        <p>LTV is calculated and monitored 24/7 using real-time market data. No waiting for monthly statements or quarterly appraisals.</p>
+      </div>
+      <div class="why-bank-card">
+        <h4><i data-lucide="bell" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;color:var(--color-accent);"></i>Automated Margin Calls</h4>
+        <p>When LTV rises above threshold, automated systems notify borrowers and can require additional collateral or partial repayment.</p>
+      </div>
+      <div class="why-bank-card" style="grid-column: 1 / -1;">
+        <h4><i data-lucide="shield" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;color:#16a34a;"></i>Orderly Liquidation</h4>
+        <p>If a margin call isn't met, bitcoin can be liquidated on global markets within minutes to protect the lender's principal.</p>
+      </div>
+    </div>
+
+    <h3>Interactive: LTV Risk Gauge</h3>
+    <p>Click or drag along the gauge below to see what happens at different LTV levels.</p>
+
+    <div class="risk-gauge-container" id="risk-gauge">
+      <div class="risk-gauge-bar" id="risk-bar">
+        <div class="risk-gauge-marker" id="risk-marker" data-ltv="50%" style="left: 50%;"></div>
+      </div>
+      <div class="risk-gauge-labels">
+        <span>0% LTV</span>
+        <span>50%</span>
+        <span>75% — Margin Call</span>
+        <span>90% — Liquidation</span>
+        <span>100%</span>
+      </div>
+      <div class="risk-gauge-status risk-safe" id="risk-status">
+        <strong>Safe Zone</strong> — Collateral value provides ample buffer. No action required.
+      </div>
+    </div>
+
+    <!-- ===== WHY BANKS ===== -->
+    <h2>Banks Are Uniquely Positioned</h2>
+    <span class="section-label-inline">Why Banks</span>
+    <p>While crypto lenders have struggled with risk management, regulated banks bring the discipline and infrastructure needed to offer bitcoin-backed lending safely.</p>
+
+    <div class="why-banks-grid">
+      <div class="why-bank-card">
+        <h4><i data-lucide="lock" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;color:var(--color-primary);"></i>Trusted Custody</h4>
+        <p>Banks already hold billions in customer assets. Bitcoin custody is a natural extension of existing fiduciary relationships.</p>
+      </div>
+      <div class="why-bank-card">
+        <h4><i data-lucide="file-check" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;color:var(--color-primary);"></i>Credit Underwriting</h4>
+        <p>Decades of experience in secured lending, LTV management, and borrower assessment translate directly to bitcoin-backed products.</p>
+      </div>
+      <div class="why-bank-card">
+        <h4><i data-lucide="scale" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;color:var(--color-primary);"></i>Regulatory Discipline</h4>
+        <p>Unlike unregulated crypto lenders, banks operate within supervisory frameworks that ensure responsible risk management.</p>
+      </div>
+      <div class="why-bank-card">
+        <h4><i data-lucide="users" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;color:var(--color-primary);"></i>Customer Demand</h4>
+        <p>Bitcoin holders want to access liquidity without selling. Banks can serve this growing segment while retaining valuable customer relationships.</p>
+      </div>
+    </div>
+
+    <blockquote><p>Bitcoin isn't replacing lending. It's upgrading collateral.</p></blockquote>
+
+    <p>The fundamentals of secured lending remain the same. What changes is the quality and efficiency of the collateral — making bitcoin-backed loans potentially safer than many traditional secured products.</p>
+
+    <h3>Liquidation Speed Comparison</h3>
+
+    <div class="speed-bars animate-in" id="speed-bars">
+      <div class="speed-bar-row">
+        <span class="speed-bar-label">Mortgage Foreclosure</span>
+        <div class="speed-bar-track">
+          <div class="speed-bar-fill" data-width="100%" style="width: 0; background: #dc2626;">6–12 months</div>
+        </div>
+      </div>
+      <div class="speed-bar-row">
+        <span class="speed-bar-label">Securities Liquidation</span>
+        <div class="speed-bar-track">
+          <div class="speed-bar-fill" data-width="20%" style="width: 0; background: var(--color-accent); min-width: 0;">1–3 days</div>
+        </div>
+      </div>
+      <div class="speed-bar-row">
+        <span class="speed-bar-label">Bitcoin Liquidation</span>
+        <div class="speed-bar-track">
+          <div class="speed-bar-fill" data-width="5%" style="width: 0; background: #16a34a; min-width: 0;">Minutes</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== KEY TAKEAWAYS ===== -->
+    <h2>Key Takeaways</h2>
+
+    <div class="takeaway-grid">
+      <div class="takeaway-card">
+        <div class="takeaway-num">1</div>
+        <p>Bitcoin-backed lending is <strong>asset-based lending modernized</strong> — not a radical departure from traditional banking.</p>
+      </div>
+      <div class="takeaway-card">
+        <div class="takeaway-num">2</div>
+        <p>Bitcoin's <strong>24/7 liquidity and transparent pricing</strong> enable real-time risk management impossible with traditional collateral.</p>
+      </div>
+      <div class="takeaway-card">
+        <div class="takeaway-num">3</div>
+        <p><strong>Bitcoin is not crypto.</strong> Its regulatory clarity, liquidity, and institutional acceptance set it apart from other digital assets.</p>
+      </div>
+      <div class="takeaway-card">
+        <div class="takeaway-num">4</div>
+        <p>Banks are <strong>uniquely positioned</strong> to offer bitcoin-backed lending safely, bringing custody expertise and regulatory discipline.</p>
+      </div>
+    </div>
+
+    <!-- ===== RESOURCES ===== -->
+    <h2>Ready to Explore Further?</h2>
+    <p>Bitcoin-backed lending represents a significant opportunity for forward-thinking financial institutions. Here are resources to continue your learning.</p>
+
+    <div class="resource-links">
+      <a href="../regulatory/index.html" class="resource-link">
+        <h4><i data-lucide="scale" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;color:var(--color-primary);"></i>Regulatory Radar</h4>
+        <p>Track OCC guidance and regulatory developments enabling bitcoin in traditional banking.</p>
+      </a>
+      <a href="bitcoin-backed-lending.html" class="resource-link">
+        <h4><i data-lucide="trending-up" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;color:var(--color-primary);"></i>Bitcoin-Backed Lending: A Win/Win/Win</h4>
+        <p>Why bitcoin-backed loans are a win for banks, customers, and compliance.</p>
+      </a>
+      <a href="../../company/contact.html" class="resource-link">
+        <h4><i data-lucide="mail" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;color:var(--color-primary);"></i>Get in Touch</h4>
+        <p>Learn about Galoy's bitcoin-native banking infrastructure for regulated financial institutions.</p>
+      </a>
+    </div>
+
+    <p style="margin-top: var(--space-8); font-size: var(--font-size-sm); color: var(--neutral-400); text-align: center;"><em>This content is for educational purposes only and does not constitute financial advice.</em></p>
+
+  </article>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Stay Updated</h2>
+      <p>Subscribe to the Bitcoin Banking Standard for monthly insights on Bitcoin banking trends and regulatory developments.</p>
+      <div style="max-width: 500px; margin: 0 auto;">
+        <form style="display: flex; gap: var(--space-3);">
+          <input type="email" placeholder="Enter your email" style="flex: 1; padding: var(--space-3) var(--space-4); border: 1px solid var(--border-default); border-radius: var(--radius-md); font-size: var(--font-size-base);">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../../../images/galoy-logo-white.svg" alt="Galoy" style="height: 32px; margin-bottom: var(--space-4);">
+          <p>Banking software for the Bitcoin age.</p>
+          <div class="footer-social">
+            <a href="https://github.com/GaloyMoney" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="https://twitter.com/GaloyMoney" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://t.me/galoyofficial" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+            <a href="https://www.linkedin.com/company/galoymoney" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">Solutions</h4>
+          <ul class="footer-links">
+            <li><a href="../../../pages/solutions/index.html">Solutions Overview</a></li>
+            <li><a href="../../use-cases/bitcoin-backed-lending.html">Bitcoin-Backed Lending</a></li>
+            <li><a href="../../use-cases/bitcoin-payments.html">Bitcoin Payments</a></li>
+            <li><a href="../../use-cases/stablecoin-payments.html">Stablecoin Payments</a></li>
+            <li><a href="../../use-cases/bitcoin-exchange.html">Bitcoin Exchange</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Resources</h4>
+          <ul class="footer-links">
+            <li><a href="https://github.com/GaloyMoney" target="_blank">GitHub</a></li>
+            <li><a href="../index.html">Research</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li><a href="../../company/about.html">About</a></li>
+            <li><a href="../../company/careers.html">Careers</a></li>
+            <li><a href="../../company/security.html">Security</a></li>
+            <li><a href="../../company/contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2026 Galoy Inc. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="../../terms.html">Terms</a>
+          <a href="../../privacy.html">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../../js/nav.js"></script>
+  <script>lucide.createIcons();</script>
+
+  <!-- Full Interactive JavaScript -->
+  <script>
+  (function() {
+
+    // === LTV CALCULATOR ===
+    var slider = document.getElementById('ltv-slider');
+    var display = document.getElementById('ltv-display');
+    var loanEl = document.getElementById('loan-amount');
+    var bufferEl = document.getElementById('collateral-buffer');
+    var btcValue = 100000;
+    function updateLTV() {
+      var ltv = parseInt(slider.value);
+      var loan = btcValue * (ltv / 100);
+      var buffer = btcValue - loan;
+      var bufferPct = Math.round((buffer / loan) * 100);
+      display.textContent = ltv + '%';
+      loanEl.textContent = '$' + loan.toLocaleString();
+      bufferEl.textContent = '$' + buffer.toLocaleString() + ' (' + bufferPct + '%)';
+    }
+    slider.addEventListener('input', updateLTV);
+    updateLTV();
+
+    // === LIFECYCLE TIMELINE ===
+    var timelineNav = document.getElementById('lifecycle-nav');
+    var timelinePanels = document.getElementById('lifecycle-panels');
+    timelineNav.addEventListener('click', function(e) {
+      var btn = e.target.closest('.timeline-btn');
+      if (!btn) return;
+      var step = btn.getAttribute('data-step');
+      timelineNav.querySelectorAll('.timeline-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      timelinePanels.querySelectorAll('.timeline-panel').forEach(function(p) { p.classList.remove('active'); });
+      timelinePanels.querySelector('[data-step="' + step + '"]').classList.add('active');
+      // Re-init Lucide icons for the newly visible panel
+      if (window.lucide) lucide.createIcons();
+    });
+
+    // Auto-advance timeline every 5s (pause on hover)
+    var timelineInterval;
+    var timelinePaused = false;
+    function advanceTimeline() {
+      var active = timelineNav.querySelector('.timeline-btn.active');
+      var next = parseInt(active.getAttribute('data-step')) + 1;
+      if (next > 4) next = 0;
+      timelineNav.querySelector('[data-step="' + next + '"]').click();
+    }
+    function startAutoAdvance() {
+      timelineInterval = setInterval(function() {
+        if (!timelinePaused) advanceTimeline();
+      }, 5000);
+    }
+    timelineNav.addEventListener('mouseenter', function() { timelinePaused = true; });
+    timelineNav.addEventListener('mouseleave', function() { timelinePaused = false; });
+    timelinePanels.addEventListener('mouseenter', function() { timelinePaused = true; });
+    timelinePanels.addEventListener('mouseleave', function() { timelinePaused = false; });
+    startAutoAdvance();
+
+    // === INTERACTIVE RISK GAUGE ===
+    var riskBar = document.getElementById('risk-bar');
+    var riskMarker = document.getElementById('risk-marker');
+    var riskStatus = document.getElementById('risk-status');
+    function updateRiskGauge(pct) {
+      pct = Math.max(0, Math.min(100, pct));
+      riskMarker.style.left = pct + '%';
+      riskMarker.setAttribute('data-ltv', Math.round(pct) + '% LTV');
+      riskStatus.className = 'risk-gauge-status';
+      if (pct < 75) {
+        riskStatus.className += ' risk-safe';
+        riskStatus.innerHTML = '<strong>Safe Zone (' + Math.round(pct) + '% LTV)</strong> — Collateral value provides ample buffer. No action required.';
+      } else if (pct < 90) {
+        riskStatus.className += ' risk-warning';
+        riskStatus.innerHTML = '<strong>Margin Call Zone (' + Math.round(pct) + '% LTV)</strong> — Borrower notified to add collateral or make partial repayment.';
+      } else {
+        riskStatus.className += ' risk-danger';
+        riskStatus.innerHTML = '<strong>Liquidation Zone (' + Math.round(pct) + '% LTV)</strong> — Collateral may be liquidated to protect lender principal.';
+      }
+    }
+    function handleRiskInteraction(e) {
+      var rect = riskBar.getBoundingClientRect();
+      var x = (e.clientX || e.touches[0].clientX) - rect.left;
+      var pct = (x / rect.width) * 100;
+      updateRiskGauge(pct);
+    }
+    var riskDragging = false;
+    riskBar.addEventListener('mousedown', function(e) { riskDragging = true; handleRiskInteraction(e); });
+    riskBar.addEventListener('touchstart', function(e) { riskDragging = true; handleRiskInteraction(e); }, {passive: true});
+    document.addEventListener('mousemove', function(e) { if (riskDragging) handleRiskInteraction(e); });
+    document.addEventListener('touchmove', function(e) { if (riskDragging) handleRiskInteraction(e); }, {passive: true});
+    document.addEventListener('mouseup', function() { riskDragging = false; });
+    document.addEventListener('touchend', function() { riskDragging = false; });
+    riskBar.addEventListener('click', handleRiskInteraction);
+
+    // === COMPARISON TABS ===
+    var compareTabs = document.getElementById('compare-tabs');
+    compareTabs.addEventListener('click', function(e) {
+      var tab = e.target.closest('.compare-tab');
+      if (!tab) return;
+      var tabId = tab.getAttribute('data-tab');
+      compareTabs.querySelectorAll('.compare-tab').forEach(function(t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      document.querySelectorAll('.compare-panel').forEach(function(p) { p.classList.remove('active'); });
+      document.querySelector('.compare-panel[data-tab="' + tabId + '"]').classList.add('active');
+      if (window.lucide) lucide.createIcons();
+    });
+
+    // === SCROLL-TRIGGERED ANIMATIONS ===
+    var animateEls = document.querySelectorAll('.animate-in');
+    var speedBarsAnimated = false;
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Animate speed bars when they come into view
+          if (entry.target.id === 'speed-bars' && !speedBarsAnimated) {
+            speedBarsAnimated = true;
+            setTimeout(function() {
+              entry.target.querySelectorAll('.speed-bar-fill').forEach(function(bar) {
+                bar.style.width = bar.getAttribute('data-width');
+                bar.style.minWidth = bar.textContent === 'Minutes' ? '80px' : (bar.textContent.indexOf('days') > -1 ? '100px' : '0');
+              });
+            }, 200);
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    animateEls.forEach(function(el) { observer.observe(el); });
+
+    // Also add animate-in to all major sections
+    document.querySelectorAll('.lifecycle-steps, .ltv-calculator, .two-col-compare, .why-banks-grid, .takeaway-grid, .resource-links').forEach(function(el) {
+      el.classList.add('animate-in');
+      observer.observe(el);
+    });
+
+  })();
+  </script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-consent" style="
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    background: #1A1A2E;
+    border-top: 1px solid rgba(54,84,255,0.3);
+    padding: 16px 24px;
+    font-family: 'Inter', sans-serif;
+  ">
+    <div style="
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    ">
+      <p style="
+        margin: 0;
+        color: #D1D5DB;
+        font-size: 14px;
+        line-height: 1.5;
+        flex: 1;
+        min-width: 280px;
+      ">
+        We use cookies to understand how visitors interact with our site.
+        <a href="../../../pages/privacy.html" style="color: #3654FF; text-decoration: underline;">Privacy Policy</a>
+      </p>
+      <div style="display: flex; gap: 10px; flex-shrink: 0;">
+        <button id="cookie-decline" style="
+          background: transparent;
+          color: #9CA3AF;
+          border: 1px solid #374151;
+          padding: 8px 20px;
+          border-radius: 6px;
+          font-size: 14px;
+          font-family: 'Inter', sans-serif;
+          cursor: pointer;
+          transition: all 0.2s;
+        " onmouseover="this.style.borderColor='#6B7280';this.style.color='#E5E7EB'"
+           onmouseout="this.style.borderColor='#374151';this.style.color='#9CA3AF'">Decline</button>
+        <button id="cookie-accept" style="
+          background: #3654FF;
+          color: white;
+          border: none;
+          padding: 8px 20px;
+          border-radius: 6px;
+          font-size: 14px;
+          font-weight: 600;
+          font-family: 'Inter', sans-serif;
+          cursor: pointer;
+          transition: all 0.2s;
+        " onmouseover="this.style.background='#2340CC'"
+           onmouseout="this.style.background='#3654FF'">Accept</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function() {
+      var consent = localStorage.getItem('galoy_cookie_consent');
+      var banner = document.getElementById('cookie-consent');
+      if (consent === 'accepted') {
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+      } else if (consent === 'declined') {
+      } else {
+        banner.style.display = 'block';
+      }
+      document.getElementById('cookie-accept').addEventListener('click', function() {
+        localStorage.setItem('galoy_cookie_consent', 'accepted');
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        banner.style.display = 'none';
+      });
+      document.getElementById('cookie-decline').addEventListener('click', function() {
+        localStorage.setItem('galoy_cookie_consent', 'declined');
+        banner.style.display = 'none';
+      });
+    })();
+  </script>
+
+</body>
+</html>

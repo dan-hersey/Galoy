@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="lanaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3654FF;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1e3a8a;stop-opacity:1"/>
+    </linearGradient>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3654FF"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#f59e0b"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#10b981"/>
+    </marker>
+    <marker id="arrowGray" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <rect width="600" height="400" rx="12" fill="url(#bgGrad)"/>
+
+  <rect x="24" y="105" width="130" height="70" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="89" y="137" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600" letter-spacing="0.5">BORROWER</text>
+  <text x="89" y="157" text-anchor="middle" fill="white" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600">Institution</text>
+
+  <rect x="24" y="205" width="130" height="60" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="89" y="232" text-anchor="middle" fill="#f59e0b" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">BTC COLLATERAL</text>
+  <text x="89" y="250" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="9">Custody-independent</text>
+
+  <line x1="154" y1="140" x2="192" y2="140" stroke="#3654FF" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <text x="173" y="132" text-anchor="middle" fill="#64748b" font-family="Inter, system-ui, sans-serif" font-size="8">Loan</text>
+
+  <line x1="154" y1="235" x2="192" y2="210" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrowAmber)"/>
+
+  <rect x="200" y="68" width="200" height="268" rx="10" fill="#1e293b" stroke="#3654FF" stroke-width="2"/>
+  
+  <rect x="200" y="68" width="200" height="42" rx="10" fill="url(#lanaGrad)"/>
+  
+  <rect x="200" y="96" width="200" height="14" fill="url(#lanaGrad)"/>
+  <rect x="200" y="104" width="200" height="8" fill="#1e293b"/>
+  <text x="300" y="96" text-anchor="middle" fill="white" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700">Lana Lending Engine</text>
+
+  <rect x="215" y="118" width="170" height="28" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <circle cx="231" cy="132" r="5" fill="#3654FF" opacity="0.3"/>
+  <circle cx="231" cy="132" r="3" fill="#3654FF"/>
+  <text x="242" y="136" fill="white" font-family="Inter, system-ui, sans-serif" font-size="10">LTV Monitoring</text>
+
+  <rect x="215" y="154" width="170" height="28" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <circle cx="231" cy="168" r="5" fill="#f59e0b" opacity="0.3"/>
+  <circle cx="231" cy="168" r="3" fill="#f59e0b"/>
+  <text x="242" y="172" fill="white" font-family="Inter, system-ui, sans-serif" font-size="10">Margin Calls</text>
+
+  <rect x="215" y="190" width="170" height="28" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <circle cx="231" cy="204" r="5" fill="#10b981" opacity="0.3"/>
+  <circle cx="231" cy="204" r="3" fill="#10b981"/>
+  <text x="242" y="208" fill="white" font-family="Inter, system-ui, sans-serif" font-size="10">Risk Assessment</text>
+
+  <rect x="215" y="226" width="170" height="28" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <circle cx="231" cy="240" r="5" fill="#8b5cf6" opacity="0.3"/>
+  <circle cx="231" cy="240" r="3" fill="#8b5cf6"/>
+  <text x="242" y="244" fill="white" font-family="Inter, system-ui, sans-serif" font-size="10">Compliance</text>
+
+  <rect x="215" y="262" width="170" height="28" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <circle cx="231" cy="276" r="5" fill="#06b6d4" opacity="0.3"/>
+  <circle cx="231" cy="276" r="3" fill="#06b6d4"/>
+  <text x="242" y="280" fill="white" font-family="Inter, system-ui, sans-serif" font-size="10">Loan Lifecycle</text>
+
+  <rect x="440" y="90" width="140" height="52" rx="8" fill="#1e293b" stroke="#10b981" stroke-width="1.5"/>
+  <text x="510" y="113" text-anchor="middle" fill="#10b981" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">DISBURSEMENT</text>
+  <text x="510" y="131" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="10">USD / Stablecoin</text>
+
+  <rect x="440" y="162" width="140" height="52" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="510" y="185" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">PRICE FEEDS</text>
+  <text x="510" y="203" text-anchor="middle" fill="white" font-family="Inter, system-ui, sans-serif" font-size="10">Real-time BTC/USD</text>
+
+  <rect x="440" y="234" width="140" height="52" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="510" y="257" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="600">YOUR CUSTODIAN</text>
+  <text x="510" y="275" text-anchor="middle" fill="white" font-family="Inter, system-ui, sans-serif" font-size="10">BitGo · Anchorage</text>
+
+  <line x1="400" y1="118" x2="440" y2="116" stroke="#10b981" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+  <line x1="400" y1="188" x2="440" y2="188" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <line x1="400" y1="260" x2="440" y2="260" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <rect x="130" y="355" width="340" height="28" rx="14" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="300" y="373" text-anchor="middle" fill="#94a3b8" font-family="Inter, system-ui, sans-serif" font-size="10">Custody-independent · Configurable LTV · Full audit trail</text>
+</svg>

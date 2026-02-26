@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google Analytics (consent-gated) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CQDG874Z8M"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    // Default: deny analytics until user consents
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied'
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-CQDG874Z8M');
+  </script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Be Your Own Bank (For Corporations) – MSTR World 2023 | Galoy</title>
@@ -269,5 +282,96 @@
 
   <script src="../../../js/nav.js"></script>
   <script>lucide.createIcons();</script>
+
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-consent" style="
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    background: #1A1A2E;
+    border-top: 1px solid rgba(54,84,255,0.3);
+    padding: 16px 24px;
+    font-family: 'Inter', sans-serif;
+  ">
+    <div style="
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    ">
+      <p style="
+        margin: 0;
+        color: #D1D5DB;
+        font-size: 14px;
+        line-height: 1.5;
+        flex: 1;
+        min-width: 280px;
+      ">
+        We use cookies to understand how visitors interact with our site. 
+        <a href="../../../pages/privacy.html" style="color: #3654FF; text-decoration: underline;">Privacy Policy</a>
+      </p>
+      <div style="display: flex; gap: 10px; flex-shrink: 0;">
+        <button id="cookie-decline" style="
+          background: transparent;
+          color: #9CA3AF;
+          border: 1px solid #374151;
+          padding: 8px 20px;
+          border-radius: 6px;
+          font-size: 14px;
+          font-family: 'Inter', sans-serif;
+          cursor: pointer;
+          transition: all 0.2s;
+        " onmouseover="this.style.borderColor='#6B7280';this.style.color='#E5E7EB'" 
+           onmouseout="this.style.borderColor='#374151';this.style.color='#9CA3AF'">Decline</button>
+        <button id="cookie-accept" style="
+          background: #3654FF;
+          color: white;
+          border: none;
+          padding: 8px 20px;
+          border-radius: 6px;
+          font-size: 14px;
+          font-weight: 600;
+          font-family: 'Inter', sans-serif;
+          cursor: pointer;
+          transition: all 0.2s;
+        " onmouseover="this.style.background='#2340CC'" 
+           onmouseout="this.style.background='#3654FF'">Accept</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function() {
+      var consent = localStorage.getItem('galoy_cookie_consent');
+      var banner = document.getElementById('cookie-consent');
+      
+      if (consent === 'accepted') {
+        // User previously accepted — grant analytics
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+      } else if (consent === 'declined') {
+        // User previously declined — keep denied, don't show banner
+      } else {
+        // No choice yet — show banner
+        banner.style.display = 'block';
+      }
+
+      document.getElementById('cookie-accept').addEventListener('click', function() {
+        localStorage.setItem('galoy_cookie_consent', 'accepted');
+        gtag('consent', 'update', { 'analytics_storage': 'granted' });
+        banner.style.display = 'none';
+      });
+
+      document.getElementById('cookie-decline').addEventListener('click', function() {
+        localStorage.setItem('galoy_cookie_consent', 'declined');
+        banner.style.display = 'none';
+      });
+    })();
+  </script>
+
 </body>
 </html>
