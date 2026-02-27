@@ -24,13 +24,13 @@
   <text x="525" y="115" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="white" text-anchor="middle">Galoy Bitcoin Stack</text>
 
   <rect x="425" y="140" width="200" height="50" rx="8" fill="#ffffff" fill-opacity="0.15"/>
-  <text x="525" y="170" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Cala (Ledger)</text>
+  <text x="525" y="170" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Accounting (Ledger)</text>
 
   <rect x="425" y="200" width="200" height="50" rx="8" fill="#ffffff" fill-opacity="0.15"/>
   <text x="525" y="230" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Lana (BTC Lending)</text>
 
   <rect x="425" y="260" width="200" height="50" rx="8" fill="#ffffff" fill-opacity="0.15"/>
-  <text x="525" y="290" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Bria (BTC/Lightning)</text>
+  <text x="525" y="290" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Payments (BTC/Lightning)</text>
 
   <rect x="425" y="320" width="200" height="50" rx="8" fill="#ffffff" fill-opacity="0.15"/>
   <text x="525" y="350" font-family="Arial, sans-serif" font-size="12" fill="white" text-anchor="middle">Custody Integration</text>

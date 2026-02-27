@@ -22,7 +22,7 @@
 
   <!-- Labels -->
   <text x="80" y="210" font-family="Arial, sans-serif" font-size="10" fill="#6f717d" text-anchor="middle">Sender</text>
-  <text x="220" y="210" font-family="Arial, sans-serif" font-size="10" fill="#6f717d" text-anchor="middle">Bria</text>
+  <text x="220" y="210" font-family="Arial, sans-serif" font-size="10" fill="#6f717d" text-anchor="middle">Payments</text>
   <text x="360" y="210" font-family="Arial, sans-serif" font-size="10" fill="#6f717d" text-anchor="middle">Recipient</text>
 
   <!-- Bottom label -->
