@@ -764,6 +764,21 @@ p {
   margin-right: auto;
 }
 
+/* Left-aligned hero variant for solution use-case pages */
+.hero-subpage.hero-left {
+  text-align: left;
+}
+
+.hero-subpage.hero-left p {
+  margin-left: 0;
+  margin-right: 0;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.hero-subpage.hero-left .section-label {
+  justify-content: flex-start;
+}
+
 /* Hero on colored gradient backgrounds — improve subtext contrast */
 .hero-subpage[style*="gradient"] p,
 .hero-subpage[style*="background"] p {
@@ -965,12 +980,15 @@ p {
 .team-card {
   text-align: center;
   padding: var(--space-6);
+  background: var(--neutral-50);
+  border: 1px solid var(--neutral-200);
+  border-radius: var(--radius-lg);
 }
 
 .team-card-image {
-  width: 96px;
-  height: 96px;
-  border-radius: var(--radius-full);
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md);
   overflow: hidden;
   margin: 0 auto var(--space-4);
   background-color: var(--neutral-100);

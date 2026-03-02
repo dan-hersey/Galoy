@@ -258,7 +258,7 @@
                 Stablecoin Payments
               </a>
               <a href="../../../pages/use-cases/bitcoin-exchange.html" class="dropdown-item">
-                <i data-lucide="shopping-cart"></i>
+                <i data-lucide="arrow-up-down"></i>
                 Bitcoin Exchange
               </a>
             </div>
@@ -289,7 +289,7 @@
           </li>
 
           <li>
-            <a href="../../company/index.html" class="nav-link nav-link-dropdown">
+            <a href="../../company/about.html" class="nav-link nav-link-dropdown">
               Company
               <i data-lucide="chevron-down" class="nav-dropdown-icon"></i>
             </a>
@@ -347,7 +347,7 @@
       <div class="hero-content">
         <span class="section-label"><i data-lucide="scale"></i> Intelligence Dashboard</span>
         <h1>Digital Asset Regulatory Radar</h1>
-        <p>Comprehensive intelligence dashboard tracking regulatory developments enabling bitcoin and digital assets in traditional banking. 90 high-priority signals across SEC, OCC, FDIC, Federal Reserve, CFTC, FinCEN, and more.</p>
+        <p>Comprehensive intelligence dashboard tracking regulatory developments enabling bitcoin and digital assets in traditional banking. 107 high-priority signals across SEC, OCC, FDIC, Federal Reserve, CFTC, FinCEN, and more.</p>
       </div>
     </div>
   </section>
@@ -358,7 +358,7 @@
       <button class="nav-tab active font-medium py-2" data-section="overview">Overview</button>
       <button class="nav-tab font-medium py-2" data-section="themes">Key Themes</button>
       <button class="nav-tab font-medium py-2" data-section="explorer">Data Explorer</button>
-      <span style="margin-left: auto; font-size: 12px; color: var(--text-secondary);">Last updated: February 17, 2026</span>
+      <span style="margin-left: auto; font-size: 12px; color: var(--text-secondary);">Last updated: March 2, 2026</span>
     </div>
   </div>
 
@@ -369,14 +369,14 @@
         <div class="mb-10">
           <div class="flex items-center gap-2 mb-3">
             <span class="px-3 py-1 rounded-full text-xs font-semibold" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">🔴 LIVE TRACKER</span>
-            <span class="text-sm" style="color: var(--text-secondary);">13 Agencies Tracked</span>
+            <span class="text-sm" style="color: var(--text-secondary);">16 Agencies Tracked</span>
           </div>
           <h1 class="text-4xl lg:text-5xl font-extrabold mb-4" style="color: var(--text-primary);">
             Digital Asset <span class="gradient-text">Regulatory Radar</span>
           </h1>
           <p style="color: var(--text-secondary); max-width: 48rem; font-size: 18px;">
             Comprehensive intelligence dashboard tracking regulatory developments enabling bitcoin and digital assets in traditional banking.
-            90 high-priority signals across SEC, OCC, FDIC, Federal Reserve, CFTC, FinCEN, NY DFS, CFPB, FTC, California DFPI, and state legislatures.
+            107 high-priority signals across SEC, OCC, FDIC, Federal Reserve, CFTC, FinCEN, NY DFS, CFPB, FTC, California DFPI, and state legislatures.
           </p>
         </div>
 
@@ -463,11 +463,16 @@
               <option value="FTC">FTC</option>
               <option value="California DFPI">California DFPI</option>
               <option value="Senate Banking">Senate Banking</option>
+              <option value="NCUA">NCUA</option>
               <option value="NY Legislature">NY Legislature</option>
               <option value="South Dakota">South Dakota</option>
+              <option value="West Virginia">West Virginia</option>
+              <option value="Washington">Washington</option>
+              <option value="Minnesota">Minnesota</option>
             </select>
             <select id="monthFilter" class="px-4 py-3 border border-gray-300 rounded-xl text-sm cursor-pointer" style="background: #fff; color: var(--text-primary);">
               <option value="all">All Months</option>
+              <option value="2026-02">February 2026</option>
               <option value="2026-01">January 2026</option>
               <option value="2025-12">December 2025</option>
               <option value="2025-11">November 2025</option>
@@ -488,7 +493,7 @@
               <option value="adjacent">🟡 Adjacent</option>
             </select>
             <div class="px-4 py-3 rounded-xl text-sm" style="background: var(--neutral-50); border: 1px solid var(--border-default);">
-              <span id="filteredCount" class="font-bold" style="color: var(--color-primary);">90</span>
+              <span id="filteredCount" class="font-bold" style="color: var(--color-primary);">107</span>
               <span style="color: var(--text-secondary);"> signals</span>
             </div>
           </div>
@@ -576,6 +581,23 @@
   <script>
     // Regulatory Data
     const rawData = [
+      {"Agency":"OCC","Date":"2026-02-27","DocumentType":"Final Rule","DocumentID":"","Title":"OCC Final Rule - Broadening Trust Company Activities Definition","URL":"https://www.occ.gov/news-issuances/news-releases/2026/nr-occ-2026-9.html","ThemeTags":"trust banking; digital asset custody; staking; national trust banks","LeadSignal":"High","ActionType":"Final Rule","ComplianceDeadline":"2026-04-01","ImpactSummary":"Replaces narrow 'fiduciary activities' definition with broader 'operations of a trust company,' enabling national trust banks to offer expanded digital asset services including custody, staking, and settlement"},
+      {"Agency":"NY DFS","Date":"2026-02-27","DocumentType":"Proposed Rules","DocumentID":"","Title":"NY DFS Proposed Rules to Protect New Yorkers Using Cryptocurrency","URL":"https://www.dfs.ny.gov/","ThemeTags":"consumer protection; New York regulation; state policy","LeadSignal":"High","ActionType":"Proposed Rule","ComplianceDeadline":"","ImpactSummary":"Governor Hochul announced NY DFS publication of proposed rules enhancing consumer protections for cryptocurrency users in New York"},
+      {"Agency":"West Virginia","Date":"2026-02-26","DocumentType":"Legislative Bill","DocumentID":"HB 5353","Title":"West Virginia HB 5353 - Cryptocurrency ATM Licensing and Consumer Protection","URL":"https://www.wvlegislature.gov/Bill_Status/Bills_history.cfm?input=5353&year=2026&sessiontype=RS&btype=bill","ThemeTags":"state regulation; consumer protection; ATM licensing; elderly protection","LeadSignal":"Medium","ActionType":"Legislation","ComplianceDeadline":"","ImpactSummary":"Requires crypto ATM operators to obtain licenses, imposes 15% flat fee limit, daily transaction limits, and enhanced due diligence for senior citizens"},
+      {"Agency":"Senate Banking","Date":"2026-02-26","DocumentType":"Congressional Hearing","DocumentID":"","Title":"Senate Banking Committee Hearing - Oversight of Federal Bank Regulators (Crypto Policy Focus)","URL":"https://www.banking.senate.gov/newsroom/majority/chairman-scott-announces-digital-asset-market-structure-markup","ThemeTags":"congressional oversight; stablecoins; banking; GENIUS Act","LeadSignal":"High","ActionType":"Hearing","ComplianceDeadline":"","ImpactSummary":"Routine bank regulatory oversight hearing dominated by crypto topics; OCC GENIUS Act stablecoin proposal presented; Chairman Scott noted banking deposits increased despite stablecoin concerns"},
+      {"Agency":"OCC","Date":"2026-02-25","DocumentType":"Proposed Rule","DocumentID":"Bulletin 2026-3","Title":"OCC GENIUS Act Implementation - Proposed Rule for Permitted Payment Stablecoin Issuers","URL":"https://www.occ.gov/news-issuances/bulletins/2026/bulletin-2026-3.html","ThemeTags":"stablecoins; GENIUS Act; yield prohibition; reserve requirements","LeadSignal":"High","ActionType":"Proposed Rule","ComplianceDeadline":"2026-04-28","ImpactSummary":"376-page proposed rule establishes framework for payment stablecoin issuers under GENIUS Act, including prohibition on yield/rewards, 1:1 reserve requirements in cash/Treasury, and custody standards"},
+      {"Agency":"Federal Reserve","Date":"2026-02-23","DocumentType":"Proposed Rule","DocumentID":"BCREG20260223a","Title":"Federal Reserve Proposed Rule to Eliminate Reputation Risk in Bank Supervision","URL":"https://www.federalreserve.gov/newsevents/pressreleases/bcreg20260223a.htm","ThemeTags":"debanking; reputation risk; supervision standards; crypto banking access","LeadSignal":"High","ActionType":"Proposed Rule","ComplianceDeadline":"","ImpactSummary":"Codifies elimination of 'reputation risk' as factor in bank examinations, formally preventing supervisors from pressuring banks to sever ties with crypto firms; addresses debanking concerns"},
+      {"Agency":"SEC","Date":"2026-02-19","DocumentType":"FAQ/Guidance","DocumentID":"","Title":"SEC Stablecoin Capital Relief - 2% Haircut for Payment Stablecoins Under Net Capital Rule","URL":"https://www.sec.gov/newsroom/speeches-statements/peirce-stablecoin-021926-cutting-two-would-do","ThemeTags":"stablecoins; capital requirements; broker-dealer regulation; institutional access","LeadSignal":"High","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"Allows broker-dealers to apply only a 2% haircut to proprietary positions in qualifying payment stablecoins, counting 98% toward regulatory capital; major shift from previous 100% haircuts"},
+      {"Agency":"Washington","Date":"2026-02-18","DocumentType":"Legislative Bill","DocumentID":"SB 5280","Title":"Washington SB 5280 - Cryptocurrency Kiosk Restrictions and Fraud Prevention","URL":"https://app.leg.wa.gov/billsummary?BillNumber=5280&Year=2025&Initiative=false","ThemeTags":"state regulation; consumer protection; ATM restrictions; senior protection","LeadSignal":"Medium","ActionType":"Legislation","ComplianceDeadline":"","ImpactSummary":"Targets crypto kiosk fraud affecting seniors with daily $1,000 deposit limits, reduced transaction fees, warning sign requirements, and reporting mechanisms"},
+      {"Agency":"Minnesota","Date":"2026-02-15","DocumentType":"Legislative Bill","DocumentID":"HF 3642","Title":"Minnesota HF 3642 - Cryptocurrency Kiosk Prohibition","URL":"https://www.cbsnews.com/minnesota/news/minnesota-legislature-bill-crypto-kiosks/","ThemeTags":"state regulation; consumer protection; ATM regulation; elder fraud prevention","LeadSignal":"Medium","ActionType":"Legislation","ComplianceDeadline":"","ImpactSummary":"Proposes comprehensive ban on cryptocurrency kiosks across Minnesota, driven by surge in crypto scams targeting older residents"},
+      {"Agency":"SEC","Date":"2026-02-13","DocumentType":"Statement","DocumentID":"","Title":"SEC Division of Corporation Finance - Coming Attractions on Crypto Asset Taxonomy","URL":"https://www.sec.gov/newsroom/speeches-statements/moloney-statement-coming-attractions-021326-coming-attractions-division-corporation-finance","ThemeTags":"securities taxonomy; network maturity; token classification","LeadSignal":"High","ActionType":"Guidance","ComplianceDeadline":"","ImpactSummary":"SEC Corporation Finance division signaled prioritization of crypto asset taxonomy and interpretive guidance on when tokens may shed securities status as networks mature"},
+      {"Agency":"OCC","Date":"2026-02-13","DocumentType":"Conditional Approval","DocumentID":"","Title":"Crypto.com Conditional Approval for Foris Dax National Trust Bank Charter","URL":"https://crypto.com/us/company-news/cryptocom-receives-conditional-approval-from-occ-for-national-trust-bank-charter","ThemeTags":"banking charter; digital asset custody; conditional approval","LeadSignal":"High","ActionType":"Conditional Approval","ComplianceDeadline":"","ImpactSummary":"Crypto.com receives conditional approval to operate national trust bank offering regulated custody, staking, and settlement services; part of broader wave of OCC approvals for digital asset firms"},
+      {"Agency":"Federal Reserve","Date":"2026-02-11","DocumentType":"Research Paper","DocumentID":"","Title":"Initial Margin for Crypto Currencies: Risks in Uncleared Markets","URL":"https://www.federalreserve.gov/econres/feds/initial-margin-for-crypto-currencies-risks-in-uncleared-markets.htm","ThemeTags":"derivatives regulation; risk management; initial margin; asset classification","LeadSignal":"Medium","ActionType":"Research","ComplianceDeadline":"","ImpactSummary":"Proposes framework classifying cryptocurrency as distinct asset class for initial margin requirements in derivatives markets, accounting for volatility differences between floating cryptos and stablecoins"},
+      {"Agency":"NCUA","Date":"2026-02-11","DocumentType":"Proposed Rule","DocumentID":"","Title":"NCUA Proposed Rule - GENIUS Act Implementation for Credit Union Stablecoin Issuers","URL":"https://ncua.gov/newsroom/press-release/2026/ncua-proposes-rule-permitted-payment-stablecoin-issuer-applications","ThemeTags":"GENIUS Act; credit unions; stablecoin issuance","LeadSignal":"High","ActionType":"Proposed Rule","ComplianceDeadline":"2026-04-13","ImpactSummary":"Establishes application procedures for credit union subsidiaries seeking to issue permitted payment stablecoins under GENIUS Act; parallels FDIC and OCC implementations"},
+      {"Agency":"FinCEN","Date":"2026-02-11","DocumentType":"Enforcement","DocumentID":"","Title":"DOJ-FinCEN Settlement - Paxful Holdings Inc. for AML Violations","URL":"https://www.fincen.gov/news/news-releases/fincen-assesses-35-million-penalty-against-paxful-facilitating-suspicious","ThemeTags":"AML enforcement; money laundering; criminal fine; P2P exchanges","LeadSignal":"High","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"P2P exchange Paxful agrees to $4M DOJ criminal fine plus $3.5M FinCEN civil penalty ($7.5M total) for processing $3B+ in transactions with $500M+ linked to illicit activity"},
+      {"Agency":"FTC","Date":"2026-02-06","DocumentType":"Report","DocumentID":"","Title":"FTC Second Report to Congress on Ransomware and Cyberattacks","URL":"https://www.ftc.gov/news-events/news/press-releases/2026/02/ftc-issues-second-report-congress-its-work-fight-ransomware-other-cyberattacks","ThemeTags":"cybersecurity; data security; ransomware; consumer protection","LeadSignal":"Medium","ActionType":"Report","ComplianceDeadline":"","ImpactSummary":"FTC second biennial report covering data security enforcement, ransomware payment trends, and crypto-related security incidents including blockchain-based ransomware payments"},
+      {"Agency":"FinCEN","Date":"2026-02-04","DocumentType":"Advisory","DocumentID":"","Title":"FinCEN Seeks Panel Members for AML Modernization and GENIUS Act Implementation","URL":"https://www.federalregister.gov/documents/2026/02/25/2026-03707/bank-secrecy-act-advisory-group-solicitation-of-application-for-membership","ThemeTags":"AML modernization; GENIUS Act; stablecoins; compliance","LeadSignal":"Medium","ActionType":"Advisory","ComplianceDeadline":"","ImpactSummary":"FinCEN convening advisory panel to modernize AML compliance and implement GENIUS Act provisions, including Travel Rule compliance for stablecoins and transaction monitoring standards"},
+      {"Agency":"FDIC","Date":"2026-02-17","DocumentType":"Comment Deadline","DocumentID":"","Title":"FDIC GENIUS Act Stablecoin Issuance Application Procedures - Comment Deadline","URL":"https://www.federalregister.gov/documents/2025/12/19/2025-23510/approval-requirements-for-issuance-of-payment-stablecoins-by-subsidiaries-of-fdic-supervised-insured","ThemeTags":"GENIUS Act; stablecoin issuance; IDI regulation","LeadSignal":"High","ActionType":"Comment Deadline","ComplianceDeadline":"2026-02-17","ImpactSummary":"Comment period closes for FDIC proposed procedures for FDIC-supervised insured depository institutions seeking to issue payment stablecoins through subsidiaries under GENIUS Act"},
       {"Agency":"OCC","Date":"","DocumentType":"Conditional Approval","DocumentID":"CA 1349","Title":"Boston Trust Walden Company conversion to a national bank (Control No. 2025-Conversion-342326)","URL":"https://www.occ.gov/topics/charters-and-licensing/interpretations-and-actions/2025/ca1349.pdf","ThemeTags":"conversion; national bank","LeadSignal":"Medium","ActionType":"Conditional Approval","ComplianceDeadline":"","ImpactSummary":""},
       {"Agency":"OCC","Date":"","DocumentType":"Conditional Approval","DocumentID":"CA 1348","Title":"Application to charter Erebor Bank, National Association (Control No. 2025-Charter-342076)","URL":"https://www.occ.gov/topics/charters-and-licensing/interpretations-and-actions/2025/ca1348.pdf","ThemeTags":"chartering; de novo","LeadSignal":"High","ActionType":"Conditional Approval","ComplianceDeadline":"","ImpactSummary":""},
 
@@ -669,27 +691,29 @@
       {"Agency":"CFTC","Date":"2025-01-01","DocumentType":"Enforcement","DocumentID":"PR 9032-25","Title":"Mosaic Exchange Ltd. and CEO Default Judgment","URL":"https://www.cftc.gov/PressRoom/PressReleases/9032-25","ThemeTags":"crypto; enforcement; fraud; digital assets","LeadSignal":"Medium","ActionType":"Enforcement","ComplianceDeadline":"","ImpactSummary":"Default judgment against fraudulent digital asset scheme; $1.1M penalty"}
     ];
 
-    // Theme Definitions - Updated with January 2026 developments
+    // Theme Definitions - Updated with February 2026 developments
     const themes = [
       {
         id: 'stablecoin',
         title: 'Stablecoin Framework',
         icon: '🪙',
         color: '#10b981',
-        description: 'Comprehensive federal framework emerging for bank-issued stablecoins through the GENIUS Act, Digital Asset Market Clarity Act, and regulatory guidance.',
-        keywords: ['stablecoin', 'dollar token', 'GENIUS', 'reserve', 'payment token', 'USD1'],
+        description: 'Comprehensive federal framework accelerating for bank-issued stablecoins with OCC, FDIC, and NCUA all publishing GENIUS Act implementation rules and SEC issuing landmark capital relief guidance.',
+        keywords: ['stablecoin', 'dollar token', 'GENIUS', 'reserve', 'payment token', 'USD1', 'haircut'],
         developments: [
+          'OCC publishes 376-page GENIUS Act implementation proposed rule (February 2026)',
+          'SEC allows 2% haircut for stablecoins under net capital rule (February 2026)',
+          'NCUA proposes GENIUS Act rule for credit union stablecoin issuers (February 2026)',
+          'FDIC GENIUS Act comment period closes (February 2026)',
+          'Senate Banking hearing features stablecoin yield debate (February 2026)',
           'GENIUS Act signed into law (July 2025) - first federal stablecoin framework',
-          'Digital Asset Market Clarity Act introduced (January 2026) - 278-page bipartisan bill',
-          'FDIC proposed rule for GENIUS Act implementation (December 2025)',
-          'World Liberty Financial applies for national trust bank charter for USD1 stablecoin (January 2026)',
           'SEC clarity on USD-pegged stablecoins not being securities'
         ],
         opportunities: [
           'Bank-issued stablecoins for payments and settlement',
           'Stablecoin reserve custody services',
           'National trust bank charters for stablecoin issuance',
-          'Integration with existing payment infrastructure'
+          'Capital-efficient stablecoin holdings for broker-dealers'
         ]
       },
       {
@@ -697,21 +721,22 @@
         title: 'Custody & Safekeeping',
         icon: '🔐',
         color: '#3b82f6',
-        description: 'Clear regulatory pathway for banks to provide crypto custody and safekeeping services, with new trust bank charters and tokenization initiatives.',
-        keywords: ['custody', 'safekeeping', 'storage', 'wallet', 'keys', 'BitLicense', 'tokenized', 'tokenization'],
+        description: 'Expanding regulatory pathway for banks to provide crypto custody, staking, and settlement services with new trust bank charters including Crypto.com and broadened OCC trust company definitions.',
+        keywords: ['custody', 'safekeeping', 'storage', 'wallet', 'keys', 'BitLicense', 'tokenized', 'tokenization', 'trust bank'],
         developments: [
+          'OCC broadens trust company activities definition (February 2026) - enables staking, settlement',
+          'Crypto.com receives conditional approval for national trust bank charter (February 2026)',
+          'SEC Corporation Finance previews crypto asset taxonomy guidance (February 2026)',
           'SEC Statement on Tokenized Securities (January 2026) - landmark guidance',
           'DTC Tokenization Pilot No-Action Letter (December 2025)',
           'OCC approved five national trust bank charter applications (December 2025)',
-          'Interagency joint statement on crypto-asset safekeeping (July 2025)',
-          'SEC broker-dealer custody guidance issued (December 2025)',
-          'NY DFS updated custodial structure guidance (September 2025)'
+          'Interagency joint statement on crypto-asset safekeeping (July 2025)'
         ],
         opportunities: [
           'Institutional-grade crypto custody services',
           'Tokenized securities custody and settlement',
-          'Multi-asset custody platforms',
-          'Trust bank charters for digital assets'
+          'Staking services via trust bank charters',
+          'Multi-asset custody platforms'
         ]
       },
       {
@@ -719,9 +744,10 @@
         title: 'End of Debanking',
         icon: '🏦',
         color: '#f59e0b',
-        description: 'Regulatory pivot away from "Operation Chokepoint 2.0" with explicit protections for crypto businesses and enhanced banking access.',
+        description: 'Federal Reserve formally proposes eliminating reputation risk from bank supervision, codifying protections for crypto businesses and completing the debanking reversal.',
         keywords: ['debanking', 'chokepoint', 'reputation risk', 'account termination', 'fair access'],
         developments: [
+          'Federal Reserve proposes rule to eliminate reputation risk in bank exams (February 2026)',
           'OCC ceased examinations for reputation risk (March 2025)',
           'OCC preliminary findings on large bank debanking (December 2025)',
           'Proposed rule prohibiting reputation risk by regulators (October 2025)',
@@ -740,15 +766,15 @@
         title: 'Enforcement Reset',
         icon: '⚖️',
         color: '#ef4444',
-        description: 'Major shift from "regulation by enforcement" to proactive regulatory frameworks with inter-agency harmonization.',
-        keywords: ['enforcement', 'investigation', 'Wells Notice', 'task force', 'dismissal', 'Project Crypto'],
+        description: 'Continued shift from enforcement to frameworks, with DOJ-FinCEN targeting illicit activity while SEC and CFTC focus on enabling legitimate innovation through Project Crypto.',
+        keywords: ['enforcement', 'investigation', 'Wells Notice', 'task force', 'dismissal', 'Project Crypto', 'AML'],
         developments: [
+          'DOJ-FinCEN settle with Paxful for $7.5M on AML violations (February 2026)',
+          'FinCEN convenes AML modernization advisory panel (February 2026)',
+          'State legislatures target crypto kiosk fraud - WV, MN, WA (February 2026)',
           'Project Crypto joint SEC-CFTC harmonization launch (January 2026)',
           'SEC dismisses Gemini enforcement action with prejudice (January 2026)',
-          'SEC Crypto Task Force established (January 2025)',
-          'Coinbase enforcement action dismissed (February 2025)',
-          'Investigations closed: Gemini, Robinhood, OpenSea',
-          'SEC clarity on meme coins, staking, mining not being securities'
+          'Investigations closed: Gemini, Robinhood, OpenSea, Coinbase'
         ],
         opportunities: [
           'Reduced legal uncertainty for crypto services',
@@ -762,16 +788,17 @@
         title: 'Trading Infrastructure',
         icon: '📈',
         color: '#8b5cf6',
-        description: 'New frameworks enabling banks to participate in crypto trading, execution, and derivatives markets with tokenized collateral.',
-        keywords: ['trading', 'execution', 'riskless principal', 'ETF', 'spot', 'derivatives', 'collateral', 'perpetual'],
+        description: 'New frameworks enabling banks to participate in crypto trading, execution, and derivatives markets, with Fed research advancing margin requirements for crypto derivatives.',
+        keywords: ['trading', 'execution', 'riskless principal', 'ETF', 'spot', 'derivatives', 'collateral', 'perpetual', 'margin'],
         developments: [
+          'Federal Reserve publishes initial margin framework for crypto derivatives (February 2026)',
+          'FTC reports on ransomware and crypto-related cybersecurity (February 2026)',
           'CFTC Innovation Advisory Committee launched (January 2026)',
           'CFTC Chairman outlines perpetual derivatives, tokenized collateral priorities (January 2026)',
           'Morgan Stanley files for spot Bitcoin and Solana ETFs (January 2026)',
           'OCC confirmed riskless principal crypto transactions (December 2025)',
           'CFTC first-ever listed spot crypto trading (December 2025)',
-          'CFTC no-action relief for BTC/ETH/USDC as margin collateral (December 2025)',
-          'SEC approved generic listing for crypto ETPs (September 2025)'
+          'CFTC no-action relief for BTC/ETH/USDC as margin collateral (December 2025)'
         ],
         opportunities: [
           'Crypto execution services for clients',
@@ -796,7 +823,11 @@
       'California DFPI': '#14b8a6',
       'Senate Banking': '#6366f1',
       'NY Legislature': '#0ea5e9',
-      'South Dakota': '#a855f7'
+      'South Dakota': '#a855f7',
+      'NCUA': '#059669',
+      'West Virginia': '#7c3aed',
+      'Washington': '#0284c7',
+      'Minnesota': '#dc2626'
     };
 
     // Crypto Relevance Classification
@@ -1035,7 +1066,6 @@
           <div class="footer-social">
             <a href="https://github.com/GaloyMoney" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
             <a href="https://twitter.com/GaloyMoney" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-            <a href="https://t.me/galoyofficial" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
             <a href="https://www.linkedin.com/company/galoymoney" target="_blank" rel="noopener"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
           </div>
         </div>
