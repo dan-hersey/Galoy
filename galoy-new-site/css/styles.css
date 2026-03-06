@@ -1576,8 +1576,14 @@ p {
   }
 
   .navbar-nav .nav-link {
-    padding: var(--space-3) 0;
+    padding: var(--space-3) var(--space-2);
     display: block;
+    font-size: 16px;
+  }
+
+  /* Remove the underline hover effect on mobile */
+  .navbar-nav .nav-link::after {
+    display: none;
   }
 
   .navbar-nav .dropdown-menu {
@@ -1588,8 +1594,9 @@ p {
     background: transparent;
     box-shadow: none;
     border: none;
-    padding: 0 0 var(--space-2) var(--space-4);
+    padding: 0 0 var(--space-3) var(--space-4);
     display: none;
+    min-width: unset;
   }
 
   .navbar-nav > li.mobile-dropdown-open .dropdown-menu {
@@ -1597,8 +1604,28 @@ p {
   }
 
   .navbar-nav .dropdown-item {
-    padding: var(--space-2) 0;
-    color: var(--neutral-300);
+    padding: var(--space-2) var(--space-3);
+    color: var(--neutral-400);
+    font-size: 15px;
+    border-radius: var(--radius-sm);
+  }
+
+  .navbar-nav .dropdown-item:hover,
+  .navbar-nav .dropdown-item:active {
+    background-color: rgba(255,255,255,0.08);
+    color: var(--neutral-white);
+  }
+
+  .navbar-nav .dropdown-item:hover [data-lucide],
+  .navbar-nav .dropdown-item:hover .lucide,
+  .navbar-nav .dropdown-item:active [data-lucide],
+  .navbar-nav .dropdown-item:active .lucide {
+    color: var(--neutral-white);
+  }
+
+  .navbar-nav .dropdown-item [data-lucide],
+  .navbar-nav .dropdown-item .lucide {
+    color: var(--neutral-500);
   }
 
   .navbar-nav .dropdown-divider {
@@ -1621,6 +1648,11 @@ p {
     transform: rotate(-45deg) translate(5px, -5px);
   }
 
+  /* Rotate chevron when dropdown is open on mobile */
+  .navbar-nav > li.mobile-dropdown-open .nav-dropdown-icon {
+    transform: rotate(180deg);
+  }
+
   .navbar-social {
     display: none;
   }
@@ -1633,6 +1665,16 @@ p {
   .hero-text p {
     margin-left: auto;
     margin-right: auto;
+  }
+
+  /* hero-left pages: keep left alignment on tablet/mobile */
+  .hero-subpage.hero-left .hero-split {
+    text-align: left;
+  }
+
+  .hero-subpage.hero-left .hero-text p {
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .hero-image {
@@ -1716,5 +1758,40 @@ p {
 
   .split-feature {
     gap: var(--space-8);
+  }
+
+  /* Section headers with flex justify-between: stack on mobile */
+  .flex.justify-between {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: var(--space-4);
+  }
+
+  /* Angel investor pipe separators: hide on mobile */
+  .angel-separator {
+    display: none;
+  }
+
+  /* Investor logo cards: constrain width on mobile */
+  .investor-card {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* Job listing cards: stack title and arrow vertically on narrow screens */
+  .job-card-header {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: var(--space-3);
+  }
+
+  /* Inline grids: force single column on mobile */
+  .mobile-stack {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Cookie consent: allow text to shrink below min-width */
+  #cookie-consent p {
+    min-width: 0 !important;
   }
 }
