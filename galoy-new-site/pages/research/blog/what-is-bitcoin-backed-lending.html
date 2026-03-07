@@ -257,7 +257,7 @@
     .risk-gauge-bar {
       height: 32px;
       border-radius: var(--radius-full);
-      background: linear-gradient(90deg, #16a34a 0%, #16a34a 50%, #F7931A 50%, #F7931A 75%, #dc2626 75%, #dc2626 100%);
+      background: linear-gradient(90deg, #16a34a 0%, #16a34a 75%, #F7931A 75%, #F7931A 90%, #dc2626 90%, #dc2626 100%);
       position: relative;
       margin: var(--space-4) 0;
       cursor: pointer;
@@ -793,6 +793,7 @@
       </div>
       <div class="risk-gauge-labels">
         <span>0% LTV</span>
+        <span>25%</span>
         <span>50%</span>
         <span>75% — Margin Call</span>
         <span>90% — Liquidation</span>
@@ -1046,7 +1047,8 @@
     }
     function handleRiskInteraction(e) {
       var rect = riskBar.getBoundingClientRect();
-      var x = (e.clientX || e.touches[0].clientX) - rect.left;
+      var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      var x = clientX - rect.left;
       var pct = (x / rect.width) * 100;
       updateRiskGauge(pct);
     }
@@ -1054,7 +1056,7 @@
     riskBar.addEventListener('mousedown', function(e) { riskDragging = true; handleRiskInteraction(e); });
     riskBar.addEventListener('touchstart', function(e) { riskDragging = true; handleRiskInteraction(e); }, {passive: true});
     document.addEventListener('mousemove', function(e) { if (riskDragging) handleRiskInteraction(e); });
-    document.addEventListener('touchmove', function(e) { if (riskDragging) handleRiskInteraction(e); }, {passive: true});
+    document.addEventListener('touchmove', function(e) { if (riskDragging && e.touches && e.touches.length) handleRiskInteraction(e); }, {passive: true});
     document.addEventListener('mouseup', function() { riskDragging = false; });
     document.addEventListener('touchend', function() { riskDragging = false; });
     riskBar.addEventListener('click', handleRiskInteraction);
